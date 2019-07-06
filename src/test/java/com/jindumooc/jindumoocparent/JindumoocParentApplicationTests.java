@@ -11,6 +11,7 @@ public class JindumoocParentApplicationTests {
 
     @Test
     public void contextLoads() {
+		System.out.println("test");
     }
 
 }
