@@ -27,7 +27,6 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
     <dependencies>
         <!-- SpringBoot 整合 Web组件 -->
         <dependency>
