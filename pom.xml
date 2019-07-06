@@ -29,7 +29,6 @@
     </properties>
 
     <dependencies>
-
         <!-- SpringBoot 整合 Web组件 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
