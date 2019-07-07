@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.jinduMooc</groupId>
-        <artifactId>jindumooc-parent</artifactId>
+        <artifactId>jindumooc-interface</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.jinduMooc</groupId>
-    <artifactId>jindumooc-course-service</artifactId>
+    <artifactId>jindumooc-interface-system-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jindumooc-course-service</name>
+    <name>jindumooc-interface-system-service</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -37,21 +37,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
 
 </project>
