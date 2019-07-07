@@ -14,7 +14,7 @@
     <name>jindumooc-parent</name>
     <description>Demo project for Spring Boot</description>
     <modules>
-        <module>jindumooc-interface-service</module>
+        <module>jindumooc-interface</module>
         <module>jindumooc-class-service</module>
         <module>jindumooc-user-service</module>
         <module>jindumooc-course-service</module>
@@ -28,6 +28,7 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+
         <!-- SpringBoot 整合 Web组件 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -37,7 +38,7 @@
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>0.2.0</version>
+            <version>${dubbo.starter.version}</version>
         </dependency>
 
         <!--<dependency>
@@ -56,6 +57,18 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>2.1.6.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.1.8.RELEASE</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

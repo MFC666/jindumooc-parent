@@ -1,4 +1,4 @@
-package com.jindumooc.jindumoocmaterialservice;
+package com.jindumooc;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
