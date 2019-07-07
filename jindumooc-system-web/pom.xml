@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jinduMooc</groupId>
-    <artifactId>jindumooc-system-service</artifactId>
+    <artifactId>jindumooc-system-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jindumooc-system-service</name>
+    <name>jindumooc-system-web</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

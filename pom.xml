@@ -23,6 +23,14 @@
         <module>jindumooc-information-service</module>
         <module>jindumooc-system-service</module>
         <module>jindumooc-login-service</module>
+        <module>jindumooc-class-web</module>
+        <module>jindumooc-user-web</module>
+        <module>jindumooc-course-web</module>
+        <module>jindumooc-material-web</module>
+        <module>jindumooc-group-web</module>
+        <module>jindumooc-information-web</module>
+        <module>jindumooc-system-web</module>
+        <module>jindumooc-login-web</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
@@ -38,7 +46,7 @@
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>${dubbo.starter.version}</version>
+            <version>0.2.0</version>
         </dependency>
 
         <!--<dependency>
