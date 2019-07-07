@@ -1,4 +1,4 @@
-package com.jindumooc.jindumoocsystemservice;
+package com.jindumooc.system.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

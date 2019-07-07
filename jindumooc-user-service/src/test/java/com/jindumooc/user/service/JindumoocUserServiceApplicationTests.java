@@ -1,4 +1,4 @@
-package com.jindumooc.jindumoocuserservice;
+package com.jindumooc.user.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
