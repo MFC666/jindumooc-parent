@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.jinduMooc</groupId>
-        <artifactId>jindumooc-interface-service</artifactId>
+        <artifactId>jindumooc-interface</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.jinduMooc</groupId>
-    <artifactId>jindumooc-interface-user-service</artifactId>
+    <artifactId>jindumooc-interface-class-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jindumooc-interface-user-service</name>
+    <name>jindumooc-interface-class-service</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
