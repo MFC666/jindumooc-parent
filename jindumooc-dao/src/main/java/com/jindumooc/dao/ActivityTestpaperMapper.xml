@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.ActivityTestpaperMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.ActivityTestpaper" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mediaId" property="mediaid" jdbcType="INTEGER" />
+    <result column="doTimes" property="dotimes" jdbcType="SMALLINT" />
+    <result column="redoInterval" property="redointerval" jdbcType="REAL" />
+    <result column="limitedTime" property="limitedtime" jdbcType="INTEGER" />
+    <result column="requireCredit" property="requirecredit" jdbcType="INTEGER" />
+    <result column="testMode" property="testmode" jdbcType="VARCHAR" />
+    <result column="migrateLessonId" property="migratelessonid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.ActivityTestpaperWithBLOBs" extends="BaseResultMap" >
+    <result column="checkType" property="checktype" jdbcType="LONGVARCHAR" />
+    <result column="finishCondition" property="finishcondition" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mediaId, doTimes, redoInterval, limitedTime, requireCredit, testMode, migrateLessonId
+  </sql>
+  <sql id="Blob_Column_List" >
+    checkType, finishCondition
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.ActivityTestpaperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity_testpaper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ActivityTestpaperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity_testpaper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity_testpaper
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from activity_testpaper
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ActivityTestpaperExample" >
+    delete from activity_testpaper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.ActivityTestpaperWithBLOBs" >
+    insert into activity_testpaper (id, mediaId, doTimes, 
+      redoInterval, limitedTime, requireCredit, 
+      testMode, migrateLessonId, checkType, 
+      finishCondition)
+    values (#{id,jdbcType=INTEGER}, #{mediaid,jdbcType=INTEGER}, #{dotimes,jdbcType=SMALLINT}, 
+      #{redointerval,jdbcType=REAL}, #{limitedtime,jdbcType=INTEGER}, #{requirecredit,jdbcType=INTEGER}, 
+      #{testmode,jdbcType=VARCHAR}, #{migratelessonid,jdbcType=INTEGER}, #{checktype,jdbcType=LONGVARCHAR}, 
+      #{finishcondition,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.ActivityTestpaperWithBLOBs" >
+    insert into activity_testpaper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mediaid != null" >
+        mediaId,
+      </if>
+      <if test="dotimes != null" >
+        doTimes,
+      </if>
+      <if test="redointerval != null" >
+        redoInterval,
+      </if>
+      <if test="limitedtime != null" >
+        limitedTime,
+      </if>
+      <if test="requirecredit != null" >
+        requireCredit,
+      </if>
+      <if test="testmode != null" >
+        testMode,
+      </if>
+      <if test="migratelessonid != null" >
+        migrateLessonId,
+      </if>
+      <if test="checktype != null" >
+        checkType,
+      </if>
+      <if test="finishcondition != null" >
+        finishCondition,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mediaid != null" >
+        #{mediaid,jdbcType=INTEGER},
+      </if>
+      <if test="dotimes != null" >
+        #{dotimes,jdbcType=SMALLINT},
+      </if>
+      <if test="redointerval != null" >
+        #{redointerval,jdbcType=REAL},
+      </if>
+      <if test="limitedtime != null" >
+        #{limitedtime,jdbcType=INTEGER},
+      </if>
+      <if test="requirecredit != null" >
+        #{requirecredit,jdbcType=INTEGER},
+      </if>
+      <if test="testmode != null" >
+        #{testmode,jdbcType=VARCHAR},
+      </if>
+      <if test="migratelessonid != null" >
+        #{migratelessonid,jdbcType=INTEGER},
+      </if>
+      <if test="checktype != null" >
+        #{checktype,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finishcondition != null" >
+        #{finishcondition,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.ActivityTestpaperExample" resultType="java.lang.Integer" >
+    select count(*) from activity_testpaper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update activity_testpaper
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mediaid != null" >
+        mediaId = #{record.mediaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dotimes != null" >
+        doTimes = #{record.dotimes,jdbcType=SMALLINT},
+      </if>
+      <if test="record.redointerval != null" >
+        redoInterval = #{record.redointerval,jdbcType=REAL},
+      </if>
+      <if test="record.limitedtime != null" >
+        limitedTime = #{record.limitedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.requirecredit != null" >
+        requireCredit = #{record.requirecredit,jdbcType=INTEGER},
+      </if>
+      <if test="record.testmode != null" >
+        testMode = #{record.testmode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.migratelessonid != null" >
+        migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.checktype != null" >
+        checkType = #{record.checktype,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.finishcondition != null" >
+        finishCondition = #{record.finishcondition,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update activity_testpaper
+    set id = #{record.id,jdbcType=INTEGER},
+      mediaId = #{record.mediaid,jdbcType=INTEGER},
+      doTimes = #{record.dotimes,jdbcType=SMALLINT},
+      redoInterval = #{record.redointerval,jdbcType=REAL},
+      limitedTime = #{record.limitedtime,jdbcType=INTEGER},
+      requireCredit = #{record.requirecredit,jdbcType=INTEGER},
+      testMode = #{record.testmode,jdbcType=VARCHAR},
+      migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER},
+      checkType = #{record.checktype,jdbcType=LONGVARCHAR},
+      finishCondition = #{record.finishcondition,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update activity_testpaper
+    set id = #{record.id,jdbcType=INTEGER},
+      mediaId = #{record.mediaid,jdbcType=INTEGER},
+      doTimes = #{record.dotimes,jdbcType=SMALLINT},
+      redoInterval = #{record.redointerval,jdbcType=REAL},
+      limitedTime = #{record.limitedtime,jdbcType=INTEGER},
+      requireCredit = #{record.requirecredit,jdbcType=INTEGER},
+      testMode = #{record.testmode,jdbcType=VARCHAR},
+      migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ActivityTestpaperWithBLOBs" >
+    update activity_testpaper
+    <set >
+      <if test="mediaid != null" >
+        mediaId = #{mediaid,jdbcType=INTEGER},
+      </if>
+      <if test="dotimes != null" >
+        doTimes = #{dotimes,jdbcType=SMALLINT},
+      </if>
+      <if test="redointerval != null" >
+        redoInterval = #{redointerval,jdbcType=REAL},
+      </if>
+      <if test="limitedtime != null" >
+        limitedTime = #{limitedtime,jdbcType=INTEGER},
+      </if>
+      <if test="requirecredit != null" >
+        requireCredit = #{requirecredit,jdbcType=INTEGER},
+      </if>
+      <if test="testmode != null" >
+        testMode = #{testmode,jdbcType=VARCHAR},
+      </if>
+      <if test="migratelessonid != null" >
+        migrateLessonId = #{migratelessonid,jdbcType=INTEGER},
+      </if>
+      <if test="checktype != null" >
+        checkType = #{checktype,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finishcondition != null" >
+        finishCondition = #{finishcondition,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.ActivityTestpaperWithBLOBs" >
+    update activity_testpaper
+    set mediaId = #{mediaid,jdbcType=INTEGER},
+      doTimes = #{dotimes,jdbcType=SMALLINT},
+      redoInterval = #{redointerval,jdbcType=REAL},
+      limitedTime = #{limitedtime,jdbcType=INTEGER},
+      requireCredit = #{requirecredit,jdbcType=INTEGER},
+      testMode = #{testmode,jdbcType=VARCHAR},
+      migrateLessonId = #{migratelessonid,jdbcType=INTEGER},
+      checkType = #{checktype,jdbcType=LONGVARCHAR},
+      finishCondition = #{finishcondition,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.ActivityTestpaper" >
+    update activity_testpaper
+    set mediaId = #{mediaid,jdbcType=INTEGER},
+      doTimes = #{dotimes,jdbcType=SMALLINT},
+      redoInterval = #{redointerval,jdbcType=REAL},
+      limitedTime = #{limitedtime,jdbcType=INTEGER},
+      requireCredit = #{requirecredit,jdbcType=INTEGER},
+      testMode = #{testmode,jdbcType=VARCHAR},
+      migrateLessonId = #{migratelessonid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

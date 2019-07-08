@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.QuestionAnalysisMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.QuestionAnalysis" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="targetId" property="targetid" jdbcType="INTEGER" />
+    <result column="targetType" property="targettype" jdbcType="VARCHAR" />
+    <result column="activityId" property="activityid" jdbcType="INTEGER" />
+    <result column="questionId" property="questionid" jdbcType="INTEGER" />
+    <result column="choiceIndex" property="choiceindex" jdbcType="INTEGER" />
+    <result column="firstAnswerCount" property="firstanswercount" jdbcType="INTEGER" />
+    <result column="totalAnswerCount" property="totalanswercount" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, targetId, targetType, activityId, questionId, choiceIndex, firstAnswerCount, 
+    totalAnswerCount, createdTime, updatedTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.QuestionAnalysisExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from question_analysis
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from question_analysis
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from question_analysis
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.QuestionAnalysisExample" >
+    delete from question_analysis
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.QuestionAnalysis" >
+    insert into question_analysis (id, targetId, targetType, 
+      activityId, questionId, choiceIndex, 
+      firstAnswerCount, totalAnswerCount, createdTime, 
+      updatedTime)
+    values (#{id,jdbcType=INTEGER}, #{targetid,jdbcType=INTEGER}, #{targettype,jdbcType=VARCHAR}, 
+      #{activityid,jdbcType=INTEGER}, #{questionid,jdbcType=INTEGER}, #{choiceindex,jdbcType=INTEGER}, 
+      #{firstanswercount,jdbcType=INTEGER}, #{totalanswercount,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, 
+      #{updatedtime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.QuestionAnalysis" >
+    insert into question_analysis
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="targetid != null" >
+        targetId,
+      </if>
+      <if test="targettype != null" >
+        targetType,
+      </if>
+      <if test="activityid != null" >
+        activityId,
+      </if>
+      <if test="questionid != null" >
+        questionId,
+      </if>
+      <if test="choiceindex != null" >
+        choiceIndex,
+      </if>
+      <if test="firstanswercount != null" >
+        firstAnswerCount,
+      </if>
+      <if test="totalanswercount != null" >
+        totalAnswerCount,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="targetid != null" >
+        #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="activityid != null" >
+        #{activityid,jdbcType=INTEGER},
+      </if>
+      <if test="questionid != null" >
+        #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="choiceindex != null" >
+        #{choiceindex,jdbcType=INTEGER},
+      </if>
+      <if test="firstanswercount != null" >
+        #{firstanswercount,jdbcType=INTEGER},
+      </if>
+      <if test="totalanswercount != null" >
+        #{totalanswercount,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.QuestionAnalysisExample" resultType="java.lang.Integer" >
+    select count(*) from question_analysis
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update question_analysis
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.targetid != null" >
+        targetId = #{record.targetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.targettype != null" >
+        targetType = #{record.targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityid != null" >
+        activityId = #{record.activityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionid != null" >
+        questionId = #{record.questionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.choiceindex != null" >
+        choiceIndex = #{record.choiceindex,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstanswercount != null" >
+        firstAnswerCount = #{record.firstanswercount,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalanswercount != null" >
+        totalAnswerCount = #{record.totalanswercount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update question_analysis
+    set id = #{record.id,jdbcType=INTEGER},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      activityId = #{record.activityid,jdbcType=INTEGER},
+      questionId = #{record.questionid,jdbcType=INTEGER},
+      choiceIndex = #{record.choiceindex,jdbcType=INTEGER},
+      firstAnswerCount = #{record.firstanswercount,jdbcType=INTEGER},
+      totalAnswerCount = #{record.totalanswercount,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.QuestionAnalysis" >
+    update question_analysis
+    <set >
+      <if test="targetid != null" >
+        targetId = #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        targetType = #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="activityid != null" >
+        activityId = #{activityid,jdbcType=INTEGER},
+      </if>
+      <if test="questionid != null" >
+        questionId = #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="choiceindex != null" >
+        choiceIndex = #{choiceindex,jdbcType=INTEGER},
+      </if>
+      <if test="firstanswercount != null" >
+        firstAnswerCount = #{firstanswercount,jdbcType=INTEGER},
+      </if>
+      <if test="totalanswercount != null" >
+        totalAnswerCount = #{totalanswercount,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.QuestionAnalysis" >
+    update question_analysis
+    set targetId = #{targetid,jdbcType=INTEGER},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      activityId = #{activityid,jdbcType=INTEGER},
+      questionId = #{questionid,jdbcType=INTEGER},
+      choiceIndex = #{choiceindex,jdbcType=INTEGER},
+      firstAnswerCount = #{firstanswercount,jdbcType=INTEGER},
+      totalAnswerCount = #{totalanswercount,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseLessonLearnMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseLessonLearn" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="lessonId" property="lessonid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="startTime" property="starttime" jdbcType="INTEGER" />
+    <result column="finishedTime" property="finishedtime" jdbcType="INTEGER" />
+    <result column="learnTime" property="learntime" jdbcType="INTEGER" />
+    <result column="watchTime" property="watchtime" jdbcType="INTEGER" />
+    <result column="watchNum" property="watchnum" jdbcType="INTEGER" />
+    <result column="videoStatus" property="videostatus" jdbcType="CHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, courseId, lessonId, status, startTime, finishedTime, learnTime, watchTime, 
+    watchNum, videoStatus, updateTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseLessonLearnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_lesson_learn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_lesson_learn
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_lesson_learn
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseLessonLearnExample" >
+    delete from course_lesson_learn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseLessonLearn" >
+    insert into course_lesson_learn (id, userId, courseId, 
+      lessonId, status, startTime, 
+      finishedTime, learnTime, watchTime, 
+      watchNum, videoStatus, updateTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, 
+      #{lessonid,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{starttime,jdbcType=INTEGER}, 
+      #{finishedtime,jdbcType=INTEGER}, #{learntime,jdbcType=INTEGER}, #{watchtime,jdbcType=INTEGER}, 
+      #{watchnum,jdbcType=INTEGER}, #{videostatus,jdbcType=CHAR}, #{updatetime,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseLessonLearn" >
+    insert into course_lesson_learn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="lessonid != null" >
+        lessonId,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="finishedtime != null" >
+        finishedTime,
+      </if>
+      <if test="learntime != null" >
+        learnTime,
+      </if>
+      <if test="watchtime != null" >
+        watchTime,
+      </if>
+      <if test="watchnum != null" >
+        watchNum,
+      </if>
+      <if test="videostatus != null" >
+        videoStatus,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=INTEGER},
+      </if>
+      <if test="finishedtime != null" >
+        #{finishedtime,jdbcType=INTEGER},
+      </if>
+      <if test="learntime != null" >
+        #{learntime,jdbcType=INTEGER},
+      </if>
+      <if test="watchtime != null" >
+        #{watchtime,jdbcType=INTEGER},
+      </if>
+      <if test="watchnum != null" >
+        #{watchnum,jdbcType=INTEGER},
+      </if>
+      <if test="videostatus != null" >
+        #{videostatus,jdbcType=CHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseLessonLearnExample" resultType="java.lang.Integer" >
+    select count(*) from course_lesson_learn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_lesson_learn
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lessonid != null" >
+        lessonId = #{record.lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.starttime != null" >
+        startTime = #{record.starttime,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishedtime != null" >
+        finishedTime = #{record.finishedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.learntime != null" >
+        learnTime = #{record.learntime,jdbcType=INTEGER},
+      </if>
+      <if test="record.watchtime != null" >
+        watchTime = #{record.watchtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.watchnum != null" >
+        watchNum = #{record.watchnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.videostatus != null" >
+        videoStatus = #{record.videostatus,jdbcType=CHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_lesson_learn
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      lessonId = #{record.lessonid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      startTime = #{record.starttime,jdbcType=INTEGER},
+      finishedTime = #{record.finishedtime,jdbcType=INTEGER},
+      learnTime = #{record.learntime,jdbcType=INTEGER},
+      watchTime = #{record.watchtime,jdbcType=INTEGER},
+      watchNum = #{record.watchnum,jdbcType=INTEGER},
+      videoStatus = #{record.videostatus,jdbcType=CHAR},
+      updateTime = #{record.updatetime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseLessonLearn" >
+    update course_lesson_learn
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        lessonId = #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=INTEGER},
+      </if>
+      <if test="finishedtime != null" >
+        finishedTime = #{finishedtime,jdbcType=INTEGER},
+      </if>
+      <if test="learntime != null" >
+        learnTime = #{learntime,jdbcType=INTEGER},
+      </if>
+      <if test="watchtime != null" >
+        watchTime = #{watchtime,jdbcType=INTEGER},
+      </if>
+      <if test="watchnum != null" >
+        watchNum = #{watchnum,jdbcType=INTEGER},
+      </if>
+      <if test="videostatus != null" >
+        videoStatus = #{videostatus,jdbcType=CHAR},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseLessonLearn" >
+    update course_lesson_learn
+    set userId = #{userid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      lessonId = #{lessonid,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      startTime = #{starttime,jdbcType=INTEGER},
+      finishedTime = #{finishedtime,jdbcType=INTEGER},
+      learnTime = #{learntime,jdbcType=INTEGER},
+      watchTime = #{watchtime,jdbcType=INTEGER},
+      watchNum = #{watchnum,jdbcType=INTEGER},
+      videoStatus = #{videostatus,jdbcType=CHAR},
+      updateTime = #{updatetime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

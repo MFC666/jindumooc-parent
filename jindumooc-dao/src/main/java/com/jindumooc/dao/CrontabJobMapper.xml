@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CrontabJobMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CrontabJob" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="cycle" property="cycle" jdbcType="CHAR" />
+    <result column="cycleTime" property="cycletime" jdbcType="VARCHAR" />
+    <result column="jobClass" property="jobclass" jdbcType="VARCHAR" />
+    <result column="targetType" property="targettype" jdbcType="VARCHAR" />
+    <result column="targetId" property="targetid" jdbcType="INTEGER" />
+    <result column="executing" property="executing" jdbcType="TINYINT" />
+    <result column="nextExcutedTime" property="nextexcutedtime" jdbcType="INTEGER" />
+    <result column="latestExecutedTime" property="latestexecutedtime" jdbcType="INTEGER" />
+    <result column="creatorId" property="creatorid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="enabled" property="enabled" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.CrontabJob" extends="BaseResultMap" >
+    <result column="jobParams" property="jobparams" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, cycle, cycleTime, jobClass, targetType, targetId, executing, nextExcutedTime, 
+    latestExecutedTime, creatorId, createdTime, enabled
+  </sql>
+  <sql id="Blob_Column_List" >
+    jobParams
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.CrontabJobExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from crontab_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CrontabJobExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crontab_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from crontab_job
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from crontab_job
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CrontabJobExample" >
+    delete from crontab_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CrontabJob" >
+    insert into crontab_job (id, name, cycle, 
+      cycleTime, jobClass, targetType, 
+      targetId, executing, nextExcutedTime, 
+      latestExecutedTime, creatorId, createdTime, 
+      enabled, jobParams)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{cycle,jdbcType=CHAR}, 
+      #{cycletime,jdbcType=VARCHAR}, #{jobclass,jdbcType=VARCHAR}, #{targettype,jdbcType=VARCHAR}, 
+      #{targetid,jdbcType=INTEGER}, #{executing,jdbcType=TINYINT}, #{nextexcutedtime,jdbcType=INTEGER}, 
+      #{latestexecutedtime,jdbcType=INTEGER}, #{creatorid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, 
+      #{enabled,jdbcType=BIT}, #{jobparams,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CrontabJob" >
+    insert into crontab_job
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="cycle != null" >
+        cycle,
+      </if>
+      <if test="cycletime != null" >
+        cycleTime,
+      </if>
+      <if test="jobclass != null" >
+        jobClass,
+      </if>
+      <if test="targettype != null" >
+        targetType,
+      </if>
+      <if test="targetid != null" >
+        targetId,
+      </if>
+      <if test="executing != null" >
+        executing,
+      </if>
+      <if test="nextexcutedtime != null" >
+        nextExcutedTime,
+      </if>
+      <if test="latestexecutedtime != null" >
+        latestExecutedTime,
+      </if>
+      <if test="creatorid != null" >
+        creatorId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="jobparams != null" >
+        jobParams,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null" >
+        #{cycle,jdbcType=CHAR},
+      </if>
+      <if test="cycletime != null" >
+        #{cycletime,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclass != null" >
+        #{jobclass,jdbcType=VARCHAR},
+      </if>
+      <if test="targettype != null" >
+        #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="targetid != null" >
+        #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="executing != null" >
+        #{executing,jdbcType=TINYINT},
+      </if>
+      <if test="nextexcutedtime != null" >
+        #{nextexcutedtime,jdbcType=INTEGER},
+      </if>
+      <if test="latestexecutedtime != null" >
+        #{latestexecutedtime,jdbcType=INTEGER},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="jobparams != null" >
+        #{jobparams,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CrontabJobExample" resultType="java.lang.Integer" >
+    select count(*) from crontab_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update crontab_job
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cycle != null" >
+        cycle = #{record.cycle,jdbcType=CHAR},
+      </if>
+      <if test="record.cycletime != null" >
+        cycleTime = #{record.cycletime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobclass != null" >
+        jobClass = #{record.jobclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targettype != null" >
+        targetType = #{record.targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetid != null" >
+        targetId = #{record.targetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.executing != null" >
+        executing = #{record.executing,jdbcType=TINYINT},
+      </if>
+      <if test="record.nextexcutedtime != null" >
+        nextExcutedTime = #{record.nextexcutedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.latestexecutedtime != null" >
+        latestExecutedTime = #{record.latestexecutedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.creatorid != null" >
+        creatorId = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.enabled != null" >
+        enabled = #{record.enabled,jdbcType=BIT},
+      </if>
+      <if test="record.jobparams != null" >
+        jobParams = #{record.jobparams,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update crontab_job
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      cycle = #{record.cycle,jdbcType=CHAR},
+      cycleTime = #{record.cycletime,jdbcType=VARCHAR},
+      jobClass = #{record.jobclass,jdbcType=VARCHAR},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      executing = #{record.executing,jdbcType=TINYINT},
+      nextExcutedTime = #{record.nextexcutedtime,jdbcType=INTEGER},
+      latestExecutedTime = #{record.latestexecutedtime,jdbcType=INTEGER},
+      creatorId = #{record.creatorid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      enabled = #{record.enabled,jdbcType=BIT},
+      jobParams = #{record.jobparams,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update crontab_job
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      cycle = #{record.cycle,jdbcType=CHAR},
+      cycleTime = #{record.cycletime,jdbcType=VARCHAR},
+      jobClass = #{record.jobclass,jdbcType=VARCHAR},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      executing = #{record.executing,jdbcType=TINYINT},
+      nextExcutedTime = #{record.nextexcutedtime,jdbcType=INTEGER},
+      latestExecutedTime = #{record.latestexecutedtime,jdbcType=INTEGER},
+      creatorId = #{record.creatorid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      enabled = #{record.enabled,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CrontabJob" >
+    update crontab_job
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null" >
+        cycle = #{cycle,jdbcType=CHAR},
+      </if>
+      <if test="cycletime != null" >
+        cycleTime = #{cycletime,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclass != null" >
+        jobClass = #{jobclass,jdbcType=VARCHAR},
+      </if>
+      <if test="targettype != null" >
+        targetType = #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="targetid != null" >
+        targetId = #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="executing != null" >
+        executing = #{executing,jdbcType=TINYINT},
+      </if>
+      <if test="nextexcutedtime != null" >
+        nextExcutedTime = #{nextexcutedtime,jdbcType=INTEGER},
+      </if>
+      <if test="latestexecutedtime != null" >
+        latestExecutedTime = #{latestexecutedtime,jdbcType=INTEGER},
+      </if>
+      <if test="creatorid != null" >
+        creatorId = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="jobparams != null" >
+        jobParams = #{jobparams,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.CrontabJob" >
+    update crontab_job
+    set name = #{name,jdbcType=VARCHAR},
+      cycle = #{cycle,jdbcType=CHAR},
+      cycleTime = #{cycletime,jdbcType=VARCHAR},
+      jobClass = #{jobclass,jdbcType=VARCHAR},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      targetId = #{targetid,jdbcType=INTEGER},
+      executing = #{executing,jdbcType=TINYINT},
+      nextExcutedTime = #{nextexcutedtime,jdbcType=INTEGER},
+      latestExecutedTime = #{latestexecutedtime,jdbcType=INTEGER},
+      creatorId = #{creatorid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=BIT},
+      jobParams = #{jobparams,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CrontabJob" >
+    update crontab_job
+    set name = #{name,jdbcType=VARCHAR},
+      cycle = #{cycle,jdbcType=CHAR},
+      cycleTime = #{cycletime,jdbcType=VARCHAR},
+      jobClass = #{jobclass,jdbcType=VARCHAR},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      targetId = #{targetid,jdbcType=INTEGER},
+      executing = #{executing,jdbcType=TINYINT},
+      nextExcutedTime = #{nextexcutedtime,jdbcType=INTEGER},
+      latestExecutedTime = #{latestexecutedtime,jdbcType=INTEGER},
+      creatorId = #{creatorid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

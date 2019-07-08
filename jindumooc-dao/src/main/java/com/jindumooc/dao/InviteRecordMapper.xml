@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.InviteRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.InviteRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="inviteUserId" property="inviteuserid" jdbcType="INTEGER" />
+    <result column="invitedUserId" property="inviteduserid" jdbcType="INTEGER" />
+    <result column="inviteTime" property="invitetime" jdbcType="INTEGER" />
+    <result column="inviteUserCardId" property="inviteusercardid" jdbcType="INTEGER" />
+    <result column="invitedUserCardId" property="invitedusercardid" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="REAL" />
+    <result column="cashAmount" property="cashamount" jdbcType="REAL" />
+    <result column="coinAmount" property="coinamount" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, inviteUserId, invitedUserId, inviteTime, inviteUserCardId, invitedUserCardId, 
+    amount, cashAmount, coinAmount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.InviteRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from invite_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from invite_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from invite_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.InviteRecordExample" >
+    delete from invite_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.InviteRecord" >
+    insert into invite_record (id, inviteUserId, invitedUserId, 
+      inviteTime, inviteUserCardId, invitedUserCardId, 
+      amount, cashAmount, coinAmount
+      )
+    values (#{id,jdbcType=INTEGER}, #{inviteuserid,jdbcType=INTEGER}, #{inviteduserid,jdbcType=INTEGER}, 
+      #{invitetime,jdbcType=INTEGER}, #{inviteusercardid,jdbcType=INTEGER}, #{invitedusercardid,jdbcType=INTEGER}, 
+      #{amount,jdbcType=REAL}, #{cashamount,jdbcType=REAL}, #{coinamount,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.InviteRecord" >
+    insert into invite_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="inviteuserid != null" >
+        inviteUserId,
+      </if>
+      <if test="inviteduserid != null" >
+        invitedUserId,
+      </if>
+      <if test="invitetime != null" >
+        inviteTime,
+      </if>
+      <if test="inviteusercardid != null" >
+        inviteUserCardId,
+      </if>
+      <if test="invitedusercardid != null" >
+        invitedUserCardId,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="cashamount != null" >
+        cashAmount,
+      </if>
+      <if test="coinamount != null" >
+        coinAmount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="inviteuserid != null" >
+        #{inviteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="inviteduserid != null" >
+        #{inviteduserid,jdbcType=INTEGER},
+      </if>
+      <if test="invitetime != null" >
+        #{invitetime,jdbcType=INTEGER},
+      </if>
+      <if test="inviteusercardid != null" >
+        #{inviteusercardid,jdbcType=INTEGER},
+      </if>
+      <if test="invitedusercardid != null" >
+        #{invitedusercardid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=REAL},
+      </if>
+      <if test="cashamount != null" >
+        #{cashamount,jdbcType=REAL},
+      </if>
+      <if test="coinamount != null" >
+        #{coinamount,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.InviteRecordExample" resultType="java.lang.Integer" >
+    select count(*) from invite_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update invite_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.inviteuserid != null" >
+        inviteUserId = #{record.inviteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.inviteduserid != null" >
+        invitedUserId = #{record.inviteduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.invitetime != null" >
+        inviteTime = #{record.invitetime,jdbcType=INTEGER},
+      </if>
+      <if test="record.inviteusercardid != null" >
+        inviteUserCardId = #{record.inviteusercardid,jdbcType=INTEGER},
+      </if>
+      <if test="record.invitedusercardid != null" >
+        invitedUserCardId = #{record.invitedusercardid,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=REAL},
+      </if>
+      <if test="record.cashamount != null" >
+        cashAmount = #{record.cashamount,jdbcType=REAL},
+      </if>
+      <if test="record.coinamount != null" >
+        coinAmount = #{record.coinamount,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update invite_record
+    set id = #{record.id,jdbcType=INTEGER},
+      inviteUserId = #{record.inviteuserid,jdbcType=INTEGER},
+      invitedUserId = #{record.inviteduserid,jdbcType=INTEGER},
+      inviteTime = #{record.invitetime,jdbcType=INTEGER},
+      inviteUserCardId = #{record.inviteusercardid,jdbcType=INTEGER},
+      invitedUserCardId = #{record.invitedusercardid,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=REAL},
+      cashAmount = #{record.cashamount,jdbcType=REAL},
+      coinAmount = #{record.coinamount,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.InviteRecord" >
+    update invite_record
+    <set >
+      <if test="inviteuserid != null" >
+        inviteUserId = #{inviteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="inviteduserid != null" >
+        invitedUserId = #{inviteduserid,jdbcType=INTEGER},
+      </if>
+      <if test="invitetime != null" >
+        inviteTime = #{invitetime,jdbcType=INTEGER},
+      </if>
+      <if test="inviteusercardid != null" >
+        inviteUserCardId = #{inviteusercardid,jdbcType=INTEGER},
+      </if>
+      <if test="invitedusercardid != null" >
+        invitedUserCardId = #{invitedusercardid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=REAL},
+      </if>
+      <if test="cashamount != null" >
+        cashAmount = #{cashamount,jdbcType=REAL},
+      </if>
+      <if test="coinamount != null" >
+        coinAmount = #{coinamount,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.InviteRecord" >
+    update invite_record
+    set inviteUserId = #{inviteuserid,jdbcType=INTEGER},
+      invitedUserId = #{inviteduserid,jdbcType=INTEGER},
+      inviteTime = #{invitetime,jdbcType=INTEGER},
+      inviteUserCardId = #{inviteusercardid,jdbcType=INTEGER},
+      invitedUserCardId = #{invitedusercardid,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=REAL},
+      cashAmount = #{cashamount,jdbcType=REAL},
+      coinAmount = #{coinamount,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

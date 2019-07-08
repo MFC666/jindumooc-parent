@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.BizSchedulerJobLogMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.BizSchedulerJobLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="job_id" property="jobId" jdbcType="INTEGER" />
+    <result column="job_fired_id" property="jobFiredId" jdbcType="INTEGER" />
+    <result column="hostname" property="hostname" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pool" property="pool" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="classes" property="classes" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.BizSchedulerJobLogWithBLOBs" extends="BaseResultMap" >
+    <result column="args" property="args" jdbcType="LONGVARCHAR" />
+    <result column="message" property="message" jdbcType="LONGVARCHAR" />
+    <result column="trace" property="trace" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, job_id, job_fired_id, hostname, name, pool, source, classes, priority, status, 
+    created_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    args, message, trace
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.BizSchedulerJobLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from biz_scheduler_job_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.BizSchedulerJobLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from biz_scheduler_job_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from biz_scheduler_job_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from biz_scheduler_job_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.BizSchedulerJobLogExample" >
+    delete from biz_scheduler_job_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.BizSchedulerJobLogWithBLOBs" >
+    insert into biz_scheduler_job_log (id, job_id, job_fired_id, 
+      hostname, name, pool, 
+      source, classes, priority, 
+      status, created_time, args, 
+      message, trace)
+    values (#{id,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER}, #{jobFiredId,jdbcType=INTEGER}, 
+      #{hostname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{pool,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{classes,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{createdTime,jdbcType=INTEGER}, #{args,jdbcType=LONGVARCHAR}, 
+      #{message,jdbcType=LONGVARCHAR}, #{trace,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.BizSchedulerJobLogWithBLOBs" >
+    insert into biz_scheduler_job_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jobId != null" >
+        job_id,
+      </if>
+      <if test="jobFiredId != null" >
+        job_fired_id,
+      </if>
+      <if test="hostname != null" >
+        hostname,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="pool != null" >
+        pool,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="classes != null" >
+        classes,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="args != null" >
+        args,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="trace != null" >
+        trace,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null" >
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="jobFiredId != null" >
+        #{jobFiredId,jdbcType=INTEGER},
+      </if>
+      <if test="hostname != null" >
+        #{hostname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pool != null" >
+        #{pool,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="args != null" >
+        #{args,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="trace != null" >
+        #{trace,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.BizSchedulerJobLogExample" resultType="java.lang.Integer" >
+    select count(*) from biz_scheduler_job_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update biz_scheduler_job_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobId != null" >
+        job_id = #{record.jobId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobFiredId != null" >
+        job_fired_id = #{record.jobFiredId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hostname != null" >
+        hostname = #{record.hostname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pool != null" >
+        pool = #{record.pool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classes != null" >
+        classes = #{record.classes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        priority = #{record.priority,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null" >
+        created_time = #{record.createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.args != null" >
+        args = #{record.args,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.trace != null" >
+        trace = #{record.trace,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update biz_scheduler_job_log
+    set id = #{record.id,jdbcType=INTEGER},
+      job_id = #{record.jobId,jdbcType=INTEGER},
+      job_fired_id = #{record.jobFiredId,jdbcType=INTEGER},
+      hostname = #{record.hostname,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      pool = #{record.pool,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      classes = #{record.classes,jdbcType=VARCHAR},
+      priority = #{record.priority,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      created_time = #{record.createdTime,jdbcType=INTEGER},
+      args = #{record.args,jdbcType=LONGVARCHAR},
+      message = #{record.message,jdbcType=LONGVARCHAR},
+      trace = #{record.trace,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update biz_scheduler_job_log
+    set id = #{record.id,jdbcType=INTEGER},
+      job_id = #{record.jobId,jdbcType=INTEGER},
+      job_fired_id = #{record.jobFiredId,jdbcType=INTEGER},
+      hostname = #{record.hostname,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      pool = #{record.pool,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      classes = #{record.classes,jdbcType=VARCHAR},
+      priority = #{record.priority,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      created_time = #{record.createdTime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.BizSchedulerJobLogWithBLOBs" >
+    update biz_scheduler_job_log
+    <set >
+      <if test="jobId != null" >
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="jobFiredId != null" >
+        job_fired_id = #{jobFiredId,jdbcType=INTEGER},
+      </if>
+      <if test="hostname != null" >
+        hostname = #{hostname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pool != null" >
+        pool = #{pool,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        classes = #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="args != null" >
+        args = #{args,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="trace != null" >
+        trace = #{trace,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.BizSchedulerJobLogWithBLOBs" >
+    update biz_scheduler_job_log
+    set job_id = #{jobId,jdbcType=INTEGER},
+      job_fired_id = #{jobFiredId,jdbcType=INTEGER},
+      hostname = #{hostname,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pool = #{pool,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      classes = #{classes,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=INTEGER},
+      args = #{args,jdbcType=LONGVARCHAR},
+      message = #{message,jdbcType=LONGVARCHAR},
+      trace = #{trace,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.BizSchedulerJobLog" >
+    update biz_scheduler_job_log
+    set job_id = #{jobId,jdbcType=INTEGER},
+      job_fired_id = #{jobFiredId,jdbcType=INTEGER},
+      hostname = #{hostname,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pool = #{pool,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      classes = #{classes,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

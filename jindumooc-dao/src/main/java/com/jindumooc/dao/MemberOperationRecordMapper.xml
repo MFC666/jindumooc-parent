@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.MemberOperationRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.MemberOperationRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="member_type" property="memberType" jdbcType="VARCHAR" />
+    <result column="target_id" property="targetId" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="course_set_id" property="courseSetId" jdbcType="INTEGER" />
+    <result column="target_type" property="targetType" jdbcType="VARCHAR" />
+    <result column="operate_type" property="operateType" jdbcType="VARCHAR" />
+    <result column="exit_course_set" property="exitCourseSet" jdbcType="BIT" />
+    <result column="join_course_set" property="joinCourseSet" jdbcType="BIT" />
+    <result column="operate_time" property="operateTime" jdbcType="INTEGER" />
+    <result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="refund_id" property="refundId" jdbcType="INTEGER" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="reason_type" property="reasonType" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.MemberOperationRecord" extends="BaseResultMap" >
+    <result column="data" property="data" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, member_id, member_type, target_id, parent_id, course_set_id, target_type, 
+    operate_type, exit_course_set, join_course_set, operate_time, operator_id, user_id, 
+    order_id, refund_id, reason, reason_type, created_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    data
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.MemberOperationRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from member_operation_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.MemberOperationRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member_operation_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from member_operation_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member_operation_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.MemberOperationRecordExample" >
+    delete from member_operation_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.MemberOperationRecord" >
+    insert into member_operation_record (id, title, member_id, 
+      member_type, target_id, parent_id, 
+      course_set_id, target_type, operate_type, 
+      exit_course_set, join_course_set, operate_time, 
+      operator_id, user_id, order_id, 
+      refund_id, reason, reason_type, 
+      created_time, data)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
+      #{memberType,jdbcType=VARCHAR}, #{targetId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
+      #{courseSetId,jdbcType=INTEGER}, #{targetType,jdbcType=VARCHAR}, #{operateType,jdbcType=VARCHAR}, 
+      #{exitCourseSet,jdbcType=BIT}, #{joinCourseSet,jdbcType=BIT}, #{operateTime,jdbcType=INTEGER}, 
+      #{operatorId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+      #{refundId,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, #{reasonType,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=INTEGER}, #{data,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.MemberOperationRecord" >
+    insert into member_operation_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="memberType != null" >
+        member_type,
+      </if>
+      <if test="targetId != null" >
+        target_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="courseSetId != null" >
+        course_set_id,
+      </if>
+      <if test="targetType != null" >
+        target_type,
+      </if>
+      <if test="operateType != null" >
+        operate_type,
+      </if>
+      <if test="exitCourseSet != null" >
+        exit_course_set,
+      </if>
+      <if test="joinCourseSet != null" >
+        join_course_set,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="refundId != null" >
+        refund_id,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="reasonType != null" >
+        reason_type,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="data != null" >
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberType != null" >
+        #{memberType,jdbcType=VARCHAR},
+      </if>
+      <if test="targetId != null" >
+        #{targetId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="courseSetId != null" >
+        #{courseSetId,jdbcType=INTEGER},
+      </if>
+      <if test="targetType != null" >
+        #{targetType,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null" >
+        #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="exitCourseSet != null" >
+        #{exitCourseSet,jdbcType=BIT},
+      </if>
+      <if test="joinCourseSet != null" >
+        #{joinCourseSet,jdbcType=BIT},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="refundId != null" >
+        #{refundId,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonType != null" >
+        #{reasonType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.MemberOperationRecordExample" resultType="java.lang.Integer" >
+    select count(*) from member_operation_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member_operation_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberId != null" >
+        member_id = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberType != null" >
+        member_type = #{record.memberType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetId != null" >
+        target_id = #{record.targetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseSetId != null" >
+        course_set_id = #{record.courseSetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.targetType != null" >
+        target_type = #{record.targetType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateType != null" >
+        operate_type = #{record.operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exitCourseSet != null" >
+        exit_course_set = #{record.exitCourseSet,jdbcType=BIT},
+      </if>
+      <if test="record.joinCourseSet != null" >
+        join_course_set = #{record.joinCourseSet,jdbcType=BIT},
+      </if>
+      <if test="record.operateTime != null" >
+        operate_time = #{record.operateTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.operatorId != null" >
+        operator_id = #{record.operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundId != null" >
+        refund_id = #{record.refundId,jdbcType=INTEGER},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reasonType != null" >
+        reason_type = #{record.reasonType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null" >
+        created_time = #{record.createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.data != null" >
+        data = #{record.data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update member_operation_record
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      member_id = #{record.memberId,jdbcType=INTEGER},
+      member_type = #{record.memberType,jdbcType=VARCHAR},
+      target_id = #{record.targetId,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      course_set_id = #{record.courseSetId,jdbcType=INTEGER},
+      target_type = #{record.targetType,jdbcType=VARCHAR},
+      operate_type = #{record.operateType,jdbcType=VARCHAR},
+      exit_course_set = #{record.exitCourseSet,jdbcType=BIT},
+      join_course_set = #{record.joinCourseSet,jdbcType=BIT},
+      operate_time = #{record.operateTime,jdbcType=INTEGER},
+      operator_id = #{record.operatorId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      refund_id = #{record.refundId,jdbcType=INTEGER},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      reason_type = #{record.reasonType,jdbcType=VARCHAR},
+      created_time = #{record.createdTime,jdbcType=INTEGER},
+      data = #{record.data,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member_operation_record
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      member_id = #{record.memberId,jdbcType=INTEGER},
+      member_type = #{record.memberType,jdbcType=VARCHAR},
+      target_id = #{record.targetId,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      course_set_id = #{record.courseSetId,jdbcType=INTEGER},
+      target_type = #{record.targetType,jdbcType=VARCHAR},
+      operate_type = #{record.operateType,jdbcType=VARCHAR},
+      exit_course_set = #{record.exitCourseSet,jdbcType=BIT},
+      join_course_set = #{record.joinCourseSet,jdbcType=BIT},
+      operate_time = #{record.operateTime,jdbcType=INTEGER},
+      operator_id = #{record.operatorId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      refund_id = #{record.refundId,jdbcType=INTEGER},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      reason_type = #{record.reasonType,jdbcType=VARCHAR},
+      created_time = #{record.createdTime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.MemberOperationRecord" >
+    update member_operation_record
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberType != null" >
+        member_type = #{memberType,jdbcType=VARCHAR},
+      </if>
+      <if test="targetId != null" >
+        target_id = #{targetId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="courseSetId != null" >
+        course_set_id = #{courseSetId,jdbcType=INTEGER},
+      </if>
+      <if test="targetType != null" >
+        target_type = #{targetType,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null" >
+        operate_type = #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="exitCourseSet != null" >
+        exit_course_set = #{exitCourseSet,jdbcType=BIT},
+      </if>
+      <if test="joinCourseSet != null" >
+        join_course_set = #{joinCourseSet,jdbcType=BIT},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="refundId != null" >
+        refund_id = #{refundId,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonType != null" >
+        reason_type = #{reasonType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="data != null" >
+        data = #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.MemberOperationRecord" >
+    update member_operation_record
+    set title = #{title,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=INTEGER},
+      member_type = #{memberType,jdbcType=VARCHAR},
+      target_id = #{targetId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      course_set_id = #{courseSetId,jdbcType=INTEGER},
+      target_type = #{targetType,jdbcType=VARCHAR},
+      operate_type = #{operateType,jdbcType=VARCHAR},
+      exit_course_set = #{exitCourseSet,jdbcType=BIT},
+      join_course_set = #{joinCourseSet,jdbcType=BIT},
+      operate_time = #{operateTime,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      refund_id = #{refundId,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      reason_type = #{reasonType,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=INTEGER},
+      data = #{data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.MemberOperationRecord" >
+    update member_operation_record
+    set title = #{title,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=INTEGER},
+      member_type = #{memberType,jdbcType=VARCHAR},
+      target_id = #{targetId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      course_set_id = #{courseSetId,jdbcType=INTEGER},
+      target_type = #{targetType,jdbcType=VARCHAR},
+      operate_type = #{operateType,jdbcType=VARCHAR},
+      exit_course_set = #{exitCourseSet,jdbcType=BIT},
+      join_course_set = #{joinCourseSet,jdbcType=BIT},
+      operate_time = #{operateTime,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      refund_id = #{refundId,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      reason_type = #{reasonType,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.TestpaperItemResultMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.TestpaperItemResult" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="itemId" property="itemid" jdbcType="INTEGER" />
+    <result column="testId" property="testid" jdbcType="INTEGER" />
+    <result column="testPaperResultId" property="testpaperresultid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="questionId" property="questionid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="score" property="score" jdbcType="REAL" />
+    <result column="pId" property="pid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.TestpaperItemResultWithBLOBs" extends="BaseResultMap" >
+    <result column="answer" property="answer" jdbcType="LONGVARCHAR" />
+    <result column="teacherSay" property="teachersay" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, itemId, testId, testPaperResultId, userId, questionId, status, score, pId
+  </sql>
+  <sql id="Blob_Column_List" >
+    answer, teacherSay
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.TestpaperItemResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from testpaper_item_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.TestpaperItemResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from testpaper_item_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from testpaper_item_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from testpaper_item_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.TestpaperItemResultExample" >
+    delete from testpaper_item_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.TestpaperItemResultWithBLOBs" >
+    insert into testpaper_item_result (id, itemId, testId, 
+      testPaperResultId, userId, questionId, 
+      status, score, pId, answer, 
+      teacherSay)
+    values (#{id,jdbcType=INTEGER}, #{itemid,jdbcType=INTEGER}, #{testid,jdbcType=INTEGER}, 
+      #{testpaperresultid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{questionid,jdbcType=INTEGER}, 
+      #{status,jdbcType=CHAR}, #{score,jdbcType=REAL}, #{pid,jdbcType=INTEGER}, #{answer,jdbcType=LONGVARCHAR}, 
+      #{teachersay,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.TestpaperItemResultWithBLOBs" >
+    insert into testpaper_item_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="itemid != null" >
+        itemId,
+      </if>
+      <if test="testid != null" >
+        testId,
+      </if>
+      <if test="testpaperresultid != null" >
+        testPaperResultId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="questionid != null" >
+        questionId,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="pid != null" >
+        pId,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="teachersay != null" >
+        teacherSay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="itemid != null" >
+        #{itemid,jdbcType=INTEGER},
+      </if>
+      <if test="testid != null" >
+        #{testid,jdbcType=INTEGER},
+      </if>
+      <if test="testpaperresultid != null" >
+        #{testpaperresultid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="questionid != null" >
+        #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=REAL},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="teachersay != null" >
+        #{teachersay,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.TestpaperItemResultExample" resultType="java.lang.Integer" >
+    select count(*) from testpaper_item_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update testpaper_item_result
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemid != null" >
+        itemId = #{record.itemid,jdbcType=INTEGER},
+      </if>
+      <if test="record.testid != null" >
+        testId = #{record.testid,jdbcType=INTEGER},
+      </if>
+      <if test="record.testpaperresultid != null" >
+        testPaperResultId = #{record.testpaperresultid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionid != null" >
+        questionId = #{record.questionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=REAL},
+      </if>
+      <if test="record.pid != null" >
+        pId = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.teachersay != null" >
+        teacherSay = #{record.teachersay,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update testpaper_item_result
+    set id = #{record.id,jdbcType=INTEGER},
+      itemId = #{record.itemid,jdbcType=INTEGER},
+      testId = #{record.testid,jdbcType=INTEGER},
+      testPaperResultId = #{record.testpaperresultid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      questionId = #{record.questionid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      score = #{record.score,jdbcType=REAL},
+      pId = #{record.pid,jdbcType=INTEGER},
+      answer = #{record.answer,jdbcType=LONGVARCHAR},
+      teacherSay = #{record.teachersay,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update testpaper_item_result
+    set id = #{record.id,jdbcType=INTEGER},
+      itemId = #{record.itemid,jdbcType=INTEGER},
+      testId = #{record.testid,jdbcType=INTEGER},
+      testPaperResultId = #{record.testpaperresultid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      questionId = #{record.questionid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      score = #{record.score,jdbcType=REAL},
+      pId = #{record.pid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.TestpaperItemResultWithBLOBs" >
+    update testpaper_item_result
+    <set >
+      <if test="itemid != null" >
+        itemId = #{itemid,jdbcType=INTEGER},
+      </if>
+      <if test="testid != null" >
+        testId = #{testid,jdbcType=INTEGER},
+      </if>
+      <if test="testpaperresultid != null" >
+        testPaperResultId = #{testpaperresultid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="questionid != null" >
+        questionId = #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="pid != null" >
+        pId = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="teachersay != null" >
+        teacherSay = #{teachersay,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.TestpaperItemResultWithBLOBs" >
+    update testpaper_item_result
+    set itemId = #{itemid,jdbcType=INTEGER},
+      testId = #{testid,jdbcType=INTEGER},
+      testPaperResultId = #{testpaperresultid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      questionId = #{questionid,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      score = #{score,jdbcType=REAL},
+      pId = #{pid,jdbcType=INTEGER},
+      answer = #{answer,jdbcType=LONGVARCHAR},
+      teacherSay = #{teachersay,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.TestpaperItemResult" >
+    update testpaper_item_result
+    set itemId = #{itemid,jdbcType=INTEGER},
+      testId = #{testid,jdbcType=INTEGER},
+      testPaperResultId = #{testpaperresultid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      questionId = #{questionid,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      score = #{score,jdbcType=REAL},
+      pId = #{pid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

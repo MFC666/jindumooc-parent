@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Question" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="REAL" />
+    <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
+    <result column="difficulty" property="difficulty" jdbcType="VARCHAR" />
+    <result column="target" property="target" jdbcType="VARCHAR" />
+    <result column="courseSetId" property="coursesetid" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="lessonId" property="lessonid" jdbcType="INTEGER" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="subCount" property="subcount" jdbcType="INTEGER" />
+    <result column="finishedTimes" property="finishedtimes" jdbcType="INTEGER" />
+    <result column="passedTimes" property="passedtimes" jdbcType="INTEGER" />
+    <result column="createdUserId" property="createduserid" jdbcType="INTEGER" />
+    <result column="updatedUserId" property="updateduserid" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="copyId" property="copyid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.QuestionWithBLOBs" extends="BaseResultMap" >
+    <result column="stem" property="stem" jdbcType="LONGVARCHAR" />
+    <result column="answer" property="answer" jdbcType="LONGVARCHAR" />
+    <result column="analysis" property="analysis" jdbcType="LONGVARCHAR" />
+    <result column="metas" property="metas" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type, score, categoryId, difficulty, target, courseSetId, courseId, lessonId, 
+    parentId, subCount, finishedTimes, passedTimes, createdUserId, updatedUserId, updatedTime, 
+    createdTime, copyId
+  </sql>
+  <sql id="Blob_Column_List" >
+    stem, answer, analysis, metas
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.QuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.QuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from question
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from question
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.QuestionExample" >
+    delete from question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.QuestionWithBLOBs" >
+    insert into question (id, type, score, 
+      categoryId, difficulty, target, 
+      courseSetId, courseId, lessonId, 
+      parentId, subCount, finishedTimes, 
+      passedTimes, createdUserId, updatedUserId, 
+      updatedTime, createdTime, copyId, 
+      stem, answer, analysis, 
+      metas)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{score,jdbcType=REAL}, 
+      #{categoryid,jdbcType=INTEGER}, #{difficulty,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, 
+      #{coursesetid,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, #{lessonid,jdbcType=INTEGER}, 
+      #{parentid,jdbcType=INTEGER}, #{subcount,jdbcType=INTEGER}, #{finishedtimes,jdbcType=INTEGER}, 
+      #{passedtimes,jdbcType=INTEGER}, #{createduserid,jdbcType=INTEGER}, #{updateduserid,jdbcType=INTEGER}, 
+      #{updatedtime,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, #{copyid,jdbcType=INTEGER}, 
+      #{stem,jdbcType=LONGVARCHAR}, #{answer,jdbcType=LONGVARCHAR}, #{analysis,jdbcType=LONGVARCHAR}, 
+      #{metas,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.QuestionWithBLOBs" >
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="categoryid != null" >
+        categoryId,
+      </if>
+      <if test="difficulty != null" >
+        difficulty,
+      </if>
+      <if test="target != null" >
+        target,
+      </if>
+      <if test="coursesetid != null" >
+        courseSetId,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="lessonid != null" >
+        lessonId,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="subcount != null" >
+        subCount,
+      </if>
+      <if test="finishedtimes != null" >
+        finishedTimes,
+      </if>
+      <if test="passedtimes != null" >
+        passedTimes,
+      </if>
+      <if test="createduserid != null" >
+        createdUserId,
+      </if>
+      <if test="updateduserid != null" >
+        updatedUserId,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="copyid != null" >
+        copyId,
+      </if>
+      <if test="stem != null" >
+        stem,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="analysis != null" >
+        analysis,
+      </if>
+      <if test="metas != null" >
+        metas,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=REAL},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="difficulty != null" >
+        #{difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="coursesetid != null" >
+        #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="subcount != null" >
+        #{subcount,jdbcType=INTEGER},
+      </if>
+      <if test="finishedtimes != null" >
+        #{finishedtimes,jdbcType=INTEGER},
+      </if>
+      <if test="passedtimes != null" >
+        #{passedtimes,jdbcType=INTEGER},
+      </if>
+      <if test="createduserid != null" >
+        #{createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="updateduserid != null" >
+        #{updateduserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="stem != null" >
+        #{stem,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="analysis != null" >
+        #{analysis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="metas != null" >
+        #{metas,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.QuestionExample" resultType="java.lang.Integer" >
+    select count(*) from question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update question
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=REAL},
+      </if>
+      <if test="record.categoryid != null" >
+        categoryId = #{record.categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.difficulty != null" >
+        difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.target != null" >
+        target = #{record.target,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursesetid != null" >
+        courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lessonid != null" >
+        lessonId = #{record.lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.subcount != null" >
+        subCount = #{record.subcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishedtimes != null" >
+        finishedTimes = #{record.finishedtimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.passedtimes != null" >
+        passedTimes = #{record.passedtimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.createduserid != null" >
+        createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateduserid != null" >
+        updatedUserId = #{record.updateduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.copyid != null" >
+        copyId = #{record.copyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stem != null" >
+        stem = #{record.stem,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.analysis != null" >
+        analysis = #{record.analysis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.metas != null" >
+        metas = #{record.metas,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update question
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=REAL},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      target = #{record.target,jdbcType=VARCHAR},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      lessonId = #{record.lessonid,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      subCount = #{record.subcount,jdbcType=INTEGER},
+      finishedTimes = #{record.finishedtimes,jdbcType=INTEGER},
+      passedTimes = #{record.passedtimes,jdbcType=INTEGER},
+      createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      updatedUserId = #{record.updateduserid,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      copyId = #{record.copyid,jdbcType=INTEGER},
+      stem = #{record.stem,jdbcType=LONGVARCHAR},
+      answer = #{record.answer,jdbcType=LONGVARCHAR},
+      analysis = #{record.analysis,jdbcType=LONGVARCHAR},
+      metas = #{record.metas,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update question
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=REAL},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      difficulty = #{record.difficulty,jdbcType=VARCHAR},
+      target = #{record.target,jdbcType=VARCHAR},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      lessonId = #{record.lessonid,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      subCount = #{record.subcount,jdbcType=INTEGER},
+      finishedTimes = #{record.finishedtimes,jdbcType=INTEGER},
+      passedTimes = #{record.passedtimes,jdbcType=INTEGER},
+      createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      updatedUserId = #{record.updateduserid,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      copyId = #{record.copyid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.QuestionWithBLOBs" >
+    update question
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="categoryid != null" >
+        categoryId = #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="difficulty != null" >
+        difficulty = #{difficulty,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        target = #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="coursesetid != null" >
+        courseSetId = #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        lessonId = #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="subcount != null" >
+        subCount = #{subcount,jdbcType=INTEGER},
+      </if>
+      <if test="finishedtimes != null" >
+        finishedTimes = #{finishedtimes,jdbcType=INTEGER},
+      </if>
+      <if test="passedtimes != null" >
+        passedTimes = #{passedtimes,jdbcType=INTEGER},
+      </if>
+      <if test="createduserid != null" >
+        createdUserId = #{createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="updateduserid != null" >
+        updatedUserId = #{updateduserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        copyId = #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="stem != null" >
+        stem = #{stem,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="analysis != null" >
+        analysis = #{analysis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="metas != null" >
+        metas = #{metas,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.QuestionWithBLOBs" >
+    update question
+    set type = #{type,jdbcType=VARCHAR},
+      score = #{score,jdbcType=REAL},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      difficulty = #{difficulty,jdbcType=VARCHAR},
+      target = #{target,jdbcType=VARCHAR},
+      courseSetId = #{coursesetid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      lessonId = #{lessonid,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=INTEGER},
+      subCount = #{subcount,jdbcType=INTEGER},
+      finishedTimes = #{finishedtimes,jdbcType=INTEGER},
+      passedTimes = #{passedtimes,jdbcType=INTEGER},
+      createdUserId = #{createduserid,jdbcType=INTEGER},
+      updatedUserId = #{updateduserid,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      copyId = #{copyid,jdbcType=INTEGER},
+      stem = #{stem,jdbcType=LONGVARCHAR},
+      answer = #{answer,jdbcType=LONGVARCHAR},
+      analysis = #{analysis,jdbcType=LONGVARCHAR},
+      metas = #{metas,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Question" >
+    update question
+    set type = #{type,jdbcType=VARCHAR},
+      score = #{score,jdbcType=REAL},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      difficulty = #{difficulty,jdbcType=VARCHAR},
+      target = #{target,jdbcType=VARCHAR},
+      courseSetId = #{coursesetid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      lessonId = #{lessonid,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=INTEGER},
+      subCount = #{subcount,jdbcType=INTEGER},
+      finishedTimes = #{finishedtimes,jdbcType=INTEGER},
+      passedTimes = #{passedtimes,jdbcType=INTEGER},
+      createdUserId = #{createduserid,jdbcType=INTEGER},
+      updatedUserId = #{updateduserid,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      copyId = #{copyid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

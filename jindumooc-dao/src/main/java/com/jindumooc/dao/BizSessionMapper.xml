@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.BizSessionMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.BizSession" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sess_time" property="sessTime" jdbcType="INTEGER" />
+    <result column="sess_deadline" property="sessDeadline" jdbcType="INTEGER" />
+    <result column="created_time" property="createdTime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.BizSessionWithBLOBs" extends="BaseResultMap" >
+    <result column="sess_id" property="sessId" jdbcType="VARBINARY" />
+    <result column="sess_data" property="sessData" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sess_time, sess_deadline, created_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    sess_id, sess_data
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.BizSessionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from biz_session
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.BizSessionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from biz_session
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from biz_session
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from biz_session
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.BizSessionExample" >
+    delete from biz_session
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.BizSessionWithBLOBs" >
+    insert into biz_session (id, sess_time, sess_deadline, 
+      created_time, sess_id, sess_data
+      )
+    values (#{id,jdbcType=INTEGER}, #{sessTime,jdbcType=INTEGER}, #{sessDeadline,jdbcType=INTEGER}, 
+      #{createdTime,jdbcType=INTEGER}, #{sessId,jdbcType=VARBINARY}, #{sessData,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.BizSessionWithBLOBs" >
+    insert into biz_session
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sessTime != null" >
+        sess_time,
+      </if>
+      <if test="sessDeadline != null" >
+        sess_deadline,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="sessId != null" >
+        sess_id,
+      </if>
+      <if test="sessData != null" >
+        sess_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sessTime != null" >
+        #{sessTime,jdbcType=INTEGER},
+      </if>
+      <if test="sessDeadline != null" >
+        #{sessDeadline,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="sessId != null" >
+        #{sessId,jdbcType=VARBINARY},
+      </if>
+      <if test="sessData != null" >
+        #{sessData,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.BizSessionExample" resultType="java.lang.Integer" >
+    select count(*) from biz_session
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update biz_session
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sessTime != null" >
+        sess_time = #{record.sessTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.sessDeadline != null" >
+        sess_deadline = #{record.sessDeadline,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdTime != null" >
+        created_time = #{record.createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.sessId != null" >
+        sess_id = #{record.sessId,jdbcType=VARBINARY},
+      </if>
+      <if test="record.sessData != null" >
+        sess_data = #{record.sessData,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update biz_session
+    set id = #{record.id,jdbcType=INTEGER},
+      sess_time = #{record.sessTime,jdbcType=INTEGER},
+      sess_deadline = #{record.sessDeadline,jdbcType=INTEGER},
+      created_time = #{record.createdTime,jdbcType=INTEGER},
+      sess_id = #{record.sessId,jdbcType=VARBINARY},
+      sess_data = #{record.sessData,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update biz_session
+    set id = #{record.id,jdbcType=INTEGER},
+      sess_time = #{record.sessTime,jdbcType=INTEGER},
+      sess_deadline = #{record.sessDeadline,jdbcType=INTEGER},
+      created_time = #{record.createdTime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.BizSessionWithBLOBs" >
+    update biz_session
+    <set >
+      <if test="sessTime != null" >
+        sess_time = #{sessTime,jdbcType=INTEGER},
+      </if>
+      <if test="sessDeadline != null" >
+        sess_deadline = #{sessDeadline,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=INTEGER},
+      </if>
+      <if test="sessId != null" >
+        sess_id = #{sessId,jdbcType=VARBINARY},
+      </if>
+      <if test="sessData != null" >
+        sess_data = #{sessData,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.BizSessionWithBLOBs" >
+    update biz_session
+    set sess_time = #{sessTime,jdbcType=INTEGER},
+      sess_deadline = #{sessDeadline,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=INTEGER},
+      sess_id = #{sessId,jdbcType=VARBINARY},
+      sess_data = #{sessData,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.BizSession" >
+    update biz_session
+    set sess_time = #{sessTime,jdbcType=INTEGER},
+      sess_deadline = #{sessDeadline,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

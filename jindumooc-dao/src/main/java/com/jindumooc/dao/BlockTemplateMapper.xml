@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.BlockTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.BlockTemplate" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="mode" property="mode" jdbcType="CHAR" />
+    <result column="templateName" property="templatename" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="tips" property="tips" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updateTime" property="updatetime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.BlockTemplateWithBLOBs" extends="BaseResultMap" >
+    <result column="template" property="template" jdbcType="LONGVARCHAR" />
+    <result column="templateData" property="templatedata" jdbcType="LONGVARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="data" property="data" jdbcType="LONGVARCHAR" />
+    <result column="meta" property="meta" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, mode, templateName, code, tips, category, createdTime, updateTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    template, templateData, content, data, meta
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.BlockTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from block_template
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.BlockTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from block_template
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from block_template
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from block_template
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.BlockTemplateExample" >
+    delete from block_template
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.BlockTemplateWithBLOBs" >
+    insert into block_template (id, title, mode, 
+      templateName, code, tips, 
+      category, createdTime, updateTime, 
+      template, templateData, content, 
+      data, meta)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{mode,jdbcType=CHAR}, 
+      #{templatename,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{tips,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{createdtime,jdbcType=INTEGER}, #{updatetime,jdbcType=INTEGER}, 
+      #{template,jdbcType=LONGVARCHAR}, #{templatedata,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR}, 
+      #{data,jdbcType=LONGVARCHAR}, #{meta,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.BlockTemplateWithBLOBs" >
+    insert into block_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="mode != null" >
+        mode,
+      </if>
+      <if test="templatename != null" >
+        templateName,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="tips != null" >
+        tips,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="template != null" >
+        template,
+      </if>
+      <if test="templatedata != null" >
+        templateData,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="data != null" >
+        data,
+      </if>
+      <if test="meta != null" >
+        meta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null" >
+        #{mode,jdbcType=CHAR},
+      </if>
+      <if test="templatename != null" >
+        #{templatename,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=INTEGER},
+      </if>
+      <if test="template != null" >
+        #{template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="templatedata != null" >
+        #{templatedata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null" >
+        #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.BlockTemplateExample" resultType="java.lang.Integer" >
+    select count(*) from block_template
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update block_template
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mode != null" >
+        mode = #{record.mode,jdbcType=CHAR},
+      </if>
+      <if test="record.templatename != null" >
+        templateName = #{record.templatename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tips != null" >
+        tips = #{record.tips,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null" >
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=INTEGER},
+      </if>
+      <if test="record.template != null" >
+        template = #{record.template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.templatedata != null" >
+        templateData = #{record.templatedata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.data != null" >
+        data = #{record.data,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.meta != null" >
+        meta = #{record.meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update block_template
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=CHAR},
+      templateName = #{record.templatename,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      tips = #{record.tips,jdbcType=VARCHAR},
+      category = #{record.category,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updateTime = #{record.updatetime,jdbcType=INTEGER},
+      template = #{record.template,jdbcType=LONGVARCHAR},
+      templateData = #{record.templatedata,jdbcType=LONGVARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR},
+      data = #{record.data,jdbcType=LONGVARCHAR},
+      meta = #{record.meta,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update block_template
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      mode = #{record.mode,jdbcType=CHAR},
+      templateName = #{record.templatename,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      tips = #{record.tips,jdbcType=VARCHAR},
+      category = #{record.category,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updateTime = #{record.updatetime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.BlockTemplateWithBLOBs" >
+    update block_template
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null" >
+        mode = #{mode,jdbcType=CHAR},
+      </if>
+      <if test="templatename != null" >
+        templateName = #{templatename,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        tips = #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=INTEGER},
+      </if>
+      <if test="template != null" >
+        template = #{template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="templatedata != null" >
+        templateData = #{templatedata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data != null" >
+        data = #{data,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meta != null" >
+        meta = #{meta,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.BlockTemplateWithBLOBs" >
+    update block_template
+    set title = #{title,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=CHAR},
+      templateName = #{templatename,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      tips = #{tips,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=INTEGER},
+      template = #{template,jdbcType=LONGVARCHAR},
+      templateData = #{templatedata,jdbcType=LONGVARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      data = #{data,jdbcType=LONGVARCHAR},
+      meta = #{meta,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.BlockTemplate" >
+    update block_template
+    set title = #{title,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=CHAR},
+      templateName = #{templatename,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      tips = #{tips,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

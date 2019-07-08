@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.RefererLogMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.RefererLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="targetId" property="targetid" jdbcType="VARCHAR" />
+    <result column="targetType" property="targettype" jdbcType="VARCHAR" />
+    <result column="targetInnerType" property="targetinnertype" jdbcType="VARCHAR" />
+    <result column="refererUrl" property="refererurl" jdbcType="VARCHAR" />
+    <result column="refererHost" property="refererhost" jdbcType="VARCHAR" />
+    <result column="refererName" property="referername" jdbcType="VARCHAR" />
+    <result column="orderCount" property="ordercount" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="uri" property="uri" jdbcType="VARCHAR" />
+    <result column="createdUserId" property="createduserid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.RefererLog" extends="BaseResultMap" >
+    <result column="userAgent" property="useragent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, targetId, targetType, targetInnerType, refererUrl, refererHost, refererName, 
+    orderCount, ip, uri, createdUserId, createdTime, updatedTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    userAgent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.RefererLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from referer_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.RefererLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from referer_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from referer_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from referer_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.RefererLogExample" >
+    delete from referer_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.RefererLog" >
+    insert into referer_log (id, targetId, targetType, 
+      targetInnerType, refererUrl, refererHost, 
+      refererName, orderCount, ip, 
+      uri, createdUserId, createdTime, 
+      updatedTime, userAgent)
+    values (#{id,jdbcType=INTEGER}, #{targetid,jdbcType=VARCHAR}, #{targettype,jdbcType=VARCHAR}, 
+      #{targetinnertype,jdbcType=VARCHAR}, #{refererurl,jdbcType=VARCHAR}, #{refererhost,jdbcType=VARCHAR}, 
+      #{referername,jdbcType=VARCHAR}, #{ordercount,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, 
+      #{uri,jdbcType=VARCHAR}, #{createduserid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, 
+      #{updatedtime,jdbcType=INTEGER}, #{useragent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.RefererLog" >
+    insert into referer_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="targetid != null" >
+        targetId,
+      </if>
+      <if test="targettype != null" >
+        targetType,
+      </if>
+      <if test="targetinnertype != null" >
+        targetInnerType,
+      </if>
+      <if test="refererurl != null" >
+        refererUrl,
+      </if>
+      <if test="refererhost != null" >
+        refererHost,
+      </if>
+      <if test="referername != null" >
+        refererName,
+      </if>
+      <if test="ordercount != null" >
+        orderCount,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="uri != null" >
+        uri,
+      </if>
+      <if test="createduserid != null" >
+        createdUserId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="useragent != null" >
+        userAgent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="targetid != null" >
+        #{targetid,jdbcType=VARCHAR},
+      </if>
+      <if test="targettype != null" >
+        #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="targetinnertype != null" >
+        #{targetinnertype,jdbcType=VARCHAR},
+      </if>
+      <if test="refererurl != null" >
+        #{refererurl,jdbcType=VARCHAR},
+      </if>
+      <if test="refererhost != null" >
+        #{refererhost,jdbcType=VARCHAR},
+      </if>
+      <if test="referername != null" >
+        #{referername,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercount != null" >
+        #{ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null" >
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="createduserid != null" >
+        #{createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="useragent != null" >
+        #{useragent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.RefererLogExample" resultType="java.lang.Integer" >
+    select count(*) from referer_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update referer_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.targetid != null" >
+        targetId = #{record.targetid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targettype != null" >
+        targetType = #{record.targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetinnertype != null" >
+        targetInnerType = #{record.targetinnertype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refererurl != null" >
+        refererUrl = #{record.refererurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refererhost != null" >
+        refererHost = #{record.refererhost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.referername != null" >
+        refererName = #{record.referername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordercount != null" >
+        orderCount = #{record.ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uri != null" >
+        uri = #{record.uri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createduserid != null" >
+        createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.useragent != null" >
+        userAgent = #{record.useragent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update referer_log
+    set id = #{record.id,jdbcType=INTEGER},
+      targetId = #{record.targetid,jdbcType=VARCHAR},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      targetInnerType = #{record.targetinnertype,jdbcType=VARCHAR},
+      refererUrl = #{record.refererurl,jdbcType=VARCHAR},
+      refererHost = #{record.refererhost,jdbcType=VARCHAR},
+      refererName = #{record.referername,jdbcType=VARCHAR},
+      orderCount = #{record.ordercount,jdbcType=INTEGER},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      uri = #{record.uri,jdbcType=VARCHAR},
+      createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      userAgent = #{record.useragent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update referer_log
+    set id = #{record.id,jdbcType=INTEGER},
+      targetId = #{record.targetid,jdbcType=VARCHAR},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      targetInnerType = #{record.targetinnertype,jdbcType=VARCHAR},
+      refererUrl = #{record.refererurl,jdbcType=VARCHAR},
+      refererHost = #{record.refererhost,jdbcType=VARCHAR},
+      refererName = #{record.referername,jdbcType=VARCHAR},
+      orderCount = #{record.ordercount,jdbcType=INTEGER},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      uri = #{record.uri,jdbcType=VARCHAR},
+      createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.RefererLog" >
+    update referer_log
+    <set >
+      <if test="targetid != null" >
+        targetId = #{targetid,jdbcType=VARCHAR},
+      </if>
+      <if test="targettype != null" >
+        targetType = #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="targetinnertype != null" >
+        targetInnerType = #{targetinnertype,jdbcType=VARCHAR},
+      </if>
+      <if test="refererurl != null" >
+        refererUrl = #{refererurl,jdbcType=VARCHAR},
+      </if>
+      <if test="refererhost != null" >
+        refererHost = #{refererhost,jdbcType=VARCHAR},
+      </if>
+      <if test="referername != null" >
+        refererName = #{referername,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercount != null" >
+        orderCount = #{ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null" >
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="createduserid != null" >
+        createdUserId = #{createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="useragent != null" >
+        userAgent = #{useragent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.RefererLog" >
+    update referer_log
+    set targetId = #{targetid,jdbcType=VARCHAR},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      targetInnerType = #{targetinnertype,jdbcType=VARCHAR},
+      refererUrl = #{refererurl,jdbcType=VARCHAR},
+      refererHost = #{refererhost,jdbcType=VARCHAR},
+      refererName = #{referername,jdbcType=VARCHAR},
+      orderCount = #{ordercount,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR},
+      createdUserId = #{createduserid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      userAgent = #{useragent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.RefererLog" >
+    update referer_log
+    set targetId = #{targetid,jdbcType=VARCHAR},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      targetInnerType = #{targetinnertype,jdbcType=VARCHAR},
+      refererUrl = #{refererurl,jdbcType=VARCHAR},
+      refererHost = #{refererhost,jdbcType=VARCHAR},
+      refererName = #{referername,jdbcType=VARCHAR},
+      orderCount = #{ordercount,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR},
+      uri = #{uri,jdbcType=VARCHAR},
+      createdUserId = #{createduserid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

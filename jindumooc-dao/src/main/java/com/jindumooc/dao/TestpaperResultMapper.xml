@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.TestpaperResultMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.TestpaperResult" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="paperName" property="papername" jdbcType="VARCHAR" />
+    <result column="testId" property="testid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="REAL" />
+    <result column="objectiveScore" property="objectivescore" jdbcType="REAL" />
+    <result column="subjectiveScore" property="subjectivescore" jdbcType="REAL" />
+    <result column="rightItemCount" property="rightitemcount" jdbcType="INTEGER" />
+    <result column="passedStatus" property="passedstatus" jdbcType="CHAR" />
+    <result column="limitedTime" property="limitedtime" jdbcType="INTEGER" />
+    <result column="beginTime" property="begintime" jdbcType="INTEGER" />
+    <result column="endTime" property="endtime" jdbcType="INTEGER" />
+    <result column="updateTime" property="updatetime" jdbcType="INTEGER" />
+    <result column="active" property="active" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="target" property="target" jdbcType="VARCHAR" />
+    <result column="checkTeacherId" property="checkteacherid" jdbcType="INTEGER" />
+    <result column="checkedTime" property="checkedtime" jdbcType="INTEGER" />
+    <result column="usedTime" property="usedtime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.TestpaperResult" extends="BaseResultMap" >
+    <result column="teacherSay" property="teachersay" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, paperName, testId, userId, score, objectiveScore, subjectiveScore, rightItemCount, 
+    passedStatus, limitedTime, beginTime, endTime, updateTime, active, status, target, 
+    checkTeacherId, checkedTime, usedTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    teacherSay
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.TestpaperResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from testpaper_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.TestpaperResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from testpaper_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from testpaper_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from testpaper_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.TestpaperResultExample" >
+    delete from testpaper_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.TestpaperResult" >
+    insert into testpaper_result (id, paperName, testId, 
+      userId, score, objectiveScore, 
+      subjectiveScore, rightItemCount, passedStatus, 
+      limitedTime, beginTime, endTime, 
+      updateTime, active, status, 
+      target, checkTeacherId, checkedTime, 
+      usedTime, teacherSay)
+    values (#{id,jdbcType=INTEGER}, #{papername,jdbcType=VARCHAR}, #{testid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{score,jdbcType=REAL}, #{objectivescore,jdbcType=REAL}, 
+      #{subjectivescore,jdbcType=REAL}, #{rightitemcount,jdbcType=INTEGER}, #{passedstatus,jdbcType=CHAR}, 
+      #{limitedtime,jdbcType=INTEGER}, #{begintime,jdbcType=INTEGER}, #{endtime,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=INTEGER}, #{active,jdbcType=TINYINT}, #{status,jdbcType=CHAR}, 
+      #{target,jdbcType=VARCHAR}, #{checkteacherid,jdbcType=INTEGER}, #{checkedtime,jdbcType=INTEGER}, 
+      #{usedtime,jdbcType=INTEGER}, #{teachersay,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.TestpaperResult" >
+    insert into testpaper_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="papername != null" >
+        paperName,
+      </if>
+      <if test="testid != null" >
+        testId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="objectivescore != null" >
+        objectiveScore,
+      </if>
+      <if test="subjectivescore != null" >
+        subjectiveScore,
+      </if>
+      <if test="rightitemcount != null" >
+        rightItemCount,
+      </if>
+      <if test="passedstatus != null" >
+        passedStatus,
+      </if>
+      <if test="limitedtime != null" >
+        limitedTime,
+      </if>
+      <if test="begintime != null" >
+        beginTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="active != null" >
+        active,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="target != null" >
+        target,
+      </if>
+      <if test="checkteacherid != null" >
+        checkTeacherId,
+      </if>
+      <if test="checkedtime != null" >
+        checkedTime,
+      </if>
+      <if test="usedtime != null" >
+        usedTime,
+      </if>
+      <if test="teachersay != null" >
+        teacherSay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="papername != null" >
+        #{papername,jdbcType=VARCHAR},
+      </if>
+      <if test="testid != null" >
+        #{testid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=REAL},
+      </if>
+      <if test="objectivescore != null" >
+        #{objectivescore,jdbcType=REAL},
+      </if>
+      <if test="subjectivescore != null" >
+        #{subjectivescore,jdbcType=REAL},
+      </if>
+      <if test="rightitemcount != null" >
+        #{rightitemcount,jdbcType=INTEGER},
+      </if>
+      <if test="passedstatus != null" >
+        #{passedstatus,jdbcType=CHAR},
+      </if>
+      <if test="limitedtime != null" >
+        #{limitedtime,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=INTEGER},
+      </if>
+      <if test="active != null" >
+        #{active,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="target != null" >
+        #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="checkteacherid != null" >
+        #{checkteacherid,jdbcType=INTEGER},
+      </if>
+      <if test="checkedtime != null" >
+        #{checkedtime,jdbcType=INTEGER},
+      </if>
+      <if test="usedtime != null" >
+        #{usedtime,jdbcType=INTEGER},
+      </if>
+      <if test="teachersay != null" >
+        #{teachersay,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.TestpaperResultExample" resultType="java.lang.Integer" >
+    select count(*) from testpaper_result
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update testpaper_result
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.papername != null" >
+        paperName = #{record.papername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testid != null" >
+        testId = #{record.testid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=REAL},
+      </if>
+      <if test="record.objectivescore != null" >
+        objectiveScore = #{record.objectivescore,jdbcType=REAL},
+      </if>
+      <if test="record.subjectivescore != null" >
+        subjectiveScore = #{record.subjectivescore,jdbcType=REAL},
+      </if>
+      <if test="record.rightitemcount != null" >
+        rightItemCount = #{record.rightitemcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.passedstatus != null" >
+        passedStatus = #{record.passedstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.limitedtime != null" >
+        limitedTime = #{record.limitedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.begintime != null" >
+        beginTime = #{record.begintime,jdbcType=INTEGER},
+      </if>
+      <if test="record.endtime != null" >
+        endTime = #{record.endtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=INTEGER},
+      </if>
+      <if test="record.active != null" >
+        active = #{record.active,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.target != null" >
+        target = #{record.target,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkteacherid != null" >
+        checkTeacherId = #{record.checkteacherid,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkedtime != null" >
+        checkedTime = #{record.checkedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.usedtime != null" >
+        usedTime = #{record.usedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.teachersay != null" >
+        teacherSay = #{record.teachersay,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update testpaper_result
+    set id = #{record.id,jdbcType=INTEGER},
+      paperName = #{record.papername,jdbcType=VARCHAR},
+      testId = #{record.testid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=REAL},
+      objectiveScore = #{record.objectivescore,jdbcType=REAL},
+      subjectiveScore = #{record.subjectivescore,jdbcType=REAL},
+      rightItemCount = #{record.rightitemcount,jdbcType=INTEGER},
+      passedStatus = #{record.passedstatus,jdbcType=CHAR},
+      limitedTime = #{record.limitedtime,jdbcType=INTEGER},
+      beginTime = #{record.begintime,jdbcType=INTEGER},
+      endTime = #{record.endtime,jdbcType=INTEGER},
+      updateTime = #{record.updatetime,jdbcType=INTEGER},
+      active = #{record.active,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=CHAR},
+      target = #{record.target,jdbcType=VARCHAR},
+      checkTeacherId = #{record.checkteacherid,jdbcType=INTEGER},
+      checkedTime = #{record.checkedtime,jdbcType=INTEGER},
+      usedTime = #{record.usedtime,jdbcType=INTEGER},
+      teacherSay = #{record.teachersay,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update testpaper_result
+    set id = #{record.id,jdbcType=INTEGER},
+      paperName = #{record.papername,jdbcType=VARCHAR},
+      testId = #{record.testid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=REAL},
+      objectiveScore = #{record.objectivescore,jdbcType=REAL},
+      subjectiveScore = #{record.subjectivescore,jdbcType=REAL},
+      rightItemCount = #{record.rightitemcount,jdbcType=INTEGER},
+      passedStatus = #{record.passedstatus,jdbcType=CHAR},
+      limitedTime = #{record.limitedtime,jdbcType=INTEGER},
+      beginTime = #{record.begintime,jdbcType=INTEGER},
+      endTime = #{record.endtime,jdbcType=INTEGER},
+      updateTime = #{record.updatetime,jdbcType=INTEGER},
+      active = #{record.active,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=CHAR},
+      target = #{record.target,jdbcType=VARCHAR},
+      checkTeacherId = #{record.checkteacherid,jdbcType=INTEGER},
+      checkedTime = #{record.checkedtime,jdbcType=INTEGER},
+      usedTime = #{record.usedtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.TestpaperResult" >
+    update testpaper_result
+    <set >
+      <if test="papername != null" >
+        paperName = #{papername,jdbcType=VARCHAR},
+      </if>
+      <if test="testid != null" >
+        testId = #{testid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="objectivescore != null" >
+        objectiveScore = #{objectivescore,jdbcType=REAL},
+      </if>
+      <if test="subjectivescore != null" >
+        subjectiveScore = #{subjectivescore,jdbcType=REAL},
+      </if>
+      <if test="rightitemcount != null" >
+        rightItemCount = #{rightitemcount,jdbcType=INTEGER},
+      </if>
+      <if test="passedstatus != null" >
+        passedStatus = #{passedstatus,jdbcType=CHAR},
+      </if>
+      <if test="limitedtime != null" >
+        limitedTime = #{limitedtime,jdbcType=INTEGER},
+      </if>
+      <if test="begintime != null" >
+        beginTime = #{begintime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=INTEGER},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="target != null" >
+        target = #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="checkteacherid != null" >
+        checkTeacherId = #{checkteacherid,jdbcType=INTEGER},
+      </if>
+      <if test="checkedtime != null" >
+        checkedTime = #{checkedtime,jdbcType=INTEGER},
+      </if>
+      <if test="usedtime != null" >
+        usedTime = #{usedtime,jdbcType=INTEGER},
+      </if>
+      <if test="teachersay != null" >
+        teacherSay = #{teachersay,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.TestpaperResult" >
+    update testpaper_result
+    set paperName = #{papername,jdbcType=VARCHAR},
+      testId = #{testid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      score = #{score,jdbcType=REAL},
+      objectiveScore = #{objectivescore,jdbcType=REAL},
+      subjectiveScore = #{subjectivescore,jdbcType=REAL},
+      rightItemCount = #{rightitemcount,jdbcType=INTEGER},
+      passedStatus = #{passedstatus,jdbcType=CHAR},
+      limitedTime = #{limitedtime,jdbcType=INTEGER},
+      beginTime = #{begintime,jdbcType=INTEGER},
+      endTime = #{endtime,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=INTEGER},
+      active = #{active,jdbcType=TINYINT},
+      status = #{status,jdbcType=CHAR},
+      target = #{target,jdbcType=VARCHAR},
+      checkTeacherId = #{checkteacherid,jdbcType=INTEGER},
+      checkedTime = #{checkedtime,jdbcType=INTEGER},
+      usedTime = #{usedtime,jdbcType=INTEGER},
+      teacherSay = #{teachersay,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.TestpaperResult" >
+    update testpaper_result
+    set paperName = #{papername,jdbcType=VARCHAR},
+      testId = #{testid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      score = #{score,jdbcType=REAL},
+      objectiveScore = #{objectivescore,jdbcType=REAL},
+      subjectiveScore = #{subjectivescore,jdbcType=REAL},
+      rightItemCount = #{rightitemcount,jdbcType=INTEGER},
+      passedStatus = #{passedstatus,jdbcType=CHAR},
+      limitedTime = #{limitedtime,jdbcType=INTEGER},
+      beginTime = #{begintime,jdbcType=INTEGER},
+      endTime = #{endtime,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=INTEGER},
+      active = #{active,jdbcType=TINYINT},
+      status = #{status,jdbcType=CHAR},
+      target = #{target,jdbcType=VARCHAR},
+      checkTeacherId = #{checkteacherid,jdbcType=INTEGER},
+      checkedTime = #{checkedtime,jdbcType=INTEGER},
+      usedTime = #{usedtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

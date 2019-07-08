@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.UserLearnStatisticsTotalMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.UserLearnStatisticsTotal" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="joinedClassroomNum" property="joinedclassroomnum" jdbcType="INTEGER" />
+    <result column="joinedCourseSetNum" property="joinedcoursesetnum" jdbcType="INTEGER" />
+    <result column="joinedCourseNum" property="joinedcoursenum" jdbcType="INTEGER" />
+    <result column="exitClassroomNum" property="exitclassroomnum" jdbcType="INTEGER" />
+    <result column="exitCourseSetNum" property="exitcoursesetnum" jdbcType="INTEGER" />
+    <result column="exitCourseNum" property="exitcoursenum" jdbcType="INTEGER" />
+    <result column="learnedSeconds" property="learnedseconds" jdbcType="INTEGER" />
+    <result column="finishedTaskNum" property="finishedtasknum" jdbcType="INTEGER" />
+    <result column="paidAmount" property="paidamount" jdbcType="INTEGER" />
+    <result column="refundAmount" property="refundamount" jdbcType="INTEGER" />
+    <result column="actualAmount" property="actualamount" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, joinedClassroomNum, joinedCourseSetNum, joinedCourseNum, exitClassroomNum, 
+    exitCourseSetNum, exitCourseNum, learnedSeconds, finishedTaskNum, paidAmount, refundAmount, 
+    actualAmount, createdTime, updatedTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.UserLearnStatisticsTotalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_learn_statistics_total
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_learn_statistics_total
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_learn_statistics_total
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.UserLearnStatisticsTotalExample" >
+    delete from user_learn_statistics_total
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.UserLearnStatisticsTotal" >
+    insert into user_learn_statistics_total (id, userId, joinedClassroomNum, 
+      joinedCourseSetNum, joinedCourseNum, exitClassroomNum, 
+      exitCourseSetNum, exitCourseNum, learnedSeconds, 
+      finishedTaskNum, paidAmount, refundAmount, 
+      actualAmount, createdTime, updatedTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{joinedclassroomnum,jdbcType=INTEGER}, 
+      #{joinedcoursesetnum,jdbcType=INTEGER}, #{joinedcoursenum,jdbcType=INTEGER}, #{exitclassroomnum,jdbcType=INTEGER}, 
+      #{exitcoursesetnum,jdbcType=INTEGER}, #{exitcoursenum,jdbcType=INTEGER}, #{learnedseconds,jdbcType=INTEGER}, 
+      #{finishedtasknum,jdbcType=INTEGER}, #{paidamount,jdbcType=INTEGER}, #{refundamount,jdbcType=INTEGER}, 
+      #{actualamount,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.UserLearnStatisticsTotal" >
+    insert into user_learn_statistics_total
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="joinedclassroomnum != null" >
+        joinedClassroomNum,
+      </if>
+      <if test="joinedcoursesetnum != null" >
+        joinedCourseSetNum,
+      </if>
+      <if test="joinedcoursenum != null" >
+        joinedCourseNum,
+      </if>
+      <if test="exitclassroomnum != null" >
+        exitClassroomNum,
+      </if>
+      <if test="exitcoursesetnum != null" >
+        exitCourseSetNum,
+      </if>
+      <if test="exitcoursenum != null" >
+        exitCourseNum,
+      </if>
+      <if test="learnedseconds != null" >
+        learnedSeconds,
+      </if>
+      <if test="finishedtasknum != null" >
+        finishedTaskNum,
+      </if>
+      <if test="paidamount != null" >
+        paidAmount,
+      </if>
+      <if test="refundamount != null" >
+        refundAmount,
+      </if>
+      <if test="actualamount != null" >
+        actualAmount,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="joinedclassroomnum != null" >
+        #{joinedclassroomnum,jdbcType=INTEGER},
+      </if>
+      <if test="joinedcoursesetnum != null" >
+        #{joinedcoursesetnum,jdbcType=INTEGER},
+      </if>
+      <if test="joinedcoursenum != null" >
+        #{joinedcoursenum,jdbcType=INTEGER},
+      </if>
+      <if test="exitclassroomnum != null" >
+        #{exitclassroomnum,jdbcType=INTEGER},
+      </if>
+      <if test="exitcoursesetnum != null" >
+        #{exitcoursesetnum,jdbcType=INTEGER},
+      </if>
+      <if test="exitcoursenum != null" >
+        #{exitcoursenum,jdbcType=INTEGER},
+      </if>
+      <if test="learnedseconds != null" >
+        #{learnedseconds,jdbcType=INTEGER},
+      </if>
+      <if test="finishedtasknum != null" >
+        #{finishedtasknum,jdbcType=INTEGER},
+      </if>
+      <if test="paidamount != null" >
+        #{paidamount,jdbcType=INTEGER},
+      </if>
+      <if test="refundamount != null" >
+        #{refundamount,jdbcType=INTEGER},
+      </if>
+      <if test="actualamount != null" >
+        #{actualamount,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.UserLearnStatisticsTotalExample" resultType="java.lang.Integer" >
+    select count(*) from user_learn_statistics_total
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_learn_statistics_total
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinedclassroomnum != null" >
+        joinedClassroomNum = #{record.joinedclassroomnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinedcoursesetnum != null" >
+        joinedCourseSetNum = #{record.joinedcoursesetnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinedcoursenum != null" >
+        joinedCourseNum = #{record.joinedcoursenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.exitclassroomnum != null" >
+        exitClassroomNum = #{record.exitclassroomnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.exitcoursesetnum != null" >
+        exitCourseSetNum = #{record.exitcoursesetnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.exitcoursenum != null" >
+        exitCourseNum = #{record.exitcoursenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.learnedseconds != null" >
+        learnedSeconds = #{record.learnedseconds,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishedtasknum != null" >
+        finishedTaskNum = #{record.finishedtasknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.paidamount != null" >
+        paidAmount = #{record.paidamount,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundamount != null" >
+        refundAmount = #{record.refundamount,jdbcType=INTEGER},
+      </if>
+      <if test="record.actualamount != null" >
+        actualAmount = #{record.actualamount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_learn_statistics_total
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      joinedClassroomNum = #{record.joinedclassroomnum,jdbcType=INTEGER},
+      joinedCourseSetNum = #{record.joinedcoursesetnum,jdbcType=INTEGER},
+      joinedCourseNum = #{record.joinedcoursenum,jdbcType=INTEGER},
+      exitClassroomNum = #{record.exitclassroomnum,jdbcType=INTEGER},
+      exitCourseSetNum = #{record.exitcoursesetnum,jdbcType=INTEGER},
+      exitCourseNum = #{record.exitcoursenum,jdbcType=INTEGER},
+      learnedSeconds = #{record.learnedseconds,jdbcType=INTEGER},
+      finishedTaskNum = #{record.finishedtasknum,jdbcType=INTEGER},
+      paidAmount = #{record.paidamount,jdbcType=INTEGER},
+      refundAmount = #{record.refundamount,jdbcType=INTEGER},
+      actualAmount = #{record.actualamount,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.UserLearnStatisticsTotal" >
+    update user_learn_statistics_total
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="joinedclassroomnum != null" >
+        joinedClassroomNum = #{joinedclassroomnum,jdbcType=INTEGER},
+      </if>
+      <if test="joinedcoursesetnum != null" >
+        joinedCourseSetNum = #{joinedcoursesetnum,jdbcType=INTEGER},
+      </if>
+      <if test="joinedcoursenum != null" >
+        joinedCourseNum = #{joinedcoursenum,jdbcType=INTEGER},
+      </if>
+      <if test="exitclassroomnum != null" >
+        exitClassroomNum = #{exitclassroomnum,jdbcType=INTEGER},
+      </if>
+      <if test="exitcoursesetnum != null" >
+        exitCourseSetNum = #{exitcoursesetnum,jdbcType=INTEGER},
+      </if>
+      <if test="exitcoursenum != null" >
+        exitCourseNum = #{exitcoursenum,jdbcType=INTEGER},
+      </if>
+      <if test="learnedseconds != null" >
+        learnedSeconds = #{learnedseconds,jdbcType=INTEGER},
+      </if>
+      <if test="finishedtasknum != null" >
+        finishedTaskNum = #{finishedtasknum,jdbcType=INTEGER},
+      </if>
+      <if test="paidamount != null" >
+        paidAmount = #{paidamount,jdbcType=INTEGER},
+      </if>
+      <if test="refundamount != null" >
+        refundAmount = #{refundamount,jdbcType=INTEGER},
+      </if>
+      <if test="actualamount != null" >
+        actualAmount = #{actualamount,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.UserLearnStatisticsTotal" >
+    update user_learn_statistics_total
+    set userId = #{userid,jdbcType=INTEGER},
+      joinedClassroomNum = #{joinedclassroomnum,jdbcType=INTEGER},
+      joinedCourseSetNum = #{joinedcoursesetnum,jdbcType=INTEGER},
+      joinedCourseNum = #{joinedcoursenum,jdbcType=INTEGER},
+      exitClassroomNum = #{exitclassroomnum,jdbcType=INTEGER},
+      exitCourseSetNum = #{exitcoursesetnum,jdbcType=INTEGER},
+      exitCourseNum = #{exitcoursenum,jdbcType=INTEGER},
+      learnedSeconds = #{learnedseconds,jdbcType=INTEGER},
+      finishedTaskNum = #{finishedtasknum,jdbcType=INTEGER},
+      paidAmount = #{paidamount,jdbcType=INTEGER},
+      refundAmount = #{refundamount,jdbcType=INTEGER},
+      actualAmount = #{actualamount,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

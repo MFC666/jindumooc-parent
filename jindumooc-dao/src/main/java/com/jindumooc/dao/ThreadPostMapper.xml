@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.ThreadPostMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.ThreadPost" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="threadId" property="threadid" jdbcType="INTEGER" />
+    <result column="adopted" property="adopted" jdbcType="TINYINT" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="subposts" property="subposts" jdbcType="INTEGER" />
+    <result column="ups" property="ups" jdbcType="INTEGER" />
+    <result column="targetType" property="targettype" jdbcType="VARCHAR" />
+    <result column="targetId" property="targetid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.ThreadPostWithBLOBs" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="ats" property="ats" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, threadId, adopted, userId, parentId, subposts, ups, targetType, targetId, createdTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    content, ats
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.ThreadPostExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from thread_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ThreadPostExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from thread_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from thread_post
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from thread_post
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ThreadPostExample" >
+    delete from thread_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.ThreadPostWithBLOBs" >
+    insert into thread_post (id, threadId, adopted, 
+      userId, parentId, subposts, 
+      ups, targetType, targetId, 
+      createdTime, content, ats
+      )
+    values (#{id,jdbcType=INTEGER}, #{threadid,jdbcType=INTEGER}, #{adopted,jdbcType=TINYINT}, 
+      #{userid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, #{subposts,jdbcType=INTEGER}, 
+      #{ups,jdbcType=INTEGER}, #{targettype,jdbcType=VARCHAR}, #{targetid,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}, #{ats,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.ThreadPostWithBLOBs" >
+    insert into thread_post
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="threadid != null" >
+        threadId,
+      </if>
+      <if test="adopted != null" >
+        adopted,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="subposts != null" >
+        subposts,
+      </if>
+      <if test="ups != null" >
+        ups,
+      </if>
+      <if test="targettype != null" >
+        targetType,
+      </if>
+      <if test="targetid != null" >
+        targetId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="ats != null" >
+        ats,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="threadid != null" >
+        #{threadid,jdbcType=INTEGER},
+      </if>
+      <if test="adopted != null" >
+        #{adopted,jdbcType=TINYINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="subposts != null" >
+        #{subposts,jdbcType=INTEGER},
+      </if>
+      <if test="ups != null" >
+        #{ups,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="targetid != null" >
+        #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ats != null" >
+        #{ats,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.ThreadPostExample" resultType="java.lang.Integer" >
+    select count(*) from thread_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update thread_post
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.threadid != null" >
+        threadId = #{record.threadid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adopted != null" >
+        adopted = #{record.adopted,jdbcType=TINYINT},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.subposts != null" >
+        subposts = #{record.subposts,jdbcType=INTEGER},
+      </if>
+      <if test="record.ups != null" >
+        ups = #{record.ups,jdbcType=INTEGER},
+      </if>
+      <if test="record.targettype != null" >
+        targetType = #{record.targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetid != null" >
+        targetId = #{record.targetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ats != null" >
+        ats = #{record.ats,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update thread_post
+    set id = #{record.id,jdbcType=INTEGER},
+      threadId = #{record.threadid,jdbcType=INTEGER},
+      adopted = #{record.adopted,jdbcType=TINYINT},
+      userId = #{record.userid,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      subposts = #{record.subposts,jdbcType=INTEGER},
+      ups = #{record.ups,jdbcType=INTEGER},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR},
+      ats = #{record.ats,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update thread_post
+    set id = #{record.id,jdbcType=INTEGER},
+      threadId = #{record.threadid,jdbcType=INTEGER},
+      adopted = #{record.adopted,jdbcType=TINYINT},
+      userId = #{record.userid,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      subposts = #{record.subposts,jdbcType=INTEGER},
+      ups = #{record.ups,jdbcType=INTEGER},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ThreadPostWithBLOBs" >
+    update thread_post
+    <set >
+      <if test="threadid != null" >
+        threadId = #{threadid,jdbcType=INTEGER},
+      </if>
+      <if test="adopted != null" >
+        adopted = #{adopted,jdbcType=TINYINT},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="subposts != null" >
+        subposts = #{subposts,jdbcType=INTEGER},
+      </if>
+      <if test="ups != null" >
+        ups = #{ups,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        targetType = #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="targetid != null" >
+        targetId = #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ats != null" >
+        ats = #{ats,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.ThreadPostWithBLOBs" >
+    update thread_post
+    set threadId = #{threadid,jdbcType=INTEGER},
+      adopted = #{adopted,jdbcType=TINYINT},
+      userId = #{userid,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=INTEGER},
+      subposts = #{subposts,jdbcType=INTEGER},
+      ups = #{ups,jdbcType=INTEGER},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      targetId = #{targetid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR},
+      ats = #{ats,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.ThreadPost" >
+    update thread_post
+    set threadId = #{threadid,jdbcType=INTEGER},
+      adopted = #{adopted,jdbcType=TINYINT},
+      userId = #{userid,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=INTEGER},
+      subposts = #{subposts,jdbcType=INTEGER},
+      ups = #{ups,jdbcType=INTEGER},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      targetId = #{targetid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

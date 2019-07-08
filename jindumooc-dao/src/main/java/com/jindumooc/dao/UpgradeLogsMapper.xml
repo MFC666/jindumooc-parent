@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.UpgradeLogsMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.UpgradeLogs" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="remoteId" property="remoteid" jdbcType="INTEGER" />
+    <result column="installedId" property="installedid" jdbcType="INTEGER" />
+    <result column="ename" property="ename" jdbcType="VARCHAR" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="fromv" property="fromv" jdbcType="VARCHAR" />
+    <result column="tov" property="tov" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="logtime" property="logtime" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.UpgradeLogsWithBLOBs" extends="BaseResultMap" >
+    <result column="dbBackPath" property="dbbackpath" jdbcType="LONGVARCHAR" />
+    <result column="srcBackPath" property="srcbackpath" jdbcType="LONGVARCHAR" />
+    <result column="reason" property="reason" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, remoteId, installedId, ename, cname, fromv, tov, type, status, logtime, uid, 
+    ip
+  </sql>
+  <sql id="Blob_Column_List" >
+    dbBackPath, srcBackPath, reason
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.UpgradeLogsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from upgrade_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.UpgradeLogsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from upgrade_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from upgrade_logs
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from upgrade_logs
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.UpgradeLogsExample" >
+    delete from upgrade_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.UpgradeLogsWithBLOBs" >
+    insert into upgrade_logs (id, remoteId, installedId, 
+      ename, cname, fromv, 
+      tov, type, status, 
+      logtime, uid, ip, dbBackPath, 
+      srcBackPath, reason)
+    values (#{id,jdbcType=INTEGER}, #{remoteid,jdbcType=INTEGER}, #{installedid,jdbcType=INTEGER}, 
+      #{ename,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, #{fromv,jdbcType=VARCHAR}, 
+      #{tov,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, #{status,jdbcType=VARCHAR}, 
+      #{logtime,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{dbbackpath,jdbcType=LONGVARCHAR}, 
+      #{srcbackpath,jdbcType=LONGVARCHAR}, #{reason,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.UpgradeLogsWithBLOBs" >
+    insert into upgrade_logs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="remoteid != null" >
+        remoteId,
+      </if>
+      <if test="installedid != null" >
+        installedId,
+      </if>
+      <if test="ename != null" >
+        ename,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="fromv != null" >
+        fromv,
+      </if>
+      <if test="tov != null" >
+        tov,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="logtime != null" >
+        logtime,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="dbbackpath != null" >
+        dbBackPath,
+      </if>
+      <if test="srcbackpath != null" >
+        srcBackPath,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="remoteid != null" >
+        #{remoteid,jdbcType=INTEGER},
+      </if>
+      <if test="installedid != null" >
+        #{installedid,jdbcType=INTEGER},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="fromv != null" >
+        #{fromv,jdbcType=VARCHAR},
+      </if>
+      <if test="tov != null" >
+        #{tov,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="logtime != null" >
+        #{logtime,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="dbbackpath != null" >
+        #{dbbackpath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="srcbackpath != null" >
+        #{srcbackpath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.UpgradeLogsExample" resultType="java.lang.Integer" >
+    select count(*) from upgrade_logs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update upgrade_logs
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.remoteid != null" >
+        remoteId = #{record.remoteid,jdbcType=INTEGER},
+      </if>
+      <if test="record.installedid != null" >
+        installedId = #{record.installedid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ename != null" >
+        ename = #{record.ename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromv != null" >
+        fromv = #{record.fromv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tov != null" >
+        tov = #{record.tov,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=SMALLINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logtime != null" >
+        logtime = #{record.logtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dbbackpath != null" >
+        dbBackPath = #{record.dbbackpath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.srcbackpath != null" >
+        srcBackPath = #{record.srcbackpath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update upgrade_logs
+    set id = #{record.id,jdbcType=INTEGER},
+      remoteId = #{record.remoteid,jdbcType=INTEGER},
+      installedId = #{record.installedid,jdbcType=INTEGER},
+      ename = #{record.ename,jdbcType=VARCHAR},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      fromv = #{record.fromv,jdbcType=VARCHAR},
+      tov = #{record.tov,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=SMALLINT},
+      status = #{record.status,jdbcType=VARCHAR},
+      logtime = #{record.logtime,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      dbBackPath = #{record.dbbackpath,jdbcType=LONGVARCHAR},
+      srcBackPath = #{record.srcbackpath,jdbcType=LONGVARCHAR},
+      reason = #{record.reason,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update upgrade_logs
+    set id = #{record.id,jdbcType=INTEGER},
+      remoteId = #{record.remoteid,jdbcType=INTEGER},
+      installedId = #{record.installedid,jdbcType=INTEGER},
+      ename = #{record.ename,jdbcType=VARCHAR},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      fromv = #{record.fromv,jdbcType=VARCHAR},
+      tov = #{record.tov,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=SMALLINT},
+      status = #{record.status,jdbcType=VARCHAR},
+      logtime = #{record.logtime,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      ip = #{record.ip,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.UpgradeLogsWithBLOBs" >
+    update upgrade_logs
+    <set >
+      <if test="remoteid != null" >
+        remoteId = #{remoteid,jdbcType=INTEGER},
+      </if>
+      <if test="installedid != null" >
+        installedId = #{installedid,jdbcType=INTEGER},
+      </if>
+      <if test="ename != null" >
+        ename = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="fromv != null" >
+        fromv = #{fromv,jdbcType=VARCHAR},
+      </if>
+      <if test="tov != null" >
+        tov = #{tov,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="logtime != null" >
+        logtime = #{logtime,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="dbbackpath != null" >
+        dbBackPath = #{dbbackpath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="srcbackpath != null" >
+        srcBackPath = #{srcbackpath,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.UpgradeLogsWithBLOBs" >
+    update upgrade_logs
+    set remoteId = #{remoteid,jdbcType=INTEGER},
+      installedId = #{installedid,jdbcType=INTEGER},
+      ename = #{ename,jdbcType=VARCHAR},
+      cname = #{cname,jdbcType=VARCHAR},
+      fromv = #{fromv,jdbcType=VARCHAR},
+      tov = #{tov,jdbcType=VARCHAR},
+      type = #{type,jdbcType=SMALLINT},
+      status = #{status,jdbcType=VARCHAR},
+      logtime = #{logtime,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR},
+      dbBackPath = #{dbbackpath,jdbcType=LONGVARCHAR},
+      srcBackPath = #{srcbackpath,jdbcType=LONGVARCHAR},
+      reason = #{reason,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.UpgradeLogs" >
+    update upgrade_logs
+    set remoteId = #{remoteid,jdbcType=INTEGER},
+      installedId = #{installedid,jdbcType=INTEGER},
+      ename = #{ename,jdbcType=VARCHAR},
+      cname = #{cname,jdbcType=VARCHAR},
+      fromv = #{fromv,jdbcType=VARCHAR},
+      tov = #{tov,jdbcType=VARCHAR},
+      type = #{type,jdbcType=SMALLINT},
+      status = #{status,jdbcType=VARCHAR},
+      logtime = #{logtime,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

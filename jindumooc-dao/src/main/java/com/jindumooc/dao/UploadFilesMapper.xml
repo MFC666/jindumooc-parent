@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.UploadFilesMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.UploadFiles" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="globalId" property="globalid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="hashId" property="hashid" jdbcType="VARCHAR" />
+    <result column="targetId" property="targetid" jdbcType="INTEGER" />
+    <result column="targetType" property="targettype" jdbcType="VARCHAR" />
+    <result column="useType" property="usetype" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="ext" property="ext" jdbcType="VARCHAR" />
+    <result column="fileSize" property="filesize" jdbcType="BIGINT" />
+    <result column="etag" property="etag" jdbcType="VARCHAR" />
+    <result column="length" property="length" jdbcType="INTEGER" />
+    <result column="convertHash" property="converthash" jdbcType="VARCHAR" />
+    <result column="convertStatus" property="convertstatus" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="storage" property="storage" jdbcType="CHAR" />
+    <result column="isPublic" property="ispublic" jdbcType="TINYINT" />
+    <result column="canDownload" property="candownload" jdbcType="TINYINT" />
+    <result column="usedCount" property="usedcount" jdbcType="INTEGER" />
+    <result column="updatedUserId" property="updateduserid" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="createdUserId" property="createduserid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="audioConvertStatus" property="audioconvertstatus" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.UploadFilesWithBLOBs" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="convertParams" property="convertparams" jdbcType="LONGVARCHAR" />
+    <result column="metas" property="metas" jdbcType="LONGVARCHAR" />
+    <result column="metas2" property="metas2" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, globalId, status, hashId, targetId, targetType, useType, filename, ext, fileSize, 
+    etag, length, convertHash, convertStatus, type, storage, isPublic, canDownload, usedCount, 
+    updatedUserId, updatedTime, createdUserId, createdTime, audioConvertStatus
+  </sql>
+  <sql id="Blob_Column_List" >
+    description, convertParams, metas, metas2
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.UploadFilesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from upload_files
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.UploadFilesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from upload_files
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from upload_files
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from upload_files
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.UploadFilesExample" >
+    delete from upload_files
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.UploadFilesWithBLOBs" >
+    insert into upload_files (id, globalId, status, 
+      hashId, targetId, targetType, 
+      useType, filename, ext, 
+      fileSize, etag, length, 
+      convertHash, convertStatus, type, 
+      storage, isPublic, canDownload, 
+      usedCount, updatedUserId, updatedTime, 
+      createdUserId, createdTime, audioConvertStatus, 
+      description, convertParams, metas, 
+      metas2)
+    values (#{id,jdbcType=INTEGER}, #{globalid,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{hashid,jdbcType=VARCHAR}, #{targetid,jdbcType=INTEGER}, #{targettype,jdbcType=VARCHAR}, 
+      #{usetype,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{ext,jdbcType=VARCHAR}, 
+      #{filesize,jdbcType=BIGINT}, #{etag,jdbcType=VARCHAR}, #{length,jdbcType=INTEGER}, 
+      #{converthash,jdbcType=VARCHAR}, #{convertstatus,jdbcType=CHAR}, #{type,jdbcType=CHAR}, 
+      #{storage,jdbcType=CHAR}, #{ispublic,jdbcType=TINYINT}, #{candownload,jdbcType=TINYINT}, 
+      #{usedcount,jdbcType=INTEGER}, #{updateduserid,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, 
+      #{createduserid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, #{audioconvertstatus,jdbcType=CHAR}, 
+      #{description,jdbcType=LONGVARCHAR}, #{convertparams,jdbcType=LONGVARCHAR}, #{metas,jdbcType=LONGVARCHAR}, 
+      #{metas2,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.UploadFilesWithBLOBs" >
+    insert into upload_files
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="globalid != null" >
+        globalId,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="hashid != null" >
+        hashId,
+      </if>
+      <if test="targetid != null" >
+        targetId,
+      </if>
+      <if test="targettype != null" >
+        targetType,
+      </if>
+      <if test="usetype != null" >
+        useType,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="ext != null" >
+        ext,
+      </if>
+      <if test="filesize != null" >
+        fileSize,
+      </if>
+      <if test="etag != null" >
+        etag,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="converthash != null" >
+        convertHash,
+      </if>
+      <if test="convertstatus != null" >
+        convertStatus,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="storage != null" >
+        storage,
+      </if>
+      <if test="ispublic != null" >
+        isPublic,
+      </if>
+      <if test="candownload != null" >
+        canDownload,
+      </if>
+      <if test="usedcount != null" >
+        usedCount,
+      </if>
+      <if test="updateduserid != null" >
+        updatedUserId,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="createduserid != null" >
+        createdUserId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="audioconvertstatus != null" >
+        audioConvertStatus,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="convertparams != null" >
+        convertParams,
+      </if>
+      <if test="metas != null" >
+        metas,
+      </if>
+      <if test="metas2 != null" >
+        metas2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="globalid != null" >
+        #{globalid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="hashid != null" >
+        #{hashid,jdbcType=VARCHAR},
+      </if>
+      <if test="targetid != null" >
+        #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="usetype != null" >
+        #{usetype,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null" >
+        #{filesize,jdbcType=BIGINT},
+      </if>
+      <if test="etag != null" >
+        #{etag,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="converthash != null" >
+        #{converthash,jdbcType=VARCHAR},
+      </if>
+      <if test="convertstatus != null" >
+        #{convertstatus,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="storage != null" >
+        #{storage,jdbcType=CHAR},
+      </if>
+      <if test="ispublic != null" >
+        #{ispublic,jdbcType=TINYINT},
+      </if>
+      <if test="candownload != null" >
+        #{candownload,jdbcType=TINYINT},
+      </if>
+      <if test="usedcount != null" >
+        #{usedcount,jdbcType=INTEGER},
+      </if>
+      <if test="updateduserid != null" >
+        #{updateduserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createduserid != null" >
+        #{createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="audioconvertstatus != null" >
+        #{audioconvertstatus,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="convertparams != null" >
+        #{convertparams,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="metas != null" >
+        #{metas,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="metas2 != null" >
+        #{metas2,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.UploadFilesExample" resultType="java.lang.Integer" >
+    select count(*) from upload_files
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update upload_files
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.globalid != null" >
+        globalId = #{record.globalid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.hashid != null" >
+        hashId = #{record.hashid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetid != null" >
+        targetId = #{record.targetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.targettype != null" >
+        targetType = #{record.targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usetype != null" >
+        useType = #{record.usetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filename != null" >
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext != null" >
+        ext = #{record.ext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filesize != null" >
+        fileSize = #{record.filesize,jdbcType=BIGINT},
+      </if>
+      <if test="record.etag != null" >
+        etag = #{record.etag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.length != null" >
+        length = #{record.length,jdbcType=INTEGER},
+      </if>
+      <if test="record.converthash != null" >
+        convertHash = #{record.converthash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.convertstatus != null" >
+        convertStatus = #{record.convertstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.storage != null" >
+        storage = #{record.storage,jdbcType=CHAR},
+      </if>
+      <if test="record.ispublic != null" >
+        isPublic = #{record.ispublic,jdbcType=TINYINT},
+      </if>
+      <if test="record.candownload != null" >
+        canDownload = #{record.candownload,jdbcType=TINYINT},
+      </if>
+      <if test="record.usedcount != null" >
+        usedCount = #{record.usedcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateduserid != null" >
+        updatedUserId = #{record.updateduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createduserid != null" >
+        createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.audioconvertstatus != null" >
+        audioConvertStatus = #{record.audioconvertstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.convertparams != null" >
+        convertParams = #{record.convertparams,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.metas != null" >
+        metas = #{record.metas,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.metas2 != null" >
+        metas2 = #{record.metas2,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update upload_files
+    set id = #{record.id,jdbcType=INTEGER},
+      globalId = #{record.globalid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      hashId = #{record.hashid,jdbcType=VARCHAR},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      useType = #{record.usetype,jdbcType=VARCHAR},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      ext = #{record.ext,jdbcType=VARCHAR},
+      fileSize = #{record.filesize,jdbcType=BIGINT},
+      etag = #{record.etag,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=INTEGER},
+      convertHash = #{record.converthash,jdbcType=VARCHAR},
+      convertStatus = #{record.convertstatus,jdbcType=CHAR},
+      type = #{record.type,jdbcType=CHAR},
+      storage = #{record.storage,jdbcType=CHAR},
+      isPublic = #{record.ispublic,jdbcType=TINYINT},
+      canDownload = #{record.candownload,jdbcType=TINYINT},
+      usedCount = #{record.usedcount,jdbcType=INTEGER},
+      updatedUserId = #{record.updateduserid,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      audioConvertStatus = #{record.audioconvertstatus,jdbcType=CHAR},
+      description = #{record.description,jdbcType=LONGVARCHAR},
+      convertParams = #{record.convertparams,jdbcType=LONGVARCHAR},
+      metas = #{record.metas,jdbcType=LONGVARCHAR},
+      metas2 = #{record.metas2,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update upload_files
+    set id = #{record.id,jdbcType=INTEGER},
+      globalId = #{record.globalid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      hashId = #{record.hashid,jdbcType=VARCHAR},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      useType = #{record.usetype,jdbcType=VARCHAR},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      ext = #{record.ext,jdbcType=VARCHAR},
+      fileSize = #{record.filesize,jdbcType=BIGINT},
+      etag = #{record.etag,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=INTEGER},
+      convertHash = #{record.converthash,jdbcType=VARCHAR},
+      convertStatus = #{record.convertstatus,jdbcType=CHAR},
+      type = #{record.type,jdbcType=CHAR},
+      storage = #{record.storage,jdbcType=CHAR},
+      isPublic = #{record.ispublic,jdbcType=TINYINT},
+      canDownload = #{record.candownload,jdbcType=TINYINT},
+      usedCount = #{record.usedcount,jdbcType=INTEGER},
+      updatedUserId = #{record.updateduserid,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      audioConvertStatus = #{record.audioconvertstatus,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.UploadFilesWithBLOBs" >
+    update upload_files
+    <set >
+      <if test="globalid != null" >
+        globalId = #{globalid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="hashid != null" >
+        hashId = #{hashid,jdbcType=VARCHAR},
+      </if>
+      <if test="targetid != null" >
+        targetId = #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        targetType = #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="usetype != null" >
+        useType = #{usetype,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null" >
+        fileSize = #{filesize,jdbcType=BIGINT},
+      </if>
+      <if test="etag != null" >
+        etag = #{etag,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="converthash != null" >
+        convertHash = #{converthash,jdbcType=VARCHAR},
+      </if>
+      <if test="convertstatus != null" >
+        convertStatus = #{convertstatus,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="storage != null" >
+        storage = #{storage,jdbcType=CHAR},
+      </if>
+      <if test="ispublic != null" >
+        isPublic = #{ispublic,jdbcType=TINYINT},
+      </if>
+      <if test="candownload != null" >
+        canDownload = #{candownload,jdbcType=TINYINT},
+      </if>
+      <if test="usedcount != null" >
+        usedCount = #{usedcount,jdbcType=INTEGER},
+      </if>
+      <if test="updateduserid != null" >
+        updatedUserId = #{updateduserid,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createduserid != null" >
+        createdUserId = #{createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="audioconvertstatus != null" >
+        audioConvertStatus = #{audioconvertstatus,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="convertparams != null" >
+        convertParams = #{convertparams,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="metas != null" >
+        metas = #{metas,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="metas2 != null" >
+        metas2 = #{metas2,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.UploadFilesWithBLOBs" >
+    update upload_files
+    set globalId = #{globalid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      hashId = #{hashid,jdbcType=VARCHAR},
+      targetId = #{targetid,jdbcType=INTEGER},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      useType = #{usetype,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      ext = #{ext,jdbcType=VARCHAR},
+      fileSize = #{filesize,jdbcType=BIGINT},
+      etag = #{etag,jdbcType=VARCHAR},
+      length = #{length,jdbcType=INTEGER},
+      convertHash = #{converthash,jdbcType=VARCHAR},
+      convertStatus = #{convertstatus,jdbcType=CHAR},
+      type = #{type,jdbcType=CHAR},
+      storage = #{storage,jdbcType=CHAR},
+      isPublic = #{ispublic,jdbcType=TINYINT},
+      canDownload = #{candownload,jdbcType=TINYINT},
+      usedCount = #{usedcount,jdbcType=INTEGER},
+      updatedUserId = #{updateduserid,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      createdUserId = #{createduserid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      audioConvertStatus = #{audioconvertstatus,jdbcType=CHAR},
+      description = #{description,jdbcType=LONGVARCHAR},
+      convertParams = #{convertparams,jdbcType=LONGVARCHAR},
+      metas = #{metas,jdbcType=LONGVARCHAR},
+      metas2 = #{metas2,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.UploadFiles" >
+    update upload_files
+    set globalId = #{globalid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      hashId = #{hashid,jdbcType=VARCHAR},
+      targetId = #{targetid,jdbcType=INTEGER},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      useType = #{usetype,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      ext = #{ext,jdbcType=VARCHAR},
+      fileSize = #{filesize,jdbcType=BIGINT},
+      etag = #{etag,jdbcType=VARCHAR},
+      length = #{length,jdbcType=INTEGER},
+      convertHash = #{converthash,jdbcType=VARCHAR},
+      convertStatus = #{convertstatus,jdbcType=CHAR},
+      type = #{type,jdbcType=CHAR},
+      storage = #{storage,jdbcType=CHAR},
+      isPublic = #{ispublic,jdbcType=TINYINT},
+      canDownload = #{candownload,jdbcType=TINYINT},
+      usedCount = #{usedcount,jdbcType=INTEGER},
+      updatedUserId = #{updateduserid,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      createdUserId = #{createduserid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      audioConvertStatus = #{audioconvertstatus,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

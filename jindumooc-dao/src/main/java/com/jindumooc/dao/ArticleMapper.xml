@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Article" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
+    <result column="tagIds" property="tagids" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="sourceUrl" property="sourceurl" jdbcType="VARCHAR" />
+    <result column="publishedTime" property="publishedtime" jdbcType="INTEGER" />
+    <result column="thumb" property="thumb" jdbcType="VARCHAR" />
+    <result column="originalThumb" property="originalthumb" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="hits" property="hits" jdbcType="INTEGER" />
+    <result column="featured" property="featured" jdbcType="TINYINT" />
+    <result column="promoted" property="promoted" jdbcType="TINYINT" />
+    <result column="sticky" property="sticky" jdbcType="TINYINT" />
+    <result column="postNum" property="postnum" jdbcType="INTEGER" />
+    <result column="upsNum" property="upsnum" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="orgId" property="orgid" jdbcType="INTEGER" />
+    <result column="orgCode" property="orgcode" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.Article" extends="BaseResultMap" >
+    <result column="body" property="body" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, categoryId, tagIds, source, sourceUrl, publishedTime, thumb, originalThumb, 
+    picture, status, hits, featured, promoted, sticky, postNum, upsNum, userId, orgId, 
+    orgCode, createdTime, updatedTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    body
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.ArticleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ArticleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ArticleExample" >
+    delete from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.Article" >
+    insert into article (id, title, categoryId, 
+      tagIds, source, sourceUrl, 
+      publishedTime, thumb, originalThumb, 
+      picture, status, hits, 
+      featured, promoted, sticky, 
+      postNum, upsNum, userId, 
+      orgId, orgCode, createdTime, 
+      updatedTime, body)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{categoryid,jdbcType=INTEGER}, 
+      #{tagids,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{sourceurl,jdbcType=VARCHAR}, 
+      #{publishedtime,jdbcType=INTEGER}, #{thumb,jdbcType=VARCHAR}, #{originalthumb,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{hits,jdbcType=INTEGER}, 
+      #{featured,jdbcType=TINYINT}, #{promoted,jdbcType=TINYINT}, #{sticky,jdbcType=TINYINT}, 
+      #{postnum,jdbcType=INTEGER}, #{upsnum,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{orgid,jdbcType=INTEGER}, #{orgcode,jdbcType=VARCHAR}, #{createdtime,jdbcType=INTEGER}, 
+      #{updatedtime,jdbcType=INTEGER}, #{body,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.Article" >
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="categoryid != null" >
+        categoryId,
+      </if>
+      <if test="tagids != null" >
+        tagIds,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="sourceurl != null" >
+        sourceUrl,
+      </if>
+      <if test="publishedtime != null" >
+        publishedTime,
+      </if>
+      <if test="thumb != null" >
+        thumb,
+      </if>
+      <if test="originalthumb != null" >
+        originalThumb,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="hits != null" >
+        hits,
+      </if>
+      <if test="featured != null" >
+        featured,
+      </if>
+      <if test="promoted != null" >
+        promoted,
+      </if>
+      <if test="sticky != null" >
+        sticky,
+      </if>
+      <if test="postnum != null" >
+        postNum,
+      </if>
+      <if test="upsnum != null" >
+        upsNum,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+      <if test="orgcode != null" >
+        orgCode,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="tagids != null" >
+        #{tagids,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceurl != null" >
+        #{sourceurl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishedtime != null" >
+        #{publishedtime,jdbcType=INTEGER},
+      </if>
+      <if test="thumb != null" >
+        #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="originalthumb != null" >
+        #{originalthumb,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="hits != null" >
+        #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="featured != null" >
+        #{featured,jdbcType=TINYINT},
+      </if>
+      <if test="promoted != null" >
+        #{promoted,jdbcType=TINYINT},
+      </if>
+      <if test="sticky != null" >
+        #{sticky,jdbcType=TINYINT},
+      </if>
+      <if test="postnum != null" >
+        #{postnum,jdbcType=INTEGER},
+      </if>
+      <if test="upsnum != null" >
+        #{upsnum,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="orgcode != null" >
+        #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.ArticleExample" resultType="java.lang.Integer" >
+    select count(*) from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update article
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryid != null" >
+        categoryId = #{record.categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagids != null" >
+        tagIds = #{record.tagids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceurl != null" >
+        sourceUrl = #{record.sourceurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishedtime != null" >
+        publishedTime = #{record.publishedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.thumb != null" >
+        thumb = #{record.thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalthumb != null" >
+        originalThumb = #{record.originalthumb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.hits != null" >
+        hits = #{record.hits,jdbcType=INTEGER},
+      </if>
+      <if test="record.featured != null" >
+        featured = #{record.featured,jdbcType=TINYINT},
+      </if>
+      <if test="record.promoted != null" >
+        promoted = #{record.promoted,jdbcType=TINYINT},
+      </if>
+      <if test="record.sticky != null" >
+        sticky = #{record.sticky,jdbcType=TINYINT},
+      </if>
+      <if test="record.postnum != null" >
+        postNum = #{record.postnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.upsnum != null" >
+        upsNum = #{record.upsnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgid != null" >
+        orgId = #{record.orgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgcode != null" >
+        orgCode = #{record.orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.body != null" >
+        body = #{record.body,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update article
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      tagIds = #{record.tagids,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      sourceUrl = #{record.sourceurl,jdbcType=VARCHAR},
+      publishedTime = #{record.publishedtime,jdbcType=INTEGER},
+      thumb = #{record.thumb,jdbcType=VARCHAR},
+      originalThumb = #{record.originalthumb,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      hits = #{record.hits,jdbcType=INTEGER},
+      featured = #{record.featured,jdbcType=TINYINT},
+      promoted = #{record.promoted,jdbcType=TINYINT},
+      sticky = #{record.sticky,jdbcType=TINYINT},
+      postNum = #{record.postnum,jdbcType=INTEGER},
+      upsNum = #{record.upsnum,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      orgId = #{record.orgid,jdbcType=INTEGER},
+      orgCode = #{record.orgcode,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      body = #{record.body,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update article
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      tagIds = #{record.tagids,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      sourceUrl = #{record.sourceurl,jdbcType=VARCHAR},
+      publishedTime = #{record.publishedtime,jdbcType=INTEGER},
+      thumb = #{record.thumb,jdbcType=VARCHAR},
+      originalThumb = #{record.originalthumb,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      hits = #{record.hits,jdbcType=INTEGER},
+      featured = #{record.featured,jdbcType=TINYINT},
+      promoted = #{record.promoted,jdbcType=TINYINT},
+      sticky = #{record.sticky,jdbcType=TINYINT},
+      postNum = #{record.postnum,jdbcType=INTEGER},
+      upsNum = #{record.upsnum,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      orgId = #{record.orgid,jdbcType=INTEGER},
+      orgCode = #{record.orgcode,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.Article" >
+    update article
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryid != null" >
+        categoryId = #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="tagids != null" >
+        tagIds = #{tagids,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceurl != null" >
+        sourceUrl = #{sourceurl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishedtime != null" >
+        publishedTime = #{publishedtime,jdbcType=INTEGER},
+      </if>
+      <if test="thumb != null" >
+        thumb = #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="originalthumb != null" >
+        originalThumb = #{originalthumb,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="hits != null" >
+        hits = #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="featured != null" >
+        featured = #{featured,jdbcType=TINYINT},
+      </if>
+      <if test="promoted != null" >
+        promoted = #{promoted,jdbcType=TINYINT},
+      </if>
+      <if test="sticky != null" >
+        sticky = #{sticky,jdbcType=TINYINT},
+      </if>
+      <if test="postnum != null" >
+        postNum = #{postnum,jdbcType=INTEGER},
+      </if>
+      <if test="upsnum != null" >
+        upsNum = #{upsnum,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="orgcode != null" >
+        orgCode = #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.Article" >
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      tagIds = #{tagids,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      sourceUrl = #{sourceurl,jdbcType=VARCHAR},
+      publishedTime = #{publishedtime,jdbcType=INTEGER},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      originalThumb = #{originalthumb,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      hits = #{hits,jdbcType=INTEGER},
+      featured = #{featured,jdbcType=TINYINT},
+      promoted = #{promoted,jdbcType=TINYINT},
+      sticky = #{sticky,jdbcType=TINYINT},
+      postNum = #{postnum,jdbcType=INTEGER},
+      upsNum = #{upsnum,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      orgId = #{orgid,jdbcType=INTEGER},
+      orgCode = #{orgcode,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      body = #{body,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Article" >
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      tagIds = #{tagids,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      sourceUrl = #{sourceurl,jdbcType=VARCHAR},
+      publishedTime = #{publishedtime,jdbcType=INTEGER},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      originalThumb = #{originalthumb,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      hits = #{hits,jdbcType=INTEGER},
+      featured = #{featured,jdbcType=TINYINT},
+      promoted = #{promoted,jdbcType=TINYINT},
+      sticky = #{sticky,jdbcType=TINYINT},
+      postNum = #{postnum,jdbcType=INTEGER},
+      upsNum = #{upsnum,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      orgId = #{orgid,jdbcType=INTEGER},
+      orgCode = #{orgcode,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

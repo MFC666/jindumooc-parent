@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Activity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="mediaId" property="mediaid" jdbcType="INTEGER" />
+    <result column="mediaType" property="mediatype" jdbcType="VARCHAR" />
+    <result column="length" property="length" jdbcType="INTEGER" />
+    <result column="fromCourseId" property="fromcourseid" jdbcType="INTEGER" />
+    <result column="fromCourseSetId" property="fromcoursesetid" jdbcType="INTEGER" />
+    <result column="fromUserId" property="fromuserid" jdbcType="INTEGER" />
+    <result column="startTime" property="starttime" jdbcType="INTEGER" />
+    <result column="endTime" property="endtime" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="copyId" property="copyid" jdbcType="INTEGER" />
+    <result column="migrateLessonId" property="migratelessonid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.ActivityWithBLOBs" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, mediaId, mediaType, length, fromCourseId, fromCourseSetId, fromUserId, 
+    startTime, endTime, createdTime, updatedTime, copyId, migrateLessonId
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark, content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.ActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from activity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ActivityExample" >
+    delete from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.ActivityWithBLOBs" >
+    insert into activity (id, title, mediaId, 
+      mediaType, length, fromCourseId, 
+      fromCourseSetId, fromUserId, startTime, 
+      endTime, createdTime, updatedTime, 
+      copyId, migrateLessonId, remark, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{mediaid,jdbcType=INTEGER}, 
+      #{mediatype,jdbcType=VARCHAR}, #{length,jdbcType=INTEGER}, #{fromcourseid,jdbcType=INTEGER}, 
+      #{fromcoursesetid,jdbcType=INTEGER}, #{fromuserid,jdbcType=INTEGER}, #{starttime,jdbcType=INTEGER}, 
+      #{endtime,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, 
+      #{copyid,jdbcType=INTEGER}, #{migratelessonid,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.ActivityWithBLOBs" >
+    insert into activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="mediaid != null" >
+        mediaId,
+      </if>
+      <if test="mediatype != null" >
+        mediaType,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="fromcourseid != null" >
+        fromCourseId,
+      </if>
+      <if test="fromcoursesetid != null" >
+        fromCourseSetId,
+      </if>
+      <if test="fromuserid != null" >
+        fromUserId,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="copyid != null" >
+        copyId,
+      </if>
+      <if test="migratelessonid != null" >
+        migrateLessonId,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaid != null" >
+        #{mediaid,jdbcType=INTEGER},
+      </if>
+      <if test="mediatype != null" >
+        #{mediatype,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="fromcourseid != null" >
+        #{fromcourseid,jdbcType=INTEGER},
+      </if>
+      <if test="fromcoursesetid != null" >
+        #{fromcoursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="fromuserid != null" >
+        #{fromuserid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="migratelessonid != null" >
+        #{migratelessonid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.ActivityExample" resultType="java.lang.Integer" >
+    select count(*) from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update activity
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediaid != null" >
+        mediaId = #{record.mediaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mediatype != null" >
+        mediaType = #{record.mediatype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.length != null" >
+        length = #{record.length,jdbcType=INTEGER},
+      </if>
+      <if test="record.fromcourseid != null" >
+        fromCourseId = #{record.fromcourseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fromcoursesetid != null" >
+        fromCourseSetId = #{record.fromcoursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fromuserid != null" >
+        fromUserId = #{record.fromuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null" >
+        startTime = #{record.starttime,jdbcType=INTEGER},
+      </if>
+      <if test="record.endtime != null" >
+        endTime = #{record.endtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.copyid != null" >
+        copyId = #{record.copyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.migratelessonid != null" >
+        migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update activity
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      mediaId = #{record.mediaid,jdbcType=INTEGER},
+      mediaType = #{record.mediatype,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=INTEGER},
+      fromCourseId = #{record.fromcourseid,jdbcType=INTEGER},
+      fromCourseSetId = #{record.fromcoursesetid,jdbcType=INTEGER},
+      fromUserId = #{record.fromuserid,jdbcType=INTEGER},
+      startTime = #{record.starttime,jdbcType=INTEGER},
+      endTime = #{record.endtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      copyId = #{record.copyid,jdbcType=INTEGER},
+      migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=LONGVARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update activity
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      mediaId = #{record.mediaid,jdbcType=INTEGER},
+      mediaType = #{record.mediatype,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=INTEGER},
+      fromCourseId = #{record.fromcourseid,jdbcType=INTEGER},
+      fromCourseSetId = #{record.fromcoursesetid,jdbcType=INTEGER},
+      fromUserId = #{record.fromuserid,jdbcType=INTEGER},
+      startTime = #{record.starttime,jdbcType=INTEGER},
+      endTime = #{record.endtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      copyId = #{record.copyid,jdbcType=INTEGER},
+      migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ActivityWithBLOBs" >
+    update activity
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaid != null" >
+        mediaId = #{mediaid,jdbcType=INTEGER},
+      </if>
+      <if test="mediatype != null" >
+        mediaType = #{mediatype,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="fromcourseid != null" >
+        fromCourseId = #{fromcourseid,jdbcType=INTEGER},
+      </if>
+      <if test="fromcoursesetid != null" >
+        fromCourseSetId = #{fromcoursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="fromuserid != null" >
+        fromUserId = #{fromuserid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        copyId = #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="migratelessonid != null" >
+        migrateLessonId = #{migratelessonid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.ActivityWithBLOBs" >
+    update activity
+    set title = #{title,jdbcType=VARCHAR},
+      mediaId = #{mediaid,jdbcType=INTEGER},
+      mediaType = #{mediatype,jdbcType=VARCHAR},
+      length = #{length,jdbcType=INTEGER},
+      fromCourseId = #{fromcourseid,jdbcType=INTEGER},
+      fromCourseSetId = #{fromcoursesetid,jdbcType=INTEGER},
+      fromUserId = #{fromuserid,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=INTEGER},
+      endTime = #{endtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      copyId = #{copyid,jdbcType=INTEGER},
+      migrateLessonId = #{migratelessonid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Activity" >
+    update activity
+    set title = #{title,jdbcType=VARCHAR},
+      mediaId = #{mediaid,jdbcType=INTEGER},
+      mediaType = #{mediatype,jdbcType=VARCHAR},
+      length = #{length,jdbcType=INTEGER},
+      fromCourseId = #{fromcourseid,jdbcType=INTEGER},
+      fromCourseSetId = #{fromcoursesetid,jdbcType=INTEGER},
+      fromUserId = #{fromuserid,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=INTEGER},
+      endTime = #{endtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      copyId = #{copyid,jdbcType=INTEGER},
+      migrateLessonId = #{migratelessonid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
