@@ -31,6 +31,8 @@
         <module>jindumooc-information-web</module>
         <module>jindumooc-system-web</module>
         <module>jindumooc-login-web</module>
+        <module>jindumooc-pojo</module>
+        <module>jindumooc-dao</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>

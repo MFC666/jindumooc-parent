@@ -1,13 +1,13 @@
-package com.jindumooc.jindumoocinterfacegroupservice;
+package com.jindumooc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JindumoocInterfaceGroupServiceApplication {
+public class JindumoocInterfaceSystemServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JindumoocInterfaceGroupServiceApplication.class, args);
+        SpringApplication.run(JindumoocInterfaceSystemServiceApplication.class, args);
     }
 
 }
