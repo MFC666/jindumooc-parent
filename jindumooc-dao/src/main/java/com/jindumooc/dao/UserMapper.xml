@@ -858,7 +858,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getIndexUser"  resultType="com.jindumooc.pojo.User" >
-    SELECT u.nickname,u.createdIp,u.createdTime,u.loginIp,u.loginTime,u.birthday,u.roles
+    SELECT u.id,u.nickname,u.createdIp,u.createdTime,u.loginIp,u.loginTime,u.birthday,u.roles
     FROM user u
   </select>
 </mapper>

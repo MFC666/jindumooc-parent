@@ -24,4 +24,15 @@ public class UserBackGroundManagementController {
         int pageSize = 1;
         return userBackGroundManagement.getIndexUser(pageNum,pageSize);
     }
+
+    //获取后台管理中用户管理首页的搜索
+    @RequestMapping("/searchIndexUser")
+    @ResponseBody
+    public List<User> searchIndexUser()
+    {   String searchType="";
+        String searchParameter="";
+        int pageNum = 1;
+        int pageSize = 1;
+        return userBackGroundManagement.searchIndexUser(pageNum,pageSize,searchType,searchParameter);
+    }
 }

@@ -60,6 +60,16 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${http-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fast-json.version}</version>
+        </dependency>
         <!-- druid -->
         <dependency>
             <groupId>com.alibaba</groupId>

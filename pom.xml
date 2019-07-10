@@ -40,6 +40,8 @@
         <mysql.connector.vesion>8.0.11</mysql.connector.vesion>
         <pagehelper.version>1.1.0</pagehelper.version>
         <druid.version>1.0.25</druid.version>
+        <http-client.version>4.5.2</http-client.version>
+        <fast-json.version>1.2.23</fast-json.version>
     </properties>
     <dependencies>
 
