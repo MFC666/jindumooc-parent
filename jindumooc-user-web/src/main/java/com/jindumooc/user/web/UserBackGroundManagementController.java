@@ -3,6 +3,7 @@ package com.jindumooc.user.web;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jindumooc.pojo.User;
 import com.jindumooc.user.service.UserBackGroundManagement;
+import com.jindumooc.vojo.BackGroundIndexUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,21 +19,12 @@ public class UserBackGroundManagementController {
     //获取后台管理中用户管理的首页
     @RequestMapping("/getIndexUser")
     @ResponseBody
-    public List<User> getIndexUser()
+    public List<BackGroundIndexUser> getIndexUser()
     {
         int pageNum = 1;
         int pageSize = 1;
         return userBackGroundManagement.getIndexUser(pageNum,pageSize);
     }
 
-    //获取后台管理中用户管理首页的搜索
-    @RequestMapping("/searchIndexUser")
-    @ResponseBody
-    public List<User> searchIndexUser()
-    {   String searchType="";
-        String searchParameter="";
-        int pageNum = 1;
-        int pageSize = 1;
-        return userBackGroundManagement.searchIndexUser(pageNum,pageSize,searchType,searchParameter);
-    }
+
 }

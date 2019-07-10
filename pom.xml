@@ -32,6 +32,7 @@
         <module>jindumooc-system-web</module>
         <module>jindumooc-login-web</module>
         <module>jindumooc-pojo</module>
+        <module>jindumooc-vojo</module>
         <module>jindumooc-dao</module>
     </modules>
     <properties>

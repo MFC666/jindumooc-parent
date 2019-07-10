@@ -8,6 +8,7 @@ import com.jindumooc.dao.UserMapper;
 import com.jindumooc.pojo.UserExample;
 import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.pojo.User;
+import com.jindumooc.vojo.BackGroundIndexUser;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -35,16 +36,21 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
 
     //获取用户管理界面用户列表
     @Override
-    public List<User> getIndexUser(int pageNum,int pageSize) {
+    public List<BackGroundIndexUser> getIndexUser(int pageNum, int pageSize) {
         //分页查询
         PageHelper.startPage(1,17);
         List<User> listUser = userMapper.getIndexUser();
+        List<BackGroundIndexUser> backUserList = new ArrayList<>();
 
 
         for (int i=0;i<listUser.size();i++) {
             String areaName = null;
             User user = listUser.get(i);
 
+            BackGroundIndexUser bUser = new BackGroundIndexUser();
+            bUser.setBirthDay(user.getBirthday());
+            bUser.setNickName(user.getNickname());
+            bUser.setUserId(user.getId());
             //根据Ip获取地区信息
             try {
                 if(user.getLoginip()!=null&user.getLoginip()!=""){
@@ -52,21 +58,36 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
                 }else{
                     areaName="无";
                 }
-                listUser.get(i).setLoginip(listUser.get(i).getLoginip()+" "+areaName);
+                bUser.setLoginIp(listUser.get(i).getLoginip());
+                bUser.setLoginIpArea(areaName);
 
                 if(user.getCreatedip()!=null&user.getCreatedip()!=""){
                     areaName = getAreaNameByIp("ip=" + user.getCreatedip(), "utf-8");
                 }else{
                     areaName="无";
                 }
-                listUser.get(i).setCreatedip(listUser.get(i).getCreatedip()+" "+areaName);
+                bUser.setCreatIp(listUser.get(i).getCreatedip());
+                bUser.setCreatIpArea(areaName);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
 
+            //转换时间
+
+            Date d = new Date(user.getLogintime());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String s = sdf.format(d);
+            bUser.setLoginTime(s);
+
+            d = new Date(user.getCreatedtime());
+            sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            s = sdf.format(d);
+            bUser.setCreatTime(s);
+
+            backUserList.add(bUser);
         }
 
-        return listUser;
+        return backUserList;
     }
 
     //根据登录Ip获取登录地址省市
@@ -118,6 +139,8 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
             url = new URL(urlStr);
             connection = (HttpURLConnection) url.openConnection();    // 新建连接实例
             connection.setDoOutput(true);                           // 是否打开输出流 true|false
+            connection.setConnectTimeout(2000);                     // 设置连接超时时间，单位毫秒
+            connection.setReadTimeout(2000);                        // 设置读取数据超时时间，单位毫秒
             connection.setDoInput(true);                            // 是否打开输入流true|false
             connection.setRequestMethod("POST");                    // 提交方法POST|GET
             connection.setUseCaches(false);                         // 是否缓存true|false
@@ -212,7 +235,5 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     }
 
     //搜索用户
-    public List<User> searchIndexUser(int pageNum, int pageSize, String searchType, String searchParameter){
-        
-    }
+
 }
