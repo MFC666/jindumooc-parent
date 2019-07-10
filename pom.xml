@@ -36,6 +36,10 @@
     </modules>
     <properties>
         <java.version>1.8</java.version>
+        <mybatis.starter.verison>1.3.0</mybatis.starter.verison>
+        <mysql.connector.vesion>8.0.11</mysql.connector.vesion>
+        <pagehelper.version>1.1.0</pagehelper.version>
+        <druid.version>1.0.25</druid.version>
     </properties>
     <dependencies>
 

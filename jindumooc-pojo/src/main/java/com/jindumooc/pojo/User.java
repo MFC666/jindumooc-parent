@@ -1,6 +1,8 @@
 package com.jindumooc.pojo;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Integer id;
 
     private String email;
@@ -90,6 +92,8 @@ public class User {
     private String uuid;
 
     private Boolean passwordinit;
+
+    private String birthday;
 
     public Integer getId() {
         return id;
@@ -449,5 +453,13 @@ public class User {
 
     public void setPasswordinit(Boolean passwordinit) {
         this.passwordinit = passwordinit;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday == null ? null : birthday.trim();
     }
 }

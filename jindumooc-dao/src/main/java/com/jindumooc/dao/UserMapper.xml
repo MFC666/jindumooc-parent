@@ -47,6 +47,7 @@
     <result column="distributorToken" property="distributortoken" jdbcType="VARCHAR" />
     <result column="uuid" property="uuid" jdbcType="VARCHAR" />
     <result column="passwordInit" property="passwordinit" jdbcType="BIT" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -112,7 +113,8 @@
     emailVerified, setup, roles, promoted, promotedSeq, promotedTime, locked, lockDeadline, 
     consecutivePasswordErrorTimes, lastPasswordFailTime, loginTime, loginIp, loginSessionId, 
     approvalTime, approvalStatus, newMessageNum, newNotificationNum, createdIp, createdTime, 
-    updatedTime, inviteCode, orgId, orgCode, registeredWay, distributorToken, uuid, passwordInit
+    updatedTime, inviteCode, orgId, orgCode, registeredWay, distributorToken, uuid, passwordInit, 
+    birthday
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.UserExample" >
     select
@@ -159,8 +161,8 @@
       newMessageNum, newNotificationNum, createdIp, 
       createdTime, updatedTime, inviteCode, 
       orgId, orgCode, registeredWay, 
-      distributorToken, uuid, passwordInit
-      )
+      distributorToken, uuid, passwordInit, 
+      birthday)
     values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{verifiedmobile,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{paypassword,jdbcType=VARCHAR}, 
       #{paypasswordsalt,jdbcType=VARCHAR}, #{locale,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, 
@@ -175,8 +177,8 @@
       #{newmessagenum,jdbcType=INTEGER}, #{newnotificationnum,jdbcType=INTEGER}, #{createdip,jdbcType=VARCHAR}, 
       #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, #{invitecode,jdbcType=VARCHAR}, 
       #{orgid,jdbcType=INTEGER}, #{orgcode,jdbcType=VARCHAR}, #{registeredway,jdbcType=VARCHAR}, 
-      #{distributortoken,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, #{passwordinit,jdbcType=BIT}
-      )
+      #{distributortoken,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, #{passwordinit,jdbcType=BIT}, 
+      #{birthday,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jindumooc.pojo.User" >
     insert into user
@@ -316,6 +318,9 @@
       <if test="passwordinit != null" >
         passwordInit,
       </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -452,6 +457,9 @@
       </if>
       <if test="passwordinit != null" >
         #{passwordinit,jdbcType=BIT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -599,6 +607,9 @@
       <if test="record.passwordinit != null" >
         passwordInit = #{record.passwordinit,jdbcType=BIT},
       </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -650,7 +661,8 @@
       registeredWay = #{record.registeredway,jdbcType=VARCHAR},
       distributorToken = #{record.distributortoken,jdbcType=VARCHAR},
       uuid = #{record.uuid,jdbcType=VARCHAR},
-      passwordInit = #{record.passwordinit,jdbcType=BIT}
+      passwordInit = #{record.passwordinit,jdbcType=BIT},
+      birthday = #{record.birthday,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -790,6 +802,9 @@
       <if test="passwordinit != null" >
         passwordInit = #{passwordinit,jdbcType=BIT},
       </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -838,7 +853,12 @@
       registeredWay = #{registeredway,jdbcType=VARCHAR},
       distributorToken = #{distributortoken,jdbcType=VARCHAR},
       uuid = #{uuid,jdbcType=VARCHAR},
-      passwordInit = #{passwordinit,jdbcType=BIT}
+      passwordInit = #{passwordinit,jdbcType=BIT},
+      birthday = #{birthday,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getIndexUser"  resultType="com.jindumooc.pojo.User" >
+    SELECT u.nickname,u.createdIp,u.createdTime,u.loginIp,u.loginTime,u.birthday,u.roles
+    FROM user u
+  </select>
 </mapper>
