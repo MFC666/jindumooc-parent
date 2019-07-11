@@ -1,21 +1,13 @@
 server:
-  port: 9002
+  port: 8001
 
-dubbo:
-  application:
-    ###########×¢²áµ½×¢²áÖĞĞÄµÄÃû³Æ############
-    name: member
-  ###########²ÉÓÃĞ­ÒéºÍ¶Ë¿ÚºÅ################
-  protocol:
-    ###########²ÉÓÃdubboĞ­Òé####################
-    name: dubbo
-    ###########·¢²¼dubbo¶Ë¿ÚºÅÎª20880###########
-    port: 20881
-  registry:
-
-    ###########×¢²áÖĞĞÄµØÖ·(ĞŞ¸ÄÎª±¾»úzookeeperµØÖ·)#####################
-    address: zookeeper://192.168.142.128:2181
-scan:
-  ############ÊµÏÖÀàÉ¨°ü·¶Î§###################
-  base-packages: com.jindumooc.group.web
-
+  dubbo:
+    application:
+      ##### æ³¨å†ŒæœåŠ¡çš„åç§°
+      name: group-web
+    ##### æ³¨å†Œä¸­å¿ƒåœ°å€
+    registry:
+      address: zookeeper://192.168.93.128:2181
+    ##### è°ƒç”¨æœåŠ¡è¶…æ—¶æ—¶é—´
+    consumer:
+      timeout: 10000
