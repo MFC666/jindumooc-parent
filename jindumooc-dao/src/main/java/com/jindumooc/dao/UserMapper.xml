@@ -857,8 +857,13 @@
       birthday = #{birthday,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getIndexUser"  resultType="com.jindumooc.pojo.User" >
+  <select id="getIndexUser" parameterType="com.jindumooc.vojo.SearchMessage" resultType="com.jindumooc.pojo.User" >
     SELECT u.id,u.nickname,u.createdIp,u.createdTime,u.loginIp,u.loginTime,u.birthday,u.roles
     FROM user u
+    <where>
+      <if test="searchType!=null">
+        #{searchType,jdbcType=VARCHAR} like %#{searchParameter,jdbcType=VARCHAR}%
+      </if>
+    </where>
   </select>
 </mapper>

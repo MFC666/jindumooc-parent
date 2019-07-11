@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @EnableDubbo//开启Dubbo
 @SpringBootApplication
-@EntityScan(basePackages = "com.jindumooc.pojo")
 @MapperScan(basePackages = "com.jindumooc.dao")
 public class JindumoocUserServiceApplication {
 

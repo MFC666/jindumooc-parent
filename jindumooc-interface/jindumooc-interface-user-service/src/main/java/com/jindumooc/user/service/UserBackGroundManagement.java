@@ -6,7 +6,6 @@ import com.github.pagehelper.PageInfo;
 import com.jindumooc.vojo.BackGroundIndexUser;
 
 public interface UserBackGroundManagement {
-    List<BackGroundIndexUser> getIndexUser(int pageNum, int pageSize);
 
-    //List<User> searchIndexUser(int pageNum, int pageSize);
+    List<BackGroundIndexUser> getIndexUser(int pageNum, int pageSize, String searchType, String searchparameter);
 }

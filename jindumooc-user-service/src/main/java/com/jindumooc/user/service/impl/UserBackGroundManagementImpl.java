@@ -9,6 +9,7 @@ import com.jindumooc.pojo.UserExample;
 import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.pojo.User;
 import com.jindumooc.vojo.BackGroundIndexUser;
+import com.jindumooc.vojo.SearchMessage;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -36,12 +37,14 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
 
     //获取用户管理界面用户列表
     @Override
-    public List<BackGroundIndexUser> getIndexUser(int pageNum, int pageSize) {
+    public List<BackGroundIndexUser> getIndexUser(int pageNum, int pageSize, String searchType, String searchParameter) {
         //分页查询
+        SearchMessage sm = new SearchMessage();
+        sm.setSearchParameter(null);
+        sm.setSearchType(null);
         PageHelper.startPage(1,17);
-        List<User> listUser = userMapper.getIndexUser();
+        List<User> listUser = userMapper.getIndexUser(sm);
         List<BackGroundIndexUser> backUserList = new ArrayList<>();
-
 
         for (int i=0;i<listUser.size();i++) {
             String areaName = null;
@@ -91,7 +94,6 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     }
 
     //根据登录Ip获取登录地址省市
-
     private String getAreaNameByIp(String Ip,String encodingString)throws UnsupportedEncodingException {
         // 这里调用pconline的接口
         String urlStr = "http://ip.taobao.com/service/getIpInfo.php";

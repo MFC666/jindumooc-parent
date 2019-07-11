@@ -16,15 +16,22 @@ public class UserBackGroundManagementController {
     @Reference
     private UserBackGroundManagement userBackGroundManagement;
 
-    //获取后台管理中用户管理的首页
+    /*获取后台管理中用户管理的首页用户、搜索用户
+        pageNum:页码
+        pageSize：每页大小
+        searchType：搜索类型
+        searchParameter：搜索数据
+        获取首页用户时type和parameter为null
+     */
     @RequestMapping("/getIndexUser")
     @ResponseBody
     public List<BackGroundIndexUser> getIndexUser()
     {
+        String searchType = null;
+        String searchParameter = null;
         int pageNum = 1;
         int pageSize = 1;
-        return userBackGroundManagement.getIndexUser(pageNum,pageSize);
+        return userBackGroundManagement.getIndexUser(pageNum,pageSize,searchType,searchParameter);
     }
-
 
 }

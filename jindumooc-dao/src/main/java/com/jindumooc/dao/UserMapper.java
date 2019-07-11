@@ -3,6 +3,8 @@ package com.jindumooc.dao;
 import com.jindumooc.pojo.User;
 import com.jindumooc.pojo.UserExample;
 import java.util.List;
+
+import com.jindumooc.vojo.SearchMessage;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -28,5 +30,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<User> getIndexUser();
+    List<User> getIndexUser(SearchMessage searchMessage);
 }
