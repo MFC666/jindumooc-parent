@@ -1,6 +1,7 @@
 package com.jindumooc.vojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 //用于后台管理首页用户列表的展示
 public class BackGroundIndexUser implements Serializable {
@@ -11,6 +12,19 @@ public class BackGroundIndexUser implements Serializable {
     private String loginIpArea;
     private String loginTime;
     private String creatIp;
+    private List<String> roles;
+    private String creatIpArea;
+    private String creatTime;
+    private String nickName;
+    private int locked;
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 
     public String getLoginIpArea() {
         return loginIpArea;
@@ -28,9 +42,14 @@ public class BackGroundIndexUser implements Serializable {
         this.creatIpArea = creatIpArea;
     }
 
-    private String creatIpArea;
-    private String creatTime;
-    private String nickName;
+
+    public int getLocked() {
+        return locked;
+    }
+
+    public void setLocked(int locked) {
+        this.locked = locked;
+    }
 
     public int getUserId() {
         return userId;
