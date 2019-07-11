@@ -890,7 +890,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getIndexUser" parameterType="com.jindumooc.vojo.SearchMessage" resultType="com.jindumooc.pojo.User" >
-    SELECT u.nickname,u.birthday,u.loginIp,u.loginarea,u.createdIp,u.createdTime,u.createdarea,u.loginTime
+    SELECT u.nickname,u.birthday,u.roles,u.loginIp,u.loginarea,u.createdIp,u.createdTime,u.createdarea,u.loginTime
     FROM `user` u
     <if test="searchType != null" >
       <where>
@@ -898,4 +898,33 @@
       </where>
     </if>
   </select>
+  <select id="getRoles" parameterType="String" resultType="com.jindumooc.pojo.Role" >
+    SELECT r.`name`
+    FROM role r
+    WHERE r.`code` = #{roleCode}
+  </select>
+  <select id="searchIndexUserByTime" parameterType="com.jindumooc.vojo.SearchMessage" resultType="com.jindumooc.pojo.User" >
+    SELECT r.`name`
+    FROM role r
+    <if test="searchType=='登陆时间'">
+        <where>r.loginTime &gt; #{starTime} and r.loginTime &lt; #{endTime} </where>
+    </if>
+    <if test="searchType=='注册时间'">
+      <where>r.createdTime &gt; #{starTime} and r.createdTime &lt; #{endTime}</where>
+    </if>
+  </select>
+  <update id="lockedUser" parameterType="com.jindumooc.vojo.SearchMessage">
+    update user
+    set locked = #{locked}
+    where id = #{userId}
+  </update>
+  <select id="getAllRoles" resultType="com.jindumooc.pojo.Role">
+    select *
+    from role
+  </select>
+  <update id="updateUserRole" parameterType="com.jindumooc.vojo.SearchMessage">
+    update user
+    set roles = #{newRole}
+    where id = #{userId}
+  </update>
 </mapper>
