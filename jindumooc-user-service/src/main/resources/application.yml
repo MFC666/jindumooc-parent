@@ -13,7 +13,7 @@ dubbo:
     port: 20882
   registry:
   ###########注册中心地址#####################
-    address: zookeeper://192.168.253.128:2181
+    address: zookeeper://192.168.142.128:2181
   scan:
   ############实现类扫包范围###################
     base-packages: com.jindumooc.user.service.impl
