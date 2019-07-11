@@ -48,6 +48,8 @@
     <result column="uuid" property="uuid" jdbcType="VARCHAR" />
     <result column="passwordInit" property="passwordinit" jdbcType="BIT" />
     <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="loginarea" property="loginarea" jdbcType="VARCHAR" />
+    <result column="createdarea" property="createdarea" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -114,7 +116,7 @@
     consecutivePasswordErrorTimes, lastPasswordFailTime, loginTime, loginIp, loginSessionId, 
     approvalTime, approvalStatus, newMessageNum, newNotificationNum, createdIp, createdTime, 
     updatedTime, inviteCode, orgId, orgCode, registeredWay, distributorToken, uuid, passwordInit, 
-    birthday
+    birthday, loginarea, createdarea
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.UserExample" >
     select
@@ -162,7 +164,8 @@
       createdTime, updatedTime, inviteCode, 
       orgId, orgCode, registeredWay, 
       distributorToken, uuid, passwordInit, 
-      birthday)
+      birthday, loginarea, createdarea
+      )
     values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{verifiedmobile,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{paypassword,jdbcType=VARCHAR}, 
       #{paypasswordsalt,jdbcType=VARCHAR}, #{locale,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, 
@@ -178,7 +181,8 @@
       #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, #{invitecode,jdbcType=VARCHAR}, 
       #{orgid,jdbcType=INTEGER}, #{orgcode,jdbcType=VARCHAR}, #{registeredway,jdbcType=VARCHAR}, 
       #{distributortoken,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, #{passwordinit,jdbcType=BIT}, 
-      #{birthday,jdbcType=VARCHAR})
+      #{birthday,jdbcType=VARCHAR}, #{loginarea,jdbcType=VARCHAR}, #{createdarea,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jindumooc.pojo.User" >
     insert into user
@@ -321,6 +325,12 @@
       <if test="birthday != null" >
         birthday,
       </if>
+      <if test="loginarea != null" >
+        loginarea,
+      </if>
+      <if test="createdarea != null" >
+        createdarea,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -460,6 +470,12 @@
       </if>
       <if test="birthday != null" >
         #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="loginarea != null" >
+        #{loginarea,jdbcType=VARCHAR},
+      </if>
+      <if test="createdarea != null" >
+        #{createdarea,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -610,6 +626,12 @@
       <if test="record.birthday != null" >
         birthday = #{record.birthday,jdbcType=VARCHAR},
       </if>
+      <if test="record.loginarea != null" >
+        loginarea = #{record.loginarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdarea != null" >
+        createdarea = #{record.createdarea,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -662,7 +684,9 @@
       distributorToken = #{record.distributortoken,jdbcType=VARCHAR},
       uuid = #{record.uuid,jdbcType=VARCHAR},
       passwordInit = #{record.passwordinit,jdbcType=BIT},
-      birthday = #{record.birthday,jdbcType=VARCHAR}
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      loginarea = #{record.loginarea,jdbcType=VARCHAR},
+      createdarea = #{record.createdarea,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -805,6 +829,12 @@
       <if test="birthday != null" >
         birthday = #{birthday,jdbcType=VARCHAR},
       </if>
+      <if test="loginarea != null" >
+        loginarea = #{loginarea,jdbcType=VARCHAR},
+      </if>
+      <if test="createdarea != null" >
+        createdarea = #{createdarea,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -854,16 +884,18 @@
       distributorToken = #{distributortoken,jdbcType=VARCHAR},
       uuid = #{uuid,jdbcType=VARCHAR},
       passwordInit = #{passwordinit,jdbcType=BIT},
-      birthday = #{birthday,jdbcType=VARCHAR}
+      birthday = #{birthday,jdbcType=VARCHAR},
+      loginarea = #{loginarea,jdbcType=VARCHAR},
+      createdarea = #{createdarea,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getIndexUser" parameterType="com.jindumooc.vojo.SearchMessage" resultType="com.jindumooc.pojo.User" >
-    SELECT u.id,u.nickname,u.createdIp,u.createdTime,u.loginIp,u.loginTime,u.birthday,u.roles
-    FROM user u
-    <where>
-      <if test="searchType!=null">
-        #{searchType,jdbcType=VARCHAR} like %#{searchParameter,jdbcType=VARCHAR}%
-      </if>
-    </where>
+    SELECT u.nickname,u.birthday,u.loginIp,u.loginarea,u.createdIp,u.createdTime,u.createdarea,u.loginTime
+    FROM `user` u
+    <if test="searchType != null" >
+      <where>
+        #{searchType} like %#{searchParameter}%
+      </where>
+    </if>
   </select>
 </mapper>

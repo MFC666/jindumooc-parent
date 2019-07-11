@@ -1,9 +1,9 @@
 package com.jindumooc.user.service;
 
 import com.jindumooc.pojo.User;
-import java.util.*;
-import com.github.pagehelper.PageInfo;
 import com.jindumooc.vojo.BackGroundIndexUser;
+
+import java.util.*;
 
 public interface UserBackGroundManagement {
 

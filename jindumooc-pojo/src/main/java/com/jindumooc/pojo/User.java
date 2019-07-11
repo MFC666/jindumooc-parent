@@ -1,8 +1,6 @@
 package com.jindumooc.pojo;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
+public class User {
     private Integer id;
 
     private String email;
@@ -94,6 +92,10 @@ public class User implements Serializable {
     private Boolean passwordinit;
 
     private String birthday;
+
+    private String loginarea;
+
+    private String createdarea;
 
     public Integer getId() {
         return id;
@@ -461,5 +463,21 @@ public class User implements Serializable {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday == null ? null : birthday.trim();
+    }
+
+    public String getLoginarea() {
+        return loginarea;
+    }
+
+    public void setLoginarea(String loginarea) {
+        this.loginarea = loginarea == null ? null : loginarea.trim();
+    }
+
+    public String getCreatedarea() {
+        return createdarea;
+    }
+
+    public void setCreatedarea(String createdarea) {
+        this.createdarea = createdarea == null ? null : createdarea.trim();
     }
 }

@@ -3123,6 +3123,146 @@ public class UserExample {
             addCriterion("birthday not between", value1, value2, "birthday");
             return (Criteria) this;
         }
+
+        public Criteria andLoginareaIsNull() {
+            addCriterion("loginarea is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaIsNotNull() {
+            addCriterion("loginarea is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaEqualTo(String value) {
+            addCriterion("loginarea =", value, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaNotEqualTo(String value) {
+            addCriterion("loginarea <>", value, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaGreaterThan(String value) {
+            addCriterion("loginarea >", value, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaGreaterThanOrEqualTo(String value) {
+            addCriterion("loginarea >=", value, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaLessThan(String value) {
+            addCriterion("loginarea <", value, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaLessThanOrEqualTo(String value) {
+            addCriterion("loginarea <=", value, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaLike(String value) {
+            addCriterion("loginarea like", value, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaNotLike(String value) {
+            addCriterion("loginarea not like", value, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaIn(List<String> values) {
+            addCriterion("loginarea in", values, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaNotIn(List<String> values) {
+            addCriterion("loginarea not in", values, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaBetween(String value1, String value2) {
+            addCriterion("loginarea between", value1, value2, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginareaNotBetween(String value1, String value2) {
+            addCriterion("loginarea not between", value1, value2, "loginarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaIsNull() {
+            addCriterion("createdarea is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaIsNotNull() {
+            addCriterion("createdarea is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaEqualTo(String value) {
+            addCriterion("createdarea =", value, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaNotEqualTo(String value) {
+            addCriterion("createdarea <>", value, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaGreaterThan(String value) {
+            addCriterion("createdarea >", value, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaGreaterThanOrEqualTo(String value) {
+            addCriterion("createdarea >=", value, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaLessThan(String value) {
+            addCriterion("createdarea <", value, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaLessThanOrEqualTo(String value) {
+            addCriterion("createdarea <=", value, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaLike(String value) {
+            addCriterion("createdarea like", value, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaNotLike(String value) {
+            addCriterion("createdarea not like", value, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaIn(List<String> values) {
+            addCriterion("createdarea in", values, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaNotIn(List<String> values) {
+            addCriterion("createdarea not in", values, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaBetween(String value1, String value2) {
+            addCriterion("createdarea between", value1, value2, "createdarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedareaNotBetween(String value1, String value2) {
+            addCriterion("createdarea not between", value1, value2, "createdarea");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

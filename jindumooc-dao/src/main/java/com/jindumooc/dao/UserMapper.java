@@ -30,5 +30,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<User> getIndexUser(SearchMessage searchMessage);
+    List<User> getIndexUser(SearchMessage sm);
 }
