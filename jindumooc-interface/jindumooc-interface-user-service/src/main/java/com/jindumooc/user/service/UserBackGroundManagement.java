@@ -3,19 +3,19 @@ package com.jindumooc.user.service;
 import com.jindumooc.vojo.AllRoles;
 import com.jindumooc.vojo.BackGroundIndexUser;
 import com.jindumooc.dto.SearchMessage;
+import com.jindumooc.vojo.UserDataStatistics;
 
-import java.sql.Date;
 import java.util.*;
 
 public interface UserBackGroundManagement {
 
-    List<BackGroundIndexUser> getIndexUser(int pageNum, int pageSize, String searchType, String searchparameter);
-
-    List<BackGroundIndexUser> searchIndexUserByTime(String searchType, Date starTime, Date endTime);
+    List<BackGroundIndexUser> getIndexUser(SearchMessage sm);
 
     boolean lokedUser(SearchMessage searchMessage);
 
     List<AllRoles> getAllRoles();
 
     boolean updateUserRole(SearchMessage searchMessage);
+
+    List<UserDataStatistics> getUserDataStatistics(SearchMessage sm);
 }

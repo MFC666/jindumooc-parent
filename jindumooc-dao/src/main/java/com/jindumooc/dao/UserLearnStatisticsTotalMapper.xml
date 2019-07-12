@@ -368,4 +368,11 @@
       updatedTime = #{updatedtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getUserDataStatistrics" parameterType="com.jindumooc.dto.SearchMessage" resultType="com.jindumooc.pojo.UserLearnStatisticsTotal" >
+    SELECT s.userId,s.learnedSeconds,s.finishedTaskNum,s.joinedClassroomNum,s.exitClassroomNum,s.joinedCourseNum,s.exitCourseNum
+    FROM user u , user_learn_statistics_total s
+  <if test="searchParameter!=null">
+    <where>u.nickname=#{searchParameter} and s.userId = u.id</where>
+  </if>
+  </select>
 </mapper>

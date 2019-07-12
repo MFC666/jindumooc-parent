@@ -10,6 +10,33 @@ public class SearchMessage implements Serializable {
     private Long endTime;
     private int locked;
     private int userId;
+    private int pageNum;
+    private int pageSize;
+    private String searchTimeType;
+
+    public String getSearchTimeType() {
+        return searchTimeType;
+    }
+
+    public void setSearchTimeType(String searchTimeType) {
+        this.searchTimeType = searchTimeType;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public String getNewRole() {
         return newRole;

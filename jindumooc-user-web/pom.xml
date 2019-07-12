@@ -48,6 +48,12 @@
             <artifactId>jindumooc-dto</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi-ooxml.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -5,11 +5,16 @@ import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.vojo.AllRoles;
 import com.jindumooc.vojo.BackGroundIndexUser;
 import com.jindumooc.dto.SearchMessage;
+import com.jindumooc.vojo.UserDataStatistics;
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -27,21 +32,9 @@ public class UserBackGroundManagementController {
      */
     @RequestMapping("/getIndexUser")
     @ResponseBody
-    public List<BackGroundIndexUser> getIndexUser(int pageNum,int pageSize,String searchType,String searchParameter)
+    public List<BackGroundIndexUser> getIndexUser(SearchMessage sm)
     {
-        return userBackGroundManagement.getIndexUser(pageNum,pageSize,searchType,searchParameter);
-    }
-
-    /*
-    搜索用户通过时间
-    searchType：时间类型
-    starTime：开始时间
-    endTime：结束时间
-     */
-    @RequestMapping("/searchIndexUserByTime")
-    @ResponseBody
-    public List<BackGroundIndexUser> searchIndexUserByTime(String searchType, Date starTime, Date endTime){
-         return userBackGroundManagement.searchIndexUserByTime(searchType,starTime,endTime);
+        return userBackGroundManagement.getIndexUser(sm);
     }
 
     /*
@@ -77,6 +70,62 @@ public class UserBackGroundManagementController {
         searchMessage.setNewRole(newRole);
 
         return userBackGroundManagement.updateUserRole(searchMessage);
+    }
+
+    /*
+        用户数据统计
+        searchParameter：用户名，默认null
+        pageSize：每页用户数
+        pageNum：页码
+     */
+    @RequestMapping("/getUserDataStatistics")
+    @ResponseBody
+    public List<UserDataStatistics> getUserDataStatistics(SearchMessage sm){
+        return userBackGroundManagement.getUserDataStatistics(sm);
+
+    }
+
+    /*
+    测试下载Excel表格，搜索用户的功能
+     */
+
+    @RequestMapping("/exportDataStatistics")
+    @ResponseBody
+    public void exportDataStatistics(SearchMessage sm,HttpServletResponse response) throws IOException {
+
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("用户数据统计");
+        List<UserDataStatistics> userDataStatisticsList = userBackGroundManagement.getUserDataStatistics(sm);
+
+        String fileName = "DataStatistics.xls";
+        int rowNum = 1;
+        String[] headers = {"用户ID","用户名","加入班级数","退出班级数","加入计划数","退出计划数","学完任务数","学习时长"};
+        HSSFRow row = sheet.createRow(0);
+
+        for(int i=0;i<headers.length;i++){
+            HSSFCell cell = row.createCell(i);
+            HSSFRichTextString string = new HSSFRichTextString(headers[i]);
+            cell.setCellValue(string);
+        }
+
+        for (UserDataStatistics userDataStatistics:userDataStatisticsList) {
+            HSSFRow row1 = sheet.createRow(rowNum);
+            row.createCell(0).setCellValue(userDataStatistics.getUserId());
+            row.createCell(1).setCellValue(userDataStatistics.getNickName());
+            row.createCell(2).setCellValue(userDataStatistics.getJoinedClassroomNum());
+            row.createCell(3).setCellValue(userDataStatistics.getExitClassroomNum());
+            row.createCell(4).setCellValue(userDataStatistics.getJoinedCourseNum());
+            row.createCell(5).setCellValue(userDataStatistics.getExitCourseNum());
+            row.createCell(6).setCellValue(userDataStatistics.getFinishedTaskNum());
+            row.createCell(7).setCellValue(userDataStatistics.getLearnedSeconds());
+            rowNum++;
+
+        }
+
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+        response.flushBuffer();
+        workbook.write(response.getOutputStream());
     }
 
     /*

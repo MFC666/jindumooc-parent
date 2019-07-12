@@ -33,4 +33,9 @@ public interface RoleMapper {
     int updateByPrimaryKeyWithBLOBs(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    List<Role> getAllRoles();
+
+    //根据roleCode获取中文名称
+    Role getRoles(String roleCode);
 }

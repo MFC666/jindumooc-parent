@@ -284,4 +284,13 @@
       updatedTime = #{updatedtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getAllRoles" resultType="com.jindumooc.pojo.Role">
+    select *
+    from role
+  </select>
+  <select id="getRoles" parameterType="String" resultType="com.jindumooc.pojo.Role" >
+    SELECT r.`name`
+    FROM role r
+    WHERE r.`code` = #{roleCode}
+  </select>
 </mapper>
