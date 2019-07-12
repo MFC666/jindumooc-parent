@@ -15,7 +15,7 @@ public class SearchMessage implements Serializable {
     private String searchTimeType;
 
     public String getSearchTimeType() {
-        return searchTimeType;
+        return searchTimeType; 
     }
 
     public void setSearchTimeType(String searchTimeType) {
