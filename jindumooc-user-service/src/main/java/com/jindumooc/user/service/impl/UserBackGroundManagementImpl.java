@@ -7,7 +7,7 @@ import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.pojo.User;
 import com.jindumooc.vojo.AllRoles;
 import com.jindumooc.vojo.BackGroundIndexUser;
-import com.jindumooc.vojo.SearchMessage;
+import com.jindumooc.dto.SearchMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.text.SimpleDateFormat;
 import java.util.*;

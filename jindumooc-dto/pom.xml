@@ -8,9 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.jinduMooc</groupId>
-    <artifactId>jindumooc-dao</artifactId>
+    <artifactId>jindumooc-dto</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jindumooc-dao</name>
+    <name>jindumooc-dto</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -28,26 +28,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.jinduMooc</groupId>
-            <artifactId>jindumooc-pojo</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jinduMooc</groupId>
-            <artifactId>jindumooc-vojo</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jinduMooc</groupId>
-            <artifactId>jindumooc-dto</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.2.2</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -57,21 +37,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <resources>
-        <resource>
-            <directory>src/main/java</directory>
-            <includes>
-                <include>**/*.properties</include>
-                <include>**/*.xml</include>
-            </includes>
-        </resource>
-        <resource>
-            <directory>src/main/resources</directory>
-            <includes>
-                <include>**/*.*</include>
-            </includes>
-        </resource>
-        </resources>
     </build>
 
 </project>

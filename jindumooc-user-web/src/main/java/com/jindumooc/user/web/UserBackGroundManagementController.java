@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.vojo.AllRoles;
 import com.jindumooc.vojo.BackGroundIndexUser;
-import com.jindumooc.vojo.SearchMessage;
+import com.jindumooc.dto.SearchMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -78,4 +78,8 @@ public class UserBackGroundManagementController {
 
         return userBackGroundManagement.updateUserRole(searchMessage);
     }
+
+    /*
+
+     */
 }

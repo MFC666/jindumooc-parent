@@ -34,6 +34,7 @@
         <module>jindumooc-pojo</module>
         <module>jindumooc-vojo</module>
         <module>jindumooc-dao</module>
+        <module>jindumooc-dto</module>
     </modules>
     <packaging>pom</packaging>
     <properties>

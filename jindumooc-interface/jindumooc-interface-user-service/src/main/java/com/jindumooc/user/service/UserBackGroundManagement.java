@@ -1,9 +1,8 @@
 package com.jindumooc.user.service;
 
-import com.jindumooc.pojo.User;
 import com.jindumooc.vojo.AllRoles;
 import com.jindumooc.vojo.BackGroundIndexUser;
-import com.jindumooc.vojo.SearchMessage;
+import com.jindumooc.dto.SearchMessage;
 
 import java.sql.Date;
 import java.util.*;

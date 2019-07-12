@@ -5,8 +5,7 @@ import com.jindumooc.pojo.User;
 import com.jindumooc.pojo.UserExample;
 import java.util.List;
 
-import com.jindumooc.vojo.AllRoles;
-import com.jindumooc.vojo.SearchMessage;
+import com.jindumooc.dto.SearchMessage;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
