@@ -14,6 +14,16 @@ public class UserDataStatistics implements Serializable {
     private int finishedTaskNum;
     private int learnedSeconds;
 
+    private int totalNum;
+
+    public int getTotalNum() {
+        return totalNum;
+    }
+
+    public void setTotalNum(int totalNum) {
+        this.totalNum = totalNum;
+    }
+
     public int getUserId() {
         return userId;
     }

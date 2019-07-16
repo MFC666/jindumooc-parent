@@ -1,5 +1,6 @@
 package com.jindumooc.dao;
 
+import com.jindumooc.dto.SearchMessage;
 import com.jindumooc.pojo.UserApproval;
 import com.jindumooc.pojo.UserApprovalExample;
 import java.util.List;
@@ -33,4 +34,8 @@ public interface UserApprovalMapper {
     int updateByPrimaryKeyWithBLOBs(UserApproval record);
 
     int updateByPrimaryKey(UserApproval record);
+
+    List<UserApproval> getUserApproval(SearchMessage sm);
+
+    int getTotalApproval(SearchMessage sm);
 }

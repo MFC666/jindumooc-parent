@@ -17,6 +17,16 @@ public class BackGroundIndexUser implements Serializable {
     private String creatTime;
     private String nickName;
     private int locked;
+    //获得符合当前的条件的用户的总数
+    private int totalUser;
+
+    public int getTotalUser() {
+        return totalUser;
+    }
+
+    public void setTotalUser(int totalUser) {
+        this.totalUser = totalUser;
+    }
 
     public List<String> getRoles() {
         return roles;

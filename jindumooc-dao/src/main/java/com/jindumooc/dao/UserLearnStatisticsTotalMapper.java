@@ -30,4 +30,6 @@ public interface UserLearnStatisticsTotalMapper {
     int updateByPrimaryKey(UserLearnStatisticsTotal record);
 
     List<UserLearnStatisticsTotal> getUserDataStatistrics(SearchMessage sm);
+
+    int getUserNum(SearchMessage sm);
 }

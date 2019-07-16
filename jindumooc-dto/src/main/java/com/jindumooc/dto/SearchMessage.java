@@ -4,18 +4,60 @@ import java.io.Serializable;
 
 public class SearchMessage implements Serializable {
 
-    private String searchType;
-    private String searchParameter;
-    private Long starTime;
-    private Long endTime;
-    private int locked;
     private int userId;
     private int pageNum;
     private int pageSize;
+    //搜索条件
+    private String searchType;
+    private String searchParameter;
+    //按时间搜索
     private String searchTimeType;
+    private Long starTime;
+    private Long endTime;
+    //锁定用户
+    private int locked;
+    //设置角色
+    private String role;
+    //设置推荐
+    private int promoted;
+    private int promotedSeq;
+    //实名制审核状态
+    private String approvalStatus;
+
+    public String getApprovalStatus() {
+        return approvalStatus;
+    }
+
+    public void setApprovalStatus(String approvalStatus) {
+        this.approvalStatus = approvalStatus;
+    }
+
+    public int getPromotedSeq() {
+        return promotedSeq;
+    }
+
+    public void setPromotedSeq(int promotedSeq) {
+        this.promotedSeq = promotedSeq;
+    }
+
+    public int getPromoted() {
+        return promoted;
+    }
+
+    public void setPromoted(int promoted) {
+        this.promoted = promoted;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getSearchTimeType() {
-        return searchTimeType; 
+        return searchTimeType;
     }
 
     public void setSearchTimeType(String searchTimeType) {

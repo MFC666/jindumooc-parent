@@ -42,4 +42,14 @@ public interface UserMapper {
     void updateUserRole(SearchMessage searchMessage);
 
     String getUserNickName(Integer id);
+
+    int getUserNum(SearchMessage sm);
+
+    List<User> getAllTeachers(SearchMessage sm);
+
+    int getTeachersNum(SearchMessage sm);
+
+    void updatePromoted(SearchMessage sm);
+
+    void updatePromotedSeq(SearchMessage sm);
 }
