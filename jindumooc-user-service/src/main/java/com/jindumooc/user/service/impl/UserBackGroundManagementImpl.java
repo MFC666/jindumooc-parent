@@ -155,11 +155,15 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     @Override
     public boolean updateApproval(SearchMessage sm) {
 
+        //获取修改时间
+        Date date = new Date();
+
         UserApprovalExample userApprovalExample = new UserApprovalExample();
         UserApprovalExample.Criteria criteria = userApprovalExample.createCriteria();
         criteria.andUseridEqualTo(sm.getUserId());
         com.jindumooc.pojo.UserApproval userApproval = new com.jindumooc.pojo.UserApproval();
         userApproval.setStatus(sm.getApprovalStatus());
+        userApproval.setCreatedtime(new Integer(new Long(date.getTime()).intValue()));
         userApprovalMapper.updateByExampleSelective(userApproval,userApprovalExample);
 
         return true;

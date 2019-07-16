@@ -176,7 +176,7 @@ public class UserBackGroundManagementController {
     @ResponseBody
     public boolean updateUserApproval(@RequestBody SearchMessage sm){
 
-        
+
         return userBackGroundManagement.updateApproval(sm);
     }
 
