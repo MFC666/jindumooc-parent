@@ -4,7 +4,7 @@ server:
 dubbo:
   application:
   ###########注册到注册中心的名称############
-    name: user-service
+    name: group-service
   ###########采用协议和端口号################
   protocol:
   ###########采用dubbo协议####################

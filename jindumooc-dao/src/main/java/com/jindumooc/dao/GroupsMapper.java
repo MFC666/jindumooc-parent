@@ -1,5 +1,6 @@
 package com.jindumooc.dao;
 
+import com.jindumooc.dto.SearchGroup;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.pojo.GroupsExample;
 import java.util.List;
@@ -33,4 +34,6 @@ public interface GroupsMapper {
     int updateByPrimaryKeyWithBLOBs(Groups record);
 
     int updateByPrimaryKey(Groups record);
+
+    List<Groups> getIndexGroup(SearchGroup sg);
 }
