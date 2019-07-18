@@ -1,4 +1,4 @@
-package com.jindumooc.dto;
+package com.jindumooc.dto.group;
 
 import java.io.Serializable;
 

@@ -5,9 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.GroupsMapper;
 import com.jindumooc.group.service.GroupBackGroundManagement;
 import com.jindumooc.pojo.Groups;
-import com.jindumooc.vojo.BackGroundIndexGroup;
+import com.jindumooc.vojo.ground.BackGroundIndexGroup;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.jindumooc.dto.SearchGroup;
+import com.jindumooc.dto.group.SearchGroup;
 
 import java.util.ArrayList;
 import java.util.List;

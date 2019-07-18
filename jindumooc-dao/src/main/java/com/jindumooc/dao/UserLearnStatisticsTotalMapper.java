@@ -1,6 +1,6 @@
 package com.jindumooc.dao;
 
-import com.jindumooc.dto.SearchMessage;
+import com.jindumooc.dto.user.SearchMessage;
 import com.jindumooc.pojo.UserLearnStatisticsTotal;
 import com.jindumooc.pojo.UserLearnStatisticsTotalExample;
 import java.util.List;
@@ -30,4 +30,6 @@ public interface UserLearnStatisticsTotalMapper {
     int updateByPrimaryKey(UserLearnStatisticsTotal record);
 
     List<UserLearnStatisticsTotal> getUserDataStatistrics(SearchMessage sm);
+
+    int getUserNum(SearchMessage sm);
 }

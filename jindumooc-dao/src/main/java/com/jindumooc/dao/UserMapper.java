@@ -1,12 +1,10 @@
 package com.jindumooc.dao;
 
-import com.jindumooc.pojo.Role;
 import com.jindumooc.pojo.User;
 import com.jindumooc.pojo.UserExample;
 import java.util.List;
 
-import com.jindumooc.dto.SearchMessage;
-import com.jindumooc.pojo.UserLearnStatisticsTotal;
+import com.jindumooc.dto.user.SearchMessage;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -42,4 +40,14 @@ public interface UserMapper {
     void updateUserRole(SearchMessage searchMessage);
 
     String getUserNickName(Integer id);
+
+    int getUserNum(SearchMessage sm);
+
+    List<User> getAllTeachers(SearchMessage sm);
+
+    int getTeachersNum(SearchMessage sm);
+
+    void updatePromoted(SearchMessage sm);
+
+    void updatePromotedSeq(SearchMessage sm);
 }

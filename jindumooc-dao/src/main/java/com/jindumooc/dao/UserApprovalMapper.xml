@@ -337,4 +337,26 @@
       createdTime = #{createdtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getUserApproval" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.UserApproval" >
+    SELECT *
+    FROM user_approval
+    <if test="searchType != null" >
+      <where>
+        #{searchType} like '%#{searchParameter}%'
+        <if test="approvalStatus!=null">and status = #{approvalStatus}</if>
+        <if test="searchTimeType!=null">and  createdTime > #{starTime} and createdTime &lt; #{endTime}</if>
+      </where>
+    </if>
+  </select>
+  <select id="getTotalApproval" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
+    SELECT count (*)
+    FROM user_approval
+    <if test="searchType != null" >
+      <where>
+        #{searchType} like '%#{searchParameter}%'
+        <if test="approvalStatus!=null">and status = #{approvalStatus}</if>
+        <if test="searchTimeType!=null">and  createdTime > #{starTime} and createdTime &lt; #{endTime}</if>
+      </where>
+    </if>
+  </select>
 </mapper>

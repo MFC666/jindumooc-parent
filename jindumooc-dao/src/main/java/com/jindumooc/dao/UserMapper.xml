@@ -889,23 +889,23 @@
       createdarea = #{createdarea,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getIndexUser" parameterType="com.jindumooc.dto.SearchMessage" resultType="com.jindumooc.pojo.User" >
-    SELECT u.nickname,u.birthday,u.roles,u.loginIp,u.loginarea,u.createdIp,u.createdTime,u.createdarea,u.loginTime
+  <select id="getIndexUser" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.User" >
+    SELECT *
     FROM `user` u
     <if test="searchType != null" >
       <where>
-        #{searchType} like %#{searchParameter}%
+        #{searchType} like '%#{searchParameter}%'
         <if test="searchTimeType=='loginTime'">and r.loginTime &gt; #{starTime} and r.loginTime &lt; #{endTime}</if>
         <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime} and r.createdTime &lt; #{endTime}</if>
       </where>
     </if>
   </select>
-  <update id="lockedUser" parameterType="com.jindumooc.dto.SearchMessage">
+  <update id="lockedUser" parameterType="com.jindumooc.dto.user.SearchMessage">
     update user
     set locked = #{locked}
     where id = #{userId}
   </update>
-  <update id="updateUserRole" parameterType="com.jindumooc.dto.SearchMessage">
+  <update id="updateUserRole" parameterType="com.jindumooc.dto.user.SearchMessage">
     update user
     set roles = #{newRole}
     where id = #{userId}
@@ -915,4 +915,39 @@
     from User
     where id = #{id}
   </select>
+  <select id="getUserNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
+    SELECT count(*)
+    FROM `user` u
+    <if test="searchType != null" >
+      <where>
+        #{searchType} like '%#{searchParameter}%'
+        <if test="searchTimeType=='loginTime'">and r.loginTime &gt; #{starTime} and r.loginTime &lt; #{endTime}</if>
+        <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime} and r.createdTime &lt; #{endTime}</if>
+      </where>
+    </if>
+  </select>
+  <select id="getAllTeachers" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.User" >
+    SELECT u.id,u.nickname,u.loginarea,u.loginIp,u.loginTime,u.promoted
+    FROM `user` u
+    <where>roles like '%ROLE_TEACHER%'
+    <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
+    </where>
+  </select>
+  <select id="getTeachersNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
+    SELECT count(*)
+    FROM `user` u
+    <where>roles like '%ROLE_TEACHER%'
+      <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
+    </where>
+  </select>
+  <update id="updatePromoted" parameterType="com.jindumooc.dto.user.SearchMessage">
+    update user
+    set promoted = #{promoted}
+    where id = #{userId}
+  </update>
+  <update id="updatePromotedSeq" parameterType="com.jindumooc.dto.user.SearchMessage">
+    update user
+    set promotedseq = #{promotedSeq}
+    where id = #{userId}
+  </update>
 </mapper>

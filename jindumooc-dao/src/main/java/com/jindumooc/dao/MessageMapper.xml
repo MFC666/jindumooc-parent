@@ -284,4 +284,28 @@
       isDelete = #{isdelete,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getAllMessages" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.Message" >
+    SELECT id,'type',fromId,toId,content,createdTime
+    FROM message
+    <where>
+    isDelete = 0
+    <if test="fromId != null" >
+        and fromId like '%#{fromId}%'
+    </if>
+    <if test="content!=null">and content like '%#{content}%'</if>
+    <if test="searchTimeType!=null">createdTime &gt; #{starTime} and createdTime &lt; #{endTime} </if>
+    </where>
+  </select>
+  <select id="getAllMessagesNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
+    SELECT count(*)
+    FROM message
+    <where>
+      isDelete = 0
+      <if test="fromId != null" >
+        and fromId like '%#{fromId}%'
+      </if>
+      <if test="content!=null">and content like '%#{content}%'</if>
+      <if test="searchTimeType!=null">createdTime &gt; #{starTime} and createdTime &lt; #{endTime} </if>
+    </where>
+  </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.jindumooc.vojo;
+package com.jindumooc.vojo.user;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,18 +12,28 @@ public class BackGroundIndexUser implements Serializable {
     private String loginIpArea;
     private String loginTime;
     private String creatIp;
-    private List<String> roles;
+    private List<String> rolesName;
     private String creatIpArea;
     private String creatTime;
     private String nickName;
     private int locked;
+    //获得符合当前的条件的用户的总数
+    private int totalUser;
+
+    public int getTotalUser() {
+        return totalUser;
+    }
+
+    public void setTotalUser(int totalUser) {
+        this.totalUser = totalUser;
+    }
 
     public List<String> getRoles() {
-        return roles;
+        return rolesName;
     }
 
     public void setRoles(List<String> roles) {
-        this.roles = roles;
+        this.rolesName = roles;
     }
 
     public String getLoginIpArea() {
