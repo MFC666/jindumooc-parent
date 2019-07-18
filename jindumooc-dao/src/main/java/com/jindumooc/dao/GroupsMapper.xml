@@ -356,7 +356,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getIndexGroup" parameterType="com.jindumooc.dto.SearchGroup" resultType="com.jindumooc.pojo.Groups" >
-    SELECT g.id, g.title, g.logo, g.backgroundlogo, g.status, g.membernum, g.threadnum, g.postnum, g.ownerid, g.createdtime, g.about
+    SELECT *
     FROM `groups` g
   </select>
 </mapper>

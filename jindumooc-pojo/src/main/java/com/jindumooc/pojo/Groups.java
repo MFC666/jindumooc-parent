@@ -1,6 +1,8 @@
 package com.jindumooc.pojo;
 
-public class Groups {
+import java.io.Serializable;
+
+public class Groups implements Serializable {
     private Integer id;
 
     private String title;
