@@ -2,13 +2,13 @@ package com.jindumooc.user.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.*;
+import com.jindumooc.dto.user.EditUser;
 import com.jindumooc.pojo.*;
+import com.jindumooc.pojo.UserApproval;
 import com.jindumooc.user.service.UserBackGroundManagement;
-import com.jindumooc.vojo.*;
-import com.jindumooc.dto.SearchMessage;
-import com.jindumooc.vojo.UserApproval;
+import com.jindumooc.dto.user.SearchMessage;
+import com.jindumooc.vojo.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -26,18 +26,20 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     private UserApprovalMapper userApprovalMapper;
     @Autowired
     private MessageMapper messageMapper;
+    @Autowired
+    private UserProfileMapper userProfileMapper;
 
     //获取用户管理界面用户列表
     @Override
     public List<BackGroundIndexUser> getIndexUser(SearchMessage sm) {
         //与前端交互后修改
-        PageHelper.startPage(sm.getPageNum(),sm.getPageSize());
+        PageHelper.startPage(sm.getPageNum(), sm.getPageSize());
         List<User> userList = userMapper.getIndexUser(sm);
         //获取共有多少用户符合条件
         int count = userMapper.getUserNum(sm);
 
-       //整理userList填充BackgroundIndexUser
-        return getBackGroundIndexUser(userList,count);
+        //整理userList填充BackgroundIndexUser
+        return getBackGroundIndexUser(userList, count);
     }
 
     //封禁用户
@@ -53,7 +55,7 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
         List<Role> roleList = new ArrayList<>();
         roleList = roleMapper.getAllRoles();
         List<AllRoles> allRolesList = new ArrayList<>();
-        if(roleList.get(0).getId()!=null) {
+        if (roleList.get(0).getId() != null) {
             for (Role role : roleList) {
                 AllRoles allRoles = new AllRoles();
                 allRoles.setCode(role.getCode());
@@ -77,13 +79,13 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     @Override
     public List<UserDataStatistics> getUserDataStatistics(SearchMessage sm) {
         List<UserLearnStatisticsTotal> statisticsList = new ArrayList<UserLearnStatisticsTotal>();
-        PageHelper.startPage(sm.getPageNum(),sm.getPageSize());
+        PageHelper.startPage(sm.getPageNum(), sm.getPageSize());
         statisticsList = userLearnStatisticsTotalMapper.getUserDataStatistrics(sm);
         List<UserDataStatistics> userDataStatisticsList = new ArrayList<>();
 
         int count = userLearnStatisticsTotalMapper.getUserNum(sm);
 
-        if(statisticsList.get(0).getId()!=0) {
+        if (statisticsList.get(0).getId() != 0) {
             for (UserLearnStatisticsTotal userL : statisticsList) {
 
                 UserDataStatistics userDataStatistics = new UserDataStatistics();
@@ -109,7 +111,7 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
         List<User> userList = new ArrayList<>();
         userList = userMapper.getAllTeachers(sm);
         int count = userMapper.getTeachersNum(sm);
-        return getTeachersList(userList,count);
+        return getTeachersList(userList, count);
     }
 
     @Override
@@ -131,10 +133,10 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     @Override
     public List<UserApproval> getUserApproval(SearchMessage sm) {
 
-        PageHelper.startPage(sm.getPageNum(),sm.getPageSize());
+        PageHelper.startPage(sm.getPageNum(), sm.getPageSize());
         List<com.jindumooc.pojo.UserApproval> approvalList = userApprovalMapper.getUserApproval(sm);
         List<UserApproval> approvals = new ArrayList<>();
-        for (com.jindumooc.pojo.UserApproval approval:approvalList) {
+        for (com.jindumooc.pojo.UserApproval approval : approvalList) {
             UserApproval userApproval = new UserApproval();
             userApproval.setId(approval.getId());
             userApproval.setUserId(approval.getUserid());
@@ -167,7 +169,7 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
         com.jindumooc.pojo.UserApproval userApproval = new com.jindumooc.pojo.UserApproval();
         userApproval.setStatus(sm.getApprovalStatus());
         userApproval.setCreatedtime(new Integer(new Long(date.getTime()).intValue()));
-        userApprovalMapper.updateByExampleSelective(userApproval,userApprovalExample);
+        userApprovalMapper.updateByExampleSelective(userApproval, userApprovalExample);
 
         return true;
     }
@@ -177,10 +179,10 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
      */
     @Override
     public List<Messages> getAllMessages(SearchMessage sm) {
-        PageHelper.startPage(sm.getPageNum(),sm.getPageSize());
+        PageHelper.startPage(sm.getPageNum(), sm.getPageSize());
         List<Message> messageList = messageMapper.getAllMessages(sm);
         List<Messages> messagesList = new ArrayList<>();
-        for (Message message: messageList) {
+        for (Message message : messageList) {
 
             Messages messages = new Messages();
             messages.setContent(message.getContent());
@@ -189,7 +191,10 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
             messages.setToId(message.getToid());
             messages.setType(message.getType());
             messages.setTotalMessages(messageMapper.getAllMessagesNum(sm));
-
+            Date d = new Date(message.getCreatedtime().intValue() * 1000L);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String s = sdf.format(d);
+            messages.setCreatedTime(s);
             messagesList.add(messages);
         }
         return messagesList;
@@ -198,7 +203,47 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     @Override
     public Boolean delMessages(List<Integer> idList) {
 
-        messageMapper
+        for (Integer integer : idList) {
+            Message message = new Message();
+            message.setId(integer);
+            message.setIsdelete(1);
+            messageMapper.updateByPrimaryKeySelective(message);
+
+        }
+
+        return true;
+    }
+
+    @Override
+    public UserDetail getUserDetail(SearchMessage sm) {
+
+        UserDetail userDetail = new UserDetail();
+
+        userDetail = userProfileMapper.getUserDetail(sm);
+        if(userDetail!=null){
+            if (userDetail.getIsqqpublic() == 0) {
+                userDetail.setQq("秘密");
+            }
+            if (userDetail.getIsweibopublic() == 0) {
+                userDetail.setWeibo("秘密");
+            }
+            if (userDetail.getIsweixinpublic() == 0) {
+                userDetail.setWeixin("秘密");
+            }
+            userDetail.setLoginTime(typeConversion(userDetail.getLogintime()));
+            userDetail.setCreatedTime(typeConversion(userDetail.getCreatedtime()));
+
+            userDetail.setRolesName(divisionRoleCode(userDetail.getRoles()));
+        }
+
+
+        return userDetail;
+    }
+
+    @Override
+    public boolean updateUserDetail(EditUser editUser) {
+
+        userProfileMapper.updateUserDetail(editUser);
         return true;
     }
 
@@ -210,7 +255,7 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     //根据获取的userList构造teacherlist
     private List<Teacher> getTeachersList(List<User> userList, int count) {
         List<Teacher> teacherList = new ArrayList<>();
-        for (User user:userList) {
+        for (User user : userList) {
             Teacher teacher = new Teacher();
             teacher.setId(user.getId());
             teacher.setLoginArea(user.getLoginarea());
@@ -227,24 +272,17 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     }
 
     //根据获取的userList构造BackGroundindexUserList
-    public List<BackGroundIndexUser> getBackGroundIndexUser(List<User> userList,int count){
+    public List<BackGroundIndexUser> getBackGroundIndexUser(List<User> userList, int count) {
         List<BackGroundIndexUser> bUserList = new ArrayList<>();
-        if(userList.get(0).getId()!=null) {
+        if (userList.get(0).getId() != null) {
             for (int i = 0; i < userList.size(); i++) {
                 User user = new User();
                 user = userList.get(i);
                 BackGroundIndexUser bUser = new BackGroundIndexUser();
                 //获取用户组
-                String[] strArr = user.getRoles().split("\\|");
-                List<String> roleNames = new ArrayList<>();
-                for (int m = 1; m < strArr.length; m++) {
-                    if (strArr[m] != null) {
-                        Role role = roleMapper.getRoles(strArr[m]);
-                        roleNames.add(role.getName());
-                    }
-                }
+                bUser.setUserId(user.getId());
                 bUser.setTotalUser(count);
-                bUser.setRoles(roleNames);
+                bUser.setRoles(divisionRoleCode(user.getRoles()));
                 //转换时间
                 bUser.setLocked(user.getLocked());
                 bUser.setNickName(user.getNickname());
@@ -254,19 +292,40 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
                 bUser.setLoginIpArea(user.getLoginarea());
                 bUser.setBirthDay(user.getBirthday());
 
-                Date d = new Date(user.getLogintime().intValue()*1000L);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String s = sdf.format(d);
-                bUser.setLoginTime(s);
 
-                d = new Date(user.getCreatedtime());
-                sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                s = sdf.format(d);
-                bUser.setCreatTime(s);
+                bUser.setLoginTime(typeConversion(user.getLogintime()));
+
+                bUser.setCreatTime(typeConversion(user.getCreatedtime()));
                 bUserList.add(bUser);
             }
         }
         return bUserList;
+    }
+
+    /*
+    integer类型的时间转化为String
+     */
+    public String typeConversion(Integer OldTime) {
+        Date d = new Date(OldTime.intValue() * 1000L);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String s = sdf.format(d);
+        return s;
+
+    }
+    /*
+    根据角色code获取rolename
+     */
+    public List<String> divisionRoleCode(String roleCode){
+
+        String[] strArr =roleCode.split("\\|");
+        List<String> roleNames = new ArrayList<>();
+        for (int m = 1; m < strArr.length; m++) {
+            if (strArr[m] != null) {
+                Role role = roleMapper.getRoles(strArr[m]);
+                roleNames.add(role.getName());
+            }
+        }
+        return roleNames;
     }
 
 

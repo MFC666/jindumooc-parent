@@ -1,4 +1,4 @@
-package com.jindumooc.vojo;
+package com.jindumooc.vojo.user;
 
 import java.io.Serializable;
 

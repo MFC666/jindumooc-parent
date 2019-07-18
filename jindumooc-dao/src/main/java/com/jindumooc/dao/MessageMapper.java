@@ -1,11 +1,10 @@
 package com.jindumooc.dao;
 
-import com.jindumooc.dto.SearchMessage;
+import com.jindumooc.dto.user.SearchMessage;
 import com.jindumooc.pojo.Message;
 import com.jindumooc.pojo.MessageExample;
 import java.util.List;
 
-import com.jindumooc.vojo.Messages;
 import org.apache.ibatis.annotations.Param;
 
 public interface MessageMapper {

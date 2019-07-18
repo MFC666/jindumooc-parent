@@ -1,9 +1,13 @@
 package com.jindumooc.dao;
 
+import com.jindumooc.dto.user.EditUser;
+import com.jindumooc.dto.user.SearchMessage;
 import com.jindumooc.pojo.UserProfile;
 import com.jindumooc.pojo.UserProfileExample;
 import com.jindumooc.pojo.UserProfileWithBLOBs;
 import java.util.List;
+
+import com.jindumooc.vojo.user.UserDetail;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserProfileMapper {
@@ -34,4 +38,8 @@ public interface UserProfileMapper {
     int updateByPrimaryKeyWithBLOBs(UserProfileWithBLOBs record);
 
     int updateByPrimaryKey(UserProfile record);
+
+    UserDetail getUserDetail(SearchMessage sm);
+
+    void updateUserDetail(EditUser editUser);
 }

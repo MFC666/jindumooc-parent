@@ -1,20 +1,25 @@
 package com.jindumooc.user.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.jindumooc.dto.user.EditUser;
 import com.jindumooc.user.service.UserBackGroundManagement;
-import com.jindumooc.vojo.*;
-import com.jindumooc.dto.SearchMessage;
+import com.jindumooc.dto.user.SearchMessage;
+import com.jindumooc.vojo.user.*;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.net.InetAddress;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class UserBackGroundManagementController {
@@ -198,5 +203,53 @@ public class UserBackGroundManagementController {
     public Boolean delMessages(@RequestBody List<Integer> idList){
 
         return userBackGroundManagement.delMessages(idList);
+    }
+
+    /*
+    查看个人详细信息
+     */
+    @RequestMapping("/user/getUserDetail")
+    @ResponseBody
+    public UserDetail getUserDetail(@RequestBody SearchMessage sm){
+
+        return userBackGroundManagement.getUserDetail(sm);
+    }
+
+    /*
+    编辑用户详细信息
+     */
+    @RequestMapping("/user/updateUserDetail")
+    @ResponseBody
+    public boolean updateUserDetail(EditUser editUser){
+
+        return userBackGroundManagement.updateUserDetail(editUser);
+    }
+
+    /*
+    上传头像
+     */
+    @RequestMapping("/user/uploadAvatar")
+    @ResponseBody
+    public String uploadAvatar(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request)throws IllegalStateException, IOException{
+
+        request.setCharacterEncoding("utf-8");
+        if(!file.isEmpty()){
+            String fileName = file.getOriginalFilename();
+            String suffixName = fileName.substring(fileName.lastIndexOf("."));
+            String filePath = InetAddress.getLocalHost().getHostAddress();
+            fileName = UUID.randomUUID()+suffixName;
+            File dest = new File(filePath+fileName);
+            if(!dest.getParentFile().exists()){
+                dest.getParentFile().mkdirs();
+            }
+            try {
+                file.transferTo(dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String filename = "/temp-rainy/" + fileName;
+            return filename;
+        }
+        return null;
     }
 }

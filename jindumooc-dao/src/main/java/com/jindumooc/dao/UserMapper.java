@@ -1,12 +1,10 @@
 package com.jindumooc.dao;
 
-import com.jindumooc.pojo.Role;
 import com.jindumooc.pojo.User;
 import com.jindumooc.pojo.UserExample;
 import java.util.List;
 
-import com.jindumooc.dto.SearchMessage;
-import com.jindumooc.pojo.UserLearnStatisticsTotal;
+import com.jindumooc.dto.user.SearchMessage;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {

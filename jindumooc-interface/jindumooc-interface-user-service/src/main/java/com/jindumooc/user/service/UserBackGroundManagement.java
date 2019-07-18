@@ -1,7 +1,8 @@
 package com.jindumooc.user.service;
 
-import com.jindumooc.vojo.*;
-import com.jindumooc.dto.SearchMessage;
+import com.jindumooc.dto.user.EditUser;
+import com.jindumooc.dto.user.SearchMessage;
+import com.jindumooc.vojo.user.*;
 
 import java.util.*;
 
@@ -30,4 +31,8 @@ public interface UserBackGroundManagement {
     List<Messages> getAllMessages(SearchMessage sm);
 
     Boolean delMessages(List<Integer> idList);
+
+    UserDetail getUserDetail(SearchMessage sm);
+
+    boolean updateUserDetail(EditUser editUser);
 }

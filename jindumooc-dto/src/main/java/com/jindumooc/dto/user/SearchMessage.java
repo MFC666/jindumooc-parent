@@ -1,4 +1,4 @@
-package com.jindumooc.dto;
+package com.jindumooc.dto.user;
 
 import java.io.Serializable;
 

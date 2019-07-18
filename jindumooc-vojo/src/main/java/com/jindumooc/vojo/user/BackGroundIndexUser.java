@@ -1,4 +1,4 @@
-package com.jindumooc.vojo;
+package com.jindumooc.vojo.user;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,7 +12,7 @@ public class BackGroundIndexUser implements Serializable {
     private String loginIpArea;
     private String loginTime;
     private String creatIp;
-    private List<String> roles;
+    private List<String> rolesName;
     private String creatIpArea;
     private String creatTime;
     private String nickName;
@@ -29,11 +29,11 @@ public class BackGroundIndexUser implements Serializable {
     }
 
     public List<String> getRoles() {
-        return roles;
+        return rolesName;
     }
 
     public void setRoles(List<String> roles) {
-        this.roles = roles;
+        this.rolesName = roles;
     }
 
     public String getLoginIpArea() {

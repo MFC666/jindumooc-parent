@@ -1133,4 +1133,26 @@
       varcharField10 = #{varcharfield10,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getUserDetail" resultType="com.jindumooc.vojo.user.UserDetail" parameterType="com.jindumooc.dto.user.SearchMessage" >
+    SELECT u.id,u.nickname,u.email,u.roles,u.loginIp,u.loginTime,u.loginarea,u.createdIp,u.createdTime,u.createdarea,p.truename,p.gender,p.idcard,p.mobile,p.company,p.job,p.birthday,p.weibo,p.weixin,p.site,p.signature,p.about,p.iam,p.isQQPublic,p.isWeiboPublic,p.isWeixinPublic
+    FROM `user` u,user_profile p
+    WHERE u.id = p.id and u.id = #{userId}
+  </select>
+    <update id="updateUserDetail" parameterType="com.jindumooc.dto.user.EditUser" >
+    update user_profile
+    set truename = #{truename,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      iam = #{iam,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      weibo = #{weibo,jdbcType=VARCHAR},
+      about = #{about,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR},
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

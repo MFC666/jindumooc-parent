@@ -368,14 +368,14 @@
       updatedTime = #{updatedtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getUserDataStatistrics" parameterType="com.jindumooc.dto.SearchMessage" resultType="com.jindumooc.pojo.UserLearnStatisticsTotal" >
+  <select id="getUserDataStatistrics" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.UserLearnStatisticsTotal" >
     SELECT s.userId,s.learnedSeconds,s.finishedTaskNum,s.joinedClassroomNum,s.exitClassroomNum,s.joinedCourseNum,s.exitCourseNum,s.createdTime,s.actualAmount,s.createdTime,s.exitCourseSetNum,s.joinedCourseSetNum,s.paidAmount,s.id,s.updatedTime,s.refundAmount
     FROM user u , user_learn_statistics_total s
   <if test="searchParameter!=null">
     <where>u.nickname=#{searchParameter} and s.userId = u.id</where>
   </if>
   </select>
-  <select id="getUserNum" parameterType="com.jindumooc.dto.SearchMessage" resultType="int" >
+  <select id="getUserNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
     SELECT count(*)
     FROM user u , user_learn_statistics_total s
     <if test="searchParameter!=null">

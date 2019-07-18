@@ -1,6 +1,6 @@
 package com.jindumooc.dao;
 
-import com.jindumooc.dto.SearchMessage;
+import com.jindumooc.dto.user.SearchMessage;
 import com.jindumooc.pojo.UserApproval;
 import com.jindumooc.pojo.UserApprovalExample;
 import java.util.List;
