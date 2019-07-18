@@ -1,10 +1,7 @@
 package com.jindumooc.user.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
-import com.jindumooc.dao.RoleMapper;
-import com.jindumooc.dao.UserApprovalMapper;
-import com.jindumooc.dao.UserLearnStatisticsTotalMapper;
-import com.jindumooc.dao.UserMapper;
+import com.jindumooc.dao.*;
 import com.jindumooc.pojo.*;
 import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.vojo.*;
@@ -27,6 +24,8 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     private RoleMapper roleMapper;
     @Autowired
     private UserApprovalMapper userApprovalMapper;
+    @Autowired
+    private MessageMapper messageMapper;
 
     //获取用户管理界面用户列表
     @Override
@@ -125,6 +124,10 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
         userMapper.updatePromotedSeq(sm);
         return true;
     }
+
+    /*
+    获取用户实名制申请
+     */
     @Override
     public List<UserApproval> getUserApproval(SearchMessage sm) {
 
@@ -168,6 +171,41 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
 
         return true;
     }
+
+    /*
+    获取私信
+     */
+    @Override
+    public List<Messages> getAllMessages(SearchMessage sm) {
+        PageHelper.startPage(sm.getPageNum(),sm.getPageSize());
+        List<Message> messageList = messageMapper.getAllMessages(sm);
+        List<Messages> messagesList = new ArrayList<>();
+        for (Message message: messageList) {
+
+            Messages messages = new Messages();
+            messages.setContent(message.getContent());
+            messages.setFromId(message.getFromid());
+            messages.setId(message.getId());
+            messages.setToId(message.getToid());
+            messages.setType(message.getType());
+            messages.setTotalMessages(messageMapper.getAllMessagesNum(sm));
+
+            messagesList.add(messages);
+        }
+        return messagesList;
+    }
+
+    @Override
+    public Boolean delMessages(List<Integer> idList) {
+
+        messageMapper
+        return true;
+    }
+
+    /*
+    删除私信
+     */
+
 
     //根据获取的userList构造teacherlist
     private List<Teacher> getTeachersList(List<User> userList, int count) {

@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Teacher implements Serializable {
     //用于储存教师搜索
-    private int Id;
-    private String nickName;
+    private int id;
+    private String nickname;
     //是否推荐、推荐为1，不推荐为0
     private int promoted;
     private String loginTime;
@@ -22,19 +22,19 @@ public class Teacher implements Serializable {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNickName() {
-        return nickName;
+        return nickname;
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName;
+        this.nickname = nickName;
     }
 
     public int getPromoted() {

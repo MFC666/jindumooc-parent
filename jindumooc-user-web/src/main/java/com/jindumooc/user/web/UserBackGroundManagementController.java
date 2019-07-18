@@ -180,4 +180,23 @@ public class UserBackGroundManagementController {
         return userBackGroundManagement.updateApproval(sm);
     }
 
+    /*
+    获取所有私信
+     */
+    @RequestMapping("/user/getAllMessages")
+    @ResponseBody
+    public List<Messages> getAllMessages(@RequestBody SearchMessage sm){
+
+        return userBackGroundManagement.getAllMessages(sm);
+    }
+
+    /*
+    删除私信
+     */
+    @RequestMapping("/user/delMessages")
+    @ResponseBody
+    public Boolean delMessages(@RequestBody List<Integer> idList){
+
+        return userBackGroundManagement.delMessages(idList);
+    }
 }

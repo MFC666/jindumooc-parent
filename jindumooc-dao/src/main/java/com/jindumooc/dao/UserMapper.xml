@@ -929,24 +929,16 @@
   <select id="getAllTeachers" parameterType="com.jindumooc.dto.SearchMessage" resultType="com.jindumooc.pojo.User" >
     SELECT u.id,u.nickname,u.loginarea,u.loginIp,u.loginTime,u.promoted
     FROM `user` u
-    where roles like '%ROLE_TEACHER%'
-    <if test="searchType != null" >
-      <where>
-        #{searchType} like '%#{searchParameter}%'
-        <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
-      </where>
-    </if>
+    <where>roles like '%ROLE_TEACHER%'
+    <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
+    </where>
   </select>
   <select id="getTeachersNum" parameterType="com.jindumooc.dto.SearchMessage" resultType="int" >
     SELECT count(*)
     FROM `user` u
-    where roles like '%ROLE_TEACHER%'
-    <if test="searchType != null" >
-      <where>
-        #{searchType} like '%#{searchParameter}%'
-        <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
-      </where>
-    </if>
+    <where>roles like '%ROLE_TEACHER%'
+      <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
+    </where>
   </select>
   <update id="updatePromoted" parameterType="com.jindumooc.dto.SearchMessage">
     update user

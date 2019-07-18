@@ -23,6 +23,27 @@ public class SearchMessage implements Serializable {
     private int promotedSeq;
     //实名制审核状态
     private String approvalStatus;
+    //搜索私信管理
+    //发信人昵称
+    private int fromId;
+    private String content;
+
+
+    public int getFromNickName() {
+        return fromId;
+    }
+
+    public void setFromNickName(int fromId) {
+        this.fromId = fromId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getApprovalStatus() {
         return approvalStatus;

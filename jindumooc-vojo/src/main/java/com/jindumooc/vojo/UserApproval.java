@@ -8,10 +8,10 @@ public class UserApproval implements Serializable {
 
     private int userId;
     private int id;
-    private String idCard;
+    private String idcard;
     private String faceImg;
     private String backImg;
-    private String trueName;
+    private String truename;
     private String note;
     private String status;
     private int operatorId;
@@ -52,11 +52,11 @@ public class UserApproval implements Serializable {
     }
 
     public String getIdCard() {
-        return idCard;
+        return idcard;
     }
 
     public void setIdCard(String idCard) {
-        this.idCard = idCard;
+        this.idcard = idCard;
     }
 
     public String getFaceImg() {
@@ -76,11 +76,11 @@ public class UserApproval implements Serializable {
     }
 
     public String getTrueName() {
-        return trueName;
+        return truename;
     }
 
     public void setTrueName(String trueName) {
-        this.trueName = trueName;
+        this.truename = trueName;
     }
 
     public String getNote() {

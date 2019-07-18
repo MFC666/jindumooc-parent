@@ -26,4 +26,8 @@ public interface UserBackGroundManagement {
     List<UserApproval> getUserApproval(SearchMessage sm);
 
     boolean updateApproval(SearchMessage sm);
+
+    List<Messages> getAllMessages(SearchMessage sm);
+
+    Boolean delMessages(List<Integer> idList);
 }
