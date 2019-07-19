@@ -24,7 +24,7 @@ public interface UserBackGroundManagement {
 
     boolean updatePromotedSeq(SearchMessage sm);
 
-    List<UserApproval> getUserApproval(SearchMessage sm);
+    List<UserApprovals> getUserApproval(SearchMessage sm);
 
     boolean updateApproval(SearchMessage sm);
 

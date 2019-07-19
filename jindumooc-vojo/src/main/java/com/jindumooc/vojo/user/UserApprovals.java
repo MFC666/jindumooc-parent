@@ -2,7 +2,7 @@ package com.jindumooc.vojo.user;
 
 import java.io.Serializable;
 
-public class UserApproval implements Serializable {
+public class UserApprovals implements Serializable {
 
     //用于储存申请实名认证的信息
 

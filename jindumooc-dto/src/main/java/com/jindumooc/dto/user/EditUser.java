@@ -8,11 +8,12 @@ public class EditUser implements Serializable {
 
     private int id;
 
-    private String trueName;
+    private String truename;
 
     private String gender;
 
     private String idcard;
+
 
     private String mobile;
 
@@ -34,20 +35,21 @@ public class EditUser implements Serializable {
 
     private String iam;
 
+    public String getTruename() {
+        return truename;
+    }
+
+    public void setTruename(String trueName) {
+        this.truename = trueName;
+    }
+
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTrueName() {
-        return trueName;
-    }
-
-    public void setTrueName(String trueName) {
-        this.trueName = trueName;
     }
 
     public String getGender() {

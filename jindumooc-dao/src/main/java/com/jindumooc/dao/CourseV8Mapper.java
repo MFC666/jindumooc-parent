@@ -1,9 +1,12 @@
 package com.jindumooc.dao;
 
+import com.jindumooc.dto.user.SearchMessage;
 import com.jindumooc.pojo.CourseV8;
 import com.jindumooc.pojo.CourseV8Example;
 import com.jindumooc.pojo.CourseV8WithBLOBs;
 import java.util.List;
+
+import com.jindumooc.vojo.user.TeachingCourse;
 import org.apache.ibatis.annotations.Param;
 
 public interface CourseV8Mapper {
@@ -34,4 +37,6 @@ public interface CourseV8Mapper {
     int updateByPrimaryKeyWithBLOBs(CourseV8WithBLOBs record);
 
     int updateByPrimaryKey(CourseV8 record);
+
+    List<TeachingCourse> getTeachingCourse(SearchMessage sm);
 }

@@ -165,9 +165,9 @@ public class UserBackGroundManagementController {
     /*
     进行实名认证
      */
-    @RequestMapping("/getUserApproval")
+    @RequestMapping("/user/getUserApproval")
     @ResponseBody
-    public List<UserApproval> getUserApproval(@RequestBody SearchMessage sm){
+    public List<UserApprovals> getUserApproval(@RequestBody SearchMessage sm){
         //获取实名认证信息，如果条件为空，则按页码进行全部搜索
 
         return userBackGroundManagement.getUserApproval(sm);
@@ -177,7 +177,7 @@ public class UserBackGroundManagementController {
     /*
     修改实名认证状态
      */
-    @RequestMapping("updateUserApproval")
+    @RequestMapping("/user/updateUserApproval")
     @ResponseBody
     public boolean updateUserApproval(@RequestBody SearchMessage sm){
 
@@ -211,7 +211,6 @@ public class UserBackGroundManagementController {
     @RequestMapping("/user/getUserDetail")
     @ResponseBody
     public UserDetail getUserDetail(@RequestBody SearchMessage sm){
-
         return userBackGroundManagement.getUserDetail(sm);
     }
 
@@ -220,7 +219,7 @@ public class UserBackGroundManagementController {
      */
     @RequestMapping("/user/updateUserDetail")
     @ResponseBody
-    public boolean updateUserDetail(EditUser editUser){
+    public boolean updateUserDetail(@RequestBody EditUser editUser){
 
         return userBackGroundManagement.updateUserDetail(editUser);
     }

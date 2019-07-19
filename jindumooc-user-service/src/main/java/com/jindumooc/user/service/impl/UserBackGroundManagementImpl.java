@@ -131,28 +131,28 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     获取用户实名制申请
      */
     @Override
-    public List<UserApproval> getUserApproval(SearchMessage sm) {
+    public List<UserApprovals> getUserApproval(SearchMessage sm) {
 
         PageHelper.startPage(sm.getPageNum(), sm.getPageSize());
-        List<com.jindumooc.pojo.UserApproval> approvalList = userApprovalMapper.getUserApproval(sm);
-        List<UserApproval> approvals = new ArrayList<>();
-        for (com.jindumooc.pojo.UserApproval approval : approvalList) {
-            UserApproval userApproval = new UserApproval();
-            userApproval.setId(approval.getId());
-            userApproval.setUserId(approval.getUserid());
-            userApproval.setIdCard(approval.getIdcard());
-            userApproval.setFaceImg(approval.getFaceimg());
-            userApproval.setBackImg(approval.getBackimg());
-            userApproval.setTrueName(approval.getTruename());
-            userApproval.setNote(approval.getNote());
-            userApproval.setStatus(approval.getStatus());
+        List<UserApproval> approvalList = userApprovalMapper.getUserApproval(sm);
+        List<UserApprovals> approvals = new ArrayList<>();
+        for (UserApproval approval : approvalList) {
+            UserApprovals userApprovals = new UserApprovals();
+            userApprovals.setId(approval.getId());
+            userApprovals.setUserId(approval.getUserid());
+            userApprovals.setIdCard(approval.getIdcard());
+            userApprovals.setFaceImg(approval.getFaceimg());
+            userApprovals.setBackImg(approval.getBackimg());
+            userApprovals.setTrueName(approval.getTruename());
+            userApprovals.setNote(approval.getNote());
+            userApprovals.setStatus(approval.getStatus());
             UserExample userExample = new UserExample();
             UserExample.Criteria criteria = userExample.createCriteria();
-            userApproval.setNickName(userMapper.getUserNickName(approval.getUserid()));
-            userApproval.setTotalApproval(userApprovalMapper.getTotalApproval(sm));
+            userApprovals.setNickName(userMapper.getUserNickName(approval.getUserid()));
+            userApprovals.setTotalApproval(userApprovalMapper.getTotalApproval(sm));
 
 
-            approvals.add(userApproval);
+            approvals.add(userApprovals);
         }
         return approvals;
     }

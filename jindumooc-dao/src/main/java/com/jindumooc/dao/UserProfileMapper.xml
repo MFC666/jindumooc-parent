@@ -1152,7 +1152,7 @@
       about = #{about,jdbcType=VARCHAR},
       signature = #{signature,jdbcType=VARCHAR},
       weixin = #{weixin,jdbcType=VARCHAR},
-      site = #{site,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
