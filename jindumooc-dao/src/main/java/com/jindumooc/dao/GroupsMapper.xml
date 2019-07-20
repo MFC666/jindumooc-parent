@@ -130,11 +130,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jindumooc.pojo.Groups" >
-    insert into groups (id, title, logo, 
+    insert into groups (title, logo,
       backgroundLogo, status, memberNum, 
       threadNum, postNum, ownerId, 
       createdTime, about)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+    values (#{title,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR},
       #{backgroundlogo,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{membernum,jdbcType=INTEGER}, 
       #{threadnum,jdbcType=INTEGER}, #{postnum,jdbcType=INTEGER}, #{ownerid,jdbcType=INTEGER}, 
       #{createdtime,jdbcType=INTEGER}, #{about,jdbcType=LONGVARCHAR})
