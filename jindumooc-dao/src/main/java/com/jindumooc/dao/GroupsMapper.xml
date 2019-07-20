@@ -355,13 +355,8 @@
       createdTime = #{createdtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-<<<<<<< HEAD
-  <select id="getIndexGroup" parameterType="com.jindumooc.dto.SearchGroup" resultType="com.jindumooc.pojo.Groups" >
-    SELECT *
-=======
   <select id="getIndexGroup" parameterType="com.jindumooc.dto.group.SearchGroup" resultType="com.jindumooc.pojo.Groups" >
-    SELECT g.id, g.title, g.logo, g.backgroundlogo, g.status, g.membernum, g.threadnum, g.postnum, g.ownerid, g.createdtime, g.about
->>>>>>> b012bc79e9eb05abb386170963c84f2c2712b226
+    SELECT *
     FROM `groups` g
   </select>
 </mapper>

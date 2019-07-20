@@ -1,7 +1,7 @@
 package com.jindumooc.group.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jindumooc.dto.SearchGroup;
+import com.jindumooc.dto.group.SearchGroup;
 import com.jindumooc.group.service.GroupBackGroundManagement;
 import com.jindumooc.vojo.ground.BackGroundIndexGroup;
 import org.springframework.stereotype.Controller;
