@@ -23,7 +23,7 @@ public class MyTeachingController {
     @RequestMapping("/user/getTeachingCourse")
     @ResponseBody
     public List<TeachingCourse> getTeachingCourse(SearchMessage sm){
-
+        sm.setTeacherId("|"+sm.getTeacherIds()+"|");
         return myTeaching.getTeachingCourse(sm);
     }
 }

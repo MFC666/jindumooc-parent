@@ -35,7 +35,8 @@ public class SearchMessage implements Serializable {
     private String content;
     //课程类型
     private String courseType;
-
+    private String teacherId;
+    private int teacherIds;
     //
 
 }
