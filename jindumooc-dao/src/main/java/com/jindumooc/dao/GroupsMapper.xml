@@ -1,135 +1,138 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jindumooc.dao.GroupsMapper" >
-  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Groups" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="logo" property="logo" jdbcType="VARCHAR" />
-    <result column="backgroundLogo" property="backgroundlogo" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="CHAR" />
-    <result column="memberNum" property="membernum" jdbcType="INTEGER" />
-    <result column="threadNum" property="threadnum" jdbcType="INTEGER" />
-    <result column="postNum" property="postnum" jdbcType="INTEGER" />
-    <result column="ownerId" property="ownerid" jdbcType="INTEGER" />
-    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.Groups" extends="BaseResultMap" >
-    <result column="about" property="about" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.jindumooc.dao.GroupsMapper">
+    <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Groups">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="logo" property="logo" jdbcType="VARCHAR"/>
+        <result column="backgroundLogo" property="backgroundlogo" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="memberNum" property="membernum" jdbcType="INTEGER"/>
+        <result column="threadNum" property="threadnum" jdbcType="INTEGER"/>
+        <result column="postNum" property="postnum" jdbcType="INTEGER"/>
+        <result column="ownerId" property="ownerid" jdbcType="INTEGER"/>
+        <result column="createdTime" property="createdtime" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.Groups" extends="BaseResultMap">
+        <result column="about" property="about" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, title, logo, backgroundLogo, status, memberNum, threadNum, postNum, ownerId, 
     createdTime
   </sql>
-  <sql id="Blob_Column_List" >
+    <sql id="Blob_Column_List">
     about
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.GroupsExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from groups
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.GroupsExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from groups
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from groups
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+            parameterType="com.jindumooc.pojo.GroupsExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from groups
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.GroupsExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from groups
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from groups
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from groups
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.GroupsExample" >
-    delete from groups
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.jindumooc.pojo.Groups" >
+    <delete id="deleteByExample" parameterType="com.jindumooc.pojo.GroupsExample">
+        delete from groups
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.jindumooc.pojo.Groups">
     insert into groups (title, logo,
       backgroundLogo, status, memberNum, 
       threadNum, postNum, ownerId, 
@@ -139,196 +142,196 @@
       #{threadnum,jdbcType=INTEGER}, #{postnum,jdbcType=INTEGER}, #{ownerid,jdbcType=INTEGER}, 
       #{createdtime,jdbcType=INTEGER}, #{about,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jindumooc.pojo.Groups" >
-    insert into groups
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="logo != null" >
-        logo,
-      </if>
-      <if test="backgroundlogo != null" >
-        backgroundLogo,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="membernum != null" >
-        memberNum,
-      </if>
-      <if test="threadnum != null" >
-        threadNum,
-      </if>
-      <if test="postnum != null" >
-        postNum,
-      </if>
-      <if test="ownerid != null" >
-        ownerId,
-      </if>
-      <if test="createdtime != null" >
-        createdTime,
-      </if>
-      <if test="about != null" >
-        about,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="logo != null" >
-        #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="backgroundlogo != null" >
-        #{backgroundlogo,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="membernum != null" >
-        #{membernum,jdbcType=INTEGER},
-      </if>
-      <if test="threadnum != null" >
-        #{threadnum,jdbcType=INTEGER},
-      </if>
-      <if test="postnum != null" >
-        #{postnum,jdbcType=INTEGER},
-      </if>
-      <if test="ownerid != null" >
-        #{ownerid,jdbcType=INTEGER},
-      </if>
-      <if test="createdtime != null" >
-        #{createdtime,jdbcType=INTEGER},
-      </if>
-      <if test="about != null" >
-        #{about,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.jindumooc.pojo.GroupsExample" resultType="java.lang.Integer" >
-    select count(*) from groups
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update groups
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.title != null" >
+    <insert id="insertSelective" parameterType="com.jindumooc.pojo.Groups">
+        insert into groups
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="logo != null">
+                logo,
+            </if>
+            <if test="backgroundlogo != null">
+                backgroundLogo,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="membernum != null">
+                memberNum,
+            </if>
+            <if test="threadnum != null">
+                threadNum,
+            </if>
+            <if test="postnum != null">
+                postNum,
+            </if>
+            <if test="ownerid != null">
+                ownerId,
+            </if>
+            <if test="createdtime != null">
+                createdTime,
+            </if>
+            <if test="about != null">
+                about,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="backgroundlogo != null">
+                #{backgroundlogo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="membernum != null">
+                #{membernum,jdbcType=INTEGER},
+            </if>
+            <if test="threadnum != null">
+                #{threadnum,jdbcType=INTEGER},
+            </if>
+            <if test="postnum != null">
+                #{postnum,jdbcType=INTEGER},
+            </if>
+            <if test="ownerid != null">
+                #{ownerid,jdbcType=INTEGER},
+            </if>
+            <if test="createdtime != null">
+                #{createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="about != null">
+                #{about,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.jindumooc.pojo.GroupsExample" resultType="java.lang.Integer">
+        select count(*) from groups
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update groups
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.logo != null">
+                logo = #{record.logo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.backgroundlogo != null">
+                backgroundLogo = #{record.backgroundlogo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=CHAR},
+            </if>
+            <if test="record.membernum != null">
+                memberNum = #{record.membernum,jdbcType=INTEGER},
+            </if>
+            <if test="record.threadnum != null">
+                threadNum = #{record.threadnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.postnum != null">
+                postNum = #{record.postnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.ownerid != null">
+                ownerId = #{record.ownerid,jdbcType=INTEGER},
+            </if>
+            <if test="record.createdtime != null">
+                createdTime = #{record.createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.about != null">
+                about = #{record.about,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update groups
+        set id = #{record.id,jdbcType=INTEGER},
         title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.logo != null" >
         logo = #{record.logo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.backgroundlogo != null" >
         backgroundLogo = #{record.backgroundlogo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null" >
         status = #{record.status,jdbcType=CHAR},
-      </if>
-      <if test="record.membernum != null" >
         memberNum = #{record.membernum,jdbcType=INTEGER},
-      </if>
-      <if test="record.threadnum != null" >
         threadNum = #{record.threadnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.postnum != null" >
         postNum = #{record.postnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.ownerid != null" >
         ownerId = #{record.ownerid,jdbcType=INTEGER},
-      </if>
-      <if test="record.createdtime != null" >
         createdTime = #{record.createdtime,jdbcType=INTEGER},
-      </if>
-      <if test="record.about != null" >
-        about = #{record.about,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update groups
-    set id = #{record.id,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      logo = #{record.logo,jdbcType=VARCHAR},
-      backgroundLogo = #{record.backgroundlogo,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=CHAR},
-      memberNum = #{record.membernum,jdbcType=INTEGER},
-      threadNum = #{record.threadnum,jdbcType=INTEGER},
-      postNum = #{record.postnum,jdbcType=INTEGER},
-      ownerId = #{record.ownerid,jdbcType=INTEGER},
-      createdTime = #{record.createdtime,jdbcType=INTEGER},
-      about = #{record.about,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update groups
-    set id = #{record.id,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      logo = #{record.logo,jdbcType=VARCHAR},
-      backgroundLogo = #{record.backgroundlogo,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=CHAR},
-      memberNum = #{record.membernum,jdbcType=INTEGER},
-      threadNum = #{record.threadnum,jdbcType=INTEGER},
-      postNum = #{record.postnum,jdbcType=INTEGER},
-      ownerId = #{record.ownerid,jdbcType=INTEGER},
-      createdTime = #{record.createdtime,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.Groups" >
-    update groups
-    <set >
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="logo != null" >
-        logo = #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="backgroundlogo != null" >
-        backgroundLogo = #{backgroundlogo,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="membernum != null" >
-        memberNum = #{membernum,jdbcType=INTEGER},
-      </if>
-      <if test="threadnum != null" >
-        threadNum = #{threadnum,jdbcType=INTEGER},
-      </if>
-      <if test="postnum != null" >
-        postNum = #{postnum,jdbcType=INTEGER},
-      </if>
-      <if test="ownerid != null" >
-        ownerId = #{ownerid,jdbcType=INTEGER},
-      </if>
-      <if test="createdtime != null" >
-        createdTime = #{createdtime,jdbcType=INTEGER},
-      </if>
-      <if test="about != null" >
-        about = #{about,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.Groups" >
+        about = #{record.about,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update groups
+        set id = #{record.id,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        logo = #{record.logo,jdbcType=VARCHAR},
+        backgroundLogo = #{record.backgroundlogo,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=CHAR},
+        memberNum = #{record.membernum,jdbcType=INTEGER},
+        threadNum = #{record.threadnum,jdbcType=INTEGER},
+        postNum = #{record.postnum,jdbcType=INTEGER},
+        ownerId = #{record.ownerid,jdbcType=INTEGER},
+        createdTime = #{record.createdtime,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.Groups">
+        update groups
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                logo = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="backgroundlogo != null">
+                backgroundLogo = #{backgroundlogo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="membernum != null">
+                memberNum = #{membernum,jdbcType=INTEGER},
+            </if>
+            <if test="threadnum != null">
+                threadNum = #{threadnum,jdbcType=INTEGER},
+            </if>
+            <if test="postnum != null">
+                postNum = #{postnum,jdbcType=INTEGER},
+            </if>
+            <if test="ownerid != null">
+                ownerId = #{ownerid,jdbcType=INTEGER},
+            </if>
+            <if test="createdtime != null">
+                createdTime = #{createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="about != null">
+                about = #{about,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.Groups">
     update groups
     set title = #{title,jdbcType=VARCHAR},
       logo = #{logo,jdbcType=VARCHAR},
@@ -342,7 +345,7 @@
       about = #{about,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Groups" >
+    <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Groups">
     update groups
     set title = #{title,jdbcType=VARCHAR},
       logo = #{logo,jdbcType=VARCHAR},
@@ -355,8 +358,14 @@
       createdTime = #{createdtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getIndexGroup" parameterType="com.jindumooc.dto.group.SearchGroup" resultType="com.jindumooc.pojo.Groups" >
+    <select id="getIndexGroup" parameterType="com.jindumooc.dto.group.SearchGroup"
+            resultType="com.jindumooc.pojo.Groups">
     SELECT *
     FROM `groups` g
   </select>
+    <update id="openGroupStatusByPrimaryKey" parameterType="java.lang.Integer">
+    update jindu.groups
+    set status = "open"
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

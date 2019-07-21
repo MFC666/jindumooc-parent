@@ -20,6 +20,7 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
 
     /**
      * 获取小组
+     *
      * @param searchGroup
      * @return
      */
@@ -32,6 +33,22 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
 
         //整理groupList填充BackgroundIndexGroup
         return getBackGroundIndexGroup(groupsList);
+    }
+
+    /**
+     * 根据小组ID打开小组
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean openGroupStatusByPrimaryKey(Integer id) {
+        try {
+            groupsMapper.openGroupStatusByPrimaryKey(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

@@ -12,4 +12,9 @@ public interface GroupBackGroundManagement {
      */
     List<BackGroundIndexGroup> getIndexGroup(SearchGroup searchGroup);
 
+    /**
+     * 根据小组ID打开小组
+     */
+    boolean openGroupStatusByPrimaryKey(Integer id);
+
 }

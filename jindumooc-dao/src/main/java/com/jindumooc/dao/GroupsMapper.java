@@ -3,7 +3,9 @@ package com.jindumooc.dao;
 import com.jindumooc.dto.group.SearchGroup;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.pojo.GroupsExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface GroupsMapper {
@@ -36,4 +38,6 @@ public interface GroupsMapper {
     int updateByPrimaryKey(Groups record);
 
     List<Groups> getIndexGroup(SearchGroup sg);
+
+    int openGroupStatusByPrimaryKey(Integer id);
 }
