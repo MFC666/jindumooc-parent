@@ -37,6 +37,7 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
 
     /**
      * 根据小组ID打开小组
+     *
      * @param id
      * @return
      */
@@ -44,6 +45,23 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     public boolean openGroupStatusByPrimaryKey(Integer id) {
         try {
             groupsMapper.openGroupStatusByPrimaryKey(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 根据小组ID关闭小组
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean closeGroupStatusByPrimaryKey(Integer id) {
+        try {
+            groupsMapper.closeGroupStatusByPrimaryKey(id);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

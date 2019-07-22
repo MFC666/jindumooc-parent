@@ -40,4 +40,6 @@ public interface GroupsMapper {
     List<Groups> getIndexGroup(SearchGroup sg);
 
     int openGroupStatusByPrimaryKey(Integer id);
+
+    int closeGroupStatusByPrimaryKey(Integer id);
 }

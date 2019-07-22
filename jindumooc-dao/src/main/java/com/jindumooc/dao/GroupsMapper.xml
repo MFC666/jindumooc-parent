@@ -365,7 +365,12 @@
   </select>
     <update id="openGroupStatusByPrimaryKey" parameterType="java.lang.Integer">
     update jindu.groups
-    set status = "open"
+    set status = 'open'
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <update id="closeGroupStatusByPrimaryKey" parameterType="java.lang.Integer">
+    update jindu.groups
+    set status = 'close'
+    where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

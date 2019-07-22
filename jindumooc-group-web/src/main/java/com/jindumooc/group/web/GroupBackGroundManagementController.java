@@ -28,4 +28,11 @@ public class GroupBackGroundManagementController {
     public boolean openGroupStatusByPrimaryKey(Integer id) {
         return groupBackGroundManagement.openGroupStatusByPrimaryKey(id);
     }
+
+    @RequestMapping("/closeGroup")
+    @ResponseBody
+    public boolean closeGroupStatusByPrimaryKey(Integer id) {
+        return groupBackGroundManagement.closeGroupStatusByPrimaryKey(id);
+    }
+
 }

@@ -17,4 +17,9 @@ public interface GroupBackGroundManagement {
      */
     boolean openGroupStatusByPrimaryKey(Integer id);
 
+    /**
+     * 根据小组ID关闭小组
+     */
+    boolean closeGroupStatusByPrimaryKey(Integer id);
+
 }
