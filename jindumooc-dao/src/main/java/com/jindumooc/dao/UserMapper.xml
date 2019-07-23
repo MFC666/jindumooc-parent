@@ -892,13 +892,12 @@
   <select id="getIndexUser" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.User" >
     SELECT *
     FROM `user` u
-    <if test="searchType != null" >
-      <where>
-        #{searchType} like '%#{searchParameter}%'
-        <if test="searchTimeType=='loginTime'">and r.loginTime &gt; #{starTime} and r.loginTime &lt; #{endTime}</if>
-        <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime} and r.createdTime &lt; #{endTime}</if>
-      </where>
-    </if>
+    <where>
+        <if test="searchParameter!=null">#{searchType} like '%${searchParameter}%'</if>
+        <if test="role!=null">and roles like '%${role}%'</if>
+        <if test="searchTimeType=='loginTime'">and r.loginTime &gt; #{starTime,jdbcType=int} and r.loginTime &lt; #{endTime,jdbcType=int}</if>
+        <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime,jdbcType=int} and r.createdTime &lt; #{endTime,jdbcType=int}</if>
+    </where>
   </select>
   <update id="lockedUser" parameterType="com.jindumooc.dto.user.SearchMessage">
     update user
@@ -918,13 +917,12 @@
   <select id="getUserNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
     SELECT count(*)
     FROM `user` u
-    <if test="searchType != null" >
-      <where>
-        #{searchType} like '%#{searchParameter}%'
-        <if test="searchTimeType=='loginTime'">and r.loginTime &gt; #{starTime} and r.loginTime &lt; #{endTime}</if>
-        <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime} and r.createdTime &lt; #{endTime}</if>
-      </where>
-    </if>
+    <where>
+      <if test="searchParameter!=null">#{searchType} like '%${searchParameter}%'</if>
+      <if test="role!=null">and roles like '%${role}%'</if>
+      <if test="searchTimeType=='loginTime'">and r.loginTime &gt; #{starTime,jdbcType=int} and r.loginTime &lt; #{endTime,jdbcType=int}</if>
+      <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime,jdbcType=int} and r.createdTime &lt; #{endTime,jdbcType=int}</if>
+    </where>
   </select>
   <select id="getAllTeachers" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.User" >
     SELECT u.id,u.nickname,u.loginarea,u.loginIp,u.loginTime,u.promoted

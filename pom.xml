@@ -47,7 +47,7 @@
         <http-client.version>4.5.2</http-client.version>
         <fast-json.version>1.2.23</fast-json.version>
         <poi-ooxml.version>3.17</poi-ooxml.version>
-        <projectlombok.version>1.16.22</projectlombok.version>
+        <projectlombok.version>1.18.8</projectlombok.version>
     </properties>
     <dependencies>
 
@@ -81,6 +81,7 @@
             <version>5.1.8.RELEASE</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>

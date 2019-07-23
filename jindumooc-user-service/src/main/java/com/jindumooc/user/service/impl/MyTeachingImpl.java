@@ -21,7 +21,6 @@ public class MyTeachingImpl implements MyTeaching {
     @Override
     public List<TeachingCourse> getTeachingCourse(SearchMessage sm) {
 
-
         return courseV8Mapper.getTeachingCourse(sm);
     }
 }

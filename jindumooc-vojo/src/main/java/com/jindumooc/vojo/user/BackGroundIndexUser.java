@@ -28,6 +28,108 @@ public class BackGroundIndexUser implements Serializable {
     private int totalUser;
     private List<String> roles;
 
+    public int getUserId() {
+        return userId;
+    }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public String getLoginIp() {
+        return loginIp;
+    }
+
+    public void setLoginIp(String loginIp) {
+        this.loginIp = loginIp;
+    }
+
+    public String getLoginIpArea() {
+        return loginIpArea;
+    }
+
+    public void setLoginIpArea(String loginIpArea) {
+        this.loginIpArea = loginIpArea;
+    }
+
+    public String getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(String loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public String getCreatIp() {
+        return creatIp;
+    }
+
+    public void setCreatIp(String creatIp) {
+        this.creatIp = creatIp;
+    }
+
+    public List<String> getRolesName() {
+        return rolesName;
+    }
+
+    public void setRolesName(List<String> rolesName) {
+        this.rolesName = rolesName;
+    }
+
+    public String getCreatIpArea() {
+        return creatIpArea;
+    }
+
+    public void setCreatIpArea(String creatIpArea) {
+        this.creatIpArea = creatIpArea;
+    }
+
+    public String getCreatTime() {
+        return creatTime;
+    }
+
+    public void setCreatTime(String creatTime) {
+        this.creatTime = creatTime;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public int getLocked() {
+        return locked;
+    }
+
+    public void setLocked(int locked) {
+        this.locked = locked;
+    }
+
+    public int getTotalUser() {
+        return totalUser;
+    }
+
+    public void setTotalUser(int totalUser) {
+        this.totalUser = totalUser;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 }
 

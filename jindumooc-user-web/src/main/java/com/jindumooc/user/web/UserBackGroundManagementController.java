@@ -46,10 +46,8 @@ public class UserBackGroundManagementController {
      */
     @RequestMapping("/user/lockedUser")
     @ResponseBody
-    public boolean lockedUser(@RequestBody int userId,int locked){
-        SearchMessage searchMessage = new SearchMessage();
-        searchMessage.setUserId(userId);
-        searchMessage.setLocked(locked);
+    public boolean lockedUser(@RequestBody SearchMessage searchMessage){
+
         return userBackGroundManagement.lokedUser(searchMessage);
     }
 
@@ -68,10 +66,7 @@ public class UserBackGroundManagementController {
      */
     @RequestMapping("/user/updateUserRole")
     @ResponseBody
-    public boolean updateUserRole(@RequestBody String newRole,int userId){
-        SearchMessage searchMessage = new SearchMessage();
-        searchMessage.setUserId(userId);
-        searchMessage.setNewRole(newRole);
+    public boolean updateUserRole(@RequestBody SearchMessage searchMessage){
 
         return userBackGroundManagement.updateUserRole(searchMessage);
     }
