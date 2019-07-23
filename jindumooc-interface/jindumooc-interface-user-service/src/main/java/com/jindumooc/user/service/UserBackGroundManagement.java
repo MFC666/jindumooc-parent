@@ -1,7 +1,6 @@
 package com.jindumooc.user.service;
 
-import com.jindumooc.dto.user.EditUser;
-import com.jindumooc.dto.user.SearchMessage;
+import com.jindumooc.dto.user.*;
 import com.jindumooc.vojo.user.*;
 
 import java.util.*;
@@ -10,29 +9,31 @@ public interface UserBackGroundManagement {
 
     List<BackGroundIndexUser> getIndexUser(SearchMessage sm);
 
-    boolean lokedUser(SearchMessage searchMessage);
+    boolean lokedUser(LockUser lockUser);
 
     List<AllRoles> getAllRoles();
 
-    boolean updateUserRole(SearchMessage searchMessage);
+    boolean updateUserRole(UserRole userRole);
 
-    List<UserDataStatistics> getUserDataStatistics(SearchMessage sm);
+    List<UserDataStatistics> getUserDataStatisticsList(int pageNum,int pageSize);
 
-    List<Teacher> getAllTeachers(SearchMessage sm);
+    List<Teacher> getAllTeachers(int pageNum,int pageSize,String nickName);
 
-    boolean updatePromoted(SearchMessage sm);
+    boolean updatePromoted(TeacherPromoted teacherPromoted);
 
-    boolean updatePromotedSeq(SearchMessage sm);
+    boolean updatePromotedSeq(TeacherPromoted teacherPromoted);
 
     List<UserApprovals> getUserApproval(SearchMessage sm);
 
-    boolean updateApproval(SearchMessage sm);
+    boolean updateApproval(ApprovalUser approvalUser);
 
     List<Messages> getAllMessages(SearchMessage sm);
 
     Boolean delMessages(List<Integer> idList);
 
-    UserDetail getUserDetail(SearchMessage sm);
+    UserDetail getUserDetail(int UserId);
 
     boolean updateUserDetail(EditUser editUser);
+
+    List<UserDataStatistics> searchUserDataStatisticsByNickName(int pageNum, int pageSize, String nickName);
 }

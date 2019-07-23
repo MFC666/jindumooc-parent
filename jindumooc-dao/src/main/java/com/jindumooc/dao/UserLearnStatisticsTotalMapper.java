@@ -4,6 +4,8 @@ import com.jindumooc.dto.user.SearchMessage;
 import com.jindumooc.pojo.UserLearnStatisticsTotal;
 import com.jindumooc.pojo.UserLearnStatisticsTotalExample;
 import java.util.List;
+
+import com.jindumooc.vojo.user.UserDataStatistics;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserLearnStatisticsTotalMapper {
@@ -29,7 +31,7 @@ public interface UserLearnStatisticsTotalMapper {
 
     int updateByPrimaryKey(UserLearnStatisticsTotal record);
 
-    List<UserLearnStatisticsTotal> getUserDataStatistrics(SearchMessage sm);
+    List<UserDataStatistics> getUserDataStatistricsList();
 
-    int getUserNum(SearchMessage sm);
+    List<UserDataStatistics> getUserDataStatistricsByNickName(String nickName);
 }

@@ -1,11 +1,16 @@
 package com.jindumooc.dao;
 
+import com.jindumooc.dto.user.LockUser;
+import com.jindumooc.dto.user.TeacherPromoted;
+import com.jindumooc.dto.user.UserRole;
 import com.jindumooc.pojo.User;
 import com.jindumooc.pojo.UserExample;
 import java.util.List;
 
 import com.jindumooc.dto.user.SearchMessage;
+import com.jindumooc.vojo.user.Teacher;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestBody;
 
 public interface UserMapper {
     int countByExample(UserExample example);
@@ -35,19 +40,17 @@ public interface UserMapper {
 
     List<User> searchIndexUserByTime(SearchMessage sm);
 
-    void lockedUser(SearchMessage searchMessage);
+    void lockedUser(LockUser lockUser);
 
-    void updateUserRole(SearchMessage searchMessage);
+    void updateUserRole(UserRole userRole);
 
     String getUserNickName(Integer id);
 
     int getUserNum(SearchMessage sm);
 
-    List<User> getAllTeachers(SearchMessage sm);
+    List<Teacher> getAllTeachers(String nickName);
 
-    int getTeachersNum(SearchMessage sm);
+    void updatePromoted(TeacherPromoted teacherPromoted);
 
-    void updatePromoted(SearchMessage sm);
-
-    void updatePromotedSeq(SearchMessage sm);
+    void updatePromotedSeq(TeacherPromoted teacherPromoted);
 }

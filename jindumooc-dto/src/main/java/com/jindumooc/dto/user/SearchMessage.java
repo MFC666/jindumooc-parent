@@ -20,16 +20,8 @@ public class SearchMessage implements Serializable {
     private String searchTimeType;
     private Long starTime;
     private Long endTime;
-    //锁定用户
-    private int locked;
-    //设置角色
-    private String role;
-    private String newRole;
-    //设置推荐
-    private int promoted;
-    private int promotedSeq;
-    //实名制审核状态
-    private String approvalStatus;
+
+
     //搜索私信管理
     //发信人昵称
     private int fromId;
@@ -101,54 +93,6 @@ public class SearchMessage implements Serializable {
 
     public void setEndTime(Long endTime) {
         this.endTime = endTime;
-    }
-
-    public int getLocked() {
-        return locked;
-    }
-
-    public void setLocked(int locked) {
-        this.locked = locked;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getNewRole() {
-        return newRole;
-    }
-
-    public void setNewRole(String newRole) {
-        this.newRole = newRole;
-    }
-
-    public int getPromoted() {
-        return promoted;
-    }
-
-    public void setPromoted(int promoted) {
-        this.promoted = promoted;
-    }
-
-    public int getPromotedSeq() {
-        return promotedSeq;
-    }
-
-    public void setPromotedSeq(int promotedSeq) {
-        this.promotedSeq = promotedSeq;
-    }
-
-    public String getApprovalStatus() {
-        return approvalStatus;
-    }
-
-    public void setApprovalStatus(String approvalStatus) {
-        this.approvalStatus = approvalStatus;
     }
 
     public int getFromId() {

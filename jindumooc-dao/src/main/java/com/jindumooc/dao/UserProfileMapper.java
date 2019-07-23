@@ -39,7 +39,7 @@ public interface UserProfileMapper {
 
     int updateByPrimaryKey(UserProfile record);
 
-    UserDetail getUserDetail(SearchMessage sm);
+    UserDetail getUserDetail(int userId);
 
     void updateUserDetail(EditUser editUser);
 }

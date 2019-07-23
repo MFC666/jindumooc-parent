@@ -1,16 +1,12 @@
 package com.jindumooc.user.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jindumooc.dto.user.EditUser;
+import com.jindumooc.dto.user.*;
 import com.jindumooc.user.service.UserBackGroundManagement;
-import com.jindumooc.dto.user.SearchMessage;
 import com.jindumooc.vojo.user.*;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,74 +24,100 @@ public class UserBackGroundManagementController {
     @Reference
     private UserBackGroundManagement userBackGroundManagement;
 
-    /*获取后台管理中用户管理的首页用户、搜索用户
-        pageNum:页码
-        pageSize：每页大小
-        searchType：搜索类型
-        searchParameter：搜索数d据
-        获取首页用户时type和parameter为null
+    /**
+     *
+     * 参数过多采用post请求
+     * @param sm 获取后台管理中用户管理的首页用户、搜索用户
+     * @return
      */
-    @RequestMapping("/user/getIndexUser")
+    @PostMapping("/user/getIndexUser")
     @ResponseBody
     public List<BackGroundIndexUser> getIndexUser(@RequestBody SearchMessage sm)
     {
         return userBackGroundManagement.getIndexUser(sm);
     }
 
-    /*
-    封禁用户
+    /**
+     * 封禁用户
+     * @param lockMessage 填写封禁用户信息
+     * @return
      */
-    @RequestMapping("/user/lockedUser")
+    @PutMapping("/user/lockedUser")
     @ResponseBody
-    public boolean lockedUser(@RequestBody SearchMessage searchMessage){
+    public boolean lockedUser(@RequestBody LockUser lockMessage){
 
-        return userBackGroundManagement.lokedUser(searchMessage);
+        return userBackGroundManagement.lokedUser(lockMessage);
     }
 
-    /*
-    获取所有用户组类型
+    /**
+     * 获取所有用户组名
+     * @return
      */
-    @RequestMapping("/user/getAllRoles")
+    @GetMapping("/user/getAllRoles")
     @ResponseBody
     public List<AllRoles> getAllRoles(){
 
         return userBackGroundManagement.getAllRoles();
     }
 
-    /*
-    更新用户
+    /**
+     * 更新用户的用户组
+     * @param userRole
+     * @return
      */
-    @RequestMapping("/user/updateUserRole")
+    @PutMapping("/user/updateUserRole")
     @ResponseBody
-    public boolean updateUserRole(@RequestBody SearchMessage searchMessage){
+    public boolean updateUserRole(@RequestBody UserRole userRole){
 
-        return userBackGroundManagement.updateUserRole(searchMessage);
+        return userBackGroundManagement.updateUserRole(userRole);
     }
 
-    /*
-        用户数据统计
-        searchParameter：用户名，默认null
-        pageSize：每页用户数
-        pageNum：页码
+    /**
+     * 获取用户数据统计
+     * @param pageNum
+     * @param pageSize
+     * @return
      */
-    @RequestMapping("/user/getUserDataStatistics")
+    @GetMapping("/user/getUserDataStatisticsList")
     @ResponseBody
-    public List<UserDataStatistics> getUserDataStatistics(@RequestBody SearchMessage sm){
-        return userBackGroundManagement.getUserDataStatistics(sm);
+    public List<UserDataStatistics> getUserDataStatisticsList(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "10") int pageSize){
+        return userBackGroundManagement.getUserDataStatisticsList(pageNum,pageSize);
 
     }
 
-    /*
-    测试下载Excel表格，搜索用户的功能
+    /**
+     * 搜索用户数据
+     * @param pageNum
+     * @param pageSize
+     * @param nickName
+     * @return
      */
-
-    @RequestMapping("/user/exportDataStatistics")
+    @GetMapping("/user/searchUserDataStatistics")
     @ResponseBody
-    public void exportDataStatistics(@RequestBody SearchMessage sm,HttpServletResponse response) throws IOException {
+    public List<UserDataStatistics> searchUserDataStatistics(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "10")int pageSize,@RequestParam String nickName){
+        return userBackGroundManagement.searchUserDataStatisticsByNickName(pageNum,pageSize,nickName);
+
+    }
+
+    /**
+     * 导出用户数据Excel
+     * @param
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("/user/exportDataStatistics")
+    @ResponseBody
+    public void exportDataStatistics(@RequestParam(defaultValue = " ") String nickName,HttpServletResponse response) throws IOException {
 
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("用户数据统计");
-        List<UserDataStatistics> userDataStatisticsList = userBackGroundManagement.getUserDataStatistics(sm);
+        List<UserDataStatistics> userDataStatisticsList = new ArrayList<>();
+        if(" "==nickName){
+            userDataStatisticsList = userBackGroundManagement.getUserDataStatisticsList(0,0);
+        }else{
+            userDataStatisticsList = userBackGroundManagement.searchUserDataStatisticsByNickName(0,0,nickName);
+        }
+
 
         String fileName = "DataStatistics.xls";
         int rowNum = 1;
@@ -127,40 +150,43 @@ public class UserBackGroundManagementController {
         workbook.write(response.getOutputStream());
     }
 
-    /*
-      搜索所有教师
+    /**
+     * 搜索教师
+     * @param nickName 用户名
+     * @return
      */
-    @RequestMapping("/user/getAllTeachers")
+    @GetMapping("/user/getAllTeachers")
     @ResponseBody
-    public List<Teacher> getAllTeachers(@RequestBody SearchMessage sm){
+    public List<Teacher> getAllTeachers(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "10") int pageSize,@RequestParam(defaultValue = "") String nickName){
 
-        return userBackGroundManagement.getAllTeachers(sm);
+        return userBackGroundManagement.getAllTeachers(pageNum,pageSize,nickName);
     }
 
-    /*
-    更改是否推荐
+    /**
+     *设置推荐教师
+     * @param teacherPromoted
+     * @return
      */
-    @RequestMapping("/user/updatePromoted")
+    @PutMapping("/user/updatePromoted")
     @ResponseBody
-    public boolean updatePromoted(@RequestBody SearchMessage sm){
+    public boolean updatePromoted(@RequestBody TeacherPromoted teacherPromoted){
 
-        return userBackGroundManagement.updatePromoted(sm);
+        return userBackGroundManagement.updatePromoted(teacherPromoted);
     }
 
-    /*
-    设置推荐序号
-     */
-    @RequestMapping("/user/updatePromotedSeq")
+    @PutMapping("/user/updatePromotedSeq")
     @ResponseBody
-    public boolean updatePromotedSeq(@RequestBody SearchMessage sm){
+    public boolean updatePromotedSeq(@RequestBody TeacherPromoted teacherPromoted){
 
-        return userBackGroundManagement.updatePromotedSeq(sm);
+        return userBackGroundManagement.updatePromotedSeq(teacherPromoted);
     }
 
-    /*
-    进行实名认证
+    /**
+     * 搜索用户实名验证信息，参数过多采用post请求
+     * @param sm
+     * @return
      */
-    @RequestMapping("/user/getUserApproval")
+    @PostMapping("/user/getUserApproval")
     @ResponseBody
     public List<UserApprovals> getUserApproval(@RequestBody SearchMessage sm){
         //获取实名认证信息，如果条件为空，则按页码进行全部搜索
@@ -169,48 +195,58 @@ public class UserBackGroundManagementController {
 
     }
 
-    /*
-    修改实名认证状态
+    /**
+     * 修改用户实名认证信息
+     * @param userApproval
+     * @return
      */
-    @RequestMapping("/user/updateUserApproval")
+    @PutMapping("/user/updateUserApproval")
     @ResponseBody
-    public boolean updateUserApproval(@RequestBody SearchMessage sm){
+    public boolean updateUserApproval(@RequestBody ApprovalUser userApproval){
 
 
-        return userBackGroundManagement.updateApproval(sm);
+        return userBackGroundManagement.updateApproval(userApproval);
     }
 
-    /*
-    获取所有私信
+    /**
+     * 获取所有私信
+     * @param sm
+     * @return
      */
-    @RequestMapping("/user/getAllMessages")
+    @PostMapping("/user/getAllMessages")
     @ResponseBody
     public List<Messages> getAllMessages(@RequestBody SearchMessage sm){
 
         return userBackGroundManagement.getAllMessages(sm);
     }
 
-    /*
-    删除私信
+    /**
+     * 删除私信
+     * @param idList
+     * @return
      */
-    @RequestMapping("/user/delMessages")
+    @DeleteMapping("/user/delMessages")
     @ResponseBody
-    public Boolean delMessages(@RequestBody List<Integer> idList){
+    public Boolean delMessages(@RequestParam List<Integer> idList){
 
         return userBackGroundManagement.delMessages(idList);
     }
 
-    /*
-    查看个人详细信息
+    /**
+     * 查看用户详情
+     * @param
+     * @return
      */
-    @RequestMapping("/user/getUserDetail")
+    @GetMapping("/user/getUserDetail")
     @ResponseBody
-    public UserDetail getUserDetail(@RequestBody SearchMessage sm){
-        return userBackGroundManagement.getUserDetail(sm);
+    public UserDetail getUserDetail(@RequestParam(defaultValue = "0") int userId){
+        return userBackGroundManagement.getUserDetail(userId);
     }
 
-    /*
-    编辑用户详细信息
+    /**
+     * 编辑用户信息
+     * @param editUser
+     * @return
      */
     @RequestMapping("/user/updateUserDetail")
     @ResponseBody

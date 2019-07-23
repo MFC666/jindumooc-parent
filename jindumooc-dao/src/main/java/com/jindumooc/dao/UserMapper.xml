@@ -899,12 +899,12 @@
         <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime,jdbcType=int} and r.createdTime &lt; #{endTime,jdbcType=int}</if>
     </where>
   </select>
-  <update id="lockedUser" parameterType="com.jindumooc.dto.user.SearchMessage">
+  <update id="lockedUser" parameterType="com.jindumooc.dto.user.LockUser">
     update user
     set locked = #{locked}
     where id = #{userId}
   </update>
-  <update id="updateUserRole" parameterType="com.jindumooc.dto.user.SearchMessage">
+  <update id="updateUserRole" parameterType="com.jindumooc.dto.user.UserRole">
     update user
     set roles = #{newRole}
     where id = #{userId}
@@ -924,20 +924,22 @@
       <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime,jdbcType=int} and r.createdTime &lt; #{endTime,jdbcType=int}</if>
     </where>
   </select>
-  <select id="getAllTeachers" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.User" >
-    SELECT u.id,u.nickname,u.loginarea,u.loginIp,u.loginTime,u.promoted
+  <select id="getAllTeachers" parameterType="com.jindumooc.dto.user.SearchMessage" resultMap="getAllTeacher" >
+    SELECT count(*) as total,u.id,u.nickname,u.loginarea,u.loginIp,u.loginTime,u.promoted
     FROM `user` u
     <where>roles like '%ROLE_TEACHER%'
     <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
     </where>
   </select>
-  <select id="getTeachersNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
-    SELECT count(*)
-    FROM `user` u
-    <where>roles like '%ROLE_TEACHER%'
-      <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
-    </where>
-  </select>
+  <resultMap id="getAllTeacher" type="com.jindumooc.vojo.user.Teacher">
+    <result property="id" column="id" />
+    <result property="nickName" column="nickname" />
+    <result property="promoted" column="promoted" />
+    <result property="loginTime" column="loginTime" />
+    <result property="loginIp" column="loginIp" />
+    <result property="loginarea" column="loginarea" />
+    <result property="totalNum" column="total" />
+  </resultMap>
   <update id="updatePromoted" parameterType="com.jindumooc.dto.user.SearchMessage">
     update user
     set promoted = #{promoted}

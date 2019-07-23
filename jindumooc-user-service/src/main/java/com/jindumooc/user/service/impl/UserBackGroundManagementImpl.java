@@ -2,11 +2,10 @@ package com.jindumooc.user.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.*;
-import com.jindumooc.dto.user.EditUser;
+import com.jindumooc.dto.user.*;
 import com.jindumooc.pojo.*;
 import com.jindumooc.pojo.UserApproval;
 import com.jindumooc.user.service.UserBackGroundManagement;
-import com.jindumooc.dto.user.SearchMessage;
 import com.jindumooc.vojo.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,8 +43,12 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
 
     //封禁用户
     @Override
-    public boolean lokedUser(SearchMessage searchMessage) {
-        userMapper.lockedUser(searchMessage);
+    public boolean lokedUser(LockUser lockUser) {
+        try{
+            userMapper.lockedUser(lockUser);
+        }catch (Exception e){
+            return false;
+        }
         return true;
     }
 
@@ -69,66 +72,76 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
 
     //更新用户的用户组
     @Override
-    public boolean updateUserRole(SearchMessage searchMessage) {
+    public boolean updateUserRole(UserRole userRole) {
 
-        userMapper.updateUserRole(searchMessage);
+        userMapper.updateUserRole(userRole);
         return true;
     }
 
-    //获取用户数据统计
+    /**
+     * 获取用户统计信息
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Override
-    public List<UserDataStatistics> getUserDataStatistics(SearchMessage sm) {
-        List<UserLearnStatisticsTotal> statisticsList = new ArrayList<UserLearnStatisticsTotal>();
-        PageHelper.startPage(sm.getPageNum(), sm.getPageSize());
-        statisticsList = userLearnStatisticsTotalMapper.getUserDataStatistrics(sm);
-        List<UserDataStatistics> userDataStatisticsList = new ArrayList<>();
-
-        int count = userLearnStatisticsTotalMapper.getUserNum(sm);
-
-        if (statisticsList.get(0).getId() != 0) {
-            for (UserLearnStatisticsTotal userL : statisticsList) {
-
-                UserDataStatistics userDataStatistics = new UserDataStatistics();
-                userDataStatistics.setTotalNum(count);
-                userDataStatistics.setUserId(userL.getId());
-                userDataStatistics.setNickName(userMapper.getUserNickName(userL.getId()));
-                userDataStatistics.setFinishedTaskNum(userL.getFinishedtasknum());
-                userDataStatistics.setLearnedSeconds(userL.getLearnedseconds());
-                userDataStatistics.setJoinedCourseNum(userL.getJoinedcoursenum());
-                userDataStatistics.setExitCourseNum(userL.getExitcoursenum());
-                userDataStatistics.setJoinedClassroomNum(userL.getJoinedclassroomnum());
-                userDataStatistics.setExitClassroomNum(userL.getExitclassroomnum());
-
-                userDataStatisticsList.add(userDataStatistics);
-            }
+    public List<UserDataStatistics> getUserDataStatisticsList(int pageNum,int pageSize) {
+        List<UserDataStatistics> statisticsList = new ArrayList<UserDataStatistics>();
+        if(pageNum == 0){
+            statisticsList = userLearnStatisticsTotalMapper.getUserDataStatistricsList();
+        }else{
+            PageHelper.startPage(pageNum, pageSize);
+            statisticsList = userLearnStatisticsTotalMapper.getUserDataStatistricsList();
         }
-        return userDataStatisticsList;
+        return statisticsList;
+    }
+    @Override
+    public List<UserDataStatistics> searchUserDataStatisticsByNickName(int pageNum, int pageSize, String nickName) {
+        List<UserDataStatistics> statisticsList = new ArrayList<UserDataStatistics>();
+        if(pageNum == 0){
+            statisticsList = userLearnStatisticsTotalMapper.getUserDataStatistricsByNickName(nickName);
+        }else{
+            PageHelper.startPage(pageNum, pageSize);
+            statisticsList = userLearnStatisticsTotalMapper.getUserDataStatistricsByNickName(nickName);
+        }
+
+        return statisticsList;
     }
 
+    /**
+     *获取搜索教师
+     * @param nickName
+     * @return
+     */
     @Override
-    public List<Teacher> getAllTeachers(SearchMessage sm) {
-        sm.setRole("ROLE_TEACHER");
-        List<User> userList = new ArrayList<>();
-        userList = userMapper.getAllTeachers(sm);
-        int count = userMapper.getTeachersNum(sm);
-        return getTeachersList(userList, count);
+    public List<Teacher> getAllTeachers(int pageNum,int pageSize,String nickName) {
+        List<Teacher> teacherList = new ArrayList<>();
+        teacherList = userMapper.getAllTeachers(nickName);
+        return teacherList;
     }
 
+    /**
+     * 设置教师推荐相关信息
+     * @param
+     * @return
+     */
     @Override
-    public boolean updatePromoted(SearchMessage sm) {
-        userMapper.updatePromoted(sm);
+    public boolean updatePromoted(TeacherPromoted teacherPromoted) {
+        userMapper.updatePromoted(teacherPromoted);
         return true;
     }
 
     @Override
-    public boolean updatePromotedSeq(SearchMessage sm) {
+    public boolean updatePromotedSeq(TeacherPromoted teacherPromoted) {
 
-        userMapper.updatePromotedSeq(sm);
+        userMapper.updatePromotedSeq(teacherPromoted);
         return true;
     }
 
-    /*
-    获取用户实名制申请
+    /**
+     * 获取用户实名制
+     * @param sm
+     * @return
      */
     @Override
     public List<UserApprovals> getUserApproval(SearchMessage sm) {
@@ -158,24 +171,26 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     }
 
     @Override
-    public boolean updateApproval(SearchMessage sm) {
+    public boolean updateApproval(ApprovalUser approvalUser) {
 
         //获取修改时间
         Date date = new Date();
 
         UserApprovalExample userApprovalExample = new UserApprovalExample();
         UserApprovalExample.Criteria criteria = userApprovalExample.createCriteria();
-        criteria.andUseridEqualTo(sm.getUserId());
+        criteria.andUseridEqualTo(approvalUser.getUserId());
         com.jindumooc.pojo.UserApproval userApproval = new com.jindumooc.pojo.UserApproval();
-        userApproval.setStatus(sm.getApprovalStatus());
+        userApproval.setStatus(approvalUser.getApprovalStatus());
         userApproval.setCreatedtime(new Integer(new Long(date.getTime()).intValue()));
         userApprovalMapper.updateByExampleSelective(userApproval, userApprovalExample);
 
         return true;
     }
 
-    /*
-    获取私信
+    /**
+     * 获取私信
+     * @param sm
+     * @return
      */
     @Override
     public List<Messages> getAllMessages(SearchMessage sm) {
@@ -214,12 +229,17 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
         return true;
     }
 
+    /**
+     * 获取用户详情
+     * @param userId 用户编号
+     * @return
+     */
     @Override
-    public UserDetail getUserDetail(SearchMessage sm) {
+    public UserDetail getUserDetail(int userId) {
 
         UserDetail userDetail = new UserDetail();
 
-        userDetail = userProfileMapper.getUserDetail(sm);
+        userDetail = userProfileMapper.getUserDetail(userId);
         if(userDetail!=null){
             if (userDetail.getIsqqpublic() == 0) {
                 userDetail.setQq("秘密");
@@ -235,11 +255,14 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
 
             userDetail.setRolesName(divisionRoleCode(userDetail.getRoles()));
         }
-
-
         return userDetail;
     }
 
+    /**
+     * 编辑用户详情信息
+     * @param editUser
+     * @return
+     */
     @Override
     public boolean updateUserDetail(EditUser editUser) {
 
@@ -247,31 +270,12 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
         return true;
     }
 
-    /*
-    删除私信
+    /**
+     * 根据获取的userList构造BackGroundindexUserList
+     * @param userList
+     * @param count
+     * @return
      */
-
-
-    //根据获取的userList构造teacherlist
-    private List<Teacher> getTeachersList(List<User> userList, int count) {
-        List<Teacher> teacherList = new ArrayList<>();
-        for (User user : userList) {
-            Teacher teacher = new Teacher();
-            teacher.setId(user.getId());
-            teacher.setLoginArea(user.getLoginarea());
-            teacher.setNickName(user.getNickname());
-            teacher.setPromoted(user.getPromoted());
-            teacher.setTotalNum(count);
-            Date date = new Date(user.getLogintime());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            teacher.setLoginTime(sdf.format(date));
-
-            teacherList.add(teacher);
-        }
-        return teacherList;
-    }
-
-    //根据获取的userList构造BackGroundindexUserList
     public List<BackGroundIndexUser> getBackGroundIndexUser(List<User> userList, int count) {
         List<BackGroundIndexUser> bUserList = new ArrayList<>();
         if (userList.get(0).getId() != null) {
@@ -302,7 +306,8 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
         return bUserList;
     }
 
-    /*
+    /**
+     *
     integer类型的时间转化为String
      */
     public String typeConversion(Integer OldTime) {
@@ -312,7 +317,7 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
         return s;
 
     }
-    /*
+    /**
     根据角色code获取rolename
      */
     public List<String> divisionRoleCode(String roleCode){
