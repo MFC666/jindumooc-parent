@@ -373,4 +373,38 @@
     set status = 'close'
     where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="avgThreadNum" parameterType="java.lang.Integer">
+        select avg(threadNum)
+        from jindu.groups
+    </select>
+    <update id="setEliteGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups
+        set isElite = 1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setNotEliteGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups
+        set isElite = 0
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setStickGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups
+        set isStick = 1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setNotStickGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups
+        set isStick = 0
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="openGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups
+        set status = 'open'
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="closeGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups
+        set status = 'close'
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

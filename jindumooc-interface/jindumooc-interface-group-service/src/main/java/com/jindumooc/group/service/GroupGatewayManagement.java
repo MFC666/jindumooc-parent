@@ -1,6 +1,11 @@
 package com.jindumooc.group.service;
 
+import com.jindumooc.dto.group.GroupIdDTO;
 import com.jindumooc.pojo.Groups;
+import com.jindumooc.vojo.group.GroupIntroduction;
+import com.jindumooc.vojo.group.GroupShow;
+
+import java.util.List;
 
 /**
  * 小组前台门口控制功能接口
@@ -26,4 +31,18 @@ public interface GroupGatewayManagement {
      */
     boolean deleteGroup(Integer groupID);
 
+    /**
+     * 根据小组ID返回Json格式小组组名与介绍
+     *
+     * @param groupIdDTO
+     * @return
+     */
+    GroupIntroduction showGroupIntroduction(GroupIdDTO groupIdDTO);
+
+    /**
+     * 展示所有热门小组的小组名与小组logo
+     *
+     * @return
+     */
+    List<GroupShow> showAllGroup();
 }

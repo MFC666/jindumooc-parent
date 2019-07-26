@@ -3,13 +3,20 @@ package com.jindumooc.group.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.GroupsMapper;
+import com.jindumooc.dao.GroupsThreadMapper;
+import com.jindumooc.dao.UserMapper;
+import com.jindumooc.dto.group.GroupThreadIdDTO;
 import com.jindumooc.group.service.GroupBackGroundManagement;
-import com.jindumooc.pojo.Groups;
-import com.jindumooc.vojo.ground.BackGroundIndexGroup;
+import com.jindumooc.pojo.*;
+import com.jindumooc.vojo.group.BackGroundIndexGroup;
+import com.jindumooc.vojo.group.GroupThreadShow;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.jindumooc.dto.group.SearchGroup;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,6 +24,12 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
 
     @Autowired
     private GroupsMapper groupsMapper;
+
+    @Autowired
+    private GroupsThreadMapper groupsThreadMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 获取小组
@@ -68,6 +81,178 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
             return false;
         }
     }
+
+    /**
+     * 展示所有话题
+     *
+     * @return
+     */
+    @Override
+    public List<GroupThreadShow> showAllThread() {
+        try {
+            List<GroupThreadShow> groupThreadShows = new ArrayList<>();
+            GroupsThreadExample groupsThreadExample = new GroupsThreadExample();
+            List<GroupsThread> threads = groupsThreadMapper.selectByExample(groupsThreadExample);
+            for (GroupsThread thread :
+                    threads) {
+                GroupThreadShow groupThreadShow = new GroupThreadShow();
+                int groupId = thread.getGroupid();
+                int userID = thread.getUserid();
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                long createdTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                String createdTimeStr = dateFormat.format(createdTimeLong);
+                Date createdTimeDate = dateFormat.parse(createdTimeStr);
+
+                long updatedTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                String updatedTimeStr = dateFormat.format(updatedTimeLong);
+                Date updatedTimeDate = dateFormat.parse(updatedTimeStr);
+
+
+                groupThreadShow.setCreatedTime(createdTimeDate);
+                groupThreadShow.setUpdatedTime(updatedTimeDate);
+                groupThreadShow.setStatus(thread.getStatus());
+                groupThreadShow.setThreadContent(thread.getContent());
+                groupThreadShow.setThreadID(thread.getId());
+                groupThreadShow.setThreadTitle(thread.getTitle());
+                groupThreadShow.setIsElite(thread.getIselite());
+
+                Groups groups = groupsMapper.selectByPrimaryKey(groupId);
+                User user = userMapper.selectByPrimaryKey(userID);
+
+                groupThreadShow.setGroupName(groups.getTitle());
+                groupThreadShow.setUserName(user.getNickname());
+                groupThreadShows.add(groupThreadShow);
+            }
+            return groupThreadShows;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 设置话题加精
+     *
+     * @param groupThreadIdDTO
+     * @return
+     */
+    @Override
+    public boolean setEliteGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+        try {
+            groupsThreadMapper.setEliteGroupThread(groupThreadIdDTO.getThreadID());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    /**
+     * 取消话题加精
+     *
+     * @param groupThreadIdDTO
+     * @return
+     */
+    @Override
+    public boolean setNotEliteGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+        try {
+            groupsThreadMapper.setNotEliteGroupThread(groupThreadIdDTO.getThreadID());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    /**
+     * 设置话题为置顶
+     *
+     * @param groupThreadIdDTO
+     * @return
+     */
+    @Override
+    public boolean setStickGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+        try {
+            groupsThreadMapper.setStickGroupThread(groupThreadIdDTO.getThreadID());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 取消话题置顶
+     *
+     * @param groupThreadIdDTO
+     * @return
+     */
+    @Override
+    public boolean setNotStickGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+        try {
+            groupsThreadMapper.setNotStickGroupThread(groupThreadIdDTO.getThreadID());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 关闭小组话题
+     *
+     * @param groupThreadIdDTO
+     * @return
+     */
+    @Override
+    public boolean closeGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+        try {
+            groupsThreadMapper.closeGroupThread(groupThreadIdDTO.getThreadID());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 打开小组话题
+     *
+     * @param groupThreadIdDTO
+     * @return
+     */
+    @Override
+    public boolean openGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+        try {
+            groupsThreadMapper.openGroupThread(groupThreadIdDTO.getThreadID());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 删除小组话题
+     *
+     * @param groupThreadIdDTO
+     * @return
+     */
+    @Override
+    public boolean deleteGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+        try {
+            groupsThreadMapper.deleteByPrimaryKey(groupThreadIdDTO.getThreadID());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     /**
      * 根据获取到的小组列表转换为我们需要展示的小组的列表

@@ -87,7 +87,6 @@
             <version>${mysql.connector.vesion}</version>
         </dependency>
 
-
     </dependencies>
 
     <build>

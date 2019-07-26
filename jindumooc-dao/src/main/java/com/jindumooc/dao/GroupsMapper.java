@@ -42,4 +42,11 @@ public interface GroupsMapper {
     int openGroupStatusByPrimaryKey(Integer id);
 
     int closeGroupStatusByPrimaryKey(Integer id);
+
+    /**
+     * 平均小组话题数
+     *
+     * @return
+     */
+    int avgThreadNum();
 }
