@@ -893,10 +893,11 @@
     SELECT *
     FROM `user` u
     <where>
-        <if test="searchParameter!=null">#{searchType} like '%${searchParameter}%'</if>
-        <if test="role!=null">and roles like '%${role}%'</if>
-        <if test="searchTimeType=='loginTime'">and r.loginTime &gt; #{starTime,jdbcType=int} and r.loginTime &lt; #{endTime,jdbcType=int}</if>
-        <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime,jdbcType=int} and r.createdTime &lt; #{endTime,jdbcType=int}</if>
+      <if test="true">u.roles = u.roles</if>
+      <if test="searchParameter!=null">and ${searchType} like '%${searchParameter}%'</if>
+      <if test="role!=null">and roles like '%${role}%'</if>
+      <if test="searchTimeType=='loginTime'">and u.loginTime &gt; #{starTime,jdbcType=INTEGER} and u.loginTime &lt; #{endTime,jdbcType=INTEGER}</if>
+      <if test="searchTimeType=='createdTime'">and u.createdTime &gt; #{starTime,jdbcType=INTEGER} and u.createdTime &lt; #{endTime,jdbcType=INTEGER}</if>
     </where>
   </select>
   <update id="lockedUser" parameterType="com.jindumooc.dto.user.LockUser">
@@ -918,10 +919,11 @@
     SELECT count(*)
     FROM `user` u
     <where>
-      <if test="searchParameter!=null">#{searchType} like '%${searchParameter}%'</if>
+      <if test="true">u.roles = u.roles</if>
+      <if test="searchParameter!=null">and ${searchType} like '%${searchParameter}%'</if>
       <if test="role!=null">and roles like '%${role}%'</if>
-      <if test="searchTimeType=='loginTime'">and r.loginTime &gt; #{starTime,jdbcType=int} and r.loginTime &lt; #{endTime,jdbcType=int}</if>
-      <if test="searchTimeType=='createdTime'">and r.createdTime &gt; #{starTime,jdbcType=int} and r.createdTime &lt; #{endTime,jdbcType=int}</if>
+      <if test="searchTimeType=='loginTime'">and u.loginTime &gt; #{starTime,jdbcType=INTEGER} and u.loginTime &lt; #{endTime,jdbcType=INTEGER}</if>
+      <if test="searchTimeType=='createdTime'">and u.createdTime &gt; #{starTime,jdbcType=INTEGER} and u.createdTime &lt; #{endTime,jdbcType=INTEGER}</if>
     </where>
   </select>
   <select id="getAllTeachers" parameterType="com.jindumooc.dto.user.SearchMessage" resultMap="getAllTeacher" >

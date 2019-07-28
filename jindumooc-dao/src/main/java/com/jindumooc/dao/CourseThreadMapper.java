@@ -4,6 +4,7 @@ import com.jindumooc.pojo.CourseThread;
 import com.jindumooc.pojo.CourseThreadExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface CourseThreadMapper {
     int countByExample(CourseThreadExample example);
@@ -33,4 +34,8 @@ public interface CourseThreadMapper {
     int updateByPrimaryKeyWithBLOBs(CourseThread record);
 
     int updateByPrimaryKey(CourseThread record);
+
+    List<com.jindumooc.vojo.user.CourseThread> getCourseQuestion(@Param("teacherId") String teacherId);
+
+    List<com.jindumooc.vojo.user.CourseThread> getCourseDiscussion(@Param("teacherId") String teacherId);
 }

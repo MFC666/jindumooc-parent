@@ -34,7 +34,8 @@ public class UserBackGroundManagementController {
     @ResponseBody
     public List<BackGroundIndexUser> getIndexUser(@RequestBody SearchMessage sm)
     {
-        return userBackGroundManagement.getIndexUser(sm);
+        List<BackGroundIndexUser> backGroundIndexUserList = userBackGroundManagement.getIndexUser(sm);
+        return backGroundIndexUserList;
     }
 
     /**
@@ -222,7 +223,7 @@ public class UserBackGroundManagementController {
 
     /**
      * 删除私信
-     * @param idList
+     * @param idList 需要删除的id列表
      * @return
      */
     @DeleteMapping("/user/delMessages")
@@ -248,7 +249,7 @@ public class UserBackGroundManagementController {
      * @param editUser
      * @return
      */
-    @RequestMapping("/user/updateUserDetail")
+    @PutMapping("/user/updateUserDetail")
     @ResponseBody
     public boolean updateUserDetail(@RequestBody EditUser editUser){
 

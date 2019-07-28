@@ -4,6 +4,8 @@ import com.jindumooc.pojo.Thread;
 import com.jindumooc.pojo.ThreadExample;
 import com.jindumooc.pojo.ThreadWithBLOBs;
 import java.util.List;
+
+import com.jindumooc.vojo.user.CourseThread;
 import org.apache.ibatis.annotations.Param;
 
 public interface ThreadMapper {
@@ -34,4 +36,6 @@ public interface ThreadMapper {
     int updateByPrimaryKeyWithBLOBs(ThreadWithBLOBs record);
 
     int updateByPrimaryKey(Thread record);
+
+    List<CourseThread> getCourseDiscussion(@Param("teacherId") String teacherId);
 }

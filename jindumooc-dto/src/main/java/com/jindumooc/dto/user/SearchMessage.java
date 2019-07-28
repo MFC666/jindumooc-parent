@@ -31,6 +31,16 @@ public class SearchMessage implements Serializable {
     private String teacherId;
     private int teacherIds;
 
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public int getUserId() {
         return userId;
     }

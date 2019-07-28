@@ -34,4 +34,6 @@ public interface ClassroomMapper {
     int updateByPrimaryKeyWithBLOBs(ClassroomWithBLOBs record);
 
     int updateByPrimaryKey(Classroom record);
+
+    void getTeachingClassroom(@Param("teacherId") int teacherId,@Param("nowTime") long nowTime);
 }

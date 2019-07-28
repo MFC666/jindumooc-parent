@@ -32,8 +32,11 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     @Override
     public List<BackGroundIndexUser> getIndexUser(SearchMessage sm) {
         //与前端交互后修改
+        System.out.println(sm.getStarTime()+"kaishi");
+        System.out.println(sm.getEndTime()+"jieshu");
         PageHelper.startPage(sm.getPageNum(), sm.getPageSize());
         List<User> userList = userMapper.getIndexUser(sm);
+
         //获取共有多少用户符合条件
         int count = userMapper.getUserNum(sm);
 
@@ -278,29 +281,37 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
      */
     public List<BackGroundIndexUser> getBackGroundIndexUser(List<User> userList, int count) {
         List<BackGroundIndexUser> bUserList = new ArrayList<>();
-        if (userList.get(0).getId() != null) {
-            for (int i = 0; i < userList.size(); i++) {
-                User user = new User();
-                user = userList.get(i);
-                BackGroundIndexUser bUser = new BackGroundIndexUser();
-                //获取用户组
-                bUser.setUserId(user.getId());
-                bUser.setTotalUser(count);
-                bUser.setRoles(divisionRoleCode(user.getRoles()));
-                //转换时间
-                bUser.setLocked(user.getLocked());
-                bUser.setNickName(user.getNickname());
-                bUser.setCreatIp(user.getCreatedip());
-                bUser.setCreatIpArea(user.getCreatedarea());
-                bUser.setLoginIp(user.getLoginip());
-                bUser.setLoginIpArea(user.getLoginarea());
-                bUser.setBirthDay(user.getBirthday());
+        if(userList!=null||userList.size()!=0) {
+            Integer id = 0;
+            try{
+                id = userList.get(0).getId();
+                System.out.println("id"+id);
+            }catch (Exception e){
+                id = -1;
+            }
+            if (id!= -1) {
+                for (int i = 0; i < userList.size(); i++) {
+                    User user = userList.get(i);
+                    BackGroundIndexUser bUser = new BackGroundIndexUser();
+                    //获取用户组
+                    bUser.setUserId(user.getId());
+                    bUser.setTotalUser(count);
+                    bUser.setRoles(divisionRoleCode(user.getRoles()));
+                    //转换时间
+                    bUser.setLocked(user.getLocked());
+                    bUser.setNickName(user.getNickname());
+                    bUser.setCreatIp(user.getCreatedip());
+                    bUser.setCreatIpArea(user.getCreatedarea());
+                    bUser.setLoginIp(user.getLoginip());
+                    bUser.setLoginIpArea(user.getLoginarea());
+                    bUser.setBirthDay(user.getBirthday());
 
 
-                bUser.setLoginTime(typeConversion(user.getLogintime()));
+                    bUser.setLoginTime(typeConversion(user.getLogintime()));
 
-                bUser.setCreatTime(typeConversion(user.getCreatedtime()));
-                bUserList.add(bUser);
+                    bUser.setCreatTime(typeConversion(user.getCreatedtime()));
+                    bUserList.add(bUser);
+                }
             }
         }
         return bUserList;

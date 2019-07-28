@@ -1380,9 +1380,9 @@
       enableAudio = #{enableaudio,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getTeachingCourse" resultType="com.jindumooc.vojo.user.TeachingCourse" parameterType="com.jindumooc.dto.user.SearchMessage">
-    SELECT id,courseSetTitle,`status`
+  <select id="getTeachingCourse" resultType="com.jindumooc.vojo.user.TeachingCourse">
+    SELECT id,courseSetTitle,studentNum,`status`,cover
     FROM course_v8
-
+    WHERE teacherIds LIKE '%${teacherId}%' AND type = #{courseType}
   </select>
 </mapper>

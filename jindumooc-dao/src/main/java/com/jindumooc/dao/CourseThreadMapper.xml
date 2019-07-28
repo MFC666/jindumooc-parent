@@ -497,4 +497,15 @@
       courseSetId = #{coursesetid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getCourseQuestion" resultType="com.jindumooc.vojo.user.CourseThread">
+    SELECT t.id,t.title,t.hitNum,t.courseId,v.title AS courseTitle,v.courseSetTitle,v.courseSetId
+    FROM course_v8 v,course_thread t
+    WHERE v.id = t.courseId AND v.teacherIds LIKE "%${teacherId}%" AND t.type='question'
+
+  </select>
+  <select id="getCourseDiscussion" resultType="com.jindumooc.vojo.user.CourseThread">
+    SELECT t.id,t.title,t.hitNum,t.courseId,v.title AS courseTitle,v.courseSetTitle,v.courseSetId
+    FROM course_v8 v,course_thread t
+    WHERE v.id = t.courseId AND v.teacherIds LIKE "%${teacherId}%" AND t.type='discussion'
+  </select>
 </mapper>

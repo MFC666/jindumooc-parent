@@ -38,5 +38,5 @@ public interface CourseV8Mapper {
 
     int updateByPrimaryKey(CourseV8 record);
 
-    List<TeachingCourse> getTeachingCourse(SearchMessage sm);
+    List<TeachingCourse> getTeachingCourse(@Param("teacherId") String teacherId,@Param("courseType") String courseType);
 }

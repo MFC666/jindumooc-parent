@@ -884,4 +884,9 @@
       creator = #{creator,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getTeachingClassroom" resultType="com.jindumooc.vojo.user.TeachingClassroom">
+        SELECT c.id,c.title,c.smallPicture,c.middlePicture,c.largePicture,c.studentNum,c.courseNum,c.threadNum,COUNT(*)
+        FROM classroom c,classroom_review r
+        WHERE c.headTeacherId = #{teacherId} and r.classroomId = c.id and r.createdTime>#{newTime}
+  </select>
 </mapper>
