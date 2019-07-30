@@ -1,14 +1,12 @@
 package com.jindumooc.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.jindumooc.dao.ClassroomMapper;
-import com.jindumooc.dao.CourseThreadMapper;
-import com.jindumooc.dao.CourseV8Mapper;
-import com.jindumooc.dao.ThreadMapper;
+import com.jindumooc.dao.*;
 import com.jindumooc.user.service.MyTeaching;
 import com.jindumooc.vojo.user.TeachingClassroom;
 import com.jindumooc.vojo.user.TeachingCourse;
 import com.jindumooc.vojo.user.CourseThread;
+import com.jindumooc.vojo.user.TestPaperResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -30,6 +28,8 @@ public class MyTeachingImpl implements MyTeaching {
     @Autowired
     private ThreadMapper threadMapper;
 
+    @Autowired
+    private TestpaperResultMapper testpaperResultMapper;
     /**
      * 获取在教课程
      * @param teacherId
@@ -104,4 +104,21 @@ public class MyTeachingImpl implements MyTeaching {
 
         return courseThreadList;
     }
+
+    /**
+     * 获取学生考试结果
+     * @param pageNum
+     * @param pageSize
+     * @param teacherId
+     * @param testPaperStatus：考试状态
+     * @return
+     */
+    @Override
+    public List<TestPaperResult> getTestPaperResult(int pageNum, int pageSize, int teacherId, String testPaperStatus) {
+
+        PageHelper.startPage(pageNum,pageSize);
+        return testpaperResultMapper.getTestPaperResult(teacherId,testPaperStatus);
+    }
+
+    
 }

@@ -2,9 +2,9 @@ package com.jindumooc.vojo.user;
 
 import java.io.Serializable;
 
-public class TeachingClassroom implements Serializable {
+public class LearningClassroom implements Serializable {
 
-    //储存在教班级
+    //储存我的班级
     private Integer id;
 
     private String title;

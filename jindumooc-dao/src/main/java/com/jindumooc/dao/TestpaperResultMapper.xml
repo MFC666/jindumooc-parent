@@ -515,4 +515,9 @@
       usedTime = #{usedtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getTestPaperResult" resultType="com.jindumooc.vojo.user.TestPaperResult">
+    SELECT c.id AS courseId,l.id AS lessonId,t.id AS testId,c.title AS courseTitle,l.title AS lessonTitle,paperName,score,objectiveScore,subjectiveScore,passedStatus
+    FROM testpaper_result_v8 t,course_v8 c,course_lesson l
+    WHERE t.lessonId = l.id AND t.courseId = c.id AND l.courseId = c.id AND c.teacherIds LIKE '%${teacherId}%' AND t.`status` = #{testPaperStatus}
+  </select>
 </mapper>

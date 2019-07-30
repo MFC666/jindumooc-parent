@@ -30,8 +30,16 @@ public class SearchMessage implements Serializable {
     private String courseType;
     private String teacherId;
     private int teacherIds;
-
+    private int approvalStatus;
     private String role;
+
+    public int getStatus() {
+        return approvalStatus;
+    }
+
+    public void setStatus(int status) {
+        this.approvalStatus = status;
+    }
 
     public String getRole() {
         return role;

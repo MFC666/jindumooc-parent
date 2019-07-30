@@ -1,6 +1,8 @@
 package com.jindumooc.user.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.jindumooc.Result.Result;
+import com.jindumooc.Result.ResultGenerator;
 import com.jindumooc.dto.user.*;
 import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.vojo.user.*;
@@ -32,10 +34,15 @@ public class UserBackGroundManagementController {
      */
     @PostMapping("/user/getIndexUser")
     @ResponseBody
-    public List<BackGroundIndexUser> getIndexUser(@RequestBody SearchMessage sm)
+    public Result getIndexUser(@RequestBody SearchMessage sm)
     {
+        if(sm==null){
+            return ResultGenerator.genFailResult("参数出错");
+        }
+
         List<BackGroundIndexUser> backGroundIndexUserList = userBackGroundManagement.getIndexUser(sm);
-        return backGroundIndexUserList;
+
+        return ResultGenerator.genSuccessResult(backGroundIndexUserList);
     }
 
     /**

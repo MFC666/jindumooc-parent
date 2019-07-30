@@ -320,4 +320,18 @@
       updateTime = #{updatetime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getLearningCourse" resultMap="getLearningCourseMap">
+    SELECT ll.learnTime,l.length,l.title,ll.watchTime,c.id AS courseId,l.id AS lessonId,ll.id AS lessonLearnId
+    FROM course_v8 c,course_lesson l,course_lesson_learn ll
+    WHERE c.id = l.courseId AND c.id = ll.courseId AND ll.lessonId = l.id AND ll.`status` = #{learnStatus} AND ll.userId = #{userId}
+  </select>
+  <resultMap id="getLearningCourseMap" type="com.jindumooc.vojo.user.LearningCourse">
+    <result property="courseId" column="courseId" />
+    <result property="learnTime" column="learnTime" />
+    <result property="length" column="length" />
+    <result property="title" column="title" />
+    <result property="watchTime" column="watchTime" />
+    <result property="lessonId" column="lessonId" />
+    <result property="lessonLearnId" column="lessonLearnId" />
+  </resultMap>
 </mapper>

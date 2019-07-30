@@ -27,4 +27,6 @@ public interface CourseLessonLearnMapper {
     int updateByPrimaryKeySelective(CourseLessonLearn record);
 
     int updateByPrimaryKey(CourseLessonLearn record);
+
+    void getLearningCourse(int userId, String learnStatus);
 }

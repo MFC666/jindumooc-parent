@@ -3,6 +3,8 @@ package com.jindumooc.dao;
 import com.jindumooc.pojo.TestpaperResult;
 import com.jindumooc.pojo.TestpaperResultExample;
 import java.util.List;
+
+import com.jindumooc.vojo.user.TestPaperResult;
 import org.apache.ibatis.annotations.Param;
 
 public interface TestpaperResultMapper {
@@ -33,4 +35,6 @@ public interface TestpaperResultMapper {
     int updateByPrimaryKeyWithBLOBs(TestpaperResult record);
 
     int updateByPrimaryKey(TestpaperResult record);
+
+    List<TestPaperResult> getTestPaperResult(@Param("teacherId") int teacherId,@Param("testPaperStatus") String testPaperStatus);
 }
