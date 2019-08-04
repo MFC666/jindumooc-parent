@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.InfoMapper">
+    <resultMap id="BaseResultMap" type="com.jindumooc.vojo.Article" >
+        <id column="aid" property="id" jdbcType="INTEGER" />
+        <result column="atitle" property="title" jdbcType="VARCHAR" />
+        <result column="abody" property="body" jdbcType="CLOB"/>
+        <result column="apu" property="publishedtime" jdbcType="INTEGER" />
+        <result column="asticky" property="sticky" jdbcType="TINYINT"/>
+        <result column="apicture" property="picture" jdbcType="VARCHAR"/>
+        <!--下面-->
+        <association property="articlecategory" javaType="com.jindumooc.vojo.ArticleCategory">
+            <id property="id" column="acaId"/>
+            <result property="name" column="acaname"/>
+        </association>
+    </resultMap>
+    <resultMap id="ArticleCategoriesResultMap" type="com.jindumooc.vojo.ArticleCategory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="weight" property="weight" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ArticleResultMap" type="com.jindumooc.vojo.Article" extends="BaseResultMap">
+        <result column="ahits" property="hits" jdbcType="INTEGER"/>
+        <result column="aposNum" property="postnum" jdbcType="INTEGER"/>
+        <result column="aupsNum" property="upsnum" jdbcType="INTEGER"/>
+        <collection property="tagList" ofType="com.jindumooc.vojo.Tag">
+            <id column="tid" property="id"/>
+            <result column="tname" property="name"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="getTags" resultType="com.jindumooc.vojo.Tag">
+        select id,name
+        from tag
+        order by id asc;
+    </select>
+    <select id="getArticlesByTagId" resultMap="BaseResultMap">
+        select article.id as aid,article.title as atitle,article_category.id as acaId,article_category.name as acaname,article.publishedTime as apu,article.body as abody,article.sticky as asticky
+        from tag_owner,article,article_category
+        where article.id=tag_owner.ownerId and article.categoryId=article_category.id and tag_owner.ownerType='article'
+        <if test="id!=null">
+            and tag_owner.tagId=#{id}
+        </if>
+        <if test="start!=null and size!=null">
+            order by article.publishedTime desc limit #{start},#{size}
+        </if>
+    </select>
+    <select id="getCountArticlesByTagId" resultType="int">
+        select count(*)
+        from tag_owner,article
+        where article.id=tag_owner.ownerId and tag_owner.ownerType='article'
+        <if test="id!=null">
+            and tag_owner.tagId=#{id}
+        </if>
+    </select>
+    <select id="getArticleCategories" resultMap="ArticleCategoriesResultMap">
+        select id,name,weight
+        from article_category
+    </select>
+    <select id="getArticles" resultMap="BaseResultMap">
+        select article.id as aid,article.title as atitle,article_category.id as acaId,article_category.name as acaname,article.publishedTime as apu,article.body as abody,article.sticky as asticky
+        from article,article_category
+        where article.categoryId=article_category.id
+        <if test="ArticleCategoryId!=null">
+            and article.categoryId=#{ArticleCategoryId}
+        </if>
+        <if test="start!=null and size!=null">
+            order by article.publishedTime desc limit #{start},#{size}
+        </if>
+    </select>
+    <select id="getCountArticles" resultType="int">
+        select count(*)
+        from article,article_category
+        where article.categoryId=article_category.id
+        <if test="ArticleCategoryId!=null">
+            and article.categoryId=#{ArticleCategoryId}
+        </if>
+    </select>
+    <select id="getArticleById" resultMap="ArticleResultMap">
+        select article.title as atitle,article_category.id as acaId,article_category.name as acaname,article.publishedTime as apu,
+        article.body as abody,article.sticky as asticky,article.hits as ahits,article.postNum as aposNum,article.upsNum as aupsNum,
+        tag.id as tid,tag.name as tname,article.picture as apicture
+        from article,article_category,tag_owner,tag
+        where article.categoryId=article_category.id and article.id=tag_owner.ownerId and tag_owner.ownerType='article' and tag.id=tag_owner.tagId
+        <if test="id!=null">
+            and article.id=#{id}
+        </if>
+    </select>
+    <select id="getPromotedList" resultMap="BaseResultMap">
+        select id as aid,title as atitle,picture as apicture
+        from article
+        where promoted=1 order by article.publishedTime
+    </select>
+    <select id="getFeaturedList" resultMap="BaseResultMap">
+        select id as aid,title as atitle
+        from article
+        where featured=1 order by article.publishedTime
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
