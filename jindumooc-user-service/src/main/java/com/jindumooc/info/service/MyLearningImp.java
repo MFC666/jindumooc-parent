@@ -1,9 +1,8 @@
-package com.jindumooc.user.service.impl;
+package com.jindumooc.info.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.CourseLessonLearnMapper;
-import com.jindumooc.user.service.MyLearning;
 import com.jindumooc.vojo.user.LearningCourse;
 
 import java.util.List;

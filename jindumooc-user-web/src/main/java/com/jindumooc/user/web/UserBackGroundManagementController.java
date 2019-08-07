@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.jindumooc.Result.Result;
 import com.jindumooc.Result.ResultGenerator;
 import com.jindumooc.dto.user.*;
-import com.jindumooc.user.service.UserBackGroundManagement;
+import com.jindumooc.info.service.UserBackGroundManagement;
 import com.jindumooc.vojo.user.*;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
 package com.jindumooc.user.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jindumooc.user.service.MyLearning;
+import com.jindumooc.info.service.MyLearning;
 import com.jindumooc.vojo.user.LearningClassroom;
 import com.jindumooc.vojo.user.LearningCourse;
 import org.springframework.web.bind.annotation.GetMapping;

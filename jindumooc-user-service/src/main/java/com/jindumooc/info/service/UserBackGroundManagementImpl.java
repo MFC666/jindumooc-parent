@@ -1,11 +1,10 @@
-package com.jindumooc.user.service.impl;
+package com.jindumooc.info.service;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.*;
 import com.jindumooc.dto.user.*;
 import com.jindumooc.pojo.*;
 import com.jindumooc.pojo.UserApproval;
-import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.vojo.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 

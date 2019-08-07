@@ -12,15 +12,22 @@ import com.jindumooc.vojo.ArticleCategory;
 public class Article implements Serializable {
     private Integer id;
     private String title;
+    private String source;
+    private String sourceUrl;
+    private Integer publishedTime;
+    private Integer updatedTime;
+    private String status;
+    private Integer thumb;
+    private Integer featured;
+    private Integer promoted;
     private String picture;
-    private Integer publishedtime;
     private String body;
-    private Byte sticky;
+    private Integer sticky;
     private Integer hits;//点击量
     private Integer postnum;//回复数
     private Integer upsnum;//点赞数
     private List<Tag> tagList;//标签列表
-    private ArticleCategory articlecategory;//文章所属的栏目和它的名称
+    private ArticleCategory articlecategory;//文章所属的栏目id和它的名称
 
     public String getPicture() {
         return picture;
@@ -70,15 +77,69 @@ public class Article implements Serializable {
     }
 
 
-    public Byte getSticky() {
+    public Integer getSticky() {
         return sticky;
     }
 
-    public void setSticky(Byte sticky) {
+    public void setSticky(Integer sticky) {
         this.sticky = sticky;
     }
 
+    public String getSource() {
+        return source;
+    }
 
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public void setSourceUrl(String sourceUrl) {
+        this.sourceUrl = sourceUrl;
+    }
+
+    public Integer getPublishedTime() {
+        return publishedTime;
+    }
+
+    public void setPublishedTime(Integer publishedTime) {
+        this.publishedTime = publishedTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Integer getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(Integer thumb) {
+        this.thumb = thumb;
+    }
+
+    public Integer getFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(Integer featured) {
+        this.featured = featured;
+    }
+
+    public Integer getPromoted() {
+        return promoted;
+    }
+
+    public void setPromoted(Integer promoted) {
+        this.promoted = promoted;
+    }
 
     public Integer getId() {
         return id;
@@ -96,13 +157,12 @@ public class Article implements Serializable {
         this.title = title;
     }
 
-
-    public Integer getPublishedtime() {
-        return publishedtime;
+    public Integer getUpdatedTime() {
+        return updatedTime;
     }
 
-    public void setPublishedtime(Integer publishedtime) {
-        this.publishedtime = publishedtime;
+    public void setUpdatedTime(Integer updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
     public String getBody() {

@@ -17,13 +17,6 @@ public interface InfoMapper {
     Article getArticleById(@Param("id")Integer id);
     List<Article> getPromotedList();
     List<Article> getFeaturedList();
-    List<Article> getArticleListByCondition1(String keywords,Integer ArticleCategoryId,
-                                             Integer featured,String status,Integer start,Integer size);
-
-    List<Article> getArticleListByCondition2(String keywords,Integer ArticleCategoryId,
-                                             Integer promoted,String status,Integer start,Integer size);
-    List<Article> getArticleListByCondition3(String keywords,Integer ArticleCategoryId,
-                                             Integer sticky,String status,Integer start,Integer size);
 
 
 

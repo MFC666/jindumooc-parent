@@ -1,4 +1,4 @@
-package com.jindumooc.user.service;
+package com.jindumooc.info.service;
 
 import com.jindumooc.dto.user.*;
 import com.jindumooc.vojo.user.*;

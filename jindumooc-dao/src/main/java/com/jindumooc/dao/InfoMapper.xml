@@ -5,7 +5,7 @@
         <id column="aid" property="id" jdbcType="INTEGER" />
         <result column="atitle" property="title" jdbcType="VARCHAR" />
         <result column="abody" property="body" jdbcType="CLOB"/>
-        <result column="apu" property="publishedtime" jdbcType="INTEGER" />
+        <result column="apu" property="publishedTime" jdbcType="INTEGER" />
         <result column="asticky" property="sticky" jdbcType="TINYINT"/>
         <result column="apicture" property="picture" jdbcType="VARCHAR"/>
         <!--下面-->

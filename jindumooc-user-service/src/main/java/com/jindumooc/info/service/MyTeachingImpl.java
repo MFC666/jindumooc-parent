@@ -1,8 +1,7 @@
-package com.jindumooc.user.service.impl;
+package com.jindumooc.info.service;
 
 import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.*;
-import com.jindumooc.user.service.MyTeaching;
 import com.jindumooc.vojo.user.TeachingClassroom;
 import com.jindumooc.vojo.user.TeachingCourse;
 import com.jindumooc.vojo.user.CourseThread;
