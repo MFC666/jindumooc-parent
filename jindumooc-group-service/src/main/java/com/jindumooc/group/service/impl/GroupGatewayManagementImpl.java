@@ -7,10 +7,14 @@ import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.pojo.GroupsExample;
 import com.jindumooc.vojo.group.GroupIntroduction;
+import com.jindumooc.vojo.group.GroupNew;
 import com.jindumooc.vojo.group.GroupShow;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -79,7 +83,7 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
      * @return
      */
     @Override
-    public List<GroupShow> showAllGroup() {
+    public List<GroupShow> showAllHotGroup() {
         try {
             int avgThreadNum = groupsMapper.avgThreadNum();
             GroupsExample groupsExample = new GroupsExample();
@@ -97,6 +101,38 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
                 groupShows.add(groupShow);
             }
             return groupShows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 展示新晋的groupNumber个小组
+     *
+     * @param groupNumber
+     * @return
+     */
+    @Override
+    public List<GroupNew> showNewGroup(Integer groupNumber) {
+        try {
+            List<Groups> groups = groupsMapper.showNewNGroups(groupNumber);
+            List<GroupNew> groupNews = new ArrayList<>();
+            for (Groups g :
+                    groups) {
+                GroupNew groupNew = new GroupNew();
+                Calendar c = Calendar.getInstance();
+                int seconds = g.getCreatedtime();//数据库中提取的数据
+                long millions = new Long(seconds).longValue() * 1000;
+                c.setTimeInMillis(millions);
+                Date createdDate = c.getTime();
+
+                groupNew.setGroupLogo(g.getLogo());
+                groupNew.setGroupCreatedDate(createdDate);
+                groupNew.setGroupTitle(g.getTitle());
+                groupNews.add(groupNew);
+            }
+            return groupNews;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

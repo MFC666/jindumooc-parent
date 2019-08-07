@@ -3,6 +3,7 @@ package com.jindumooc.group.service;
 import com.jindumooc.dto.group.GroupIdDTO;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.GroupIntroduction;
+import com.jindumooc.vojo.group.GroupNew;
 import com.jindumooc.vojo.group.GroupShow;
 
 import java.util.List;
@@ -44,5 +45,12 @@ public interface GroupGatewayManagement {
      *
      * @return
      */
-    List<GroupShow> showAllGroup();
+    List<GroupShow> showAllHotGroup();
+
+    /**
+     * 按照时间顺序展示新晋的n个小组
+     *
+     * @return
+     */
+    List<GroupNew> showNewGroup(Integer groupNumber);
 }

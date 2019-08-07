@@ -5,10 +5,12 @@ import com.jindumooc.dto.group.GroupIdDTO;
 import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.GroupIntroduction;
+import com.jindumooc.vojo.group.GroupNew;
 import com.jindumooc.vojo.group.GroupShow;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public class GroupGatewayManagementController {
      * @param newGroup
      * @return
      */
-    @RequestMapping("/addNewGroup")
+    @RequestMapping(value = "/addNewGroup", method = RequestMethod.POST)
     @ResponseBody
     public boolean addNewGroup(Groups newGroup) {
         return groupGatewayManagement.addNewGroup(newGroup);
@@ -43,7 +45,7 @@ public class GroupGatewayManagementController {
      * @param groupID
      * @return
      */
-    @RequestMapping("/deleteGroup")
+    @RequestMapping(value = "/deleteGroup", method = RequestMethod.POST)
     @ResponseBody
     public boolean deleteGroup(Integer groupID) {
         return groupGatewayManagement.deleteGroup(groupID);
@@ -56,7 +58,7 @@ public class GroupGatewayManagementController {
      * @param groupIdDTO
      * @return
      */
-    @RequestMapping("/showGroupIntroduction")
+    @RequestMapping(value = "/showGroupIntroduction", method = RequestMethod.POST)
     @ResponseBody
     public GroupIntroduction showGroupIntroduction(@RequestBody GroupIdDTO groupIdDTO) {
         return groupGatewayManagement.showGroupIntroduction(groupIdDTO);
@@ -67,11 +69,16 @@ public class GroupGatewayManagementController {
      *
      * @return
      */
-    @RequestMapping("/showAllGroup")
+    @RequestMapping(value = "/showAllHotGroup", method = RequestMethod.POST)
     @ResponseBody
-    public List<GroupShow> showAllGroup() {
-        return groupGatewayManagement.showAllGroup();
+    public List<GroupShow> showAllHotGroup() {
+        return groupGatewayManagement.showAllHotGroup();
     }
 
+    @RequestMapping(value = "/showNewGroup", method = RequestMethod.POST)
+    @ResponseBody
+    public List<GroupNew> showNewGroup(Integer groupNumber) {
+        return groupGatewayManagement.showNewGroup(groupNumber);
+    }
 
 }

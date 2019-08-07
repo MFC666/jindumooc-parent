@@ -11,7 +11,7 @@ import com.jindumooc.pojo.*;
 import com.jindumooc.vojo.group.BackGroundIndexGroup;
 import com.jindumooc.vojo.group.GroupThreadShow;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.jindumooc.dto.group.SearchGroup;
+import com.jindumooc.dto.group.SearchGroupDTO;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -34,15 +34,15 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     /**
      * 获取小组
      *
-     * @param searchGroup
+     * @param searchGroupDTO
      * @return
      */
     @Override
-    public List<BackGroundIndexGroup> getIndexGroup(SearchGroup searchGroup) {
+    public List<BackGroundIndexGroup> getIndexGroup(SearchGroupDTO searchGroupDTO) {
 
         //与前端交互后修改
-        PageHelper.startPage(searchGroup.getPageNum(), searchGroup.getPageSize());
-        List<Groups> groupsList = groupsMapper.getIndexGroup(searchGroup);
+        PageHelper.startPage(searchGroupDTO.getPageNum(), searchGroupDTO.getPageSize());
+        List<Groups> groupsList = groupsMapper.getIndexGroup(searchGroupDTO);
 
         //整理groupList填充BackgroundIndexGroup
         return getBackGroundIndexGroup(groupsList);

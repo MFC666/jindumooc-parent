@@ -1,6 +1,6 @@
 package com.jindumooc.group.service;
 
-import com.jindumooc.dto.group.SearchGroup;
+import com.jindumooc.dto.group.SearchGroupDTO;
 import com.jindumooc.dto.group.GroupThreadIdDTO;
 import com.jindumooc.vojo.group.BackGroundIndexGroup;
 import com.jindumooc.vojo.group.GroupThreadShow;
@@ -12,7 +12,7 @@ public interface GroupBackGroundManagement {
     /**
      * 查找组接口
      */
-    List<BackGroundIndexGroup> getIndexGroup(SearchGroup searchGroup);
+    List<BackGroundIndexGroup> getIndexGroup(SearchGroupDTO searchGroupDTO);
 
     /**
      * 根据小组ID打开小组
@@ -66,7 +66,7 @@ public interface GroupBackGroundManagement {
     boolean setNotStickGroupThread(GroupThreadIdDTO groupThreadIdDTO);
 
     /**
-     * 取消话题置顶
+     * 关闭小组话题
      *
      * @param groupThreadIdDTO
      * @return
@@ -74,7 +74,7 @@ public interface GroupBackGroundManagement {
     boolean closeGroupThread(GroupThreadIdDTO groupThreadIdDTO);
 
     /**
-     * 取消话题置顶
+     * 打开小组话题
      *
      * @param groupThreadIdDTO
      * @return

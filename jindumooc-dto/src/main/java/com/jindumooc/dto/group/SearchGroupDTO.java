@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author 马洪升
  * @date 2019年7月12日10:53:56
  */
-public class SearchGroup implements Serializable {
+public class SearchGroupDTO implements Serializable {
     private String groupStatus;
     private String groupTitle;
     private String groupOwnerName;

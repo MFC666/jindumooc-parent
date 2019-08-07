@@ -2,13 +2,14 @@ package com.jindumooc.group.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jindumooc.dto.group.GroupThreadIdDTO;
-import com.jindumooc.dto.group.SearchGroup;
+import com.jindumooc.dto.group.SearchGroupDTO;
 import com.jindumooc.group.service.GroupBackGroundManagement;
 import com.jindumooc.vojo.group.BackGroundIndexGroup;
 import com.jindumooc.vojo.group.GroupThreadShow;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -22,13 +23,13 @@ public class GroupBackGroundManagementController {
     /**
      * 搜索小组并展示
      *
-     * @param searchGroup
+     * @param searchGroupDTO
      * @return
      */
-    @RequestMapping("/getIndexGroup")
+    @RequestMapping(value = "/getIndexGroup", method = RequestMethod.POST)
     @ResponseBody
-    public List<BackGroundIndexGroup> getIndexGroup(SearchGroup searchGroup) {
-        return groupBackGroundManagement.getIndexGroup(searchGroup);
+    public List<BackGroundIndexGroup> getIndexGroup(SearchGroupDTO searchGroupDTO) {
+        return groupBackGroundManagement.getIndexGroup(searchGroupDTO);
     }
 
     /**
@@ -37,7 +38,7 @@ public class GroupBackGroundManagementController {
      * @param id
      * @return
      */
-    @RequestMapping("/openGroup")
+    @RequestMapping(value = "/openGroup", method = RequestMethod.POST)
     @ResponseBody
     public boolean openGroupStatusByPrimaryKey(Integer id) {
         return groupBackGroundManagement.openGroupStatusByPrimaryKey(id);
@@ -49,7 +50,7 @@ public class GroupBackGroundManagementController {
      * @param id
      * @return
      */
-    @RequestMapping("/closeGroup")
+    @RequestMapping(value = "/closeGroup", method = RequestMethod.POST)
     @ResponseBody
     public boolean closeGroupStatusByPrimaryKey(Integer id) {
         return groupBackGroundManagement.closeGroupStatusByPrimaryKey(id);
@@ -60,7 +61,7 @@ public class GroupBackGroundManagementController {
      *
      * @return
      */
-    @RequestMapping("/showAllThread")
+    @RequestMapping(value = "/showAllThread", method = RequestMethod.POST)
     @ResponseBody
     public List<GroupThreadShow> showAllThread() {
         return groupBackGroundManagement.showAllThread();
@@ -72,7 +73,7 @@ public class GroupBackGroundManagementController {
      * @param groupThreadIdDTO
      * @return
      */
-    @RequestMapping("/setEliteThread")
+    @RequestMapping(value = "/setEliteThread", method = RequestMethod.POST)
     @ResponseBody
     public boolean setEliteThread(@RequestBody GroupThreadIdDTO groupThreadIdDTO) {
         return groupBackGroundManagement.setEliteGroupThread(groupThreadIdDTO);
@@ -84,7 +85,7 @@ public class GroupBackGroundManagementController {
      * @param groupThreadIdDTO
      * @return
      */
-    @RequestMapping("/setNotEliteThread")
+    @RequestMapping(value = "/setNotEliteThread", method = RequestMethod.POST)
     @ResponseBody
     public boolean setNotEliteGroupThread(@RequestBody GroupThreadIdDTO groupThreadIdDTO) {
         return groupBackGroundManagement.setNotEliteGroupThread(groupThreadIdDTO);
@@ -96,7 +97,7 @@ public class GroupBackGroundManagementController {
      * @param groupThreadIdDTO
      * @return
      */
-    @RequestMapping("/setStickThread")
+    @RequestMapping(value = "/setStickThread", method = RequestMethod.POST)
     @ResponseBody
     public boolean setStickGroupThread(@RequestBody GroupThreadIdDTO groupThreadIdDTO) {
         return groupBackGroundManagement.setStickGroupThread(groupThreadIdDTO);
@@ -108,7 +109,7 @@ public class GroupBackGroundManagementController {
      * @param groupThreadIdDTO
      * @return
      */
-    @RequestMapping("/setNotStickThread")
+    @RequestMapping(value = "/setNotStickThread", method = RequestMethod.POST)
     @ResponseBody
     public boolean setNotStickGroupThread(@RequestBody GroupThreadIdDTO groupThreadIdDTO) {
         return groupBackGroundManagement.setNotStickGroupThread(groupThreadIdDTO);
@@ -120,7 +121,7 @@ public class GroupBackGroundManagementController {
      * @param groupThreadIdDTO
      * @return
      */
-    @RequestMapping("/openGroupThread")
+    @RequestMapping(value = "/openGroupThread", method = RequestMethod.POST)
     @ResponseBody
     public boolean openGroupThread(@RequestBody GroupThreadIdDTO groupThreadIdDTO) {
         return groupBackGroundManagement.openGroupThread
@@ -133,7 +134,7 @@ public class GroupBackGroundManagementController {
      * @param groupThreadIdDTO
      * @return
      */
-    @RequestMapping("/closeGroupThread")
+    @RequestMapping(value = "/closeGroupThread", method = RequestMethod.POST)
     @ResponseBody
     public boolean closeGroupThread(@RequestBody GroupThreadIdDTO groupThreadIdDTO) {
         return groupBackGroundManagement.closeGroupThread(groupThreadIdDTO);
@@ -145,7 +146,7 @@ public class GroupBackGroundManagementController {
      * @param groupThreadIdDTO
      * @return
      */
-    @RequestMapping("/deleteGroupThread")
+    @RequestMapping(value = "/deleteGroupThread", method = RequestMethod.POST)
     @ResponseBody
     public boolean deleteGroupThread(@RequestBody GroupThreadIdDTO groupThreadIdDTO) {
         return groupBackGroundManagement.deleteGroupThread(groupThreadIdDTO);

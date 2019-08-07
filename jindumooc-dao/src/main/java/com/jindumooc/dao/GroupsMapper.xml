@@ -358,7 +358,7 @@
       createdTime = #{createdtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <select id="getIndexGroup" parameterType="com.jindumooc.dto.group.SearchGroup"
+    <select id="getIndexGroup" parameterType="com.jindumooc.dto.group.SearchGroupDTO"
             resultType="com.jindumooc.pojo.Groups">
     SELECT *
     FROM `groups` g
@@ -407,4 +407,9 @@
         set status = 'close'
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="showNewNGroups" parameterType="java.lang.Integer">
+        select *
+        from jindu.groups
+        order by createdTime desc limit #{n,jdbcType=INTEGER}
+    </select>
 </mapper>
