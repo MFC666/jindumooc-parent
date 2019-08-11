@@ -5,6 +5,7 @@ import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.GroupIntroduction;
 import com.jindumooc.vojo.group.GroupNew;
 import com.jindumooc.vojo.group.GroupShow;
+import com.jindumooc.vojo.group.GroupThreadShow;
 
 import java.util.List;
 
@@ -53,4 +54,11 @@ public interface GroupGatewayManagement {
      * @return
      */
     List<GroupNew> showNewGroup(Integer groupNumber);
+
+    /**
+     * 展示最后更新的话题
+     *
+     * @return
+     */
+    List<GroupThreadShow> showRecentGroupThread(Integer groupThreadNum);
 }

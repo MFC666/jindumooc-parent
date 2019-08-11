@@ -102,15 +102,13 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 long createdTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
                 String createdTimeStr = dateFormat.format(createdTimeLong);
-                Date createdTimeDate = dateFormat.parse(createdTimeStr);
 
                 long updatedTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
                 String updatedTimeStr = dateFormat.format(updatedTimeLong);
-                Date updatedTimeDate = dateFormat.parse(updatedTimeStr);
 
 
-                groupThreadShow.setCreatedTime(createdTimeDate);
-                groupThreadShow.setUpdatedTime(updatedTimeDate);
+                groupThreadShow.setCreatedTime(createdTimeStr);
+                groupThreadShow.setUpdatedTime(updatedTimeStr);
                 groupThreadShow.setStatus(thread.getStatus());
                 groupThreadShow.setThreadContent(thread.getContent());
                 groupThreadShow.setThreadID(thread.getId());

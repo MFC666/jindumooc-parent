@@ -2,15 +2,21 @@ package com.jindumooc.group.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.jindumooc.dao.GroupsMapper;
+import com.jindumooc.dao.GroupsThreadMapper;
+import com.jindumooc.dao.UserMapper;
 import com.jindumooc.dto.group.GroupIdDTO;
 import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.pojo.GroupsExample;
+import com.jindumooc.pojo.GroupsThread;
+import com.jindumooc.pojo.User;
 import com.jindumooc.vojo.group.GroupIntroduction;
 import com.jindumooc.vojo.group.GroupNew;
 import com.jindumooc.vojo.group.GroupShow;
+import com.jindumooc.vojo.group.GroupThreadShow;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +28,12 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
 
     @Autowired
     private GroupsMapper groupsMapper;
+
+    @Autowired
+    private GroupsThreadMapper groupsThreadMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 添加新的小组，如果执行过程中有任何异常抛出，则返回false
@@ -133,6 +145,52 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
                 groupNews.add(groupNew);
             }
             return groupNews;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 展示最后更新的话题
+     *
+     * @return
+     */
+    @Override
+    public List<GroupThreadShow> showRecentGroupThread(Integer groupThreadNum) {
+        try {
+            List<GroupsThread> groupsThreads = groupsThreadMapper.showRecentGroupThread(groupThreadNum);
+            List<GroupThreadShow> groupThreadShows = new ArrayList<>();
+
+            for (GroupsThread thread :
+                    groupsThreads) {
+                GroupThreadShow groupThreadShow = new GroupThreadShow();
+                int groupId = thread.getGroupid();
+                int userID = thread.getUserid();
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                long createdTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                String createdTimeStr = dateFormat.format(createdTimeLong);
+
+                long updatedTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                String updatedTimeStr = dateFormat.format(updatedTimeLong);
+
+                groupThreadShow.setCreatedTime(createdTimeStr);
+                groupThreadShow.setUpdatedTime(updatedTimeStr);
+                groupThreadShow.setStatus(thread.getStatus());
+                groupThreadShow.setThreadContent(thread.getContent());
+                groupThreadShow.setThreadID(thread.getId());
+                groupThreadShow.setThreadTitle(thread.getTitle());
+                groupThreadShow.setIsElite(thread.getIselite());
+
+                Groups groups = groupsMapper.selectByPrimaryKey(groupId);
+                User user = userMapper.selectByPrimaryKey(userID);
+
+                groupThreadShow.setGroupName(groups.getTitle());
+                groupThreadShow.setUserName(user.getNickname());
+                groupThreadShows.add(groupThreadShow);
+            }
+            return groupThreadShows;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

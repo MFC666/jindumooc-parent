@@ -51,6 +51,7 @@ public interface GroupsThreadMapper {
      * @return
      */
     int setNotEliteGroupThread(Integer id);
+
     /**
      * 设置置顶
      *
@@ -66,6 +67,7 @@ public interface GroupsThreadMapper {
      * @return
      */
     int setNotStickGroupThread(Integer id);
+
     /**
      * 打开话题
      *
@@ -82,4 +84,10 @@ public interface GroupsThreadMapper {
      */
     int closeGroupThread(Integer id);
 
+    /**
+     * 展示最后更新的小组话题
+     *
+     * @return
+     */
+    List<GroupsThread> showRecentGroupThread(Integer groupThreadNum);
 }

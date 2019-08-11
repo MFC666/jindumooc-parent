@@ -7,6 +7,7 @@ import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.GroupIntroduction;
 import com.jindumooc.vojo.group.GroupNew;
 import com.jindumooc.vojo.group.GroupShow;
+import com.jindumooc.vojo.group.GroupThreadShow;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,10 +76,27 @@ public class GroupGatewayManagementController {
         return groupGatewayManagement.showAllHotGroup();
     }
 
+    /**
+     * 展示新晋小组
+     *
+     * @param groupNumber
+     * @return
+     */
     @RequestMapping(value = "/showNewGroup", method = RequestMethod.POST)
     @ResponseBody
     public List<GroupNew> showNewGroup(Integer groupNumber) {
         return groupGatewayManagement.showNewGroup(groupNumber);
     }
 
+    /**
+     * 展示最后更新的小组话题
+     *
+     * @param groupThreadNum
+     * @return
+     */
+    @RequestMapping(value = "/showRecentGroupThread", method = RequestMethod.POST)
+    @ResponseBody
+    public List<GroupThreadShow> showRecentGroupThread(Integer groupThreadNum) {
+        return groupGatewayManagement.showRecentGroupThread(groupThreadNum);
+    }
 }
