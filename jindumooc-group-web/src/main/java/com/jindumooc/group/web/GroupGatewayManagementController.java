@@ -99,4 +99,16 @@ public class GroupGatewayManagementController {
     public List<GroupThreadShow> showRecentGroupThread(Integer groupThreadNum) {
         return groupGatewayManagement.showRecentGroupThread(groupThreadNum);
     }
+
+    /**
+     * 查看我加入的小组
+     *
+     * @param userID
+     * @return
+     */
+    @RequestMapping(value = "/showMyGroup", method = RequestMethod.POST)
+    @ResponseBody
+    public List<GroupShow> showMyGroup(Integer userID) {
+        return groupGatewayManagement.showMyGroup(userID);
+    }
 }

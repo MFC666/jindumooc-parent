@@ -2,14 +2,12 @@ package com.jindumooc.group.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.jindumooc.dao.GroupsMapper;
+import com.jindumooc.dao.GroupsMemberMapper;
 import com.jindumooc.dao.GroupsThreadMapper;
 import com.jindumooc.dao.UserMapper;
 import com.jindumooc.dto.group.GroupIdDTO;
 import com.jindumooc.group.service.GroupGatewayManagement;
-import com.jindumooc.pojo.Groups;
-import com.jindumooc.pojo.GroupsExample;
-import com.jindumooc.pojo.GroupsThread;
-import com.jindumooc.pojo.User;
+import com.jindumooc.pojo.*;
 import com.jindumooc.vojo.group.GroupIntroduction;
 import com.jindumooc.vojo.group.GroupNew;
 import com.jindumooc.vojo.group.GroupShow;
@@ -34,6 +32,9 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private GroupsMemberMapper groupsMemberMapper;
 
     /**
      * 添加新的小组，如果执行过程中有任何异常抛出，则返回false
@@ -191,6 +192,45 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
                 groupThreadShows.add(groupThreadShow);
             }
             return groupThreadShows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 查看我加入的小组
+     *
+     * @param userID
+     * @return
+     */
+    @Override
+    public List<GroupShow> showMyGroup(Integer userID) {
+        try {
+            //创建小组成员示例
+            GroupsMemberExample groupsMemberExample = new GroupsMemberExample();
+            GroupsMemberExample.Criteria criteria = groupsMemberExample.createCriteria();
+            //设置条件为userID相等
+            criteria.andUseridEqualTo(userID);
+
+            List<GroupsMember> groupsMembers = groupsMemberMapper.selectByExample(groupsMemberExample);
+            List<Groups> groups = new ArrayList<>();
+            List<GroupShow> groupShows = new ArrayList<>();
+            //遍历
+            for (GroupsMember g :
+                    groupsMembers) {
+                Groups group = groupsMapper.selectByPrimaryKey(g.getGroupid());
+                groups.add(group);
+            }
+            //遍历
+            for (Groups g :
+                    groups) {
+                GroupShow groupShow = new GroupShow();
+                groupShow.setGroupLogo(g.getLogo());
+                groupShow.setGroupTitle(g.getTitle());
+                groupShows.add(groupShow);
+            }
+            return groupShows;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

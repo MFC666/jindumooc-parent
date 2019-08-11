@@ -61,4 +61,11 @@ public interface GroupGatewayManagement {
      * @return
      */
     List<GroupThreadShow> showRecentGroupThread(Integer groupThreadNum);
+
+    /**
+     * 查看我加入的小组
+     *
+     * @return
+     */
+    List<GroupShow> showMyGroup(Integer userID);
 }
