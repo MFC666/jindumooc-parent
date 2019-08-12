@@ -1,6 +1,7 @@
 package com.jindumooc.group.service;
 
 import com.jindumooc.dto.group.GroupIdDTO;
+import com.jindumooc.dto.group.GroupThreadDTO;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.GroupIntroduction;
 import com.jindumooc.vojo.group.GroupNew;
@@ -84,4 +85,11 @@ public interface GroupGatewayManagement {
      * @return
      */
     List<GroupThreadShow> showMyGroupThreadCollect(Integer userID);
+
+    /**
+     * 发起一个小组话题
+     *
+     * @return
+     */
+    boolean createGroupThread(GroupThreadDTO groupThreadDTO);
 }

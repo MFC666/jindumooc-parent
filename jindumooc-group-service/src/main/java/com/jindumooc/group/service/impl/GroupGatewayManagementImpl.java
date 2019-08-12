@@ -3,6 +3,7 @@ package com.jindumooc.group.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.jindumooc.dao.*;
 import com.jindumooc.dto.group.GroupIdDTO;
+import com.jindumooc.dto.group.GroupThreadDTO;
 import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.*;
 import com.jindumooc.vojo.group.GroupIntroduction;
@@ -349,6 +350,37 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    /**
+     * 发起一个小组话题
+     *
+     * @param groupThreadDTO
+     * @return
+     */
+    @Override
+    public boolean createGroupThread(GroupThreadDTO groupThreadDTO) {
+        try {
+            String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            long time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date).getTime();
+            int currentTime = (int) (time / 1000);
+
+            GroupsThread groupsThread = new GroupsThread();
+            groupsThread.setContent(groupThreadDTO.getContent());
+            groupsThread.setGroupid(groupThreadDTO.getGroupId());
+            groupsThread.setTitle(groupThreadDTO.getTitle());
+            groupsThread.setUserid(groupThreadDTO.getUserId());
+            groupsThread.setType(groupThreadDTO.getType());
+
+            groupsThread.setCreatedtime(currentTime);
+            groupsThread.setUpdatedtime(currentTime);
+
+            groupsThreadMapper.insertSelective(groupsThread);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

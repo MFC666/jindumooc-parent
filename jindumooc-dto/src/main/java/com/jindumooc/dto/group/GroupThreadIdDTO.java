@@ -2,15 +2,9 @@ package com.jindumooc.dto.group;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class GroupThreadIdDTO {
-    private int threadID;
-
-    public int getThreadID() {
-        return threadID;
-    }
-
-    public void setThreadID(int threadID) {
-        this.threadID = threadID;
-    }
+public class GroupThreadIdDTO implements Serializable {
+    private Integer threadID;
 }

@@ -2,6 +2,7 @@ package com.jindumooc.group.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jindumooc.dto.group.GroupIdDTO;
+import com.jindumooc.dto.group.GroupThreadDTO;
 import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.GroupIntroduction;
@@ -135,4 +136,17 @@ public class GroupGatewayManagementController {
     public List<GroupThreadShow> showMyGroupThreadCollect(Integer userID) {
         return groupGatewayManagement.showMyGroupThreadCollect(userID);
     }
+
+    /**
+     * 发起一个小组话题
+     *
+     * @param groupThreadDTO
+     * @return
+     */
+    @RequestMapping(value = "/createGroupThread", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean createGroupThread(GroupThreadDTO groupThreadDTO) {
+        return groupGatewayManagement.createGroupThread(groupThreadDTO);
+    }
+
 }
