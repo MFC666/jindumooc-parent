@@ -1,4 +1,4 @@
-package com.jindumooc.information.service;
+package com.jindumooc.information.service.Impl;
 
 import com.jindumooc.vojo.Article;
 import com.jindumooc.vojo.ArticleCategory;

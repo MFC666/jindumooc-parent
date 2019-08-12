@@ -1,7 +1,14 @@
 package com.jindumooc.vojo.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TeachingClassroom implements Serializable {
 
     //储存在教班级
@@ -23,75 +30,5 @@ public class TeachingClassroom implements Serializable {
 
     private int todayNewStudent;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSmallpicture() {
-        return smallpicture;
-    }
-
-    public void setSmallpicture(String smallpicture) {
-        this.smallpicture = smallpicture;
-    }
-
-    public String getMiddlepicture() {
-        return middlepicture;
-    }
-
-    public void setMiddlepicture(String middlepicture) {
-        this.middlepicture = middlepicture;
-    }
-
-    public String getLargepicture() {
-        return largepicture;
-    }
-
-    public void setLargepicture(String largepicture) {
-        this.largepicture = largepicture;
-    }
-
-    public Integer getStudentnum() {
-        return studentnum;
-    }
-
-    public void setStudentnum(Integer studentnum) {
-        this.studentnum = studentnum;
-    }
-
-    public Integer getCoursenum() {
-        return coursenum;
-    }
-
-    public void setCoursenum(Integer coursenum) {
-        this.coursenum = coursenum;
-    }
-
-    public Integer getThreadnum() {
-        return threadnum;
-    }
-
-    public void setThreadnum(Integer threadnum) {
-        this.threadnum = threadnum;
-    }
-
-    public int getTodayNewStudent() {
-        return todayNewStudent;
-    }
-
-    public void setTodayNewStudent(int todayNewStudent) {
-        this.todayNewStudent = todayNewStudent;
-    }
 }

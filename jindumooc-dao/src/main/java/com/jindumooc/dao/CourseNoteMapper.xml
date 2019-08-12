@@ -355,4 +355,32 @@
       courseSetId = #{coursesetid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getNoteList" resultMap="getNoteListMap">
+    SELECT c.id AS courseId,c.title AS coursrTitle,n.updatedTime,count(*) AS noteNum
+    FROM course_v8 c,course_note n
+    WHERE n.courseId = c.id AND n.userId = #{userId}
+    GROUP BY c.id
+  </select>
+  <resultMap id="getNoteListMap" type="com.jindumooc.vojo.user.Note">
+    <result column="coursrTitle" property="coursrTitle" jdbcType="VARCHAR"/>
+    <result column="courseId" property="courseId" jdbcType="INTEGER"/>
+    <result column="updatedTime" property="updatedTime" jdbcType="INTEGER"/>
+    <result column="noteNum" property="noteNum" jdbcType="INTEGER"/>
+  </resultMap>
+  <select id="getNoteDetail" resultMap="getNoteDetailMap">
+    SELECT n.id,c.id AS courseId,n.userId AS userId,t.id AS taskId,t.title AS taskTitle,n.content,n.length,c.title AS coursrTitle,n.updatedTime
+    FROM course_v8 c,course_note n,course_task t
+    WHERE n.taskId = t.id AND n.courseId = c.id AND n.userId = #{userId} AND c.id = #{courseId}
+  </select>
+  <resultMap id="getNoteDetailMap" type="com.jindumooc.vojo.user.Note">
+    <result column="id" property="id" jdbcType="INTEGER"/>
+    <result column="courseId" property="courseId" jdbcType="INTEGER"/>
+    <result column="userId" property="userId" jdbcType="INTEGER"/>
+    <result column="taskId" property="taskId" jdbcType="INTEGER"/>
+    <result column="taskTitle" property="taskTitle" jdbcType="VARCHAR"/>
+    <result column="content" property="content" jdbcType="VARCHAR"/>
+    <result column="coursrTitle" property="coursrTitle" jdbcType="VARCHAR"/>
+    <result column="updatedTime" property="updatedTime" jdbcType="INTEGER"/>
+    <result column="length" property="length" jdbcType="INTEGER"/>
+  </resultMap>
 </mapper>

@@ -7,6 +7,7 @@ import com.jindumooc.pojo.UserProfileExample;
 import com.jindumooc.pojo.UserProfileWithBLOBs;
 import java.util.List;
 
+import com.jindumooc.vojo.user.PersonalDetail;
 import com.jindumooc.vojo.user.UserDetail;
 import org.apache.ibatis.annotations.Param;
 
@@ -42,4 +43,8 @@ public interface UserProfileMapper {
     UserDetail getUserDetail(int userId);
 
     void updateUserDetail(EditUser editUser);
+
+    PersonalDetail getPersonalDetail(@Param("userId") int userId);
+
+    String updatePersonalDetail(PersonalDetail personalDetail);
 }

@@ -461,4 +461,20 @@
       deadlineNotified = #{deadlinenotified,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getLearningClassroom" resultMap="getLearningClassroomMap">
+    SELECT count(*) AS todayClassroom,c.title,c.largePicture,c.middlePicture,c.smallPicture,c.courseNum
+    FROM classroom_member m,classroom c
+    WHERE m.classroomId = c.id AND m.userId = #{userId}
+  </select>
+  <resultMap id="getLearningClassroomMap" type="com.jindumooc.vojo.user.LearningClassroom">
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="smallpicture" property="smallPicture" jdbcType="VARCHAR" />
+    <result column="middlepicture" property="middlePicture" jdbcType="VARCHAR" />
+    <result column="largepicture" property="largePicture" jdbcType="VARCHAR" />
+    <result column="studentnum" property="studentnum" jdbcType="INTEGER" />
+    <result column="coursenum" property="coursenum" jdbcType="INTEGER" />
+    <result column="threadnum" property="threadnum" jdbcType="INTEGER" />
+    <result column="todayClassroom" property="todayClassroom" jdbcType="INTEGER" />
+  </resultMap>
 </mapper>

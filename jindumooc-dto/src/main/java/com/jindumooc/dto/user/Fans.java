@@ -5,15 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherPromoted implements Serializable {
-    //推荐教师
-    private int userId;
-    //设置推荐
-    private int promoted;
+public class Fans implements Serializable {
 
-    private int promotedSeq;
+    private int fromId;
 
+    private int toId;
 }

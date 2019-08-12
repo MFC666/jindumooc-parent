@@ -11,13 +11,3 @@ dubbo:
   ##### 调用服务超时时间
   consumer:
     timeout: 10000
-# Swagger界面内容配置
-swagger:
-  title: DevPlatform API接口文档
-  description: DevPlatform Api Documentation
-  version: 1.0.0
-  termsOfServiceUrl: https://gitee.com
-  contact:
-    name: Meng FanChun
-    url: https://gitee.com/
-    email: 522183973@qq.com

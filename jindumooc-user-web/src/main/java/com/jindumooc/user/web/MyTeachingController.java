@@ -1,14 +1,20 @@
 package com.jindumooc.user.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jindumooc.info.service.MyTeaching;
+import com.jindumooc.Result.Result;
+import com.jindumooc.Result.ResultGenerator;
+import com.jindumooc.user.service.MyTeaching;
 import com.jindumooc.vojo.user.*;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+@Controller
 public class MyTeachingController {
 
     @Reference
@@ -23,28 +29,32 @@ public class MyTeachingController {
      * @param pageSize
      * @return
      */
+    @ApiOperation("获取在教课程")
     @GetMapping("/user/getTeachingCourse")
     @ResponseBody
-    public List<TeachingCourse> getTeachingCourse(@RequestParam(defaultValue = "")String teacherId,@RequestParam(defaultValue = "")String courseType,@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "10") int pageSize){
+    public Result getTeachingCourse(@RequestParam(defaultValue = "")String teacherId, @RequestParam(defaultValue = "")String courseType, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize){
         if(teacherId==null||teacherId==""){
-            return null;
+            return ResultGenerator.genFailResult("参数错误");
         }
-        return myTeaching.getTeachingCourse("|"+teacherId+"|",courseType,pageNum,pageSize);
+
+        return ResultGenerator.genSuccessResult(myTeaching.getTeachingCourse("|"+teacherId+"|",courseType,pageNum,pageSize));
+
     }
 
     /**
      * 获得在教班级
      */
+    @ApiOperation("获取在教班级")
     @GetMapping("/user/getTeachingClassroom")
     @ResponseBody
-    public List<TeachingClassroom> getTeachingClassroom(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize, @RequestParam(defaultValue = "0") int teacherId){
+    public Result getTeachingClassroom(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize, @RequestParam(defaultValue = "0") int teacherId){
 
         if(0==teacherId){
 
-            return null;
+            return ResultGenerator.genFailResult("参数错误");
         }
 
-        return myTeaching.getTeachingClassroom(pageNum,pageSize,teacherId);
+        return ResultGenerator.genSuccessResult(myTeaching.getTeachingClassroom(pageNum,pageSize,teacherId));
     }
 
     /**
@@ -54,11 +64,16 @@ public class MyTeachingController {
      * @param teacherId
      * @return
      */
+    @ApiOperation("获取课程问题")
     @GetMapping("/user/getCourseQuestion")
     @ResponseBody
-    public List<CourseThread> getCourseQuestion(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10")int pageSize, @RequestParam(defaultValue = "0") int teacherId){
+    public Result getCourseQuestion(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10")int pageSize, @RequestParam(defaultValue = "0") int teacherId){
 
-        return myTeaching.getCourseQuestion(pageNum,pageSize,teacherId);
+        if(0==teacherId){
+
+            return ResultGenerator.genFailResult("参数错误");
+        }
+        return ResultGenerator.genSuccessResult(myTeaching.getCourseQuestion(pageNum,pageSize,teacherId));
 
     }
 
@@ -70,11 +85,17 @@ public class MyTeachingController {
      * @param threadType，话题类型
      * @return
      */
+    @ApiOperation("获取学生话题")
     @GetMapping("/user/getCourseDiscussion")
     @ResponseBody
-    public List<CourseThread> getCourseDiscussion(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10")int pageSize, @RequestParam(defaultValue = "0") int teacherId,@RequestParam(defaultValue = "null") String threadType){
+    public Result getCourseDiscussion(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10")int pageSize, @RequestParam(defaultValue = "0") int teacherId,@RequestParam(defaultValue = "null") String threadType){
 
-        return myTeaching.getCourseDiscussion(pageNum,pageSize,teacherId,threadType);
+        if(0==teacherId||threadType.equals(null)){
+
+            return ResultGenerator.genFailResult("参数错误");
+        }
+
+        return ResultGenerator.genSuccessResult(myTeaching.getCourseDiscussion(pageNum,pageSize,teacherId,threadType));
     }
 
     /**
@@ -85,15 +106,16 @@ public class MyTeachingController {
      * @param testPaperStatus ：考试状态，已结束/批阅中。。
      * @return
      */
+    @ApiOperation("获取学生考试结果")
     @GetMapping("/user/getTestPaperResult")
     @ResponseBody
-    public List<TestPaperResult> getTestPaperResult(@RequestParam(defaultValue = "1")int pageNum,@RequestParam(defaultValue = "10")int pageSize,@RequestParam(defaultValue = "0")int teacherId,@RequestParam(defaultValue = "0")String testPaperStatus){
+    public Result getTestPaperResult(@RequestParam(defaultValue = "1")int pageNum,@RequestParam(defaultValue = "10")int pageSize,@RequestParam(defaultValue = "0")int teacherId,@RequestParam(defaultValue = "0")String testPaperStatus){
         if(testPaperStatus == "0" || teacherId == 0){
 
-            return null;
+            return ResultGenerator.genFailResult("参数错误");
         }else{
 
-            return myTeaching.getTestPaperResult(pageNum,pageSize,teacherId,testPaperStatus);
+            return ResultGenerator.genSuccessResult(myTeaching.getTestPaperResult(pageNum,pageSize,teacherId,testPaperStatus));
         }
 
     }
@@ -106,6 +128,7 @@ public class MyTeachingController {
      * @param testPaperStatus
      * @return
      */
+    @ApiOperation("获取课后作业")
     @GetMapping("/user/getHomeWork")
     @ResponseBody
     public List<HomeWork> getHomeWork(@RequestParam(defaultValue = "1")int pageNum, @RequestParam(defaultValue = "10")int pageSize, @RequestParam(defaultValue = "0")int teacherId, @RequestParam(defaultValue = "0")String testPaperStatus){

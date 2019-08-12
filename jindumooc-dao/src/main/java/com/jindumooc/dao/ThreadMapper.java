@@ -38,4 +38,6 @@ public interface ThreadMapper {
     int updateByPrimaryKey(Thread record);
 
     List<CourseThread> getCourseDiscussion(@Param("teacherId") String teacherId);
+
+    List<CourseThread> getMyDiscussion(@Param("userId") int userId);
 }

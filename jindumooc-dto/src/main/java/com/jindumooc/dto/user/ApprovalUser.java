@@ -1,7 +1,13 @@
 package com.jindumooc.dto.user;
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ApprovalUser implements Serializable {
 
     //用于更新用户的实名认证的状态
@@ -14,15 +20,4 @@ public class ApprovalUser implements Serializable {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getApprovalStatus() {
-        return approvalStatus;
-    }
-
-    public void setApprovalStatus(String approvalStatus) {
-        this.approvalStatus = approvalStatus;
-    }
 }

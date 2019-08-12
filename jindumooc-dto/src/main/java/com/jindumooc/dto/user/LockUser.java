@@ -1,7 +1,13 @@
 package com.jindumooc.dto.user;
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class LockUser implements Serializable {
 
     //封禁用户
@@ -10,19 +16,5 @@ public class LockUser implements Serializable {
     //锁定用户
     private int locked;
 
-    public int getUserId() {
-        return userId;
-    }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getLocked() {
-        return locked;
-    }
-
-    public void setLocked(int locked) {
-        this.locked = locked;
-    }
 }

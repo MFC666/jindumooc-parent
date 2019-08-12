@@ -12,68 +12,30 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Teacher implements Serializable {
     //用于储存教师搜索
+
     private int id;
+
     private String nickName;
     //是否推荐、推荐为1，不推荐为0
+
     private int promoted;
+
     private String loginTime;
+
     private String loginArea;
+
     private String loginIp;
+
     private int totalNum;
 
-    public int getId() {
-        return id;
-    }
+    //教师职称
+    private String title;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    //教师头像
+    private String largeAvatar;
 
-    public String getNickName() {
-        return nickName;
-    }
+    //教师简介
+    private String about;
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
 
-    public int getPromoted() {
-        return promoted;
-    }
-
-    public void setPromoted(int promoted) {
-        this.promoted = promoted;
-    }
-
-    public String getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(String loginTime) {
-        this.loginTime = loginTime;
-    }
-
-    public String getLoginArea() {
-        return loginArea;
-    }
-
-    public void setLoginArea(String loginArea) {
-        this.loginArea = loginArea;
-    }
-
-    public String getLoginIp() {
-        return loginIp;
-    }
-
-    public void setLoginIp(String loginIp) {
-        this.loginIp = loginIp;
-    }
-
-    public int getTotalNum() {
-        return totalNum;
-    }
-
-    public void setTotalNum(int totalNum) {
-        this.totalNum = totalNum;
-    }
 }

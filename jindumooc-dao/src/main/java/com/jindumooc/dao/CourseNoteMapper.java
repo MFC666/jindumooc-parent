@@ -3,7 +3,10 @@ package com.jindumooc.dao;
 import com.jindumooc.pojo.CourseNote;
 import com.jindumooc.pojo.CourseNoteExample;
 import java.util.List;
+
+import com.jindumooc.vojo.user.Note;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface CourseNoteMapper {
     int countByExample(CourseNoteExample example);
@@ -33,4 +36,7 @@ public interface CourseNoteMapper {
     int updateByPrimaryKeyWithBLOBs(CourseNote record);
 
     int updateByPrimaryKey(CourseNote record);
+
+    List<Note> getNoteList(@Param("userId") int userId);
+    List<Note> getNoteDetail(@Param("userId") int userId,@Param("courseId") int courseId);
 }

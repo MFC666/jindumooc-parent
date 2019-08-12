@@ -3,6 +3,8 @@ package com.jindumooc.dao;
 import com.jindumooc.pojo.ClassroomMember;
 import com.jindumooc.pojo.ClassroomMemberExample;
 import java.util.List;
+
+import com.jindumooc.vojo.user.LearningClassroom;
 import org.apache.ibatis.annotations.Param;
 
 public interface ClassroomMemberMapper {
@@ -33,4 +35,6 @@ public interface ClassroomMemberMapper {
     int updateByPrimaryKeyWithBLOBs(ClassroomMember record);
 
     int updateByPrimaryKey(ClassroomMember record);
+
+    List<LearningClassroom> getLearningClassroom(@Param("userId") int userId);
 }

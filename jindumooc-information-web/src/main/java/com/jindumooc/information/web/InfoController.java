@@ -2,7 +2,7 @@ package com.jindumooc.information.web;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jindumooc.information.service.InfoService;
+import com.jindumooc.information.service.Impl.InfoService;
 import com.jindumooc.vojo.Article;
 import com.jindumooc.vojo.ArticleCategory;
 import com.jindumooc.vojo.ArticleEdit;

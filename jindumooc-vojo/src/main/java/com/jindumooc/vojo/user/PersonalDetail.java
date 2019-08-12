@@ -1,4 +1,4 @@
-package com.jindumooc.dto.user;
+package com.jindumooc.vojo.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,18 +9,19 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditUser implements Serializable {
+public class PersonalDetail implements Serializable {
 
     private int id;
 
-    private String truename;
+    private String trueName;
+
+    private String nickName;
 
     private String gender;
 
-    private String idcard;
+    private String about;
 
-
-    private String mobile;
+    private String title;
 
     private String company;
 
@@ -36,8 +37,9 @@ public class EditUser implements Serializable {
 
     private String signature;
 
-    private String about;
+    private String mediumAvatar;
 
-    private String iam;
+    private int fansNum;
 
+    private int followedNum;
 }

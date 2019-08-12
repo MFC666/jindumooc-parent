@@ -1,8 +1,9 @@
-package com.jindumooc.info.service;
+package com.jindumooc.user.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.*;
 import com.jindumooc.dto.user.*;
+import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.pojo.*;
 import com.jindumooc.pojo.UserApproval;
 import com.jindumooc.vojo.user.*;
@@ -252,8 +253,8 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
             if (userDetail.getIsweixinpublic() == 0) {
                 userDetail.setWeixin("秘密");
             }
-            userDetail.setLoginTime(typeConversion(userDetail.getLogintime()));
-            userDetail.setCreatedTime(typeConversion(userDetail.getCreatedtime()));
+            userDetail.setTransformedLoginTime(typeConversion(userDetail.getLogintime()));
+            userDetail.setTransformedCreatedTime(typeConversion(userDetail.getCreatedtime()));
 
             userDetail.setRolesName(divisionRoleCode(userDetail.getRoles()));
         }

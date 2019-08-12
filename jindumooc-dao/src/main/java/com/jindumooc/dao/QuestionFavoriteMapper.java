@@ -3,6 +3,8 @@ package com.jindumooc.dao;
 import com.jindumooc.pojo.QuestionFavorite;
 import com.jindumooc.pojo.QuestionFavoriteExample;
 import java.util.List;
+
+import com.jindumooc.vojo.user.QuestionMessage;
 import org.apache.ibatis.annotations.Param;
 
 public interface QuestionFavoriteMapper {
@@ -27,4 +29,8 @@ public interface QuestionFavoriteMapper {
     int updateByPrimaryKeySelective(QuestionFavorite record);
 
     int updateByPrimaryKey(QuestionFavorite record);
+
+    List<QuestionMessage> getFavoriteQuestion(@Param("userId") int userId);
+
+    QuestionMessage getQuestionDetail(@Param("questionId") int questionId);
 }

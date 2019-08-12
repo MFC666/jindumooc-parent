@@ -240,4 +240,30 @@
       createdTime = #{createdtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getFavoriteQuestion" resultMap="getFavoriteQuestionMap">
+    SELECT q.id,q.stem,f.createdTime,v.`name`
+    FROM question_favorite f,question q,testpaper_item_v8 t,testpaper_v8 v
+    WHERE f.questionId = q.id AND f.userId = #{userId} AND q.id = t.questionId AND t.testId = v.id
+  </select>
+  <resultMap id="getFavoriteQuestionMap" type="com.jindumooc.vojo.user.QuestionMessage">
+    <result column="id" property="id" jdbcType="INTEGER"/>
+    <result column="stem" property="stem" jdbcType="VARCHAR"/>
+    <result column="createdTime" property="createdTime" jdbcType="INTEGER"/>
+    <result column="name" property="testPaperName" jdbcType="VARCHAR"/>
+  </resultMap>
+  <select id="getQuestionDetail" resultMap="getQuestionDetailMap">
+    SELECT id,stem,`type`,score,answer,metas,difficulty,analysis
+    FROM question q
+    WHERE q.id = 115
+  </select>
+  <resultMap id="getQuestionDetail" type="com.jindumooc.vojo.user.QuestionMessage">
+    <result column="id" property="id" jdbcType="INTEGER"/>
+    <result column="type" property="type" jdbcType="VARCHAR"/>
+    <result column="stem" property="stem" jdbcType="VARCHAR"/>
+    <result column="score" property="score" jdbcType="DOUBLE"/>
+    <result column="answer" property="answer" jdbcType="VARCHAR"/>
+    <result column="metas" property="metas" jdbcType="VARCHAR"/>
+    <result column="difficulty" property="difficulty" jdbcType="VARCHAR"/>
+    <result column="analysis" property="analysis" jdbcType="VARCHAR"/>
+  </resultMap>
 </mapper>

@@ -508,4 +508,14 @@
     FROM course_v8 v,course_thread t
     WHERE v.id = t.courseId AND v.teacherIds LIKE "%${teacherId}%" AND t.type='discussion'
   </select>
+  <select id="getMyQuestion" resultType="com.jindumooc.vojo.user.CourseThread">
+    SELECT t.id,t.title,t.hitNum,t.courseId,v.title AS courseTitle,v.courseSetTitle,v.courseSetId
+    FROM course_v8 v,course_thread t
+    WHERE v.id = t.courseId AND v.userId = #{userId} AND t.type='question'
+  </select>
+  <select id="getMyDiscussion" resultType="com.jindumooc.vojo.user.CourseThread">
+    SELECT t.id,t.title,t.hitNum,t.courseId,v.title AS courseTitle,v.courseSetTitle,v.courseSetId
+    FROM course_v8 v,course_thread t,course_member m
+    WHERE m.courseId = v.id AND v.id = t.courseId AND m.userId = #{userId} AND t.type='discussion'
+  </select>
 </mapper>

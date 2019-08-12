@@ -952,4 +952,16 @@
     set promotedseq = #{promotedSeq}
     where id = #{userId}
   </update>
+  <select id="getTeachers" resultMap="getTeachersMap">
+    SELECT u.id,nickname,largeAvatar,title,about
+    FROM `user` u,user_profile p
+    WHERE u.roles like '%|ROLE_TEACHER|%' AND p.id = u.id
+  </select>
+  <resultMap id="getTeachersMap" type="com.jindumooc.vojo.user.Teacher">
+    <result column="id" property="id" jdbcType="INTEGER"/>
+    <result column="nickname" property="nickName" jdbcType="VARCHAR"/>
+    <result column="largeAvatar" property="largeAvatar" jdbcType="VARCHAR"/>
+    <result column="title" property="title" jdbcType="VARCHAR"/>
+    <result column="about" property="about" jdbcType="VARCHAR"/>
+  </resultMap>
 </mapper>

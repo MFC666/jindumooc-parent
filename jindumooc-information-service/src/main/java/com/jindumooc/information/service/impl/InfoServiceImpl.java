@@ -1,19 +1,17 @@
-package com.jindumooc.info.service;
+package com.jindumooc.information.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 
 import com.jindumooc.dao.InfoBackMapper;
 import com.jindumooc.dao.InfoMapper;
-import com.jindumooc.information.service.InfoService;
+import com.jindumooc.information.service.Impl.InfoService;
 import com.jindumooc.vojo.Article;
 import com.jindumooc.vojo.ArticleCategory;
 import com.jindumooc.vojo.ArticleEdit;
 import com.jindumooc.vojo.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Service

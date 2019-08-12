@@ -53,4 +53,6 @@ public interface UserMapper {
     void updatePromoted(TeacherPromoted teacherPromoted);
 
     void updatePromotedSeq(TeacherPromoted teacherPromoted);
+
+    List<Teacher> getTeachers();
 }

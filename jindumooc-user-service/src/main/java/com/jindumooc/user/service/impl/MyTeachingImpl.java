@@ -1,7 +1,9 @@
-package com.jindumooc.info.service;
+package com.jindumooc.user.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.*;
+import com.jindumooc.user.service.MyTeaching;
 import com.jindumooc.vojo.user.TeachingClassroom;
 import com.jindumooc.vojo.user.TeachingCourse;
 import com.jindumooc.vojo.user.CourseThread;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 
+@Service
 public class MyTeachingImpl implements MyTeaching {
 
 
@@ -93,7 +96,7 @@ public class MyTeachingImpl implements MyTeaching {
             PageHelper.startPage(pageNum,pageSize);
             courseThreadList = courseThreadMapper.getCourseDiscussion("|"+teacherId+"|");
         }else if(threadType=="classMemberThread"){
-
+            PageHelper.startPage(pageNum,pageSize);
             courseThreadList = threadMapper.getCourseDiscussion("|"+teacherId+"|");
         }else{
 

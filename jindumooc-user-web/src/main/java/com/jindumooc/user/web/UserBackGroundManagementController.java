@@ -4,8 +4,10 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.jindumooc.Result.Result;
 import com.jindumooc.Result.ResultGenerator;
 import com.jindumooc.dto.user.*;
-import com.jindumooc.info.service.UserBackGroundManagement;
+import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.vojo.user.*;
+
+import io.swagger.annotations.ApiOperation;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,7 @@ public class UserBackGroundManagementController {
      * @param sm 获取后台管理中用户管理的首页用户、搜索用户
      * @return
      */
+    @ApiOperation("获取主页用户")
     @PostMapping("/user/getIndexUser")
     @ResponseBody
     public Result getIndexUser(@RequestBody SearchMessage sm)
@@ -50,6 +53,7 @@ public class UserBackGroundManagementController {
      * @param lockMessage 填写封禁用户信息
      * @return
      */
+    @ApiOperation("封禁用户")
     @PutMapping("/user/lockedUser")
     @ResponseBody
     public boolean lockedUser(@RequestBody LockUser lockMessage){
@@ -61,6 +65,7 @@ public class UserBackGroundManagementController {
      * 获取所有用户组名
      * @return
      */
+    @ApiOperation("获取所有角色")
     @GetMapping("/user/getAllRoles")
     @ResponseBody
     public List<AllRoles> getAllRoles(){
@@ -73,6 +78,7 @@ public class UserBackGroundManagementController {
      * @param userRole
      * @return
      */
+    @ApiOperation("修改用户角色")
     @PutMapping("/user/updateUserRole")
     @ResponseBody
     public boolean updateUserRole(@RequestBody UserRole userRole){
@@ -86,6 +92,7 @@ public class UserBackGroundManagementController {
      * @param pageSize
      * @return
      */
+    @ApiOperation("获取用户数据统计")
     @GetMapping("/user/getUserDataStatisticsList")
     @ResponseBody
     public List<UserDataStatistics> getUserDataStatisticsList(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "10") int pageSize){
@@ -100,6 +107,7 @@ public class UserBackGroundManagementController {
      * @param nickName
      * @return
      */
+    @ApiOperation("搜索用户数据统计")
     @GetMapping("/user/searchUserDataStatistics")
     @ResponseBody
     public List<UserDataStatistics> searchUserDataStatistics(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "10")int pageSize,@RequestParam String nickName){
@@ -113,6 +121,7 @@ public class UserBackGroundManagementController {
      * @param response
      * @throws IOException
      */
+    @ApiOperation("导出用户数据统计")
     @GetMapping("/user/exportDataStatistics")
     @ResponseBody
     public void exportDataStatistics(@RequestParam(defaultValue = " ") String nickName,HttpServletResponse response) throws IOException {
@@ -140,14 +149,14 @@ public class UserBackGroundManagementController {
 
         for (UserDataStatistics userDataStatistics:userDataStatisticsList) {
             HSSFRow row1 = sheet.createRow(rowNum);
-            row.createCell(0).setCellValue(userDataStatistics.getUserId());
-            row.createCell(1).setCellValue(userDataStatistics.getNickName());
-            row.createCell(2).setCellValue(userDataStatistics.getJoinedClassroomNum());
-            row.createCell(3).setCellValue(userDataStatistics.getExitClassroomNum());
-            row.createCell(4).setCellValue(userDataStatistics.getJoinedCourseNum());
-            row.createCell(5).setCellValue(userDataStatistics.getExitCourseNum());
-            row.createCell(6).setCellValue(userDataStatistics.getFinishedTaskNum());
-            row.createCell(7).setCellValue(userDataStatistics.getLearnedSeconds());
+            row1.createCell(0).setCellValue(userDataStatistics.getUserId());
+            row1.createCell(1).setCellValue(userDataStatistics.getNickName());
+            row1.createCell(2).setCellValue(userDataStatistics.getJoinedClassroomNum());
+            row1.createCell(3).setCellValue(userDataStatistics.getExitClassroomNum());
+            row1.createCell(4).setCellValue(userDataStatistics.getJoinedCourseNum());
+            row1.createCell(5).setCellValue(userDataStatistics.getExitCourseNum());
+            row1.createCell(6).setCellValue(userDataStatistics.getFinishedTaskNum());
+            row1.createCell(7).setCellValue(userDataStatistics.getLearnedSeconds());
             rowNum++;
 
         }
@@ -163,6 +172,7 @@ public class UserBackGroundManagementController {
      * @param nickName 用户名
      * @return
      */
+    @ApiOperation("搜索教师")
     @GetMapping("/user/getAllTeachers")
     @ResponseBody
     public List<Teacher> getAllTeachers(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "10") int pageSize,@RequestParam(defaultValue = "") String nickName){
@@ -175,6 +185,7 @@ public class UserBackGroundManagementController {
      * @param teacherPromoted
      * @return
      */
+    @ApiOperation("设置推荐教师")
     @PutMapping("/user/updatePromoted")
     @ResponseBody
     public boolean updatePromoted(@RequestBody TeacherPromoted teacherPromoted){
@@ -182,6 +193,7 @@ public class UserBackGroundManagementController {
         return userBackGroundManagement.updatePromoted(teacherPromoted);
     }
 
+    @ApiOperation("修改推荐序号")
     @PutMapping("/user/updatePromotedSeq")
     @ResponseBody
     public boolean updatePromotedSeq(@RequestBody TeacherPromoted teacherPromoted){
@@ -194,6 +206,7 @@ public class UserBackGroundManagementController {
      * @param sm
      * @return
      */
+    @ApiOperation("获取用户实名认证")
     @PostMapping("/user/getUserApproval")
     @ResponseBody
     public List<UserApprovals> getUserApproval(@RequestBody SearchMessage sm){
@@ -208,6 +221,7 @@ public class UserBackGroundManagementController {
      * @param userApproval
      * @return
      */
+    @ApiOperation("修改用户实名认证状态")
     @PutMapping("/user/updateUserApproval")
     @ResponseBody
     public boolean updateUserApproval(@RequestBody ApprovalUser userApproval){
@@ -221,6 +235,7 @@ public class UserBackGroundManagementController {
      * @param sm
      * @return
      */
+    @ApiOperation("获取私信")
     @PostMapping("/user/getAllMessages")
     @ResponseBody
     public List<Messages> getAllMessages(@RequestBody SearchMessage sm){
@@ -233,6 +248,7 @@ public class UserBackGroundManagementController {
      * @param idList 需要删除的id列表
      * @return
      */
+    @ApiOperation("删除私信")
     @DeleteMapping("/user/delMessages")
     @ResponseBody
     public Boolean delMessages(@RequestParam List<Integer> idList){
@@ -245,6 +261,7 @@ public class UserBackGroundManagementController {
      * @param
      * @return
      */
+    @ApiOperation("查看用户详情")
     @GetMapping("/user/getUserDetail")
     @ResponseBody
     public UserDetail getUserDetail(@RequestParam(defaultValue = "0") int userId){
@@ -256,6 +273,7 @@ public class UserBackGroundManagementController {
      * @param editUser
      * @return
      */
+    @ApiOperation("编辑单个用户信息")
     @PutMapping("/user/updateUserDetail")
     @ResponseBody
     public boolean updateUserDetail(@RequestBody EditUser editUser){
@@ -263,10 +281,10 @@ public class UserBackGroundManagementController {
         return userBackGroundManagement.updateUserDetail(editUser);
     }
 
-    /*
+    /**
     上传头像
      */
-    @RequestMapping("/user/uploadAvatar")
+    @PostMapping("/user/uploadAvatar")
     @ResponseBody
     public String uploadAvatar(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request)throws IllegalStateException, IOException{
 
