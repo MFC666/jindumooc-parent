@@ -68,4 +68,20 @@ public interface GroupGatewayManagement {
      * @return
      */
     List<GroupShow> showMyGroup(Integer userID);
+
+    /**
+     * 查看我回复的话题
+     *
+     * @param userID
+     * @return
+     */
+    List<GroupThreadShow> showMyGroupThreadPost(Integer userID);
+
+    /**
+     * 查看我收藏的话题
+     *
+     * @param userID
+     * @return
+     */
+    List<GroupThreadShow> showMyGroupThreadCollect(Integer userID);
 }

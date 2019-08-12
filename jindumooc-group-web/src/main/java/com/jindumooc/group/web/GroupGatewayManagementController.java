@@ -111,4 +111,28 @@ public class GroupGatewayManagementController {
     public List<GroupShow> showMyGroup(Integer userID) {
         return groupGatewayManagement.showMyGroup(userID);
     }
+
+    /**
+     * 查看我回复的话题
+     *
+     * @param userID
+     * @return
+     */
+    @RequestMapping(value = "/showMyGroupThreadPost", method = RequestMethod.POST)
+    @ResponseBody
+    public List<GroupThreadShow> showMyGroupThreadPost(Integer userID) {
+        return groupGatewayManagement.showMyGroupThreadPost(userID);
+    }
+
+    /**
+     * 查看我收藏的话题
+     *
+     * @param userID
+     * @return
+     */
+    @RequestMapping(value = "/showMyGroupThreadCollect", method = RequestMethod.POST)
+    @ResponseBody
+    public List<GroupThreadShow> showMyGroupThreadCollect(Integer userID) {
+        return groupGatewayManagement.showMyGroupThreadCollect(userID);
+    }
 }

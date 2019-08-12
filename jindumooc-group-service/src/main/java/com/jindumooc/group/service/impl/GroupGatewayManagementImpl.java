@@ -1,10 +1,7 @@
 package com.jindumooc.group.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.jindumooc.dao.GroupsMapper;
-import com.jindumooc.dao.GroupsMemberMapper;
-import com.jindumooc.dao.GroupsThreadMapper;
-import com.jindumooc.dao.UserMapper;
+import com.jindumooc.dao.*;
 import com.jindumooc.dto.group.GroupIdDTO;
 import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.*;
@@ -35,6 +32,12 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
 
     @Autowired
     private GroupsMemberMapper groupsMemberMapper;
+
+    @Autowired
+    private GroupsThreadPostMapper groupsThreadPostMapper;
+
+    @Autowired
+    private GroupsThreadCollectMapper groupsThreadCollectMapper;
 
     /**
      * 添加新的小组，如果执行过程中有任何异常抛出，则返回false
@@ -231,6 +234,118 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
                 groupShows.add(groupShow);
             }
             return groupShows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 查看我回复的小组话题
+     *
+     * @param userID
+     * @return
+     */
+    @Override
+    public List<GroupThreadShow> showMyGroupThreadPost(Integer userID) {
+        try {
+            GroupsThreadPostExample groupsThreadPostExample = new GroupsThreadPostExample();
+            GroupsThreadPostExample.Criteria criteria = groupsThreadPostExample.createCriteria();
+            criteria.andUseridEqualTo(userID);
+
+            List<GroupsThreadPost> groupsThreadPosts = groupsThreadPostMapper.selectByExample(groupsThreadPostExample);
+            List<GroupsThread> groupsThreads = new ArrayList<>();
+            List<GroupThreadShow> groupThreadShows = new ArrayList<>();
+
+            for (GroupsThreadPost g : groupsThreadPosts) {
+                GroupsThread groupsThread = groupsThreadMapper.selectByPrimaryKey(g.getThreadid());
+                groupsThreads.add(groupsThread);
+            }
+
+            for (GroupsThread thread : groupsThreads) {
+                GroupThreadShow groupThreadShow = new GroupThreadShow();
+                int groupId = thread.getGroupid();
+                userID = thread.getUserid();
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                long createdTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                String createdTimeStr = dateFormat.format(createdTimeLong);
+
+                long updatedTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                String updatedTimeStr = dateFormat.format(updatedTimeLong);
+
+                groupThreadShow.setCreatedTime(createdTimeStr);
+                groupThreadShow.setUpdatedTime(updatedTimeStr);
+                groupThreadShow.setStatus(thread.getStatus());
+                groupThreadShow.setThreadContent(thread.getContent());
+                groupThreadShow.setThreadID(thread.getId());
+                groupThreadShow.setThreadTitle(thread.getTitle());
+                groupThreadShow.setIsElite(thread.getIselite());
+
+                Groups groups = groupsMapper.selectByPrimaryKey(groupId);
+                User user = userMapper.selectByPrimaryKey(userID);
+
+                groupThreadShow.setGroupName(groups.getTitle());
+                groupThreadShow.setUserName(user.getNickname());
+                groupThreadShows.add(groupThreadShow);
+            }
+            return groupThreadShows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 查看我收藏的小组话题
+     *
+     * @param userID
+     * @return
+     */
+    @Override
+    public List<GroupThreadShow> showMyGroupThreadCollect(Integer userID) {
+        try {
+            GroupsThreadCollectExample groupsThreadCollectExample = new GroupsThreadCollectExample();
+            GroupsThreadCollectExample.Criteria criteria = groupsThreadCollectExample.createCriteria();
+            criteria.andUseridEqualTo(userID);
+
+            List<GroupsThreadCollect> groupsThreadCollects = groupsThreadCollectMapper.selectByExample(groupsThreadCollectExample);
+            List<GroupsThread> groupsThreads = new ArrayList<>();
+            List<GroupThreadShow> groupThreadShows = new ArrayList<>();
+
+            for (GroupsThreadCollect g : groupsThreadCollects) {
+                GroupsThread groupsThread = groupsThreadMapper.selectByPrimaryKey(g.getThreadid());
+                groupsThreads.add(groupsThread);
+            }
+
+            for (GroupsThread thread : groupsThreads) {
+                GroupThreadShow groupThreadShow = new GroupThreadShow();
+                int groupId = thread.getGroupid();
+                userID = thread.getUserid();
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                long createdTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                String createdTimeStr = dateFormat.format(createdTimeLong);
+
+                long updatedTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                String updatedTimeStr = dateFormat.format(updatedTimeLong);
+
+                groupThreadShow.setCreatedTime(createdTimeStr);
+                groupThreadShow.setUpdatedTime(updatedTimeStr);
+                groupThreadShow.setStatus(thread.getStatus());
+                groupThreadShow.setThreadContent(thread.getContent());
+                groupThreadShow.setThreadID(thread.getId());
+                groupThreadShow.setThreadTitle(thread.getTitle());
+                groupThreadShow.setIsElite(thread.getIselite());
+
+                Groups groups = groupsMapper.selectByPrimaryKey(groupId);
+                User user = userMapper.selectByPrimaryKey(userID);
+
+                groupThreadShow.setGroupName(groups.getTitle());
+                groupThreadShow.setUserName(user.getNickname());
+                groupThreadShows.add(groupThreadShow);
+            }
+            return groupThreadShows;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
