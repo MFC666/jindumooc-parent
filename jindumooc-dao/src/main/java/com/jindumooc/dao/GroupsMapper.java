@@ -75,4 +75,28 @@ public interface GroupsMapper {
      * @return
      */
     List<Groups> showNewNGroups(Integer n);
+
+    /**
+     * 编辑小组名称和介绍
+     *
+     * @param group
+     * @return
+     */
+    int setGroupInfo(Groups group);
+
+    /**
+     * 设置小组图标
+     *
+     * @param group
+     * @return
+     */
+    int setGroupLogo(Groups group);
+
+    /**
+     * 设置小组背景
+     *
+     * @param group
+     * @return
+     */
+    int setGroupBackground(Groups group);
 }

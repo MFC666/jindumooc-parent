@@ -382,4 +382,20 @@
         from jindu.groups
         order by createdTime desc limit #{n,jdbcType=INTEGER}
     </select>
+    <update id="setGroupInfo" parameterType="com.jindumooc.pojo.Groups">
+    update jindu.groups
+    set title = #{title,jdbcType=VARCHAR},
+	  about = #{about,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setGroupLogo" parameterType="com.jindumooc.pojo.Groups">
+    update jindu.groups
+    set logo = #{logo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setGroupBackground" parameterType="com.jindumooc.pojo.Groups">
+    update jindu.groups
+    set backgroundLogo = #{backgroundlogo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

@@ -6,10 +6,9 @@ import com.jindumooc.dto.group.GroupIdDTO;
 import com.jindumooc.dto.group.GroupThreadDTO;
 import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.*;
-import com.jindumooc.vojo.group.GroupIntroduction;
-import com.jindumooc.vojo.group.GroupNew;
-import com.jindumooc.vojo.group.GroupShow;
-import com.jindumooc.vojo.group.GroupThreadShow;
+import com.jindumooc.vojo.group.*;
+import com.jindumooc.vojo.user.UserNew;
+import com.jindumooc.vojo.user.UserShow;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
@@ -381,6 +380,170 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     * 根据小组ID展示小组成员信息
+     *
+     * @param groupId
+     * @return
+     */
+    @Override
+    public List<UserShow> showGroupMembers(Integer groupId) {
+        try {
+            List<UserShow> userId_role = groupsMemberMapper.getGroupMembers(groupId);
+            List<UserShow> users = new ArrayList<>();
+            for (UserShow u :
+                    userId_role) {
+                UserShow user = groupsMemberMapper.showGroupMember(u.getUserId());
+                user.setRole(u.getRole());
+                users.add(user);
+            }
+            return users;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 展示小组新进成员
+     *
+     * @param memberNumber
+     * @return
+     */
+    @Override
+    public List<UserNew> showNewMembers(Integer groupId, Integer memberNumber) {
+        try {
+            List<Integer> userIds = groupsMemberMapper.getNewMembers(groupId, memberNumber);
+            List<UserNew> users = new ArrayList<>();
+            for (Integer userId :
+                    userIds) {
+                UserNew user = groupsMemberMapper.showNewMember(userId);
+                users.add(user);
+            }
+            return users;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 编辑小组名称和介绍
+     *
+     * @param groupId,title,about
+     * @return
+     */
+    @Override
+    public boolean setGroupInfo(Integer groupId, String title, String about) {
+        try {
+            Groups group = new Groups();
+            group.setId(groupId);
+            group.setTitle(title);
+            group.setAbout(about);
+            groupsMapper.setGroupInfo(group);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 设置小组图标
+     *
+     * @param groupId,logo
+     * @return
+     */
+    @Override
+    public boolean setGroupLogo(Integer groupId, String logo) {
+        try {
+            Groups group = new Groups();
+            group.setId(groupId);
+            group.setLogo(logo);
+            groupsMapper.setGroupLogo(group);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 设置小组背景
+     *
+     * @param groupId,background
+     * @return
+     */
+    @Override
+    public boolean setGroupBackground(Integer groupId, String background) {
+        try {
+            Groups group = new Groups();
+            group.setId(groupId);
+            group.setBackgroundlogo(background);
+            System.out.println(group);
+            groupsMapper.setGroupBackground(group);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 编辑话题信息
+     *
+     * @param threadId,title,content
+     * @return
+     */
+    @Override
+    public boolean updateThreadInfo(Integer threadId, String title, String content) {
+        try {
+            GroupsThread gt = new GroupsThread();
+            gt.setId(threadId);
+            gt.setTitle(title);
+            gt.setContent(content);
+
+            //获取当前时间
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
+            gt.setStatus(dateFormat.format(date));
+
+            groupsThreadMapper.updateThreadInfo(gt);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 搜索组内话题
+     *
+     * @param content
+     * @return
+     */
+    @Override
+    public List<GroupThreadSearch> searchThread(Integer groupId, String content) {
+        try {
+            List<GroupThreadSearch> gts = new ArrayList<>();
+            if (content != null) {
+                gts = groupsThreadMapper.searchThread(groupId, content);
+            } else {
+                gts = groupsThreadMapper.allThread(groupId);
+            }
+            for (GroupThreadSearch temp :
+                    gts) {
+                temp.setUserName(userMapper.getUserNameById(temp.getUserId()));
+                temp.setLastPostMemberName(userMapper.getUserNameById(temp.getLastPostMemberId()));
+            }
+            return gts;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

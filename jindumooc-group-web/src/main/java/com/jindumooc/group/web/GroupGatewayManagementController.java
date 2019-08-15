@@ -5,10 +5,9 @@ import com.jindumooc.dto.group.GroupIdDTO;
 import com.jindumooc.dto.group.GroupThreadDTO;
 import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.Groups;
-import com.jindumooc.vojo.group.GroupIntroduction;
-import com.jindumooc.vojo.group.GroupNew;
-import com.jindumooc.vojo.group.GroupShow;
-import com.jindumooc.vojo.group.GroupThreadShow;
+import com.jindumooc.vojo.group.*;
+import com.jindumooc.vojo.user.UserNew;
+import com.jindumooc.vojo.user.UserShow;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -149,4 +148,87 @@ public class GroupGatewayManagementController {
         return groupGatewayManagement.createGroupThread(groupThreadDTO);
     }
 
+    /**
+     * 根据小组ID展示小组成员信息
+     *
+     * @param groupId
+     * @return
+     */
+    @RequestMapping(value = "/showGroupMembers", method = RequestMethod.POST)
+    @ResponseBody
+    public List<UserShow> showGroupMembers(Integer groupId) {
+        return groupGatewayManagement.showGroupMembers(groupId);
+    }
+
+    /**
+     * 展示小组新进成员
+     *
+     * @param memberNumber
+     * @return
+     */
+    @RequestMapping(value = "/showNewMembers", method = RequestMethod.POST)
+    @ResponseBody
+    public List<UserNew> showNewMembers(Integer groupId, Integer memberNumber) {
+        return groupGatewayManagement.showNewMembers(groupId, memberNumber);
+    }
+
+    /**
+     * 编辑小组名称和介绍
+     *
+     * @param groupId,title,about
+     * @return
+     */
+    @RequestMapping(value = "/setGroupInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean setGroupInfo(Integer groupId, String title, String about) {
+        return groupGatewayManagement.setGroupInfo(groupId, title, about);
+    }
+
+    /**
+     * 设置小组图标
+     *
+     * @param groupId,logo
+     * @return
+     */
+    @RequestMapping(value = "/setGroupLogo", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean setGroupLogo(Integer groupId, String logo) {
+        return groupGatewayManagement.setGroupLogo(groupId, logo);
+    }
+
+    /**
+     * 设置小组背景
+     *
+     * @param groupId,background
+     * @return
+     */
+    @RequestMapping(value = "/setGroupBackground", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean setGroupBackground(Integer groupId, String background) {
+        return groupGatewayManagement.setGroupBackground(groupId, background);
+    }
+
+    /**
+     * 编辑小组名称和介绍
+     *
+     * @param groupThreadId,title,content
+     * @return
+     */
+    @RequestMapping(value = "/updateThreadInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean updateThreadInfo(Integer groupThreadId, String title, String content) {
+        return groupGatewayManagement.updateThreadInfo(groupThreadId, title, content);
+    }
+
+    /**
+     * 搜索组内话题
+     *
+     * @param content
+     * @return
+     */
+    @RequestMapping(value = "/searchThread ", method = RequestMethod.POST)
+    @ResponseBody
+    public List<GroupThreadSearch> searchThread(Integer groupId, String content) {
+        return groupGatewayManagement.searchThread(groupId, content);
+    }
 }

@@ -5,6 +5,7 @@ import com.jindumooc.pojo.GroupsThreadExample;
 
 import java.util.List;
 
+import com.jindumooc.vojo.group.GroupThreadSearch;
 import org.apache.ibatis.annotations.Param;
 
 public interface GroupsThreadMapper {
@@ -90,4 +91,30 @@ public interface GroupsThreadMapper {
      * @return
      */
     List<GroupsThread> showRecentGroupThread(Integer groupThreadNum);
+
+    /**
+     * 编辑话题信息
+     *
+     * @param gt
+     * @return
+     */
+    int updateThreadInfo(GroupsThread gt);
+
+
+    /**
+     * 搜索组内话题
+     *
+     * @param groupId,content
+     * @return
+     */
+    List<GroupThreadSearch> searchThread(@Param("groupId") Integer groupId, @Param("content") String content);
+
+    /**
+     * 返回组内全部话题
+     *
+     * @param groupId
+     * @return
+     */
+    List<GroupThreadSearch> allThread(Integer groupId);
+
 }

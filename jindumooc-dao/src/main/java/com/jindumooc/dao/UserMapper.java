@@ -5,6 +5,7 @@ import com.jindumooc.dto.user.TeacherPromoted;
 import com.jindumooc.dto.user.UserRole;
 import com.jindumooc.pojo.User;
 import com.jindumooc.pojo.UserExample;
+
 import java.util.List;
 
 import com.jindumooc.dto.user.SearchMessage;
@@ -55,4 +56,12 @@ public interface UserMapper {
     void updatePromotedSeq(TeacherPromoted teacherPromoted);
 
     List<Teacher> getTeachers();
+
+    /**
+     * 根据用户ID查找用户名称
+     *
+     * @param userId
+     * @return
+     */
+    String getUserNameById(Integer userId);
 }

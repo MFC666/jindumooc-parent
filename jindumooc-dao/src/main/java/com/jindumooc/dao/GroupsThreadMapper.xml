@@ -483,4 +483,37 @@
         order by updatedTime desc
         limit #{groupThreadNum,jdbcType=INTEGER}
   </select>
+    <update id="updateThreadInfo" parameterType="com.jindumooc.pojo.GroupsThread">
+    update jindu.groups_thread
+    set title = #{title,jdbcType=VARCHAR},
+	    updatedTime = UNIX_TIMESTAMP(#{status,jdbcType=INTEGER}),
+		content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="searchThread" resultType="com.jindumooc.vojo.group.GroupThreadSearch">
+        select id as threadID,
+            postNum,
+            isElite,
+            userId,
+            title as threadTitle,
+            FROM_UNIXTIME(lastPostTime) as lastPostTime,
+            lastPostMemberId,
+            FROM_UNIXTIME(createdTime) as createdTime,
+            status
+        from jindu.groups_thread
+        where groupId = #{groupId,jdbcType=INTEGER} and title like CONCAT('%',#{content,jdbcType=LONGVARCHAR},'%')
+    </select>
+    <select id="allThread" parameterType="java.lang.Integer" resultType="com.jindumooc.vojo.group.GroupThreadSearch">
+        select id as threadID,
+            postNum,
+            isElite,
+            userId,
+            title as threadTitle,
+            FROM_UNIXTIME(lastPostTime) as lastPostTime,
+            lastPostMemberId,
+            FROM_UNIXTIME(createdTime) as createdTime,
+            status
+        from jindu.groups_thread
+        where groupId = #{groupId,jdbcType=INTEGER}
+    </select>
 </mapper>

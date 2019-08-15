@@ -133,7 +133,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=INTEGER}
@@ -964,4 +964,8 @@
     <result column="title" property="title" jdbcType="VARCHAR"/>
     <result column="about" property="about" jdbcType="VARCHAR"/>
   </resultMap>
+  <select id="getUserNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select nicknamefrom user
+    where id = #{userId, jdbcType=INTEGER }
+   </select>
 </mapper>
