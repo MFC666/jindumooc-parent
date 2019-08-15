@@ -36,7 +36,7 @@ public class GroupGatewayManagementController {
      */
     @RequestMapping(value = "/addNewGroup", method = RequestMethod.POST)
     @ResponseBody
-    public boolean addNewGroup(Groups newGroup) {
+    public boolean addNewGroup(@RequestBody Groups newGroup) {
         return groupGatewayManagement.addNewGroup(newGroup);
     }
 
@@ -144,7 +144,7 @@ public class GroupGatewayManagementController {
      */
     @RequestMapping(value = "/createGroupThread", method = RequestMethod.POST)
     @ResponseBody
-    public boolean createGroupThread(GroupThreadDTO groupThreadDTO) {
+    public boolean createGroupThread(@RequestBody GroupThreadDTO groupThreadDTO) {
         return groupGatewayManagement.createGroupThread(groupThreadDTO);
     }
 

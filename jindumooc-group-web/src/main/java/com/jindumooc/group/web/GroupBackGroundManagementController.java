@@ -1,6 +1,7 @@
 package com.jindumooc.group.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.jindumooc.dto.group.GroupThreadAllDTO;
 import com.jindumooc.dto.group.GroupThreadIdDTO;
 import com.jindumooc.dto.group.SearchGroupDTO;
 import com.jindumooc.group.service.GroupBackGroundManagement;
@@ -28,7 +29,7 @@ public class GroupBackGroundManagementController {
      */
     @RequestMapping(value = "/getIndexGroup", method = RequestMethod.POST)
     @ResponseBody
-    public List<BackGroundIndexGroup> getIndexGroup(SearchGroupDTO searchGroupDTO) {
+    public List<BackGroundIndexGroup> getIndexGroup(@RequestBody SearchGroupDTO searchGroupDTO) {
         return groupBackGroundManagement.getIndexGroup(searchGroupDTO);
     }
 
@@ -63,8 +64,8 @@ public class GroupBackGroundManagementController {
      */
     @RequestMapping(value = "/showAllThread", method = RequestMethod.POST)
     @ResponseBody
-    public List<GroupThreadShow> showAllThread() {
-        return groupBackGroundManagement.showAllThread();
+    public List<GroupThreadShow> showAllThread(@RequestBody GroupThreadAllDTO groupThreadAllDTO) {
+        return groupBackGroundManagement.showAllThread(groupThreadAllDTO);
     }
 
     /**

@@ -117,4 +117,52 @@ public interface GroupsThreadMapper {
      */
     List<GroupThreadSearch> allThread(Integer groupId);
 
+    /**
+     * 返回所有的精华小组话题
+     *
+     * @return
+     */
+    List<GroupsThread> showAllEliteGroupThread();
+
+    /**
+     * 按照最近时间筛选
+     *
+     * @return
+     */
+    List<GroupsThread> screeningByTime();
+
+    /**
+     * 按照最后回复筛选
+     *
+     * @return
+     */
+    List<GroupsThread> screeningByLastPost();
+
+    /**
+     * 按照回复数筛选
+     *
+     * @return
+     */
+    List<GroupsThread> screeningByPostNum();
+
+    /**
+     * 按照最近时间筛选且精华
+     *
+     * @return
+     */
+    List<GroupsThread> screeningByTimeAndElite();
+
+    /**
+     * 按照最后回复筛选且精华
+     *
+     * @return
+     */
+    List<GroupsThread> screeningByLastPostAndElite();
+
+    /**
+     * 按照回复数筛选且精华
+     *
+     * @return
+     */
+    List<GroupsThread> screeningByPostNumAndElite();
 }

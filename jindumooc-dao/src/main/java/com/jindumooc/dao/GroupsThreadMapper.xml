@@ -516,4 +516,44 @@
         from jindu.groups_thread
         where groupId = #{groupId,jdbcType=INTEGER}
     </select>
+    <select id="showAllEliteGroupThread" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        where isElite = 1
+    </select>
+    <select id="screeningByTime" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        order by createdTime desc
+    </select>
+    <select id="screeningByLastPost" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        order by lastPostTime desc
+    </select>
+    <select id="screeningByPostNum" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        order by postNum desc
+    </select>
+    <select id="screeningByTimeAndElite" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        where isElite = 1
+        order by createdTime desc
+    </select>
+    <select id="screeningByLastPostAndElite" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        where isElite = 1
+        order by lastPostTime desc
+    </select>
+    <select id="screeningByPostNumAndElite" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        where isElite = 1
+        order by postNum desc
+    </select>
+
+
 </mapper>

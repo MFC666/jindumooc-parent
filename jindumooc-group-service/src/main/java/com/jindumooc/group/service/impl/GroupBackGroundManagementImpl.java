@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.GroupsMapper;
 import com.jindumooc.dao.GroupsThreadMapper;
 import com.jindumooc.dao.UserMapper;
+import com.jindumooc.dto.group.GroupThreadAllDTO;
 import com.jindumooc.dto.group.GroupThreadIdDTO;
 import com.jindumooc.group.service.GroupBackGroundManagement;
 import com.jindumooc.pojo.*;
@@ -83,16 +84,54 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     }
 
     /**
-     * 展示所有话题
+     * 展示所有小组话题
      *
      * @return
      */
     @Override
-    public List<GroupThreadShow> showAllThread() {
+    public List<GroupThreadShow> showAllThread(GroupThreadAllDTO groupThreadAllDTO) {
         try {
             List<GroupThreadShow> groupThreadShows = new ArrayList<>();
             GroupsThreadExample groupsThreadExample = new GroupsThreadExample();
-            List<GroupsThread> threads = groupsThreadMapper.selectByExample(groupsThreadExample);
+            List<GroupsThread> threads = new ArrayList<>();
+
+            if (groupThreadAllDTO.getIsReward()) {
+                switch (groupThreadAllDTO.getScreeningApproach()) {
+                    case "最新发帖":
+                        PageHelper.startPage(groupThreadAllDTO.getPageNum(), groupThreadAllDTO.getPageSize());
+                        threads = groupsThreadMapper.screeningByTimeAndElite();
+                        break;
+                    case "最后回复":
+                        PageHelper.startPage(groupThreadAllDTO.getPageNum(), groupThreadAllDTO.getPageSize());
+                        threads = groupsThreadMapper.screeningByLastPostAndElite();
+                        break;
+                    case "回复数":
+                        PageHelper.startPage(groupThreadAllDTO.getPageNum(), groupThreadAllDTO.getPageSize());
+                        threads = groupsThreadMapper.screeningByPostNumAndElite();
+                        break;
+                    default:
+                        PageHelper.startPage(groupThreadAllDTO.getPageNum(), groupThreadAllDTO.getPageSize());
+                        threads = groupsThreadMapper.showAllEliteGroupThread();
+                }
+            } else {
+                switch (groupThreadAllDTO.getScreeningApproach()) {
+                    case "最新发帖":
+                        PageHelper.startPage(groupThreadAllDTO.getPageNum(), groupThreadAllDTO.getPageSize());
+                        threads = groupsThreadMapper.screeningByTime();
+                        break;
+                    case "最后回复":
+                        PageHelper.startPage(groupThreadAllDTO.getPageNum(), groupThreadAllDTO.getPageSize());
+                        threads = groupsThreadMapper.screeningByLastPost();
+                        break;
+                    case "回复数":
+                        PageHelper.startPage(groupThreadAllDTO.getPageNum(), groupThreadAllDTO.getPageSize());
+                        threads = groupsThreadMapper.screeningByPostNum();
+                        break;
+                    default:
+                        PageHelper.startPage(groupThreadAllDTO.getPageNum(), groupThreadAllDTO.getPageSize());
+                        threads = groupsThreadMapper.selectByExample(groupsThreadExample);
+                }
+            }
             for (GroupsThread thread :
                     threads) {
                 GroupThreadShow groupThreadShow = new GroupThreadShow();

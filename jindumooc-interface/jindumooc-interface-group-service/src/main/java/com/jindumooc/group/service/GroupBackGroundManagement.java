@@ -1,5 +1,6 @@
 package com.jindumooc.group.service;
 
+import com.jindumooc.dto.group.GroupThreadAllDTO;
 import com.jindumooc.dto.group.SearchGroupDTO;
 import com.jindumooc.dto.group.GroupThreadIdDTO;
 import com.jindumooc.vojo.group.BackGroundIndexGroup;
@@ -25,11 +26,11 @@ public interface GroupBackGroundManagement {
     boolean closeGroupStatusByPrimaryKey(Integer id);
 
     /**
-     * 展示所有话题
+     * 展示所有小组话题
      *
      * @return
      */
-    List<GroupThreadShow> showAllThread();
+    List<GroupThreadShow> showAllThread(GroupThreadAllDTO groupThreadAllDTO);
 
     /**
      * 设置话题为加精
