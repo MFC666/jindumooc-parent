@@ -256,7 +256,7 @@
     FROM question q
     WHERE q.id = 115
   </select>
-  <resultMap id="getQuestionDetail" type="com.jindumooc.vojo.user.QuestionMessage">
+  <resultMap id="getQuestionDetailMap" type="com.jindumooc.vojo.user.QuestionMessage">
     <result column="id" property="id" jdbcType="INTEGER"/>
     <result column="type" property="type" jdbcType="VARCHAR"/>
     <result column="stem" property="stem" jdbcType="VARCHAR"/>

@@ -546,4 +546,39 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
             return null;
         }
     }
+
+    /**
+     * 发表新的回复，如果执行过程中有任何异常抛出，则返回false
+     *
+     * @param newPost
+     * @return
+     */
+    @Override
+    public boolean newPost(PostNew newPost) {
+        try {
+            GroupsThreadPost gtp = new GroupsThreadPost();
+            gtp.setThreadid(newPost.getThreadId());
+            gtp.setUserid(newPost.getUserId());
+            gtp.setContent(newPost.getContent());
+            gtp.setFromuserid(newPost.getFromUserId());
+            gtp.setPostid(newPost.getPostId());
+
+            //获取当前时间
+            String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            long time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date).getTime();
+            int currentTime = (int) (time / 1000);
+            gtp.setCreatedtime(currentTime);
+
+            gtp.setAdopt(0);
+
+            groupsThreadPostMapper.insert(gtp);
+            groupsThreadPostMapper.updateThreadPost(gtp);
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

@@ -149,4 +149,11 @@ public interface GroupGatewayManagement {
      */
     List<GroupThreadSearch> searchThread(Integer groupId, String content);
 
+    /**
+     * 发表新的回复，如果执行过程中有任何异常抛出，则返回false
+     *
+     * @param newPost
+     * @return
+     */
+    boolean newPost(PostNew newPost);
 }
