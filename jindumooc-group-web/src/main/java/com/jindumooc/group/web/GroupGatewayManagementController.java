@@ -1,8 +1,7 @@
 package com.jindumooc.group.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.jindumooc.dto.group.GroupIdDTO;
-import com.jindumooc.dto.group.GroupThreadDTO;
+import com.jindumooc.dto.group.*;
 import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.*;
@@ -163,73 +162,73 @@ public class GroupGatewayManagementController {
     /**
      * 展示小组新进成员
      *
-     * @param memberNumber
+     * @param showNewPostDTO
      * @return
      */
     @RequestMapping(value = "/showNewMembers", method = RequestMethod.POST)
     @ResponseBody
-    public List<UserNew> showNewMembers(Integer groupId, Integer memberNumber) {
-        return groupGatewayManagement.showNewMembers(groupId, memberNumber);
+    public List<UserNew> showNewMembers(ShowNewPostDTO showNewPostDTO) {
+        return groupGatewayManagement.showNewMembers(showNewPostDTO);
     }
 
     /**
      * 编辑小组名称和介绍
      *
-     * @param groupId,title,about
+     * @param setGroupInfoDTO
      * @return
      */
     @RequestMapping(value = "/setGroupInfo", method = RequestMethod.POST)
     @ResponseBody
-    public boolean setGroupInfo(Integer groupId, String title, String about) {
-        return groupGatewayManagement.setGroupInfo(groupId, title, about);
+    public boolean setGroupInfo(SetGroupInfoDTO setGroupInfoDTO) {
+        return groupGatewayManagement.setGroupInfo(setGroupInfoDTO);
     }
 
     /**
      * 设置小组图标
      *
-     * @param groupId,logo
+     * @param setGroupLogoDTO
      * @return
      */
     @RequestMapping(value = "/setGroupLogo", method = RequestMethod.POST)
     @ResponseBody
-    public boolean setGroupLogo(Integer groupId, String logo) {
-        return groupGatewayManagement.setGroupLogo(groupId, logo);
+    public boolean setGroupLogo(SetGroupLogoDTO setGroupLogoDTO) {
+        return groupGatewayManagement.setGroupLogo(setGroupLogoDTO);
     }
 
     /**
      * 设置小组背景
      *
-     * @param groupId,background
+     * @param setGroupBackgroundDTO
      * @return
      */
     @RequestMapping(value = "/setGroupBackground", method = RequestMethod.POST)
     @ResponseBody
-    public boolean setGroupBackground(Integer groupId, String background) {
-        return groupGatewayManagement.setGroupBackground(groupId, background);
+    public boolean setGroupBackground(SetGroupBackgroundDTO setGroupBackgroundDTO) {
+        return groupGatewayManagement.setGroupBackground(setGroupBackgroundDTO);
     }
 
     /**
-     * 编辑小组名称和介绍
+     * 编辑话题信息
      *
-     * @param groupThreadId,title,content
+     * @param updateThreadInfoDTO
      * @return
      */
     @RequestMapping(value = "/updateThreadInfo", method = RequestMethod.POST)
     @ResponseBody
-    public boolean updateThreadInfo(Integer groupThreadId, String title, String content) {
-        return groupGatewayManagement.updateThreadInfo(groupThreadId, title, content);
+    public boolean updateThreadInfo(UpdateThreadInfoDTO updateThreadInfoDTO) {
+        return groupGatewayManagement.updateThreadInfo(updateThreadInfoDTO);
     }
 
     /**
      * 搜索组内话题
      *
-     * @param content
+     * @param searchThreadDTO
      * @return
      */
     @RequestMapping(value = "/searchThread ", method = RequestMethod.POST)
     @ResponseBody
-    public List<GroupThreadSearch> searchThread(Integer groupId, String content) {
-        return groupGatewayManagement.searchThread(groupId, content);
+    public List<GroupThreadSearch> searchThread(SearchThreadDTO searchThreadDTO) {
+        return groupGatewayManagement.searchThread(searchThreadDTO);
     }
 
     /**
@@ -238,9 +237,9 @@ public class GroupGatewayManagementController {
      * @param newPost
      * @return
      */
-    @RequestMapping(value = "/newPost ", method = RequestMethod.POST)
+    @RequestMapping(value = "/addNewPost ", method = RequestMethod.POST)
     @ResponseBody
-    public boolean addNewGroup(PostNew newPost) {
+    public boolean addNewPost(PostNew newPost) {
         return groupGatewayManagement.newPost(newPost);
     }
 

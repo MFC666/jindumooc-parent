@@ -1,7 +1,6 @@
 package com.jindumooc.group.service;
 
-import com.jindumooc.dto.group.GroupIdDTO;
-import com.jindumooc.dto.group.GroupThreadDTO;
+import com.jindumooc.dto.group.*;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.*;
 import com.jindumooc.vojo.user.UserNew;
@@ -103,51 +102,51 @@ public interface GroupGatewayManagement {
     /**
      * 展示小组新进成员
      *
-     * @param memberNumber
+     * @param showNewPostDTO
      * @return
      */
-    List<UserNew> showNewMembers(Integer groupId, Integer memberNumber);
+    List<UserNew> showNewMembers(ShowNewPostDTO showNewPostDTO);
 
     /**
      * 编辑小组名称和介绍
      *
-     * @param groupId,title,about
+     * @param setGroupInfoDTO
      * @return
      */
-    boolean setGroupInfo(Integer groupId, String title, String about);
+    boolean setGroupInfo(SetGroupInfoDTO setGroupInfoDTO);
 
     /**
      * 设置小组图标
      *
-     * @param groupId,logo
+     * @param setGroupLogoDTO
      * @return
      */
-    boolean setGroupLogo(Integer groupId, String logo);
+    boolean setGroupLogo(SetGroupLogoDTO setGroupLogoDTO);
 
     /**
      * 设置小组背景
      *
-     * @param groupId,background
+     * @param setGroupBackgroundDTO
      * @return
      */
-    boolean setGroupBackground(Integer groupId, String background);
+    boolean setGroupBackground(SetGroupBackgroundDTO setGroupBackgroundDTO);
 
 
     /**
      * 编辑话题信息
      *
-     * @param groupThreadId,title,content
+     * @param updateThreadInfoDTO
      * @return
      */
-    boolean updateThreadInfo(Integer groupThreadId, String title, String content);
+    boolean updateThreadInfo(UpdateThreadInfoDTO updateThreadInfoDTO);
 
     /**
      * 搜索组内话题
      *
-     * @param content
+     * @param searchThreadDTO
      * @return
      */
-    List<GroupThreadSearch> searchThread(Integer groupId, String content);
+    List<GroupThreadSearch> searchThread(SearchThreadDTO searchThreadDTO);
 
     /**
      * 发表新的回复，如果执行过程中有任何异常抛出，则返回false

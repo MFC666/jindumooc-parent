@@ -2,8 +2,7 @@ package com.jindumooc.group.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.jindumooc.dao.*;
-import com.jindumooc.dto.group.GroupIdDTO;
-import com.jindumooc.dto.group.GroupThreadDTO;
+import com.jindumooc.dto.group.*;
 import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.*;
 import com.jindumooc.vojo.group.*;
@@ -411,13 +410,13 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
     /**
      * 展示小组新进成员
      *
-     * @param memberNumber
+     * @param showNewPostDTO
      * @return
      */
     @Override
-    public List<UserNew> showNewMembers(Integer groupId, Integer memberNumber) {
+    public List<UserNew> showNewMembers(ShowNewPostDTO showNewPostDTO) {
         try {
-            List<Integer> userIds = groupsMemberMapper.getNewMembers(groupId, memberNumber);
+            List<Integer> userIds = groupsMemberMapper.getNewMembers(showNewPostDTO.getGroupId(), showNewPostDTO.getMemberNumber());
             List<UserNew> users = new ArrayList<>();
             for (Integer userId :
                     userIds) {
@@ -434,16 +433,16 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
     /**
      * 编辑小组名称和介绍
      *
-     * @param groupId,title,about
+     * @param
      * @return
      */
     @Override
-    public boolean setGroupInfo(Integer groupId, String title, String about) {
+    public boolean setGroupInfo(SetGroupInfoDTO setGroupInfoDTO) {
         try {
             Groups group = new Groups();
-            group.setId(groupId);
-            group.setTitle(title);
-            group.setAbout(about);
+            group.setId(setGroupInfoDTO.getGroupId());
+            group.setTitle(setGroupInfoDTO.getTitle());
+            group.setAbout(setGroupInfoDTO.getAbout());
             groupsMapper.setGroupInfo(group);
             return true;
         } catch (Exception e) {
@@ -455,15 +454,15 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
     /**
      * 设置小组图标
      *
-     * @param groupId,logo
+     * @param setGroupLogoDTO
      * @return
      */
     @Override
-    public boolean setGroupLogo(Integer groupId, String logo) {
+    public boolean setGroupLogo(SetGroupLogoDTO setGroupLogoDTO) {
         try {
             Groups group = new Groups();
-            group.setId(groupId);
-            group.setLogo(logo);
+            group.setId(setGroupLogoDTO.getGroupId());
+            group.setLogo(setGroupLogoDTO.getLogo());
             groupsMapper.setGroupLogo(group);
             return true;
         } catch (Exception e) {
@@ -475,15 +474,15 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
     /**
      * 设置小组背景
      *
-     * @param groupId,background
+     * @param setGroupBackgroundDTO
      * @return
      */
     @Override
-    public boolean setGroupBackground(Integer groupId, String background) {
+    public boolean setGroupBackground(SetGroupBackgroundDTO setGroupBackgroundDTO) {
         try {
             Groups group = new Groups();
-            group.setId(groupId);
-            group.setBackgroundlogo(background);
+            group.setId(setGroupBackgroundDTO.getGroupId());
+            group.setBackgroundlogo(setGroupBackgroundDTO.getBackground());
             System.out.println(group);
             groupsMapper.setGroupBackground(group);
             return true;
@@ -496,16 +495,16 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
     /**
      * 编辑话题信息
      *
-     * @param threadId,title,content
+     * @param updateThreadInfoDTO
      * @return
      */
     @Override
-    public boolean updateThreadInfo(Integer threadId, String title, String content) {
+    public boolean updateThreadInfo(UpdateThreadInfoDTO updateThreadInfoDTO) {
         try {
             GroupsThread gt = new GroupsThread();
-            gt.setId(threadId);
-            gt.setTitle(title);
-            gt.setContent(content);
+            gt.setId(updateThreadInfoDTO.getThreadId());
+            gt.setTitle(updateThreadInfoDTO.getTitle());
+            gt.setContent(updateThreadInfoDTO.getContent());
 
             //获取当前时间
             Date date = new Date();
@@ -523,17 +522,17 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
     /**
      * 搜索组内话题
      *
-     * @param content
+     * @param searchThreadDTO
      * @return
      */
     @Override
-    public List<GroupThreadSearch> searchThread(Integer groupId, String content) {
+    public List<GroupThreadSearch> searchThread(SearchThreadDTO searchThreadDTO) {
         try {
             List<GroupThreadSearch> gts = new ArrayList<>();
-            if (content != null) {
-                gts = groupsThreadMapper.searchThread(groupId, content);
+            if (searchThreadDTO.getContent() != null) {
+                gts = groupsThreadMapper.searchThread(searchThreadDTO.getGroupId(), searchThreadDTO.getContent());
             } else {
-                gts = groupsThreadMapper.allThread(groupId);
+                gts = groupsThreadMapper.allThread(searchThreadDTO.getGroupId());
             }
             for (GroupThreadSearch temp :
                     gts) {
