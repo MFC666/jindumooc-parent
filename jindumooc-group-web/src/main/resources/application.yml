@@ -4,7 +4,7 @@ server:
 dubbo:
   application:
     ##### 注册服务的名称
-    name: user-web
+    name: group-web
   ##### 注册中心地址
   registry:
     address: zookeeper://39.106.90.140:2181

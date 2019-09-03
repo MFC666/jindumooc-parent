@@ -3,10 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.jinduMooc</groupId>
+        <artifactId>jindumooc-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.jinduMooc</groupId>
     <artifactId>jindumooc-system-web</artifactId>
@@ -29,6 +28,44 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.jinduMooc</groupId>
+            <artifactId>jindumooc-interface-group-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jinduMooc</groupId>
+            <artifactId>jindumooc-pojo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jinduMooc</groupId>
+            <artifactId>jindumooc-vojo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jinduMooc</groupId>
+            <artifactId>jindumooc-dto</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-bean-validators</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -43,6 +80,7 @@
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.properties</include>
+                    <include>**/*.yml</include>
                     <include>**/*.xml</include>
                 </includes>
             </resource>

@@ -1,21 +1,23 @@
 server:
-  port: 9002
+  port: 8002
 
 dubbo:
   application:
-    ###########×¢²áµ½×¢²áÖĞĞÄµÄÃû³Æ############
-    name: member
-  ###########²ÉÓÃĞ­ÒéºÍ¶Ë¿ÚºÅ################
-  protocol:
-    ###########²ÉÓÃdubboĞ­Òé####################
-    name: dubbo
-    ###########·¢²¼dubbo¶Ë¿ÚºÅÎª20880###########
-    port: 20881
+    ##### æ³¨å†ŒæœåŠ¡çš„åç§°
+    name: system-web
+  ##### æ³¨å†Œä¸­å¿ƒåœ°å€
   registry:
-
-    ###########×¢²áÖĞĞÄµØÖ·(ĞŞ¸ÄÎª±¾»úzookeeperµØÖ·)#####################
-    address: zookeeper://192.168.142.128:2181
-scan:
-  ############ÊµÏÖÀàÉ¨°ü·¶Î§###################
-  base-packages: com.jindumooc.system.web
-
+    address: zookeeper://39.106.90.140:2181
+  ##### è°ƒç”¨æœåŠ¡è¶…æ—¶æ—¶é—´
+  consumer:
+    timeout: 10000
+# Swaggerç•Œé¢å†…å®¹é…ç½®
+swagger:
+  title: DevPlatform APIæ¥å£æ–‡æ¡£
+  description: DevPlatform Api Documentation
+  version: 1.0.0
+  termsOfServiceUrl: https://gitee.com
+  contact:
+    name: Meng FanChun
+    url: https://gitee.com/
+    email: 522183973@qq.com
