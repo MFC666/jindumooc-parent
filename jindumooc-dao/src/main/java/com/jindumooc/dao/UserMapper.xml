@@ -965,7 +965,8 @@
     <result column="about" property="about" jdbcType="VARCHAR"/>
   </resultMap>
   <select id="getUserNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
-    select nicknamefrom user
+    select nickname
+    from user
     where id = #{userId, jdbcType=INTEGER }
    </select>
 </mapper>
