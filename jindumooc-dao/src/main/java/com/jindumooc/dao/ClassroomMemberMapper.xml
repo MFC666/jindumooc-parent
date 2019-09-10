@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.ClassroomMemberMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.ClassroomMember" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="classroomId" property="classroomid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="levelId" property="levelid" jdbcType="INTEGER" />
+    <result column="noteNum" property="notenum" jdbcType="INTEGER" />
+    <result column="threadNum" property="threadnum" jdbcType="INTEGER" />
+    <result column="locked" property="locked" jdbcType="TINYINT" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="lastLearnTime" property="lastlearntime" jdbcType="INTEGER" />
+    <result column="learnedNum" property="learnednum" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="deadline" property="deadline" jdbcType="INTEGER" />
+    <result column="refundDeadline" property="refunddeadline" jdbcType="INTEGER" />
+    <result column="deadlineNotified" property="deadlinenotified" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.ClassroomMember" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, classroomId, userId, orderId, levelId, noteNum, threadNum, locked, role, createdTime, 
+    lastLearnTime, learnedNum, updatedTime, deadline, refundDeadline, deadlineNotified
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.ClassroomMemberExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from classroom_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ClassroomMemberExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from classroom_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from classroom_member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <!--根据学员Id和班级Id搜索-->
+  <select id="selectByStudentId" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from classroom_member
+    where userId = #{param1} and classroomId = #{param2}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from classroom_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ClassroomMemberExample" >
+    delete from classroom_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+
+  <delete id="deleteByStudentId">
+    DELETE FROM classroom_member
+    where classroomId = #{param1} and userId = #{param2}
+  </delete>
+
+  <insert id="insert" parameterType="com.jindumooc.pojo.ClassroomMember" >
+    insert into classroom_member (id, classroomId, userId, 
+      orderId, levelId, noteNum, 
+      threadNum, locked, role, 
+      createdTime, lastLearnTime, learnedNum, 
+      updatedTime, deadline, refundDeadline, 
+      deadlineNotified, remark)
+    values (#{id,jdbcType=INTEGER}, #{classroomid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{orderid,jdbcType=INTEGER}, #{levelid,jdbcType=INTEGER}, #{notenum,jdbcType=INTEGER}, 
+      #{threadnum,jdbcType=INTEGER}, #{locked,jdbcType=TINYINT}, #{role,jdbcType=VARCHAR}, 
+      #{createdtime,jdbcType=INTEGER}, #{lastlearntime,jdbcType=INTEGER}, #{learnednum,jdbcType=INTEGER}, 
+      #{updatedtime,jdbcType=INTEGER}, #{deadline,jdbcType=INTEGER}, #{refunddeadline,jdbcType=INTEGER}, 
+      #{deadlinenotified,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.ClassroomMember" >
+    insert into classroom_member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="classroomid != null" >
+        classroomId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="levelid != null" >
+        levelId,
+      </if>
+      <if test="notenum != null" >
+        noteNum,
+      </if>
+      <if test="threadnum != null" >
+        threadNum,
+      </if>
+      <if test="locked != null" >
+        locked,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="lastlearntime != null" >
+        lastLearnTime,
+      </if>
+      <if test="learnednum != null" >
+        learnedNum,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="deadline != null" >
+        deadline,
+      </if>
+      <if test="refunddeadline != null" >
+        refundDeadline,
+      </if>
+      <if test="deadlinenotified != null" >
+        deadlineNotified,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classroomid != null" >
+        #{classroomid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="levelid != null" >
+        #{levelid,jdbcType=INTEGER},
+      </if>
+      <if test="notenum != null" >
+        #{notenum,jdbcType=INTEGER},
+      </if>
+      <if test="threadnum != null" >
+        #{threadnum,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        #{locked,jdbcType=TINYINT},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="lastlearntime != null" >
+        #{lastlearntime,jdbcType=INTEGER},
+      </if>
+      <if test="learnednum != null" >
+        #{learnednum,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=INTEGER},
+      </if>
+      <if test="refunddeadline != null" >
+        #{refunddeadline,jdbcType=INTEGER},
+      </if>
+      <if test="deadlinenotified != null" >
+        #{deadlinenotified,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.ClassroomMemberExample" resultType="java.lang.Integer" >
+    select count(*) from classroom_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update classroom_member
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.classroomid != null" >
+        classroomId = #{record.classroomid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderid != null" >
+        orderId = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.levelid != null" >
+        levelId = #{record.levelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.notenum != null" >
+        noteNum = #{record.notenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.threadnum != null" >
+        threadNum = #{record.threadnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.locked != null" >
+        locked = #{record.locked,jdbcType=TINYINT},
+      </if>
+      <if test="record.role != null" >
+        role = #{record.role,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastlearntime != null" >
+        lastLearnTime = #{record.lastlearntime,jdbcType=INTEGER},
+      </if>
+      <if test="record.learnednum != null" >
+        learnedNum = #{record.learnednum,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.deadline != null" >
+        deadline = #{record.deadline,jdbcType=INTEGER},
+      </if>
+      <if test="record.refunddeadline != null" >
+        refundDeadline = #{record.refunddeadline,jdbcType=INTEGER},
+      </if>
+      <if test="record.deadlinenotified != null" >
+        deadlineNotified = #{record.deadlinenotified,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update classroom_member
+    set id = #{record.id,jdbcType=INTEGER},
+      classroomId = #{record.classroomid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      orderId = #{record.orderid,jdbcType=INTEGER},
+      levelId = #{record.levelid,jdbcType=INTEGER},
+      noteNum = #{record.notenum,jdbcType=INTEGER},
+      threadNum = #{record.threadnum,jdbcType=INTEGER},
+      locked = #{record.locked,jdbcType=TINYINT},
+      role = #{record.role,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      lastLearnTime = #{record.lastlearntime,jdbcType=INTEGER},
+      learnedNum = #{record.learnednum,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      deadline = #{record.deadline,jdbcType=INTEGER},
+      refundDeadline = #{record.refunddeadline,jdbcType=INTEGER},
+      deadlineNotified = #{record.deadlinenotified,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update classroom_member
+    set id = #{record.id,jdbcType=INTEGER},
+      classroomId = #{record.classroomid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      orderId = #{record.orderid,jdbcType=INTEGER},
+      levelId = #{record.levelid,jdbcType=INTEGER},
+      noteNum = #{record.notenum,jdbcType=INTEGER},
+      threadNum = #{record.threadnum,jdbcType=INTEGER},
+      locked = #{record.locked,jdbcType=TINYINT},
+      role = #{record.role,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      lastLearnTime = #{record.lastlearntime,jdbcType=INTEGER},
+      learnedNum = #{record.learnednum,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      deadline = #{record.deadline,jdbcType=INTEGER},
+      refundDeadline = #{record.refunddeadline,jdbcType=INTEGER},
+      deadlineNotified = #{record.deadlinenotified,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <update id="updateDeadline" parameterType="com.jindumooc.dto.classes.ClassroomMemberDTO">
+    update classroom_member
+    set deadline = #{deadline,jdbcType=INTEGER}
+    where userId = #{userId,jdbcType=INTEGER} and classroomId = #{classroomId,jdbcType=INTEGER}
+  </update>
+  <update id="updateRole" parameterType="com.jindumooc.dto.classes.ClassroomMemberDTO">
+    update classroom_member
+    set role = '|headTeacher|'
+    where userId = #{userId,jdbcType=INTEGER} and classroomId = #{classroomId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ClassroomMember" >
+    update classroom_member
+    <set >
+      <if test="classroomid != null" >
+        classroomId = #{classroomid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="levelid != null" >
+        levelId = #{levelid,jdbcType=INTEGER},
+      </if>
+      <if test="notenum != null" >
+        noteNum = #{notenum,jdbcType=INTEGER},
+      </if>
+      <if test="threadnum != null" >
+        threadNum = #{threadnum,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        locked = #{locked,jdbcType=TINYINT},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="lastlearntime != null" >
+        lastLearnTime = #{lastlearntime,jdbcType=INTEGER},
+      </if>
+      <if test="learnednum != null" >
+        learnedNum = #{learnednum,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null" >
+        deadline = #{deadline,jdbcType=INTEGER},
+      </if>
+      <if test="refunddeadline != null" >
+        refundDeadline = #{refunddeadline,jdbcType=INTEGER},
+      </if>
+      <if test="deadlinenotified != null" >
+        deadlineNotified = #{deadlinenotified,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.ClassroomMember" >
+    update classroom_member
+    set classroomId = #{classroomid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      orderId = #{orderid,jdbcType=INTEGER},
+      levelId = #{levelid,jdbcType=INTEGER},
+      noteNum = #{notenum,jdbcType=INTEGER},
+      threadNum = #{threadnum,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=TINYINT},
+      role = #{role,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      lastLearnTime = #{lastlearntime,jdbcType=INTEGER},
+      learnedNum = #{learnednum,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      deadline = #{deadline,jdbcType=INTEGER},
+      refundDeadline = #{refunddeadline,jdbcType=INTEGER},
+      deadlineNotified = #{deadlinenotified,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.ClassroomMember" >
+    update classroom_member
+    set classroomId = #{classroomid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      orderId = #{orderid,jdbcType=INTEGER},
+      levelId = #{levelid,jdbcType=INTEGER},
+      noteNum = #{notenum,jdbcType=INTEGER},
+      threadNum = #{threadnum,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=TINYINT},
+      role = #{role,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      lastLearnTime = #{lastlearntime,jdbcType=INTEGER},
+      learnedNum = #{learnednum,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      deadline = #{deadline,jdbcType=INTEGER},
+      refundDeadline = #{refunddeadline,jdbcType=INTEGER},
+      deadlineNotified = #{deadlinenotified,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getLearningClassroom" resultMap="getLearningClassroomMap">
+    SELECT count(*) AS todayClassroom,c.title,c.largePicture,c.middlePicture,c.smallPicture,c.courseNum
+    FROM classroom_member m,classroom c
+    WHERE m.classroomId = c.id AND m.userId = #{userId}
+  </select>
+  <resultMap id="getLearningClassroomMap" type="com.jindumooc.vojo.user.LearningClassroom">
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="smallpicture" property="smallPicture" jdbcType="VARCHAR" />
+    <result column="middlepicture" property="middlePicture" jdbcType="VARCHAR" />
+    <result column="largepicture" property="largePicture" jdbcType="VARCHAR" />
+    <result column="studentnum" property="studentnum" jdbcType="INTEGER" />
+    <result column="coursenum" property="coursenum" jdbcType="INTEGER" />
+    <result column="threadnum" property="threadnum" jdbcType="INTEGER" />
+    <result column="todayClassroom" property="todayClassroom" jdbcType="INTEGER" />
+  </resultMap>
+
+</mapper>

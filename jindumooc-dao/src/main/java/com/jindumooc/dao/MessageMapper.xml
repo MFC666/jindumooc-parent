@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Message" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="fromId" property="fromid" jdbcType="INTEGER" />
+    <result column="toId" property="toid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="isDelete" property="isdelete" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.Message" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type, fromId, toId, createdTime, isDelete
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.MessageExample" >
+    delete from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.Message" >
+    insert into message (id, type, fromId, 
+      toId, createdTime, isDelete, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=CHAR}, #{fromid,jdbcType=INTEGER}, 
+      #{toid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, #{isdelete,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="fromid != null" >
+        fromId,
+      </if>
+      <if test="toid != null" >
+        toId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="isdelete != null" >
+        isDelete,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="fromid != null" >
+        #{fromid,jdbcType=INTEGER},
+      </if>
+      <if test="toid != null" >
+        #{toid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.MessageExample" resultType="java.lang.Integer" >
+    select count(*) from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update message
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.fromid != null" >
+        fromId = #{record.fromid,jdbcType=INTEGER},
+      </if>
+      <if test="record.toid != null" >
+        toId = #{record.toid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdelete != null" >
+        isDelete = #{record.isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update message
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=CHAR},
+      fromId = #{record.fromid,jdbcType=INTEGER},
+      toId = #{record.toid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      isDelete = #{record.isdelete,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update message
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=CHAR},
+      fromId = #{record.fromid,jdbcType=INTEGER},
+      toId = #{record.toid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      isDelete = #{record.isdelete,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.Message" >
+    update message
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="fromid != null" >
+        fromId = #{fromid,jdbcType=INTEGER},
+      </if>
+      <if test="toid != null" >
+        toId = #{toid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        isDelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.Message" >
+    update message
+    set type = #{type,jdbcType=CHAR},
+      fromId = #{fromid,jdbcType=INTEGER},
+      toId = #{toid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      isDelete = #{isdelete,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Message" >
+    update message
+    set type = #{type,jdbcType=CHAR},
+      fromId = #{fromid,jdbcType=INTEGER},
+      toId = #{toid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      isDelete = #{isdelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getAllMessages" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.Message" >
+    SELECT id,'type',fromId,toId,content,createdTime
+    FROM message
+    <where>
+    isDelete = 0
+    <if test="fromId != null" >
+        and fromId like '%#{fromId}%'
+    </if>
+    <if test="content!=null">and content like '%#{content}%'</if>
+    <if test="searchTimeType!=null">createdTime &gt; #{starTime} and createdTime &lt; #{endTime} </if>
+    </where>
+  </select>
+
+  <select id="getAllMessagesNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
+    SELECT count(*)
+    FROM message
+    <where>
+      isDelete = 0
+      <if test="fromId != null" >
+        and fromId like '%#{fromId}%'
+      </if>
+      <if test="content!=null">and content like '%#{content}%'</if>
+      <if test="searchTimeType!=null">createdTime &gt; #{starTime} and createdTime &lt; #{endTime} </if>
+    </where>
+  </select>
+</mapper>

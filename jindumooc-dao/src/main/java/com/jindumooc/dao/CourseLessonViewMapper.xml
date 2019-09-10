@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseLessonViewMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseLessonView" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="lessonId" property="lessonid" jdbcType="INTEGER" />
+    <result column="fileId" property="fileid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="fileType" property="filetype" jdbcType="CHAR" />
+    <result column="fileStorage" property="filestorage" jdbcType="CHAR" />
+    <result column="fileSource" property="filesource" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, courseId, lessonId, fileId, userId, fileType, fileStorage, fileSource, createdTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseLessonViewExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_lesson_view
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_lesson_view
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_lesson_view
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseLessonViewExample" >
+    delete from course_lesson_view
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseLessonView" >
+    insert into course_lesson_view (id, courseId, lessonId, 
+      fileId, userId, fileType, 
+      fileStorage, fileSource, createdTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, #{lessonid,jdbcType=INTEGER}, 
+      #{fileid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{filetype,jdbcType=CHAR}, 
+      #{filestorage,jdbcType=CHAR}, #{filesource,jdbcType=VARCHAR}, #{createdtime,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseLessonView" >
+    insert into course_lesson_view
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="lessonid != null" >
+        lessonId,
+      </if>
+      <if test="fileid != null" >
+        fileId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="filetype != null" >
+        fileType,
+      </if>
+      <if test="filestorage != null" >
+        fileStorage,
+      </if>
+      <if test="filesource != null" >
+        fileSource,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="fileid != null" >
+        #{fileid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="filetype != null" >
+        #{filetype,jdbcType=CHAR},
+      </if>
+      <if test="filestorage != null" >
+        #{filestorage,jdbcType=CHAR},
+      </if>
+      <if test="filesource != null" >
+        #{filesource,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseLessonViewExample" resultType="java.lang.Integer" >
+    select count(*) from course_lesson_view
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_lesson_view
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lessonid != null" >
+        lessonId = #{record.lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileid != null" >
+        fileId = #{record.fileid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.filetype != null" >
+        fileType = #{record.filetype,jdbcType=CHAR},
+      </if>
+      <if test="record.filestorage != null" >
+        fileStorage = #{record.filestorage,jdbcType=CHAR},
+      </if>
+      <if test="record.filesource != null" >
+        fileSource = #{record.filesource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_lesson_view
+    set id = #{record.id,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      lessonId = #{record.lessonid,jdbcType=INTEGER},
+      fileId = #{record.fileid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      fileType = #{record.filetype,jdbcType=CHAR},
+      fileStorage = #{record.filestorage,jdbcType=CHAR},
+      fileSource = #{record.filesource,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseLessonView" >
+    update course_lesson_view
+    <set >
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        lessonId = #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="fileid != null" >
+        fileId = #{fileid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="filetype != null" >
+        fileType = #{filetype,jdbcType=CHAR},
+      </if>
+      <if test="filestorage != null" >
+        fileStorage = #{filestorage,jdbcType=CHAR},
+      </if>
+      <if test="filesource != null" >
+        fileSource = #{filesource,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseLessonView" >
+    update course_lesson_view
+    set courseId = #{courseid,jdbcType=INTEGER},
+      lessonId = #{lessonid,jdbcType=INTEGER},
+      fileId = #{fileid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      fileType = #{filetype,jdbcType=CHAR},
+      fileStorage = #{filestorage,jdbcType=CHAR},
+      fileSource = #{filesource,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

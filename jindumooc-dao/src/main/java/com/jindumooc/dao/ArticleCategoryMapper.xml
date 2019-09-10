@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.ArticleCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.ArticleCategory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="publishArticle" property="publisharticle" jdbcType="TINYINT" />
+    <result column="seoTitle" property="seotitle" jdbcType="VARCHAR" />
+    <result column="seoKeyword" property="seokeyword" jdbcType="VARCHAR" />
+    <result column="seoDesc" property="seodesc" jdbcType="VARCHAR" />
+    <result column="published" property="published" jdbcType="TINYINT" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, code, weight, publishArticle, seoTitle, seoKeyword, seoDesc, published, 
+    parentId, createdTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ArticleCategoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from article_category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from article_category
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from article_category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ArticleCategoryExample" >
+    delete from article_category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.ArticleCategory" >
+    insert into article_category (id, name, code, 
+      weight, publishArticle, seoTitle, 
+      seoKeyword, seoDesc, published, 
+      parentId, createdTime)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=INTEGER}, #{publisharticle,jdbcType=TINYINT}, #{seotitle,jdbcType=VARCHAR}, 
+      #{seokeyword,jdbcType=VARCHAR}, #{seodesc,jdbcType=VARCHAR}, #{published,jdbcType=TINYINT}, 
+      #{parentid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.ArticleCategory" >
+    insert into article_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="publisharticle != null" >
+        publishArticle,
+      </if>
+      <if test="seotitle != null" >
+        seoTitle,
+      </if>
+      <if test="seokeyword != null" >
+        seoKeyword,
+      </if>
+      <if test="seodesc != null" >
+        seoDesc,
+      </if>
+      <if test="published != null" >
+        published,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="publisharticle != null" >
+        #{publisharticle,jdbcType=TINYINT},
+      </if>
+      <if test="seotitle != null" >
+        #{seotitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seokeyword != null" >
+        #{seokeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="seodesc != null" >
+        #{seodesc,jdbcType=VARCHAR},
+      </if>
+      <if test="published != null" >
+        #{published,jdbcType=TINYINT},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.ArticleCategoryExample" resultType="java.lang.Integer" >
+    select count(*) from article_category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update article_category
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=INTEGER},
+      </if>
+      <if test="record.publisharticle != null" >
+        publishArticle = #{record.publisharticle,jdbcType=TINYINT},
+      </if>
+      <if test="record.seotitle != null" >
+        seoTitle = #{record.seotitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seokeyword != null" >
+        seoKeyword = #{record.seokeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seodesc != null" >
+        seoDesc = #{record.seodesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.published != null" >
+        published = #{record.published,jdbcType=TINYINT},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update article_category
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=INTEGER},
+      publishArticle = #{record.publisharticle,jdbcType=TINYINT},
+      seoTitle = #{record.seotitle,jdbcType=VARCHAR},
+      seoKeyword = #{record.seokeyword,jdbcType=VARCHAR},
+      seoDesc = #{record.seodesc,jdbcType=VARCHAR},
+      published = #{record.published,jdbcType=TINYINT},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ArticleCategory" >
+    update article_category
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="publisharticle != null" >
+        publishArticle = #{publisharticle,jdbcType=TINYINT},
+      </if>
+      <if test="seotitle != null" >
+        seoTitle = #{seotitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seokeyword != null" >
+        seoKeyword = #{seokeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="seodesc != null" >
+        seoDesc = #{seodesc,jdbcType=VARCHAR},
+      </if>
+      <if test="published != null" >
+        published = #{published,jdbcType=TINYINT},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.ArticleCategory" >
+    update article_category
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=INTEGER},
+      publishArticle = #{publisharticle,jdbcType=TINYINT},
+      seoTitle = #{seotitle,jdbcType=VARCHAR},
+      seoKeyword = #{seokeyword,jdbcType=VARCHAR},
+      seoDesc = #{seodesc,jdbcType=VARCHAR},
+      published = #{published,jdbcType=TINYINT},
+      parentId = #{parentid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

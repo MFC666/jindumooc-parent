@@ -1,0 +1,1404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseV8Mapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseV8" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="courseSetId" property="coursesetid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="courseSetTitle" property="coursesettitle" jdbcType="VARCHAR" />
+    <result column="learnMode" property="learnmode" jdbcType="VARCHAR" />
+    <result column="expiryMode" property="expirymode" jdbcType="VARCHAR" />
+    <result column="expiryDays" property="expirydays" jdbcType="INTEGER" />
+    <result column="expiryStartDate" property="expirystartdate" jdbcType="INTEGER" />
+    <result column="expiryEndDate" property="expiryenddate" jdbcType="INTEGER" />
+    <result column="isDefault" property="isdefault" jdbcType="BIT" />
+    <result column="maxStudentNum" property="maxstudentnum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="isFree" property="isfree" jdbcType="BIT" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="vipLevelId" property="viplevelid" jdbcType="INTEGER" />
+    <result column="buyable" property="buyable" jdbcType="BIT" />
+    <result column="tryLookable" property="trylookable" jdbcType="BIT" />
+    <result column="tryLookLength" property="trylooklength" jdbcType="INTEGER" />
+    <result column="watchLimit" property="watchlimit" jdbcType="INTEGER" />
+    <result column="taskNum" property="tasknum" jdbcType="INTEGER" />
+    <result column="compulsoryTaskNum" property="compulsorytasknum" jdbcType="INTEGER" />
+    <result column="studentNum" property="studentnum" jdbcType="INTEGER" />
+    <result column="teacherIds" property="teacherids" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="ratingNum" property="ratingnum" jdbcType="INTEGER" />
+    <result column="rating" property="rating" jdbcType="REAL" />
+    <result column="noteNum" property="notenum" jdbcType="INTEGER" />
+    <result column="buyExpiryTime" property="buyexpirytime" jdbcType="INTEGER" />
+    <result column="threadNum" property="threadnum" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="approval" property="approval" jdbcType="BIT" />
+    <result column="income" property="income" jdbcType="REAL" />
+    <result column="originPrice" property="originprice" jdbcType="REAL" />
+    <result column="coinPrice" property="coinprice" jdbcType="REAL" />
+    <result column="originCoinPrice" property="origincoinprice" jdbcType="REAL" />
+    <result column="showStudentNumType" property="showstudentnumtype" jdbcType="CHAR" />
+    <result column="giveCredit" property="givecredit" jdbcType="INTEGER" />
+    <result column="locationId" property="locationid" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="deadlineNotify" property="deadlinenotify" jdbcType="CHAR" />
+    <result column="daysOfNotifyBeforeDeadline" property="daysofnotifybeforedeadline" jdbcType="INTEGER" />
+    <result column="useInClassroom" property="useinclassroom" jdbcType="CHAR" />
+    <result column="singleBuy" property="singlebuy" jdbcType="INTEGER" />
+    <result column="freeStartTime" property="freestarttime" jdbcType="INTEGER" />
+    <result column="freeEndTime" property="freeendtime" jdbcType="INTEGER" />
+    <result column="locked" property="locked" jdbcType="INTEGER" />
+    <result column="cover" property="cover" jdbcType="VARCHAR" />
+    <result column="enableFinish" property="enablefinish" jdbcType="INTEGER" />
+    <result column="materialNum" property="materialnum" jdbcType="INTEGER" />
+    <result column="maxRate" property="maxrate" jdbcType="TINYINT" />
+    <result column="serializeMode" property="serializemode" jdbcType="VARCHAR" />
+    <result column="showServices" property="showservices" jdbcType="BIT" />
+    <result column="recommended" property="recommended" jdbcType="TINYINT" />
+    <result column="recommendedSeq" property="recommendedseq" jdbcType="INTEGER" />
+    <result column="recommendedTime" property="recommendedtime" jdbcType="INTEGER" />
+    <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
+    <result column="hitNum" property="hitnum" jdbcType="INTEGER" />
+    <result column="courseType" property="coursetype" jdbcType="VARCHAR" />
+    <result column="rewardPoint" property="rewardpoint" jdbcType="INTEGER" />
+    <result column="taskRewardPoint" property="taskrewardpoint" jdbcType="INTEGER" />
+    <result column="enableAudio" property="enableaudio" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.CourseV8WithBLOBs" extends="BaseResultMap" >
+    <result column="summary" property="summary" jdbcType="LONGVARCHAR" />
+    <result column="goals" property="goals" jdbcType="LONGVARCHAR" />
+    <result column="audiences" property="audiences" jdbcType="LONGVARCHAR" />
+    <result column="services" property="services" jdbcType="LONGVARCHAR" />
+    <result column="about" property="about" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, courseSetId, title, courseSetTitle, learnMode, expiryMode, expiryDays, expiryStartDate, 
+    expiryEndDate, isDefault, maxStudentNum, status, creator, isFree, price, vipLevelId, 
+    buyable, tryLookable, tryLookLength, watchLimit, taskNum, compulsoryTaskNum, studentNum, 
+    teacherIds, parentId, createdTime, updatedTime, ratingNum, rating, noteNum, buyExpiryTime, 
+    threadNum, type, approval, income, originPrice, coinPrice, originCoinPrice, showStudentNumType, 
+    giveCredit, locationId, address, deadlineNotify, daysOfNotifyBeforeDeadline, useInClassroom, 
+    singleBuy, freeStartTime, freeEndTime, locked, cover, enableFinish, materialNum, 
+    maxRate, serializeMode, showServices, recommended, recommendedSeq, recommendedTime, 
+    categoryId, hitNum, courseType, rewardPoint, taskRewardPoint, enableAudio
+  </sql>
+  <sql id="Blob_Column_List" >
+    summary, goals, audiences, services, about
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.CourseV8Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseV8Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectClassroomCourses" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    c.id, c.courseSetId, title, courseSetTitle, learnMode, expiryMode, expiryDays, expiryStartDate,
+    expiryEndDate, isDefault, maxStudentNum, status, creator, isFree, price, vipLevelId,
+    buyable, tryLookable, tryLookLength, watchLimit, taskNum, compulsoryTaskNum, studentNum,
+    teacherIds, parentId, createdTime, updatedTime, ratingNum, rating, noteNum, buyExpiryTime,
+    threadNum, type, approval, income, originPrice, coinPrice, originCoinPrice, showStudentNumType,
+    giveCredit, locationId, address, deadlineNotify, daysOfNotifyBeforeDeadline, useInClassroom,
+    singleBuy, freeStartTime, freeEndTime, locked, cover, enableFinish, materialNum,
+    maxRate, serializeMode, showServices, recommended, recommendedSeq, recommendedTime,
+    categoryId, hitNum, courseType, rewardPoint, taskRewardPoint, enableAudio
+    from course_v8 c,classroom_courses s
+    where s.classroomId = #{classroomId,jdbcType=INTEGER} AND s.courseId = c.id
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_v8
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_v8
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseV8Example" >
+    delete from course_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseV8WithBLOBs" >
+    insert into course_v8 (id, courseSetId, title, 
+      courseSetTitle, learnMode, expiryMode, 
+      expiryDays, expiryStartDate, expiryEndDate, 
+      isDefault, maxStudentNum, status, 
+      creator, isFree, price, vipLevelId, 
+      buyable, tryLookable, tryLookLength, 
+      watchLimit, taskNum, compulsoryTaskNum, 
+      studentNum, teacherIds, parentId, 
+      createdTime, updatedTime, ratingNum, 
+      rating, noteNum, buyExpiryTime, 
+      threadNum, type, approval, 
+      income, originPrice, coinPrice, 
+      originCoinPrice, showStudentNumType, giveCredit, 
+      locationId, address, deadlineNotify, 
+      daysOfNotifyBeforeDeadline, useInClassroom, 
+      singleBuy, freeStartTime, freeEndTime, 
+      locked, cover, enableFinish, 
+      materialNum, maxRate, serializeMode, 
+      showServices, recommended, recommendedSeq, 
+      recommendedTime, categoryId, hitNum, 
+      courseType, rewardPoint, taskRewardPoint, 
+      enableAudio, summary, goals, 
+      audiences, services, about
+      )
+    values (#{id,jdbcType=INTEGER}, #{coursesetid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{coursesettitle,jdbcType=VARCHAR}, #{learnmode,jdbcType=VARCHAR}, #{expirymode,jdbcType=VARCHAR}, 
+      #{expirydays,jdbcType=INTEGER}, #{expirystartdate,jdbcType=INTEGER}, #{expiryenddate,jdbcType=INTEGER}, 
+      #{isdefault,jdbcType=BIT}, #{maxstudentnum,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=INTEGER}, #{isfree,jdbcType=BIT}, #{price,jdbcType=REAL}, #{viplevelid,jdbcType=INTEGER}, 
+      #{buyable,jdbcType=BIT}, #{trylookable,jdbcType=BIT}, #{trylooklength,jdbcType=INTEGER}, 
+      #{watchlimit,jdbcType=INTEGER}, #{tasknum,jdbcType=INTEGER}, #{compulsorytasknum,jdbcType=INTEGER}, 
+      #{studentnum,jdbcType=INTEGER}, #{teacherids,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, #{ratingnum,jdbcType=INTEGER}, 
+      #{rating,jdbcType=REAL}, #{notenum,jdbcType=INTEGER}, #{buyexpirytime,jdbcType=INTEGER}, 
+      #{threadnum,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{approval,jdbcType=BIT}, 
+      #{income,jdbcType=REAL}, #{originprice,jdbcType=REAL}, #{coinprice,jdbcType=REAL}, 
+      #{origincoinprice,jdbcType=REAL}, #{showstudentnumtype,jdbcType=CHAR}, #{givecredit,jdbcType=INTEGER}, 
+      #{locationid,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{deadlinenotify,jdbcType=CHAR}, 
+      #{daysofnotifybeforedeadline,jdbcType=INTEGER}, #{useinclassroom,jdbcType=CHAR}, 
+      #{singlebuy,jdbcType=INTEGER}, #{freestarttime,jdbcType=INTEGER}, #{freeendtime,jdbcType=INTEGER}, 
+      #{locked,jdbcType=INTEGER}, #{cover,jdbcType=VARCHAR}, #{enablefinish,jdbcType=INTEGER}, 
+      #{materialnum,jdbcType=INTEGER}, #{maxrate,jdbcType=TINYINT}, #{serializemode,jdbcType=VARCHAR}, 
+      #{showservices,jdbcType=BIT}, #{recommended,jdbcType=TINYINT}, #{recommendedseq,jdbcType=INTEGER}, 
+      #{recommendedtime,jdbcType=INTEGER}, #{categoryid,jdbcType=INTEGER}, #{hitnum,jdbcType=INTEGER}, 
+      #{coursetype,jdbcType=VARCHAR}, #{rewardpoint,jdbcType=INTEGER}, #{taskrewardpoint,jdbcType=INTEGER}, 
+      #{enableaudio,jdbcType=INTEGER}, #{summary,jdbcType=LONGVARCHAR}, #{goals,jdbcType=LONGVARCHAR}, 
+      #{audiences,jdbcType=LONGVARCHAR}, #{services,jdbcType=LONGVARCHAR}, #{about,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseV8WithBLOBs" >
+    insert into course_v8
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="coursesetid != null" >
+        courseSetId,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="coursesettitle != null" >
+        courseSetTitle,
+      </if>
+      <if test="learnmode != null" >
+        learnMode,
+      </if>
+      <if test="expirymode != null" >
+        expiryMode,
+      </if>
+      <if test="expirydays != null" >
+        expiryDays,
+      </if>
+      <if test="expirystartdate != null" >
+        expiryStartDate,
+      </if>
+      <if test="expiryenddate != null" >
+        expiryEndDate,
+      </if>
+      <if test="isdefault != null" >
+        isDefault,
+      </if>
+      <if test="maxstudentnum != null" >
+        maxStudentNum,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="isfree != null" >
+        isFree,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="viplevelid != null" >
+        vipLevelId,
+      </if>
+      <if test="buyable != null" >
+        buyable,
+      </if>
+      <if test="trylookable != null" >
+        tryLookable,
+      </if>
+      <if test="trylooklength != null" >
+        tryLookLength,
+      </if>
+      <if test="watchlimit != null" >
+        watchLimit,
+      </if>
+      <if test="tasknum != null" >
+        taskNum,
+      </if>
+      <if test="compulsorytasknum != null" >
+        compulsoryTaskNum,
+      </if>
+      <if test="studentnum != null" >
+        studentNum,
+      </if>
+      <if test="teacherids != null" >
+        teacherIds,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="ratingnum != null" >
+        ratingNum,
+      </if>
+      <if test="rating != null" >
+        rating,
+      </if>
+      <if test="notenum != null" >
+        noteNum,
+      </if>
+      <if test="buyexpirytime != null" >
+        buyExpiryTime,
+      </if>
+      <if test="threadnum != null" >
+        threadNum,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="approval != null" >
+        approval,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="originprice != null" >
+        originPrice,
+      </if>
+      <if test="coinprice != null" >
+        coinPrice,
+      </if>
+      <if test="origincoinprice != null" >
+        originCoinPrice,
+      </if>
+      <if test="showstudentnumtype != null" >
+        showStudentNumType,
+      </if>
+      <if test="givecredit != null" >
+        giveCredit,
+      </if>
+      <if test="locationid != null" >
+        locationId,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="deadlinenotify != null" >
+        deadlineNotify,
+      </if>
+      <if test="daysofnotifybeforedeadline != null" >
+        daysOfNotifyBeforeDeadline,
+      </if>
+      <if test="useinclassroom != null" >
+        useInClassroom,
+      </if>
+      <if test="singlebuy != null" >
+        singleBuy,
+      </if>
+      <if test="freestarttime != null" >
+        freeStartTime,
+      </if>
+      <if test="freeendtime != null" >
+        freeEndTime,
+      </if>
+      <if test="locked != null" >
+        locked,
+      </if>
+      <if test="cover != null" >
+        cover,
+      </if>
+      <if test="enablefinish != null" >
+        enableFinish,
+      </if>
+      <if test="materialnum != null" >
+        materialNum,
+      </if>
+      <if test="maxrate != null" >
+        maxRate,
+      </if>
+      <if test="serializemode != null" >
+        serializeMode,
+      </if>
+      <if test="showservices != null" >
+        showServices,
+      </if>
+      <if test="recommended != null" >
+        recommended,
+      </if>
+      <if test="recommendedseq != null" >
+        recommendedSeq,
+      </if>
+      <if test="recommendedtime != null" >
+        recommendedTime,
+      </if>
+      <if test="categoryid != null" >
+        categoryId,
+      </if>
+      <if test="hitnum != null" >
+        hitNum,
+      </if>
+      <if test="coursetype != null" >
+        courseType,
+      </if>
+      <if test="rewardpoint != null" >
+        rewardPoint,
+      </if>
+      <if test="taskrewardpoint != null" >
+        taskRewardPoint,
+      </if>
+      <if test="enableaudio != null" >
+        enableAudio,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="goals != null" >
+        goals,
+      </if>
+      <if test="audiences != null" >
+        audiences,
+      </if>
+      <if test="services != null" >
+        services,
+      </if>
+      <if test="about != null" >
+        about,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="coursesetid != null" >
+        #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="coursesettitle != null" >
+        #{coursesettitle,jdbcType=VARCHAR},
+      </if>
+      <if test="learnmode != null" >
+        #{learnmode,jdbcType=VARCHAR},
+      </if>
+      <if test="expirymode != null" >
+        #{expirymode,jdbcType=VARCHAR},
+      </if>
+      <if test="expirydays != null" >
+        #{expirydays,jdbcType=INTEGER},
+      </if>
+      <if test="expirystartdate != null" >
+        #{expirystartdate,jdbcType=INTEGER},
+      </if>
+      <if test="expiryenddate != null" >
+        #{expiryenddate,jdbcType=INTEGER},
+      </if>
+      <if test="isdefault != null" >
+        #{isdefault,jdbcType=BIT},
+      </if>
+      <if test="maxstudentnum != null" >
+        #{maxstudentnum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="isfree != null" >
+        #{isfree,jdbcType=BIT},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="viplevelid != null" >
+        #{viplevelid,jdbcType=INTEGER},
+      </if>
+      <if test="buyable != null" >
+        #{buyable,jdbcType=BIT},
+      </if>
+      <if test="trylookable != null" >
+        #{trylookable,jdbcType=BIT},
+      </if>
+      <if test="trylooklength != null" >
+        #{trylooklength,jdbcType=INTEGER},
+      </if>
+      <if test="watchlimit != null" >
+        #{watchlimit,jdbcType=INTEGER},
+      </if>
+      <if test="tasknum != null" >
+        #{tasknum,jdbcType=INTEGER},
+      </if>
+      <if test="compulsorytasknum != null" >
+        #{compulsorytasknum,jdbcType=INTEGER},
+      </if>
+      <if test="studentnum != null" >
+        #{studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="teacherids != null" >
+        #{teacherids,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="ratingnum != null" >
+        #{ratingnum,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null" >
+        #{rating,jdbcType=REAL},
+      </if>
+      <if test="notenum != null" >
+        #{notenum,jdbcType=INTEGER},
+      </if>
+      <if test="buyexpirytime != null" >
+        #{buyexpirytime,jdbcType=INTEGER},
+      </if>
+      <if test="threadnum != null" >
+        #{threadnum,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="approval != null" >
+        #{approval,jdbcType=BIT},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=REAL},
+      </if>
+      <if test="originprice != null" >
+        #{originprice,jdbcType=REAL},
+      </if>
+      <if test="coinprice != null" >
+        #{coinprice,jdbcType=REAL},
+      </if>
+      <if test="origincoinprice != null" >
+        #{origincoinprice,jdbcType=REAL},
+      </if>
+      <if test="showstudentnumtype != null" >
+        #{showstudentnumtype,jdbcType=CHAR},
+      </if>
+      <if test="givecredit != null" >
+        #{givecredit,jdbcType=INTEGER},
+      </if>
+      <if test="locationid != null" >
+        #{locationid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="deadlinenotify != null" >
+        #{deadlinenotify,jdbcType=CHAR},
+      </if>
+      <if test="daysofnotifybeforedeadline != null" >
+        #{daysofnotifybeforedeadline,jdbcType=INTEGER},
+      </if>
+      <if test="useinclassroom != null" >
+        #{useinclassroom,jdbcType=CHAR},
+      </if>
+      <if test="singlebuy != null" >
+        #{singlebuy,jdbcType=INTEGER},
+      </if>
+      <if test="freestarttime != null" >
+        #{freestarttime,jdbcType=INTEGER},
+      </if>
+      <if test="freeendtime != null" >
+        #{freeendtime,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        #{locked,jdbcType=INTEGER},
+      </if>
+      <if test="cover != null" >
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="enablefinish != null" >
+        #{enablefinish,jdbcType=INTEGER},
+      </if>
+      <if test="materialnum != null" >
+        #{materialnum,jdbcType=INTEGER},
+      </if>
+      <if test="maxrate != null" >
+        #{maxrate,jdbcType=TINYINT},
+      </if>
+      <if test="serializemode != null" >
+        #{serializemode,jdbcType=VARCHAR},
+      </if>
+      <if test="showservices != null" >
+        #{showservices,jdbcType=BIT},
+      </if>
+      <if test="recommended != null" >
+        #{recommended,jdbcType=TINYINT},
+      </if>
+      <if test="recommendedseq != null" >
+        #{recommendedseq,jdbcType=INTEGER},
+      </if>
+      <if test="recommendedtime != null" >
+        #{recommendedtime,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="hitnum != null" >
+        #{hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="coursetype != null" >
+        #{coursetype,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardpoint != null" >
+        #{rewardpoint,jdbcType=INTEGER},
+      </if>
+      <if test="taskrewardpoint != null" >
+        #{taskrewardpoint,jdbcType=INTEGER},
+      </if>
+      <if test="enableaudio != null" >
+        #{enableaudio,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="goals != null" >
+        #{goals,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="audiences != null" >
+        #{audiences,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="services != null" >
+        #{services,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="about != null" >
+        #{about,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseV8Example" resultType="java.lang.Integer" >
+    select count(*) from course_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_v8
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.coursesetid != null" >
+        courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursesettitle != null" >
+        courseSetTitle = #{record.coursesettitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.learnmode != null" >
+        learnMode = #{record.learnmode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expirymode != null" >
+        expiryMode = #{record.expirymode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expirydays != null" >
+        expiryDays = #{record.expirydays,jdbcType=INTEGER},
+      </if>
+      <if test="record.expirystartdate != null" >
+        expiryStartDate = #{record.expirystartdate,jdbcType=INTEGER},
+      </if>
+      <if test="record.expiryenddate != null" >
+        expiryEndDate = #{record.expiryenddate,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdefault != null" >
+        isDefault = #{record.isdefault,jdbcType=BIT},
+      </if>
+      <if test="record.maxstudentnum != null" >
+        maxStudentNum = #{record.maxstudentnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.isfree != null" >
+        isFree = #{record.isfree,jdbcType=BIT},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.viplevelid != null" >
+        vipLevelId = #{record.viplevelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyable != null" >
+        buyable = #{record.buyable,jdbcType=BIT},
+      </if>
+      <if test="record.trylookable != null" >
+        tryLookable = #{record.trylookable,jdbcType=BIT},
+      </if>
+      <if test="record.trylooklength != null" >
+        tryLookLength = #{record.trylooklength,jdbcType=INTEGER},
+      </if>
+      <if test="record.watchlimit != null" >
+        watchLimit = #{record.watchlimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.tasknum != null" >
+        taskNum = #{record.tasknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.compulsorytasknum != null" >
+        compulsoryTaskNum = #{record.compulsorytasknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentnum != null" >
+        studentNum = #{record.studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherids != null" >
+        teacherIds = #{record.teacherids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.ratingnum != null" >
+        ratingNum = #{record.ratingnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.rating != null" >
+        rating = #{record.rating,jdbcType=REAL},
+      </if>
+      <if test="record.notenum != null" >
+        noteNum = #{record.notenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyexpirytime != null" >
+        buyExpiryTime = #{record.buyexpirytime,jdbcType=INTEGER},
+      </if>
+      <if test="record.threadnum != null" >
+        threadNum = #{record.threadnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approval != null" >
+        approval = #{record.approval,jdbcType=BIT},
+      </if>
+      <if test="record.income != null" >
+        income = #{record.income,jdbcType=REAL},
+      </if>
+      <if test="record.originprice != null" >
+        originPrice = #{record.originprice,jdbcType=REAL},
+      </if>
+      <if test="record.coinprice != null" >
+        coinPrice = #{record.coinprice,jdbcType=REAL},
+      </if>
+      <if test="record.origincoinprice != null" >
+        originCoinPrice = #{record.origincoinprice,jdbcType=REAL},
+      </if>
+      <if test="record.showstudentnumtype != null" >
+        showStudentNumType = #{record.showstudentnumtype,jdbcType=CHAR},
+      </if>
+      <if test="record.givecredit != null" >
+        giveCredit = #{record.givecredit,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationid != null" >
+        locationId = #{record.locationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deadlinenotify != null" >
+        deadlineNotify = #{record.deadlinenotify,jdbcType=CHAR},
+      </if>
+      <if test="record.daysofnotifybeforedeadline != null" >
+        daysOfNotifyBeforeDeadline = #{record.daysofnotifybeforedeadline,jdbcType=INTEGER},
+      </if>
+      <if test="record.useinclassroom != null" >
+        useInClassroom = #{record.useinclassroom,jdbcType=CHAR},
+      </if>
+      <if test="record.singlebuy != null" >
+        singleBuy = #{record.singlebuy,jdbcType=INTEGER},
+      </if>
+      <if test="record.freestarttime != null" >
+        freeStartTime = #{record.freestarttime,jdbcType=INTEGER},
+      </if>
+      <if test="record.freeendtime != null" >
+        freeEndTime = #{record.freeendtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.locked != null" >
+        locked = #{record.locked,jdbcType=INTEGER},
+      </if>
+      <if test="record.cover != null" >
+        cover = #{record.cover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enablefinish != null" >
+        enableFinish = #{record.enablefinish,jdbcType=INTEGER},
+      </if>
+      <if test="record.materialnum != null" >
+        materialNum = #{record.materialnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxrate != null" >
+        maxRate = #{record.maxrate,jdbcType=TINYINT},
+      </if>
+      <if test="record.serializemode != null" >
+        serializeMode = #{record.serializemode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showservices != null" >
+        showServices = #{record.showservices,jdbcType=BIT},
+      </if>
+      <if test="record.recommended != null" >
+        recommended = #{record.recommended,jdbcType=TINYINT},
+      </if>
+      <if test="record.recommendedseq != null" >
+        recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+      </if>
+      <if test="record.recommendedtime != null" >
+        recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryid != null" >
+        categoryId = #{record.categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.hitnum != null" >
+        hitNum = #{record.hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.coursetype != null" >
+        courseType = #{record.coursetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rewardpoint != null" >
+        rewardPoint = #{record.rewardpoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskrewardpoint != null" >
+        taskRewardPoint = #{record.taskrewardpoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.enableaudio != null" >
+        enableAudio = #{record.enableaudio,jdbcType=INTEGER},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.goals != null" >
+        goals = #{record.goals,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.audiences != null" >
+        audiences = #{record.audiences,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.services != null" >
+        services = #{record.services,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.about != null" >
+        about = #{record.about,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update course_v8
+    set id = #{record.id,jdbcType=INTEGER},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      courseSetTitle = #{record.coursesettitle,jdbcType=VARCHAR},
+      learnMode = #{record.learnmode,jdbcType=VARCHAR},
+      expiryMode = #{record.expirymode,jdbcType=VARCHAR},
+      expiryDays = #{record.expirydays,jdbcType=INTEGER},
+      expiryStartDate = #{record.expirystartdate,jdbcType=INTEGER},
+      expiryEndDate = #{record.expiryenddate,jdbcType=INTEGER},
+      isDefault = #{record.isdefault,jdbcType=BIT},
+      maxStudentNum = #{record.maxstudentnum,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=INTEGER},
+      isFree = #{record.isfree,jdbcType=BIT},
+      price = #{record.price,jdbcType=REAL},
+      vipLevelId = #{record.viplevelid,jdbcType=INTEGER},
+      buyable = #{record.buyable,jdbcType=BIT},
+      tryLookable = #{record.trylookable,jdbcType=BIT},
+      tryLookLength = #{record.trylooklength,jdbcType=INTEGER},
+      watchLimit = #{record.watchlimit,jdbcType=INTEGER},
+      taskNum = #{record.tasknum,jdbcType=INTEGER},
+      compulsoryTaskNum = #{record.compulsorytasknum,jdbcType=INTEGER},
+      studentNum = #{record.studentnum,jdbcType=INTEGER},
+      teacherIds = #{record.teacherids,jdbcType=VARCHAR},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      ratingNum = #{record.ratingnum,jdbcType=INTEGER},
+      rating = #{record.rating,jdbcType=REAL},
+      noteNum = #{record.notenum,jdbcType=INTEGER},
+      buyExpiryTime = #{record.buyexpirytime,jdbcType=INTEGER},
+      threadNum = #{record.threadnum,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      approval = #{record.approval,jdbcType=BIT},
+      income = #{record.income,jdbcType=REAL},
+      originPrice = #{record.originprice,jdbcType=REAL},
+      coinPrice = #{record.coinprice,jdbcType=REAL},
+      originCoinPrice = #{record.origincoinprice,jdbcType=REAL},
+      showStudentNumType = #{record.showstudentnumtype,jdbcType=CHAR},
+      giveCredit = #{record.givecredit,jdbcType=INTEGER},
+      locationId = #{record.locationid,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      deadlineNotify = #{record.deadlinenotify,jdbcType=CHAR},
+      daysOfNotifyBeforeDeadline = #{record.daysofnotifybeforedeadline,jdbcType=INTEGER},
+      useInClassroom = #{record.useinclassroom,jdbcType=CHAR},
+      singleBuy = #{record.singlebuy,jdbcType=INTEGER},
+      freeStartTime = #{record.freestarttime,jdbcType=INTEGER},
+      freeEndTime = #{record.freeendtime,jdbcType=INTEGER},
+      locked = #{record.locked,jdbcType=INTEGER},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      enableFinish = #{record.enablefinish,jdbcType=INTEGER},
+      materialNum = #{record.materialnum,jdbcType=INTEGER},
+      maxRate = #{record.maxrate,jdbcType=TINYINT},
+      serializeMode = #{record.serializemode,jdbcType=VARCHAR},
+      showServices = #{record.showservices,jdbcType=BIT},
+      recommended = #{record.recommended,jdbcType=TINYINT},
+      recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      hitNum = #{record.hitnum,jdbcType=INTEGER},
+      courseType = #{record.coursetype,jdbcType=VARCHAR},
+      rewardPoint = #{record.rewardpoint,jdbcType=INTEGER},
+      taskRewardPoint = #{record.taskrewardpoint,jdbcType=INTEGER},
+      enableAudio = #{record.enableaudio,jdbcType=INTEGER},
+      summary = #{record.summary,jdbcType=LONGVARCHAR},
+      goals = #{record.goals,jdbcType=LONGVARCHAR},
+      audiences = #{record.audiences,jdbcType=LONGVARCHAR},
+      services = #{record.services,jdbcType=LONGVARCHAR},
+      about = #{record.about,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_v8
+    set id = #{record.id,jdbcType=INTEGER},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      courseSetTitle = #{record.coursesettitle,jdbcType=VARCHAR},
+      learnMode = #{record.learnmode,jdbcType=VARCHAR},
+      expiryMode = #{record.expirymode,jdbcType=VARCHAR},
+      expiryDays = #{record.expirydays,jdbcType=INTEGER},
+      expiryStartDate = #{record.expirystartdate,jdbcType=INTEGER},
+      expiryEndDate = #{record.expiryenddate,jdbcType=INTEGER},
+      isDefault = #{record.isdefault,jdbcType=BIT},
+      maxStudentNum = #{record.maxstudentnum,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=INTEGER},
+      isFree = #{record.isfree,jdbcType=BIT},
+      price = #{record.price,jdbcType=REAL},
+      vipLevelId = #{record.viplevelid,jdbcType=INTEGER},
+      buyable = #{record.buyable,jdbcType=BIT},
+      tryLookable = #{record.trylookable,jdbcType=BIT},
+      tryLookLength = #{record.trylooklength,jdbcType=INTEGER},
+      watchLimit = #{record.watchlimit,jdbcType=INTEGER},
+      taskNum = #{record.tasknum,jdbcType=INTEGER},
+      compulsoryTaskNum = #{record.compulsorytasknum,jdbcType=INTEGER},
+      studentNum = #{record.studentnum,jdbcType=INTEGER},
+      teacherIds = #{record.teacherids,jdbcType=VARCHAR},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      ratingNum = #{record.ratingnum,jdbcType=INTEGER},
+      rating = #{record.rating,jdbcType=REAL},
+      noteNum = #{record.notenum,jdbcType=INTEGER},
+      buyExpiryTime = #{record.buyexpirytime,jdbcType=INTEGER},
+      threadNum = #{record.threadnum,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      approval = #{record.approval,jdbcType=BIT},
+      income = #{record.income,jdbcType=REAL},
+      originPrice = #{record.originprice,jdbcType=REAL},
+      coinPrice = #{record.coinprice,jdbcType=REAL},
+      originCoinPrice = #{record.origincoinprice,jdbcType=REAL},
+      showStudentNumType = #{record.showstudentnumtype,jdbcType=CHAR},
+      giveCredit = #{record.givecredit,jdbcType=INTEGER},
+      locationId = #{record.locationid,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      deadlineNotify = #{record.deadlinenotify,jdbcType=CHAR},
+      daysOfNotifyBeforeDeadline = #{record.daysofnotifybeforedeadline,jdbcType=INTEGER},
+      useInClassroom = #{record.useinclassroom,jdbcType=CHAR},
+      singleBuy = #{record.singlebuy,jdbcType=INTEGER},
+      freeStartTime = #{record.freestarttime,jdbcType=INTEGER},
+      freeEndTime = #{record.freeendtime,jdbcType=INTEGER},
+      locked = #{record.locked,jdbcType=INTEGER},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      enableFinish = #{record.enablefinish,jdbcType=INTEGER},
+      materialNum = #{record.materialnum,jdbcType=INTEGER},
+      maxRate = #{record.maxrate,jdbcType=TINYINT},
+      serializeMode = #{record.serializemode,jdbcType=VARCHAR},
+      showServices = #{record.showservices,jdbcType=BIT},
+      recommended = #{record.recommended,jdbcType=TINYINT},
+      recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      hitNum = #{record.hitnum,jdbcType=INTEGER},
+      courseType = #{record.coursetype,jdbcType=VARCHAR},
+      rewardPoint = #{record.rewardpoint,jdbcType=INTEGER},
+      taskRewardPoint = #{record.taskrewardpoint,jdbcType=INTEGER},
+      enableAudio = #{record.enableaudio,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseV8WithBLOBs" >
+    update course_v8
+    <set >
+      <if test="coursesetid != null" >
+        courseSetId = #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="coursesettitle != null" >
+        courseSetTitle = #{coursesettitle,jdbcType=VARCHAR},
+      </if>
+      <if test="learnmode != null" >
+        learnMode = #{learnmode,jdbcType=VARCHAR},
+      </if>
+      <if test="expirymode != null" >
+        expiryMode = #{expirymode,jdbcType=VARCHAR},
+      </if>
+      <if test="expirydays != null" >
+        expiryDays = #{expirydays,jdbcType=INTEGER},
+      </if>
+      <if test="expirystartdate != null" >
+        expiryStartDate = #{expirystartdate,jdbcType=INTEGER},
+      </if>
+      <if test="expiryenddate != null" >
+        expiryEndDate = #{expiryenddate,jdbcType=INTEGER},
+      </if>
+      <if test="isdefault != null" >
+        isDefault = #{isdefault,jdbcType=BIT},
+      </if>
+      <if test="maxstudentnum != null" >
+        maxStudentNum = #{maxstudentnum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="isfree != null" >
+        isFree = #{isfree,jdbcType=BIT},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="viplevelid != null" >
+        vipLevelId = #{viplevelid,jdbcType=INTEGER},
+      </if>
+      <if test="buyable != null" >
+        buyable = #{buyable,jdbcType=BIT},
+      </if>
+      <if test="trylookable != null" >
+        tryLookable = #{trylookable,jdbcType=BIT},
+      </if>
+      <if test="trylooklength != null" >
+        tryLookLength = #{trylooklength,jdbcType=INTEGER},
+      </if>
+      <if test="watchlimit != null" >
+        watchLimit = #{watchlimit,jdbcType=INTEGER},
+      </if>
+      <if test="tasknum != null" >
+        taskNum = #{tasknum,jdbcType=INTEGER},
+      </if>
+      <if test="compulsorytasknum != null" >
+        compulsoryTaskNum = #{compulsorytasknum,jdbcType=INTEGER},
+      </if>
+      <if test="studentnum != null" >
+        studentNum = #{studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="teacherids != null" >
+        teacherIds = #{teacherids,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="ratingnum != null" >
+        ratingNum = #{ratingnum,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null" >
+        rating = #{rating,jdbcType=REAL},
+      </if>
+      <if test="notenum != null" >
+        noteNum = #{notenum,jdbcType=INTEGER},
+      </if>
+      <if test="buyexpirytime != null" >
+        buyExpiryTime = #{buyexpirytime,jdbcType=INTEGER},
+      </if>
+      <if test="threadnum != null" >
+        threadNum = #{threadnum,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="approval != null" >
+        approval = #{approval,jdbcType=BIT},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=REAL},
+      </if>
+      <if test="originprice != null" >
+        originPrice = #{originprice,jdbcType=REAL},
+      </if>
+      <if test="coinprice != null" >
+        coinPrice = #{coinprice,jdbcType=REAL},
+      </if>
+      <if test="origincoinprice != null" >
+        originCoinPrice = #{origincoinprice,jdbcType=REAL},
+      </if>
+      <if test="showstudentnumtype != null" >
+        showStudentNumType = #{showstudentnumtype,jdbcType=CHAR},
+      </if>
+      <if test="givecredit != null" >
+        giveCredit = #{givecredit,jdbcType=INTEGER},
+      </if>
+      <if test="locationid != null" >
+        locationId = #{locationid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="deadlinenotify != null" >
+        deadlineNotify = #{deadlinenotify,jdbcType=CHAR},
+      </if>
+      <if test="daysofnotifybeforedeadline != null" >
+        daysOfNotifyBeforeDeadline = #{daysofnotifybeforedeadline,jdbcType=INTEGER},
+      </if>
+      <if test="useinclassroom != null" >
+        useInClassroom = #{useinclassroom,jdbcType=CHAR},
+      </if>
+      <if test="singlebuy != null" >
+        singleBuy = #{singlebuy,jdbcType=INTEGER},
+      </if>
+      <if test="freestarttime != null" >
+        freeStartTime = #{freestarttime,jdbcType=INTEGER},
+      </if>
+      <if test="freeendtime != null" >
+        freeEndTime = #{freeendtime,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        locked = #{locked,jdbcType=INTEGER},
+      </if>
+      <if test="cover != null" >
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="enablefinish != null" >
+        enableFinish = #{enablefinish,jdbcType=INTEGER},
+      </if>
+      <if test="materialnum != null" >
+        materialNum = #{materialnum,jdbcType=INTEGER},
+      </if>
+      <if test="maxrate != null" >
+        maxRate = #{maxrate,jdbcType=TINYINT},
+      </if>
+      <if test="serializemode != null" >
+        serializeMode = #{serializemode,jdbcType=VARCHAR},
+      </if>
+      <if test="showservices != null" >
+        showServices = #{showservices,jdbcType=BIT},
+      </if>
+      <if test="recommended != null" >
+        recommended = #{recommended,jdbcType=TINYINT},
+      </if>
+      <if test="recommendedseq != null" >
+        recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+      </if>
+      <if test="recommendedtime != null" >
+        recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null" >
+        categoryId = #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="hitnum != null" >
+        hitNum = #{hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="coursetype != null" >
+        courseType = #{coursetype,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardpoint != null" >
+        rewardPoint = #{rewardpoint,jdbcType=INTEGER},
+      </if>
+      <if test="taskrewardpoint != null" >
+        taskRewardPoint = #{taskrewardpoint,jdbcType=INTEGER},
+      </if>
+      <if test="enableaudio != null" >
+        enableAudio = #{enableaudio,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="goals != null" >
+        goals = #{goals,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="audiences != null" >
+        audiences = #{audiences,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="services != null" >
+        services = #{services,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="about != null" >
+        about = #{about,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.CourseV8WithBLOBs" >
+    update course_v8
+    set courseSetId = #{coursesetid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      courseSetTitle = #{coursesettitle,jdbcType=VARCHAR},
+      learnMode = #{learnmode,jdbcType=VARCHAR},
+      expiryMode = #{expirymode,jdbcType=VARCHAR},
+      expiryDays = #{expirydays,jdbcType=INTEGER},
+      expiryStartDate = #{expirystartdate,jdbcType=INTEGER},
+      expiryEndDate = #{expiryenddate,jdbcType=INTEGER},
+      isDefault = #{isdefault,jdbcType=BIT},
+      maxStudentNum = #{maxstudentnum,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=INTEGER},
+      isFree = #{isfree,jdbcType=BIT},
+      price = #{price,jdbcType=REAL},
+      vipLevelId = #{viplevelid,jdbcType=INTEGER},
+      buyable = #{buyable,jdbcType=BIT},
+      tryLookable = #{trylookable,jdbcType=BIT},
+      tryLookLength = #{trylooklength,jdbcType=INTEGER},
+      watchLimit = #{watchlimit,jdbcType=INTEGER},
+      taskNum = #{tasknum,jdbcType=INTEGER},
+      compulsoryTaskNum = #{compulsorytasknum,jdbcType=INTEGER},
+      studentNum = #{studentnum,jdbcType=INTEGER},
+      teacherIds = #{teacherids,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      ratingNum = #{ratingnum,jdbcType=INTEGER},
+      rating = #{rating,jdbcType=REAL},
+      noteNum = #{notenum,jdbcType=INTEGER},
+      buyExpiryTime = #{buyexpirytime,jdbcType=INTEGER},
+      threadNum = #{threadnum,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      approval = #{approval,jdbcType=BIT},
+      income = #{income,jdbcType=REAL},
+      originPrice = #{originprice,jdbcType=REAL},
+      coinPrice = #{coinprice,jdbcType=REAL},
+      originCoinPrice = #{origincoinprice,jdbcType=REAL},
+      showStudentNumType = #{showstudentnumtype,jdbcType=CHAR},
+      giveCredit = #{givecredit,jdbcType=INTEGER},
+      locationId = #{locationid,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      deadlineNotify = #{deadlinenotify,jdbcType=CHAR},
+      daysOfNotifyBeforeDeadline = #{daysofnotifybeforedeadline,jdbcType=INTEGER},
+      useInClassroom = #{useinclassroom,jdbcType=CHAR},
+      singleBuy = #{singlebuy,jdbcType=INTEGER},
+      freeStartTime = #{freestarttime,jdbcType=INTEGER},
+      freeEndTime = #{freeendtime,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=INTEGER},
+      cover = #{cover,jdbcType=VARCHAR},
+      enableFinish = #{enablefinish,jdbcType=INTEGER},
+      materialNum = #{materialnum,jdbcType=INTEGER},
+      maxRate = #{maxrate,jdbcType=TINYINT},
+      serializeMode = #{serializemode,jdbcType=VARCHAR},
+      showServices = #{showservices,jdbcType=BIT},
+      recommended = #{recommended,jdbcType=TINYINT},
+      recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      courseType = #{coursetype,jdbcType=VARCHAR},
+      rewardPoint = #{rewardpoint,jdbcType=INTEGER},
+      taskRewardPoint = #{taskrewardpoint,jdbcType=INTEGER},
+      enableAudio = #{enableaudio,jdbcType=INTEGER},
+      summary = #{summary,jdbcType=LONGVARCHAR},
+      goals = #{goals,jdbcType=LONGVARCHAR},
+      audiences = #{audiences,jdbcType=LONGVARCHAR},
+      services = #{services,jdbcType=LONGVARCHAR},
+      about = #{about,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseV8" >
+    update course_v8
+    set courseSetId = #{coursesetid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      courseSetTitle = #{coursesettitle,jdbcType=VARCHAR},
+      learnMode = #{learnmode,jdbcType=VARCHAR},
+      expiryMode = #{expirymode,jdbcType=VARCHAR},
+      expiryDays = #{expirydays,jdbcType=INTEGER},
+      expiryStartDate = #{expirystartdate,jdbcType=INTEGER},
+      expiryEndDate = #{expiryenddate,jdbcType=INTEGER},
+      isDefault = #{isdefault,jdbcType=BIT},
+      maxStudentNum = #{maxstudentnum,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=INTEGER},
+      isFree = #{isfree,jdbcType=BIT},
+      price = #{price,jdbcType=REAL},
+      vipLevelId = #{viplevelid,jdbcType=INTEGER},
+      buyable = #{buyable,jdbcType=BIT},
+      tryLookable = #{trylookable,jdbcType=BIT},
+      tryLookLength = #{trylooklength,jdbcType=INTEGER},
+      watchLimit = #{watchlimit,jdbcType=INTEGER},
+      taskNum = #{tasknum,jdbcType=INTEGER},
+      compulsoryTaskNum = #{compulsorytasknum,jdbcType=INTEGER},
+      studentNum = #{studentnum,jdbcType=INTEGER},
+      teacherIds = #{teacherids,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      ratingNum = #{ratingnum,jdbcType=INTEGER},
+      rating = #{rating,jdbcType=REAL},
+      noteNum = #{notenum,jdbcType=INTEGER},
+      buyExpiryTime = #{buyexpirytime,jdbcType=INTEGER},
+      threadNum = #{threadnum,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      approval = #{approval,jdbcType=BIT},
+      income = #{income,jdbcType=REAL},
+      originPrice = #{originprice,jdbcType=REAL},
+      coinPrice = #{coinprice,jdbcType=REAL},
+      originCoinPrice = #{origincoinprice,jdbcType=REAL},
+      showStudentNumType = #{showstudentnumtype,jdbcType=CHAR},
+      giveCredit = #{givecredit,jdbcType=INTEGER},
+      locationId = #{locationid,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      deadlineNotify = #{deadlinenotify,jdbcType=CHAR},
+      daysOfNotifyBeforeDeadline = #{daysofnotifybeforedeadline,jdbcType=INTEGER},
+      useInClassroom = #{useinclassroom,jdbcType=CHAR},
+      singleBuy = #{singlebuy,jdbcType=INTEGER},
+      freeStartTime = #{freestarttime,jdbcType=INTEGER},
+      freeEndTime = #{freeendtime,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=INTEGER},
+      cover = #{cover,jdbcType=VARCHAR},
+      enableFinish = #{enablefinish,jdbcType=INTEGER},
+      materialNum = #{materialnum,jdbcType=INTEGER},
+      maxRate = #{maxrate,jdbcType=TINYINT},
+      serializeMode = #{serializemode,jdbcType=VARCHAR},
+      showServices = #{showservices,jdbcType=BIT},
+      recommended = #{recommended,jdbcType=TINYINT},
+      recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      courseType = #{coursetype,jdbcType=VARCHAR},
+      rewardPoint = #{rewardpoint,jdbcType=INTEGER},
+      taskRewardPoint = #{taskrewardpoint,jdbcType=INTEGER},
+      enableAudio = #{enableaudio,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getTeachingCourse" resultType="com.jindumooc.vojo.user.TeachingCourse">
+    SELECT id,courseSetTitle,studentNum,`status`,cover
+    FROM course_v8
+    WHERE teacherIds LIKE '%${teacherId}%' AND type = #{courseType}
+  </select>
+</mapper>

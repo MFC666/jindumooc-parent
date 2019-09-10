@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.ContentMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Content" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="editor" property="editor" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="template" property="template" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
+    <result column="tagIds" property="tagids" jdbcType="VARCHAR" />
+    <result column="hits" property="hits" jdbcType="INTEGER" />
+    <result column="featured" property="featured" jdbcType="INTEGER" />
+    <result column="promoted" property="promoted" jdbcType="TINYINT" />
+    <result column="sticky" property="sticky" jdbcType="TINYINT" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="publishedTime" property="publishedtime" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.ContentWithBLOBs" extends="BaseResultMap" >
+    <result column="summary" property="summary" jdbcType="LONGVARCHAR" />
+    <result column="body" property="body" jdbcType="LONGVARCHAR" />
+    <result column="field1" property="field1" jdbcType="LONGVARCHAR" />
+    <result column="field2" property="field2" jdbcType="LONGVARCHAR" />
+    <result column="field3" property="field3" jdbcType="LONGVARCHAR" />
+    <result column="field4" property="field4" jdbcType="LONGVARCHAR" />
+    <result column="field5" property="field5" jdbcType="LONGVARCHAR" />
+    <result column="field6" property="field6" jdbcType="LONGVARCHAR" />
+    <result column="field7" property="field7" jdbcType="LONGVARCHAR" />
+    <result column="field8" property="field8" jdbcType="LONGVARCHAR" />
+    <result column="field9" property="field9" jdbcType="LONGVARCHAR" />
+    <result column="field10" property="field10" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, editor, type, alias, picture, template, status, categoryId, tagIds, hits, 
+    featured, promoted, sticky, userId, publishedTime, createdTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    summary, body, field1, field2, field3, field4, field5, field6, field7, field8, field9, 
+    field10
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.ContentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ContentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from content
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from content
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ContentExample" >
+    delete from content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.ContentWithBLOBs" >
+    insert into content (id, title, editor, 
+      type, alias, picture, 
+      template, status, categoryId, 
+      tagIds, hits, featured, 
+      promoted, sticky, userId, 
+      publishedTime, createdTime, summary, 
+      body, field1, field2, 
+      field3, field4, field5, 
+      field6, field7, field8, 
+      field9, field10)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{editor,jdbcType=CHAR}, 
+      #{type,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{template,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{categoryid,jdbcType=INTEGER}, 
+      #{tagids,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, #{featured,jdbcType=INTEGER}, 
+      #{promoted,jdbcType=TINYINT}, #{sticky,jdbcType=TINYINT}, #{userid,jdbcType=INTEGER}, 
+      #{publishedtime,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, #{summary,jdbcType=LONGVARCHAR}, 
+      #{body,jdbcType=LONGVARCHAR}, #{field1,jdbcType=LONGVARCHAR}, #{field2,jdbcType=LONGVARCHAR}, 
+      #{field3,jdbcType=LONGVARCHAR}, #{field4,jdbcType=LONGVARCHAR}, #{field5,jdbcType=LONGVARCHAR}, 
+      #{field6,jdbcType=LONGVARCHAR}, #{field7,jdbcType=LONGVARCHAR}, #{field8,jdbcType=LONGVARCHAR}, 
+      #{field9,jdbcType=LONGVARCHAR}, #{field10,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.ContentWithBLOBs" >
+    insert into content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="editor != null" >
+        editor,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="alias != null" >
+        alias,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="template != null" >
+        template,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="categoryid != null" >
+        categoryId,
+      </if>
+      <if test="tagids != null" >
+        tagIds,
+      </if>
+      <if test="hits != null" >
+        hits,
+      </if>
+      <if test="featured != null" >
+        featured,
+      </if>
+      <if test="promoted != null" >
+        promoted,
+      </if>
+      <if test="sticky != null" >
+        sticky,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="publishedtime != null" >
+        publishedTime,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="field1 != null" >
+        field1,
+      </if>
+      <if test="field2 != null" >
+        field2,
+      </if>
+      <if test="field3 != null" >
+        field3,
+      </if>
+      <if test="field4 != null" >
+        field4,
+      </if>
+      <if test="field5 != null" >
+        field5,
+      </if>
+      <if test="field6 != null" >
+        field6,
+      </if>
+      <if test="field7 != null" >
+        field7,
+      </if>
+      <if test="field8 != null" >
+        field8,
+      </if>
+      <if test="field9 != null" >
+        field9,
+      </if>
+      <if test="field10 != null" >
+        field10,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null" >
+        #{editor,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null" >
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="template != null" >
+        #{template,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="tagids != null" >
+        #{tagids,jdbcType=VARCHAR},
+      </if>
+      <if test="hits != null" >
+        #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="featured != null" >
+        #{featured,jdbcType=INTEGER},
+      </if>
+      <if test="promoted != null" >
+        #{promoted,jdbcType=TINYINT},
+      </if>
+      <if test="sticky != null" >
+        #{sticky,jdbcType=TINYINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="publishedtime != null" >
+        #{publishedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field1 != null" >
+        #{field1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field2 != null" >
+        #{field2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field3 != null" >
+        #{field3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field4 != null" >
+        #{field4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field5 != null" >
+        #{field5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field6 != null" >
+        #{field6,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field7 != null" >
+        #{field7,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field8 != null" >
+        #{field8,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field9 != null" >
+        #{field9,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field10 != null" >
+        #{field10,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.ContentExample" resultType="java.lang.Integer" >
+    select count(*) from content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update content
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editor != null" >
+        editor = #{record.editor,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alias != null" >
+        alias = #{record.alias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.template != null" >
+        template = #{record.template,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.categoryid != null" >
+        categoryId = #{record.categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagids != null" >
+        tagIds = #{record.tagids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hits != null" >
+        hits = #{record.hits,jdbcType=INTEGER},
+      </if>
+      <if test="record.featured != null" >
+        featured = #{record.featured,jdbcType=INTEGER},
+      </if>
+      <if test="record.promoted != null" >
+        promoted = #{record.promoted,jdbcType=TINYINT},
+      </if>
+      <if test="record.sticky != null" >
+        sticky = #{record.sticky,jdbcType=TINYINT},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishedtime != null" >
+        publishedTime = #{record.publishedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.body != null" >
+        body = #{record.body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field1 != null" >
+        field1 = #{record.field1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field2 != null" >
+        field2 = #{record.field2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field3 != null" >
+        field3 = #{record.field3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field4 != null" >
+        field4 = #{record.field4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field5 != null" >
+        field5 = #{record.field5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field6 != null" >
+        field6 = #{record.field6,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field7 != null" >
+        field7 = #{record.field7,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field8 != null" >
+        field8 = #{record.field8,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field9 != null" >
+        field9 = #{record.field9,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.field10 != null" >
+        field10 = #{record.field10,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update content
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      editor = #{record.editor,jdbcType=CHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      alias = #{record.alias,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      template = #{record.template,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      tagIds = #{record.tagids,jdbcType=VARCHAR},
+      hits = #{record.hits,jdbcType=INTEGER},
+      featured = #{record.featured,jdbcType=INTEGER},
+      promoted = #{record.promoted,jdbcType=TINYINT},
+      sticky = #{record.sticky,jdbcType=TINYINT},
+      userId = #{record.userid,jdbcType=INTEGER},
+      publishedTime = #{record.publishedtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      summary = #{record.summary,jdbcType=LONGVARCHAR},
+      body = #{record.body,jdbcType=LONGVARCHAR},
+      field1 = #{record.field1,jdbcType=LONGVARCHAR},
+      field2 = #{record.field2,jdbcType=LONGVARCHAR},
+      field3 = #{record.field3,jdbcType=LONGVARCHAR},
+      field4 = #{record.field4,jdbcType=LONGVARCHAR},
+      field5 = #{record.field5,jdbcType=LONGVARCHAR},
+      field6 = #{record.field6,jdbcType=LONGVARCHAR},
+      field7 = #{record.field7,jdbcType=LONGVARCHAR},
+      field8 = #{record.field8,jdbcType=LONGVARCHAR},
+      field9 = #{record.field9,jdbcType=LONGVARCHAR},
+      field10 = #{record.field10,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update content
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      editor = #{record.editor,jdbcType=CHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      alias = #{record.alias,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      template = #{record.template,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      tagIds = #{record.tagids,jdbcType=VARCHAR},
+      hits = #{record.hits,jdbcType=INTEGER},
+      featured = #{record.featured,jdbcType=INTEGER},
+      promoted = #{record.promoted,jdbcType=TINYINT},
+      sticky = #{record.sticky,jdbcType=TINYINT},
+      userId = #{record.userid,jdbcType=INTEGER},
+      publishedTime = #{record.publishedtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ContentWithBLOBs" >
+    update content
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null" >
+        editor = #{editor,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null" >
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="template != null" >
+        template = #{template,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="categoryid != null" >
+        categoryId = #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="tagids != null" >
+        tagIds = #{tagids,jdbcType=VARCHAR},
+      </if>
+      <if test="hits != null" >
+        hits = #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="featured != null" >
+        featured = #{featured,jdbcType=INTEGER},
+      </if>
+      <if test="promoted != null" >
+        promoted = #{promoted,jdbcType=TINYINT},
+      </if>
+      <if test="sticky != null" >
+        sticky = #{sticky,jdbcType=TINYINT},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="publishedtime != null" >
+        publishedTime = #{publishedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field1 != null" >
+        field1 = #{field1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field2 != null" >
+        field2 = #{field2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field3 != null" >
+        field3 = #{field3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field4 != null" >
+        field4 = #{field4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field5 != null" >
+        field5 = #{field5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field6 != null" >
+        field6 = #{field6,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field7 != null" >
+        field7 = #{field7,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field8 != null" >
+        field8 = #{field8,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field9 != null" >
+        field9 = #{field9,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="field10 != null" >
+        field10 = #{field10,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.ContentWithBLOBs" >
+    update content
+    set title = #{title,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=CHAR},
+      type = #{type,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      template = #{template,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      tagIds = #{tagids,jdbcType=VARCHAR},
+      hits = #{hits,jdbcType=INTEGER},
+      featured = #{featured,jdbcType=INTEGER},
+      promoted = #{promoted,jdbcType=TINYINT},
+      sticky = #{sticky,jdbcType=TINYINT},
+      userId = #{userid,jdbcType=INTEGER},
+      publishedTime = #{publishedtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      summary = #{summary,jdbcType=LONGVARCHAR},
+      body = #{body,jdbcType=LONGVARCHAR},
+      field1 = #{field1,jdbcType=LONGVARCHAR},
+      field2 = #{field2,jdbcType=LONGVARCHAR},
+      field3 = #{field3,jdbcType=LONGVARCHAR},
+      field4 = #{field4,jdbcType=LONGVARCHAR},
+      field5 = #{field5,jdbcType=LONGVARCHAR},
+      field6 = #{field6,jdbcType=LONGVARCHAR},
+      field7 = #{field7,jdbcType=LONGVARCHAR},
+      field8 = #{field8,jdbcType=LONGVARCHAR},
+      field9 = #{field9,jdbcType=LONGVARCHAR},
+      field10 = #{field10,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Content" >
+    update content
+    set title = #{title,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=CHAR},
+      type = #{type,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      template = #{template,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      tagIds = #{tagids,jdbcType=VARCHAR},
+      hits = #{hits,jdbcType=INTEGER},
+      featured = #{featured,jdbcType=INTEGER},
+      promoted = #{promoted,jdbcType=TINYINT},
+      sticky = #{sticky,jdbcType=TINYINT},
+      userId = #{userid,jdbcType=INTEGER},
+      publishedTime = #{publishedtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

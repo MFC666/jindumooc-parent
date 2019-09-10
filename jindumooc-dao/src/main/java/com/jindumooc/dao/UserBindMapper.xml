@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.UserBindMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.UserBind" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="fromId" property="fromid" jdbcType="VARCHAR" />
+    <result column="toId" property="toid" jdbcType="INTEGER" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="refreshToken" property="refreshtoken" jdbcType="VARCHAR" />
+    <result column="expiredTime" property="expiredtime" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type, fromId, toId, token, refreshToken, expiredTime, createdTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.UserBindExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_bind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_bind
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_bind
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.UserBindExample" >
+    delete from user_bind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.UserBind" >
+    insert into user_bind (id, type, fromId, 
+      toId, token, refreshToken, 
+      expiredTime, createdTime)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{fromid,jdbcType=VARCHAR}, 
+      #{toid,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, #{refreshtoken,jdbcType=VARCHAR}, 
+      #{expiredtime,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.UserBind" >
+    insert into user_bind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="fromid != null" >
+        fromId,
+      </if>
+      <if test="toid != null" >
+        toId,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="refreshtoken != null" >
+        refreshToken,
+      </if>
+      <if test="expiredtime != null" >
+        expiredTime,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="fromid != null" >
+        #{fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        #{toid,jdbcType=INTEGER},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshtoken != null" >
+        #{refreshtoken,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredtime != null" >
+        #{expiredtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.UserBindExample" resultType="java.lang.Integer" >
+    select count(*) from user_bind
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_bind
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromid != null" >
+        fromId = #{record.fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toid != null" >
+        toId = #{record.toid,jdbcType=INTEGER},
+      </if>
+      <if test="record.token != null" >
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refreshtoken != null" >
+        refreshToken = #{record.refreshtoken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expiredtime != null" >
+        expiredTime = #{record.expiredtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_bind
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      fromId = #{record.fromid,jdbcType=VARCHAR},
+      toId = #{record.toid,jdbcType=INTEGER},
+      token = #{record.token,jdbcType=VARCHAR},
+      refreshToken = #{record.refreshtoken,jdbcType=VARCHAR},
+      expiredTime = #{record.expiredtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.UserBind" >
+    update user_bind
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="fromid != null" >
+        fromId = #{fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        toId = #{toid,jdbcType=INTEGER},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshtoken != null" >
+        refreshToken = #{refreshtoken,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredtime != null" >
+        expiredTime = #{expiredtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.UserBind" >
+    update user_bind
+    set type = #{type,jdbcType=VARCHAR},
+      fromId = #{fromid,jdbcType=VARCHAR},
+      toId = #{toid,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR},
+      refreshToken = #{refreshtoken,jdbcType=VARCHAR},
+      expiredTime = #{expiredtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

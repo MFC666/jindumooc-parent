@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.jinduMooc</groupId>
+    <artifactId>jindumooc-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>jindumooc-parent</name>
+    <description>Demo project for Spring Boot</description>
+    <modules>
+        <module>jindumooc-interface</module>
+        <module>jindumooc-class-service</module>
+        <module>jindumooc-user-service</module>
+        <module>jindumooc-course-service</module>
+        <module>jindumooc-material-service</module>
+        <module>jindumooc-group-service</module>
+        <module>jindumooc-information-service</module>
+        <module>jindumooc-system-service</module>
+        <module>jindumooc-login-service</module>
+        <module>jindumooc-class-web</module>
+        <module>jindumooc-user-web</module>
+        <module>jindumooc-course-web</module>
+        <module>jindumooc-material-web</module>
+        <module>jindumooc-group-web</module>
+        <module>jindumooc-information-web</module>
+        <module>jindumooc-system-web</module>
+        <module>jindumooc-login-web</module>
+        <module>jindumooc-pojo</module>
+        <module>jindumooc-vojo</module>
+        <module>jindumooc-dao</module>
+        <module>jindumooc-dto</module>
+        <module>jindumooc-util</module>
+    </modules>
+    <packaging>pom</packaging>
+    <properties>
+        <java.version>1.8</java.version>
+        <dubbo.starter.version>0.2.0</dubbo.starter.version>
+        <mybatis.starter.verison>1.2.2</mybatis.starter.verison>
+        <mysql.connector.vesion>5.1.47</mysql.connector.vesion>
+        <pagehelper.version>1.2.3</pagehelper.version>
+        <druid.version>1.0.18</druid.version>
+        <http-client.version>4.5.2</http-client.version>
+        <fast-json.version>1.2.23</fast-json.version>
+        <poi-ooxml.version>3.17</poi-ooxml.version>
+        <projectlombok.version>1.18.8</projectlombok.version>
+    </properties>
+    <dependencies>
+
+        <!-- SpringBoot 整合 Web组件 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- SpringBoot整合Dubbo       -->
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>2.1.6.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.1.8.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+            <plugins>
+                <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.7.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

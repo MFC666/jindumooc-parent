@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.InfoBackMapper">
+    <delete id="delArticleById">
+        delete from article where id in
+        <foreach collection="idList" separator="," open="(" close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <update id="updateArticle">
+        update article
+        <set>
+            <if test="article.title!=null">
+                title=#{article.title,jdbcType=VARCHAR},
+            </if>
+            <if test="article.categoryId!=null">
+                categoryId=#{article.categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="article.body!=null">
+                body=#{article.body,jdbcType=VARCHAR},
+            </if>
+            <if test="article.featured!=null">
+                featured=#{article.featured,jdbcType=INTEGER},
+            </if>
+            <if test="article.promoted!=null">
+                promoted=#{article.promoted,jdbcType=INTEGER},
+            </if>
+            <if test="article.sticky!=null">
+                sticky=#{article.sticky,jdbcType=INTEGER},
+            </if>
+            <if test="article.source!=null">
+                source=#{article.source,jdbcType=VARCHAR},
+            </if>
+            <if test="article.sourceUrl!=null">
+                sourceUrl=#{article.sourceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="article.thumb!=null">
+                thumb=#{article.thumb,jdbcType=VARCHAR},
+            </if>
+            <if test="article.updatedTime!=null">
+                updatedTime=#{article.updatedTime,jdbcType=INTEGER},
+            </if>
+            <if test="article.publishedTime!=null">
+                publishedTime=#{article.publishedTime,jdbcType=INTEGER},
+            </if>
+            <if test="article.status!=null">
+                status=#{article.status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id=#{article.id,jdbcType=INTEGER}
+    </update>
+    <delete id="delTagsOfArticle">
+        delete from tag_owner
+        where tag_owner.ownerType='article'
+        <if test="id!=null">
+            and tag_owner.ownerId=#{id,jdbcType=INTEGER}
+        </if>
+    </delete>
+    <insert id="insertTagsOfArticle">
+        insert into tag_owner(ownerType,ownerId,tagId,userId,createdTime)
+        values 
+        <foreach collection="tagIds" item="tagId" separator=",">
+            ('article',#{id,jdbcType=INTEGER},#{tagId,jdbcType=INTEGER},1,unix_timestamp(now()))
+        </foreach>
+    </insert>
+    <insert id="insertArticle" parameterType="com.jindumooc.vojo.ArticleEdit">
+        <!--<selectKey keyProperty="article.id" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>-->
+        insert into article(title,categoryId,body,featured,promoted,sticky,source,sourceUrl,thumb,publishedTime,updatedTime,status)
+        values (#{article.title},#{article.categoryId},#{article.body,jdbcType=VARCHAR},#{article.featured,jdbcType=INTEGER},
+        #{article.promoted,jdbcType=INTEGER},#{article.sticky,jdbcType=INTEGER},#{article.source,jdbcType=VARCHAR},#{article.sourceUrl,jdbcType=VARCHAR},
+        #{article.thumb,jdbcType=VARCHAR},#{article.publishedTime,jdbcType=INTEGER},#{article.updatedTime,jdbcType=INTEGER},#{article.status,jdbcType=VARCHAR})
+    </insert>
+    <select id="getMaxArticleId" resultType="int">
+        select max(id)
+        from article
+    </select>
+    <insert id="insertCategory">
+        insert into article_category(name,code,parentId,seoTitle,seoKeyword,seoDesc,published) values (#{articleCategory.name},#{articleCategory.code},
+        #{articleCategory.parentId},#{articleCategory.seoTitle},#{articleCategory.seoKeyword},#{articleCategory.seoDesc},#{articleCategory.published})
+    </insert>
+    <update id="updateCategory">
+        update article_category
+        <set>
+            <if test="articleCategory.name!=null">
+                name=#{articleCategory.name},
+            </if>
+            <if test="articleCategory.code!=null">
+                code=#{articleCategory.code},
+            </if>
+            <if test="articleCategory.parentId!=null">
+                parentId=#{articleCategory.parentId},
+            </if>
+            <if test="articleCategory.seoTitle!=null">
+                seoTitle=#{articleCategory.seoTitle},
+            </if>
+            <if test="articleCategory.seoKeyword!=null">
+                seoKeyword=#{articleCategory.seoKeyword},
+            </if>
+            <if test="articleCategory.seoDesc!=null">
+                seoDesc=#{articleCategory.seoDesc},
+            </if>
+            <if test="articleCategory.published!=null">
+                published=#{articleCategory.published},
+            </if>
+        </set>
+        where id=#{articleCategory.id}
+    </update>
+    <resultMap id="getArticleListByConditionResultMap" type="com.jindumooc.vojo.Article">
+        <id column="aid" property="id" jdbcType="INTEGER"/>
+        <result column="atit" property="title" jdbcType="VARCHAR"/>
+        <result column="aupdatedTime" property="updatedTime" jdbcType="INTEGER"/>
+        <result column="afeatured" property="featured" jdbcType="INTEGER"/>
+        <result column="apromoted" property="promoted" jdbcType="INTEGER"/>
+        <result column="asticky" property="sticky" jdbcType="INTEGER"/>
+        <result column="astatus" property="status" jdbcType="VARCHAR"/>
+        <association property="articlecategory" javaType="com.jindumooc.vojo.ArticleCategory">
+            <id property="id" column="acaId" jdbcType="INTEGER"/>
+            <result property="name" column="acaname" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+
+
+    <select id="getArticleListByCondition1" resultMap="getArticleListByConditionResultMap">
+        select article.id as aid,article.title as atit,article_category.id as acaid,article_category.name as acaname,article.updatedTime as aupdatedTime,
+        article.featured as afeatured,article.promoted as apromoted,article.sticky as asticky,article.status as astatus
+        from article,article_category
+        where article.categoryId=article_category.id
+        <if test="keywords!=null and keywords!=''">
+            and article.title like concat('%',#{keywords},'%')
+        </if>
+        <if test="ArticleCategoryId!=null">
+            and article.categoryId=#{ArticleCategoryId}
+        </if>
+        <if test="featured!=null">
+            and article.featured=#{featured}
+        </if>
+        <if test="status!=null">
+            and article.status=#{status}
+        </if>
+        <if test="start!=null and size!=null">
+            order by article.id desc limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="getArticleListByCondition2" resultMap="getArticleListByConditionResultMap">
+        select article.id as aid,article.title as atit,article_category.id as acaid,article_category.name as acaname,article.updatedTime as aupdatedTime,
+        article.featured as afeatured,article.promoted as apromoted,article.sticky as asticky,article.status as astatus
+        from article,article_category
+        where article.categoryId=article_category.id
+        <if test="keywords!=null and keywords!=''">
+            and article.title like concat('%',#{keywords},'%')
+        </if>
+        <if test="ArticleCategoryId!=null">
+            and article.categoryId=#{ArticleCategoryId}
+        </if>
+        <if test="sticky!=null">
+            and article.sticky=#{sticky}
+        </if>
+        <if test="status!=null">
+            and article.status=#{status}
+        </if>
+        <if test="start!=null and size!=null">
+            order by article.id desc limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="getArticleListByCondition3" resultMap="getArticleListByConditionResultMap">
+        select article.id as aid,article.title as atit,article_category.id as acaid,article_category.name as acaname,article.updatedTime as aupdatedTime,
+        article.featured as afeatured,article.promoted as apromoted,article.sticky as asticky,article.status as astatus
+        from article,article_category
+        where article.categoryId=article_category.id
+        <if test="keywords!=null and keywords!=''">
+            and article.title like concat('%',#{keywords},'%')
+        </if>
+        <if test="ArticleCategoryId!=null">
+            and article.categoryId=#{ArticleCategoryId}
+        </if>
+        <if test="promoted!=null">
+            and article.promoted=#{promoted}
+        </if>
+        <if test="status!=null">
+            and article.status=#{status}
+        </if>
+        <if test="start!=null and size!=null">
+            order by article.id desc limit #{start},#{size}
+        </if>
+    </select>
+    <select id="getCountArticlesByCondition1" resultType="int">
+        select count(*)
+        from article,article_category
+        where article.categoryId=article_category.id
+        <if test="keywords!=null and keywords!=''">
+            and article.title like concat('%',#{keywords},'%')
+        </if>
+        <if test="ArticleCategoryId!=null">
+            and article.categoryId=#{ArticleCategoryId}
+        </if>
+        <if test="featured!=null">
+            and article.featured=#{featured}
+        </if>
+        <if test="status!=null">
+            and article.status=#{status}
+        </if>
+    </select>
+    <select id="getCountArticlesByCondition2" resultType="int">
+        select count(*)
+        from article,article_category
+        where article.categoryId=article_category.id
+        <if test="keywords!=null and keywords!=''">
+            and article.title like concat('%',#{keywords},'%')
+        </if>
+        <if test="ArticleCategoryId!=null">
+            and article.categoryId=#{ArticleCategoryId}
+        </if>
+        <if test="sticky!=null">
+            and article.sticky=#{sticky}
+        </if>
+        <if test="status!=null">
+            and article.status=#{status}
+        </if>
+    </select>
+    <select id="getCountArticlesByCondition3" resultType="int">
+        select count(*)
+        from article,article_category
+        where article.categoryId=article_category.id
+        <if test="keywords!=null and keywords!=''">
+            and article.title like concat('%',#{keywords},'%')
+        </if>
+        <if test="ArticleCategoryId!=null">
+            and article.categoryId=#{ArticleCategoryId}
+        </if>
+        <if test="promoted!=null">
+            and article.promoted=#{promoted}
+        </if>
+        <if test="status!=null">
+            and article.status=#{status}
+        </if>
+    </select>
+    <delete id="deleteCategory">
+        delete from article_category
+        where id=#{id}
+    </delete>
+
+    <resultMap id="getArticleEditByidResultMap" type="com.jindumooc.vojo.ArticleEdit">
+        <id column="aid" property="id" jdbcType="INTEGER"/>
+        <result column="atit" property="title" jdbcType="VARCHAR"/>
+        <result column="apublishedTime" property="publishedTime" jdbcType="INTEGER"/>
+        <result column="afeatured" property="featured" jdbcType="INTEGER"/>
+        <result column="apromoted" property="promoted" jdbcType="INTEGER"/>
+        <result column="asticky" property="sticky" jdbcType="INTEGER"/>
+        <result property="categoryId" column="acaId" jdbcType="INTEGER"/>
+        <result property="categoryName" column="acaname" jdbcType="VARCHAR"/>
+        <result property="body" column="abody" jdbcType="VARCHAR"/>
+        <result property="source" column="asource" jdbcType="VARCHAR"/>
+        <result property="sourceUrl" column="asourceUrl" jdbcType="VARCHAR"/>
+        <result property="thumb" column="athumb" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="getArticleEditByid" resultMap="getArticleEditByidResultMap">
+        select article.id as aid,article.title as atit,article.publishedTime as apublishedTime,
+        article.featured as afeatured,article.promoted as apromoted,article.sticky as asticky,article_category.id as acaId,article_category.name as acaname,
+        article.body as abody,article.source as asource,article.sourceUrl as asourceUrl,article.thumb as athumb
+        from article,article_category
+        where article.categoryId=article_category.id and article.id=#{id}
+    </select>
+</mapper>

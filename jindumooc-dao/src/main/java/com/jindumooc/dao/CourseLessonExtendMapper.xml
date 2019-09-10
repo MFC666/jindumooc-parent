@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseLessonExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseLessonExtend" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="doTimes" property="dotimes" jdbcType="INTEGER" />
+    <result column="redoInterval" property="redointerval" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, courseId, doTimes, redoInterval
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseLessonExtendExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_lesson_extend
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseLessonExtendExample" >
+    delete from course_lesson_extend
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseLessonExtend" >
+    insert into course_lesson_extend (id, courseId, doTimes, 
+      redoInterval)
+    values (#{id,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, #{dotimes,jdbcType=INTEGER}, 
+      #{redointerval,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseLessonExtend" >
+    insert into course_lesson_extend
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="dotimes != null" >
+        doTimes,
+      </if>
+      <if test="redointerval != null" >
+        redoInterval,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="dotimes != null" >
+        #{dotimes,jdbcType=INTEGER},
+      </if>
+      <if test="redointerval != null" >
+        #{redointerval,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseLessonExtendExample" resultType="java.lang.Integer" >
+    select count(*) from course_lesson_extend
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_lesson_extend
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dotimes != null" >
+        doTimes = #{record.dotimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.redointerval != null" >
+        redoInterval = #{record.redointerval,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_lesson_extend
+    set id = #{record.id,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      doTimes = #{record.dotimes,jdbcType=INTEGER},
+      redoInterval = #{record.redointerval,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

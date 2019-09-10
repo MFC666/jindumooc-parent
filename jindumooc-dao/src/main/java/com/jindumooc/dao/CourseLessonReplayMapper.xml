@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseLessonReplayMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseLessonReplay" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="lessonId" property="lessonid" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="globalId" property="globalid" jdbcType="CHAR" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="hidden" property="hidden" jdbcType="BIT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="copyId" property="copyid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.CourseLessonReplay" extends="BaseResultMap" >
+    <result column="replayId" property="replayid" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, lessonId, courseId, title, globalId, userId, createdTime, hidden, type, copyId
+  </sql>
+  <sql id="Blob_Column_List" >
+    replayId
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.CourseLessonReplayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_lesson_replay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseLessonReplayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_lesson_replay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_lesson_replay
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_lesson_replay
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseLessonReplayExample" >
+    delete from course_lesson_replay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseLessonReplay" >
+    insert into course_lesson_replay (id, lessonId, courseId, 
+      title, globalId, userId, 
+      createdTime, hidden, type, 
+      copyId, replayId)
+    values (#{id,jdbcType=INTEGER}, #{lessonid,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{globalid,jdbcType=CHAR}, #{userid,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=INTEGER}, #{hidden,jdbcType=BIT}, #{type,jdbcType=VARCHAR}, 
+      #{copyid,jdbcType=INTEGER}, #{replayid,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseLessonReplay" >
+    insert into course_lesson_replay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lessonid != null" >
+        lessonId,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="globalid != null" >
+        globalId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="hidden != null" >
+        hidden,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="copyid != null" >
+        copyId,
+      </if>
+      <if test="replayid != null" >
+        replayId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="globalid != null" >
+        #{globalid,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="hidden != null" >
+        #{hidden,jdbcType=BIT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="copyid != null" >
+        #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="replayid != null" >
+        #{replayid,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseLessonReplayExample" resultType="java.lang.Integer" >
+    select count(*) from course_lesson_replay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_lesson_replay
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.lessonid != null" >
+        lessonId = #{record.lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.globalid != null" >
+        globalId = #{record.globalid,jdbcType=CHAR},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.hidden != null" >
+        hidden = #{record.hidden,jdbcType=BIT},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.copyid != null" >
+        copyId = #{record.copyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.replayid != null" >
+        replayId = #{record.replayid,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update course_lesson_replay
+    set id = #{record.id,jdbcType=INTEGER},
+      lessonId = #{record.lessonid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      globalId = #{record.globalid,jdbcType=CHAR},
+      userId = #{record.userid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      hidden = #{record.hidden,jdbcType=BIT},
+      type = #{record.type,jdbcType=VARCHAR},
+      copyId = #{record.copyid,jdbcType=INTEGER},
+      replayId = #{record.replayid,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_lesson_replay
+    set id = #{record.id,jdbcType=INTEGER},
+      lessonId = #{record.lessonid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      globalId = #{record.globalid,jdbcType=CHAR},
+      userId = #{record.userid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      hidden = #{record.hidden,jdbcType=BIT},
+      type = #{record.type,jdbcType=VARCHAR},
+      copyId = #{record.copyid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseLessonReplay" >
+    update course_lesson_replay
+    <set >
+      <if test="lessonid != null" >
+        lessonId = #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="globalid != null" >
+        globalId = #{globalid,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="hidden != null" >
+        hidden = #{hidden,jdbcType=BIT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="copyid != null" >
+        copyId = #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="replayid != null" >
+        replayId = #{replayid,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.CourseLessonReplay" >
+    update course_lesson_replay
+    set lessonId = #{lessonid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      globalId = #{globalid,jdbcType=CHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      hidden = #{hidden,jdbcType=BIT},
+      type = #{type,jdbcType=VARCHAR},
+      copyId = #{copyid,jdbcType=INTEGER},
+      replayId = #{replayid,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseLessonReplay" >
+    update course_lesson_replay
+    set lessonId = #{lessonid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      globalId = #{globalid,jdbcType=CHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      hidden = #{hidden,jdbcType=BIT},
+      type = #{type,jdbcType=VARCHAR},
+      copyId = #{copyid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

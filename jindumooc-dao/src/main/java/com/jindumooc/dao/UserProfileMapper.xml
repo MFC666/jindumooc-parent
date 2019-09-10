@@ -1,0 +1,1198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.UserProfileMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.UserProfile" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="truename" property="truename" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="CHAR" />
+    <result column="iam" property="iam" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="classes" property="classes" jdbcType="VARCHAR" />
+    <result column="weibo" property="weibo" jdbcType="VARCHAR" />
+    <result column="weixin" property="weixin" jdbcType="VARCHAR" />
+    <result column="isQQPublic" property="isqqpublic" jdbcType="INTEGER" />
+    <result column="isWeixinPublic" property="isweixinpublic" jdbcType="INTEGER" />
+    <result column="isWeiboPublic" property="isweibopublic" jdbcType="INTEGER" />
+    <result column="site" property="site" jdbcType="VARCHAR" />
+    <result column="intField1" property="intfield1" jdbcType="INTEGER" />
+    <result column="intField2" property="intfield2" jdbcType="INTEGER" />
+    <result column="intField3" property="intfield3" jdbcType="INTEGER" />
+    <result column="intField4" property="intfield4" jdbcType="INTEGER" />
+    <result column="intField5" property="intfield5" jdbcType="INTEGER" />
+    <result column="dateField1" property="datefield1" jdbcType="DATE" />
+    <result column="dateField2" property="datefield2" jdbcType="DATE" />
+    <result column="dateField3" property="datefield3" jdbcType="DATE" />
+    <result column="dateField4" property="datefield4" jdbcType="DATE" />
+    <result column="dateField5" property="datefield5" jdbcType="DATE" />
+    <result column="floatField1" property="floatfield1" jdbcType="REAL" />
+    <result column="floatField2" property="floatfield2" jdbcType="REAL" />
+    <result column="floatField3" property="floatfield3" jdbcType="REAL" />
+    <result column="floatField4" property="floatfield4" jdbcType="REAL" />
+    <result column="floatField5" property="floatfield5" jdbcType="REAL" />
+    <result column="varcharField1" property="varcharfield1" jdbcType="VARCHAR" />
+    <result column="varcharField2" property="varcharfield2" jdbcType="VARCHAR" />
+    <result column="varcharField3" property="varcharfield3" jdbcType="VARCHAR" />
+    <result column="varcharField4" property="varcharfield4" jdbcType="VARCHAR" />
+    <result column="varcharField5" property="varcharfield5" jdbcType="VARCHAR" />
+    <result column="varcharField6" property="varcharfield6" jdbcType="VARCHAR" />
+    <result column="varcharField7" property="varcharfield7" jdbcType="VARCHAR" />
+    <result column="varcharField8" property="varcharfield8" jdbcType="VARCHAR" />
+    <result column="varcharField9" property="varcharfield9" jdbcType="VARCHAR" />
+    <result column="varcharField10" property="varcharfield10" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.UserProfileWithBLOBs" extends="BaseResultMap" >
+    <result column="signature" property="signature" jdbcType="LONGVARCHAR" />
+    <result column="about" property="about" jdbcType="LONGVARCHAR" />
+    <result column="textField1" property="textfield1" jdbcType="LONGVARCHAR" />
+    <result column="textField2" property="textfield2" jdbcType="LONGVARCHAR" />
+    <result column="textField3" property="textfield3" jdbcType="LONGVARCHAR" />
+    <result column="textField4" property="textfield4" jdbcType="LONGVARCHAR" />
+    <result column="textField5" property="textfield5" jdbcType="LONGVARCHAR" />
+    <result column="textField6" property="textfield6" jdbcType="LONGVARCHAR" />
+    <result column="textField7" property="textfield7" jdbcType="LONGVARCHAR" />
+    <result column="textField8" property="textfield8" jdbcType="LONGVARCHAR" />
+    <result column="textField9" property="textfield9" jdbcType="LONGVARCHAR" />
+    <result column="textField10" property="textfield10" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, truename, idcard, gender, iam, birthday, city, mobile, qq, company, job, school, 
+    classes, weibo, weixin, isQQPublic, isWeixinPublic, isWeiboPublic, site, intField1, 
+    intField2, intField3, intField4, intField5, dateField1, dateField2, dateField3, dateField4, 
+    dateField5, floatField1, floatField2, floatField3, floatField4, floatField5, varcharField1, 
+    varcharField2, varcharField3, varcharField4, varcharField5, varcharField6, varcharField7, 
+    varcharField8, varcharField9, varcharField10
+  </sql>
+  <sql id="Blob_Column_List" >
+    signature, about, textField1, textField2, textField3, textField4, textField5, textField6, 
+    textField7, textField8, textField9, textField10
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.UserProfileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_profile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.UserProfileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_profile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_profile
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_profile
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.UserProfileExample" >
+    delete from user_profile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.UserProfileWithBLOBs" >
+    insert into user_profile (id, truename, idcard, 
+      gender, iam, birthday, city, 
+      mobile, qq, company, 
+      job, school, classes, 
+      weibo, weixin, isQQPublic, 
+      isWeixinPublic, isWeiboPublic, site, 
+      intField1, intField2, intField3, 
+      intField4, intField5, dateField1, 
+      dateField2, dateField3, dateField4, 
+      dateField5, floatField1, floatField2, 
+      floatField3, floatField4, floatField5, 
+      varcharField1, varcharField2, varcharField3, 
+      varcharField4, varcharField5, varcharField6, 
+      varcharField7, varcharField8, varcharField9, 
+      varcharField10, signature, about, 
+      textField1, textField2, textField3, 
+      textField4, textField5, textField6, 
+      textField7, textField8, textField9, 
+      textField10)
+    values (#{id,jdbcType=INTEGER}, #{truename,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=CHAR}, #{iam,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{city,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{job,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{classes,jdbcType=VARCHAR}, 
+      #{weibo,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{isqqpublic,jdbcType=INTEGER}, 
+      #{isweixinpublic,jdbcType=INTEGER}, #{isweibopublic,jdbcType=INTEGER}, #{site,jdbcType=VARCHAR}, 
+      #{intfield1,jdbcType=INTEGER}, #{intfield2,jdbcType=INTEGER}, #{intfield3,jdbcType=INTEGER}, 
+      #{intfield4,jdbcType=INTEGER}, #{intfield5,jdbcType=INTEGER}, #{datefield1,jdbcType=DATE}, 
+      #{datefield2,jdbcType=DATE}, #{datefield3,jdbcType=DATE}, #{datefield4,jdbcType=DATE}, 
+      #{datefield5,jdbcType=DATE}, #{floatfield1,jdbcType=REAL}, #{floatfield2,jdbcType=REAL}, 
+      #{floatfield3,jdbcType=REAL}, #{floatfield4,jdbcType=REAL}, #{floatfield5,jdbcType=REAL}, 
+      #{varcharfield1,jdbcType=VARCHAR}, #{varcharfield2,jdbcType=VARCHAR}, #{varcharfield3,jdbcType=VARCHAR}, 
+      #{varcharfield4,jdbcType=VARCHAR}, #{varcharfield5,jdbcType=VARCHAR}, #{varcharfield6,jdbcType=VARCHAR}, 
+      #{varcharfield7,jdbcType=VARCHAR}, #{varcharfield8,jdbcType=VARCHAR}, #{varcharfield9,jdbcType=VARCHAR}, 
+      #{varcharfield10,jdbcType=VARCHAR}, #{signature,jdbcType=LONGVARCHAR}, #{about,jdbcType=LONGVARCHAR}, 
+      #{textfield1,jdbcType=LONGVARCHAR}, #{textfield2,jdbcType=LONGVARCHAR}, #{textfield3,jdbcType=LONGVARCHAR}, 
+      #{textfield4,jdbcType=LONGVARCHAR}, #{textfield5,jdbcType=LONGVARCHAR}, #{textfield6,jdbcType=LONGVARCHAR}, 
+      #{textfield7,jdbcType=LONGVARCHAR}, #{textfield8,jdbcType=LONGVARCHAR}, #{textfield9,jdbcType=LONGVARCHAR}, 
+      #{textfield10,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.UserProfileWithBLOBs" >
+    insert into user_profile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="truename != null" >
+        truename,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="iam != null" >
+        iam,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="classes != null" >
+        classes,
+      </if>
+      <if test="weibo != null" >
+        weibo,
+      </if>
+      <if test="weixin != null" >
+        weixin,
+      </if>
+      <if test="isqqpublic != null" >
+        isQQPublic,
+      </if>
+      <if test="isweixinpublic != null" >
+        isWeixinPublic,
+      </if>
+      <if test="isweibopublic != null" >
+        isWeiboPublic,
+      </if>
+      <if test="site != null" >
+        site,
+      </if>
+      <if test="intfield1 != null" >
+        intField1,
+      </if>
+      <if test="intfield2 != null" >
+        intField2,
+      </if>
+      <if test="intfield3 != null" >
+        intField3,
+      </if>
+      <if test="intfield4 != null" >
+        intField4,
+      </if>
+      <if test="intfield5 != null" >
+        intField5,
+      </if>
+      <if test="datefield1 != null" >
+        dateField1,
+      </if>
+      <if test="datefield2 != null" >
+        dateField2,
+      </if>
+      <if test="datefield3 != null" >
+        dateField3,
+      </if>
+      <if test="datefield4 != null" >
+        dateField4,
+      </if>
+      <if test="datefield5 != null" >
+        dateField5,
+      </if>
+      <if test="floatfield1 != null" >
+        floatField1,
+      </if>
+      <if test="floatfield2 != null" >
+        floatField2,
+      </if>
+      <if test="floatfield3 != null" >
+        floatField3,
+      </if>
+      <if test="floatfield4 != null" >
+        floatField4,
+      </if>
+      <if test="floatfield5 != null" >
+        floatField5,
+      </if>
+      <if test="varcharfield1 != null" >
+        varcharField1,
+      </if>
+      <if test="varcharfield2 != null" >
+        varcharField2,
+      </if>
+      <if test="varcharfield3 != null" >
+        varcharField3,
+      </if>
+      <if test="varcharfield4 != null" >
+        varcharField4,
+      </if>
+      <if test="varcharfield5 != null" >
+        varcharField5,
+      </if>
+      <if test="varcharfield6 != null" >
+        varcharField6,
+      </if>
+      <if test="varcharfield7 != null" >
+        varcharField7,
+      </if>
+      <if test="varcharfield8 != null" >
+        varcharField8,
+      </if>
+      <if test="varcharfield9 != null" >
+        varcharField9,
+      </if>
+      <if test="varcharfield10 != null" >
+        varcharField10,
+      </if>
+      <if test="signature != null" >
+        signature,
+      </if>
+      <if test="about != null" >
+        about,
+      </if>
+      <if test="textfield1 != null" >
+        textField1,
+      </if>
+      <if test="textfield2 != null" >
+        textField2,
+      </if>
+      <if test="textfield3 != null" >
+        textField3,
+      </if>
+      <if test="textfield4 != null" >
+        textField4,
+      </if>
+      <if test="textfield5 != null" >
+        textField5,
+      </if>
+      <if test="textfield6 != null" >
+        textField6,
+      </if>
+      <if test="textfield7 != null" >
+        textField7,
+      </if>
+      <if test="textfield8 != null" >
+        textField8,
+      </if>
+      <if test="textfield9 != null" >
+        textField9,
+      </if>
+      <if test="textfield10 != null" >
+        textField10,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="truename != null" >
+        #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="iam != null" >
+        #{iam,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="weibo != null" >
+        #{weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="isqqpublic != null" >
+        #{isqqpublic,jdbcType=INTEGER},
+      </if>
+      <if test="isweixinpublic != null" >
+        #{isweixinpublic,jdbcType=INTEGER},
+      </if>
+      <if test="isweibopublic != null" >
+        #{isweibopublic,jdbcType=INTEGER},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="intfield1 != null" >
+        #{intfield1,jdbcType=INTEGER},
+      </if>
+      <if test="intfield2 != null" >
+        #{intfield2,jdbcType=INTEGER},
+      </if>
+      <if test="intfield3 != null" >
+        #{intfield3,jdbcType=INTEGER},
+      </if>
+      <if test="intfield4 != null" >
+        #{intfield4,jdbcType=INTEGER},
+      </if>
+      <if test="intfield5 != null" >
+        #{intfield5,jdbcType=INTEGER},
+      </if>
+      <if test="datefield1 != null" >
+        #{datefield1,jdbcType=DATE},
+      </if>
+      <if test="datefield2 != null" >
+        #{datefield2,jdbcType=DATE},
+      </if>
+      <if test="datefield3 != null" >
+        #{datefield3,jdbcType=DATE},
+      </if>
+      <if test="datefield4 != null" >
+        #{datefield4,jdbcType=DATE},
+      </if>
+      <if test="datefield5 != null" >
+        #{datefield5,jdbcType=DATE},
+      </if>
+      <if test="floatfield1 != null" >
+        #{floatfield1,jdbcType=REAL},
+      </if>
+      <if test="floatfield2 != null" >
+        #{floatfield2,jdbcType=REAL},
+      </if>
+      <if test="floatfield3 != null" >
+        #{floatfield3,jdbcType=REAL},
+      </if>
+      <if test="floatfield4 != null" >
+        #{floatfield4,jdbcType=REAL},
+      </if>
+      <if test="floatfield5 != null" >
+        #{floatfield5,jdbcType=REAL},
+      </if>
+      <if test="varcharfield1 != null" >
+        #{varcharfield1,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield2 != null" >
+        #{varcharfield2,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield3 != null" >
+        #{varcharfield3,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield4 != null" >
+        #{varcharfield4,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield5 != null" >
+        #{varcharfield5,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield6 != null" >
+        #{varcharfield6,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield7 != null" >
+        #{varcharfield7,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield8 != null" >
+        #{varcharfield8,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield9 != null" >
+        #{varcharfield9,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield10 != null" >
+        #{varcharfield10,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        #{signature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="about != null" >
+        #{about,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield1 != null" >
+        #{textfield1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield2 != null" >
+        #{textfield2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield3 != null" >
+        #{textfield3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield4 != null" >
+        #{textfield4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield5 != null" >
+        #{textfield5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield6 != null" >
+        #{textfield6,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield7 != null" >
+        #{textfield7,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield8 != null" >
+        #{textfield8,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield9 != null" >
+        #{textfield9,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield10 != null" >
+        #{textfield10,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.UserProfileExample" resultType="java.lang.Integer" >
+    select count(*) from user_profile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_profile
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.truename != null" >
+        truename = #{record.truename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcard != null" >
+        idcard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=CHAR},
+      </if>
+      <if test="record.iam != null" >
+        iam = #{record.iam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null" >
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null" >
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classes != null" >
+        classes = #{record.classes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weibo != null" >
+        weibo = #{record.weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixin != null" >
+        weixin = #{record.weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isqqpublic != null" >
+        isQQPublic = #{record.isqqpublic,jdbcType=INTEGER},
+      </if>
+      <if test="record.isweixinpublic != null" >
+        isWeixinPublic = #{record.isweixinpublic,jdbcType=INTEGER},
+      </if>
+      <if test="record.isweibopublic != null" >
+        isWeiboPublic = #{record.isweibopublic,jdbcType=INTEGER},
+      </if>
+      <if test="record.site != null" >
+        site = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intfield1 != null" >
+        intField1 = #{record.intfield1,jdbcType=INTEGER},
+      </if>
+      <if test="record.intfield2 != null" >
+        intField2 = #{record.intfield2,jdbcType=INTEGER},
+      </if>
+      <if test="record.intfield3 != null" >
+        intField3 = #{record.intfield3,jdbcType=INTEGER},
+      </if>
+      <if test="record.intfield4 != null" >
+        intField4 = #{record.intfield4,jdbcType=INTEGER},
+      </if>
+      <if test="record.intfield5 != null" >
+        intField5 = #{record.intfield5,jdbcType=INTEGER},
+      </if>
+      <if test="record.datefield1 != null" >
+        dateField1 = #{record.datefield1,jdbcType=DATE},
+      </if>
+      <if test="record.datefield2 != null" >
+        dateField2 = #{record.datefield2,jdbcType=DATE},
+      </if>
+      <if test="record.datefield3 != null" >
+        dateField3 = #{record.datefield3,jdbcType=DATE},
+      </if>
+      <if test="record.datefield4 != null" >
+        dateField4 = #{record.datefield4,jdbcType=DATE},
+      </if>
+      <if test="record.datefield5 != null" >
+        dateField5 = #{record.datefield5,jdbcType=DATE},
+      </if>
+      <if test="record.floatfield1 != null" >
+        floatField1 = #{record.floatfield1,jdbcType=REAL},
+      </if>
+      <if test="record.floatfield2 != null" >
+        floatField2 = #{record.floatfield2,jdbcType=REAL},
+      </if>
+      <if test="record.floatfield3 != null" >
+        floatField3 = #{record.floatfield3,jdbcType=REAL},
+      </if>
+      <if test="record.floatfield4 != null" >
+        floatField4 = #{record.floatfield4,jdbcType=REAL},
+      </if>
+      <if test="record.floatfield5 != null" >
+        floatField5 = #{record.floatfield5,jdbcType=REAL},
+      </if>
+      <if test="record.varcharfield1 != null" >
+        varcharField1 = #{record.varcharfield1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varcharfield2 != null" >
+        varcharField2 = #{record.varcharfield2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varcharfield3 != null" >
+        varcharField3 = #{record.varcharfield3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varcharfield4 != null" >
+        varcharField4 = #{record.varcharfield4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varcharfield5 != null" >
+        varcharField5 = #{record.varcharfield5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varcharfield6 != null" >
+        varcharField6 = #{record.varcharfield6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varcharfield7 != null" >
+        varcharField7 = #{record.varcharfield7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varcharfield8 != null" >
+        varcharField8 = #{record.varcharfield8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varcharfield9 != null" >
+        varcharField9 = #{record.varcharfield9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varcharfield10 != null" >
+        varcharField10 = #{record.varcharfield10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signature != null" >
+        signature = #{record.signature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.about != null" >
+        about = #{record.about,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield1 != null" >
+        textField1 = #{record.textfield1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield2 != null" >
+        textField2 = #{record.textfield2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield3 != null" >
+        textField3 = #{record.textfield3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield4 != null" >
+        textField4 = #{record.textfield4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield5 != null" >
+        textField5 = #{record.textfield5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield6 != null" >
+        textField6 = #{record.textfield6,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield7 != null" >
+        textField7 = #{record.textfield7,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield8 != null" >
+        textField8 = #{record.textfield8,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield9 != null" >
+        textField9 = #{record.textfield9,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.textfield10 != null" >
+        textField10 = #{record.textfield10,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update user_profile
+    set id = #{record.id,jdbcType=INTEGER},
+      truename = #{record.truename,jdbcType=VARCHAR},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=CHAR},
+      iam = #{record.iam,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      city = #{record.city,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      classes = #{record.classes,jdbcType=VARCHAR},
+      weibo = #{record.weibo,jdbcType=VARCHAR},
+      weixin = #{record.weixin,jdbcType=VARCHAR},
+      isQQPublic = #{record.isqqpublic,jdbcType=INTEGER},
+      isWeixinPublic = #{record.isweixinpublic,jdbcType=INTEGER},
+      isWeiboPublic = #{record.isweibopublic,jdbcType=INTEGER},
+      site = #{record.site,jdbcType=VARCHAR},
+      intField1 = #{record.intfield1,jdbcType=INTEGER},
+      intField2 = #{record.intfield2,jdbcType=INTEGER},
+      intField3 = #{record.intfield3,jdbcType=INTEGER},
+      intField4 = #{record.intfield4,jdbcType=INTEGER},
+      intField5 = #{record.intfield5,jdbcType=INTEGER},
+      dateField1 = #{record.datefield1,jdbcType=DATE},
+      dateField2 = #{record.datefield2,jdbcType=DATE},
+      dateField3 = #{record.datefield3,jdbcType=DATE},
+      dateField4 = #{record.datefield4,jdbcType=DATE},
+      dateField5 = #{record.datefield5,jdbcType=DATE},
+      floatField1 = #{record.floatfield1,jdbcType=REAL},
+      floatField2 = #{record.floatfield2,jdbcType=REAL},
+      floatField3 = #{record.floatfield3,jdbcType=REAL},
+      floatField4 = #{record.floatfield4,jdbcType=REAL},
+      floatField5 = #{record.floatfield5,jdbcType=REAL},
+      varcharField1 = #{record.varcharfield1,jdbcType=VARCHAR},
+      varcharField2 = #{record.varcharfield2,jdbcType=VARCHAR},
+      varcharField3 = #{record.varcharfield3,jdbcType=VARCHAR},
+      varcharField4 = #{record.varcharfield4,jdbcType=VARCHAR},
+      varcharField5 = #{record.varcharfield5,jdbcType=VARCHAR},
+      varcharField6 = #{record.varcharfield6,jdbcType=VARCHAR},
+      varcharField7 = #{record.varcharfield7,jdbcType=VARCHAR},
+      varcharField8 = #{record.varcharfield8,jdbcType=VARCHAR},
+      varcharField9 = #{record.varcharfield9,jdbcType=VARCHAR},
+      varcharField10 = #{record.varcharfield10,jdbcType=VARCHAR},
+      signature = #{record.signature,jdbcType=LONGVARCHAR},
+      about = #{record.about,jdbcType=LONGVARCHAR},
+      textField1 = #{record.textfield1,jdbcType=LONGVARCHAR},
+      textField2 = #{record.textfield2,jdbcType=LONGVARCHAR},
+      textField3 = #{record.textfield3,jdbcType=LONGVARCHAR},
+      textField4 = #{record.textfield4,jdbcType=LONGVARCHAR},
+      textField5 = #{record.textfield5,jdbcType=LONGVARCHAR},
+      textField6 = #{record.textfield6,jdbcType=LONGVARCHAR},
+      textField7 = #{record.textfield7,jdbcType=LONGVARCHAR},
+      textField8 = #{record.textfield8,jdbcType=LONGVARCHAR},
+      textField9 = #{record.textfield9,jdbcType=LONGVARCHAR},
+      textField10 = #{record.textfield10,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_profile
+    set id = #{record.id,jdbcType=INTEGER},
+      truename = #{record.truename,jdbcType=VARCHAR},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=CHAR},
+      iam = #{record.iam,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      city = #{record.city,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      classes = #{record.classes,jdbcType=VARCHAR},
+      weibo = #{record.weibo,jdbcType=VARCHAR},
+      weixin = #{record.weixin,jdbcType=VARCHAR},
+      isQQPublic = #{record.isqqpublic,jdbcType=INTEGER},
+      isWeixinPublic = #{record.isweixinpublic,jdbcType=INTEGER},
+      isWeiboPublic = #{record.isweibopublic,jdbcType=INTEGER},
+      site = #{record.site,jdbcType=VARCHAR},
+      intField1 = #{record.intfield1,jdbcType=INTEGER},
+      intField2 = #{record.intfield2,jdbcType=INTEGER},
+      intField3 = #{record.intfield3,jdbcType=INTEGER},
+      intField4 = #{record.intfield4,jdbcType=INTEGER},
+      intField5 = #{record.intfield5,jdbcType=INTEGER},
+      dateField1 = #{record.datefield1,jdbcType=DATE},
+      dateField2 = #{record.datefield2,jdbcType=DATE},
+      dateField3 = #{record.datefield3,jdbcType=DATE},
+      dateField4 = #{record.datefield4,jdbcType=DATE},
+      dateField5 = #{record.datefield5,jdbcType=DATE},
+      floatField1 = #{record.floatfield1,jdbcType=REAL},
+      floatField2 = #{record.floatfield2,jdbcType=REAL},
+      floatField3 = #{record.floatfield3,jdbcType=REAL},
+      floatField4 = #{record.floatfield4,jdbcType=REAL},
+      floatField5 = #{record.floatfield5,jdbcType=REAL},
+      varcharField1 = #{record.varcharfield1,jdbcType=VARCHAR},
+      varcharField2 = #{record.varcharfield2,jdbcType=VARCHAR},
+      varcharField3 = #{record.varcharfield3,jdbcType=VARCHAR},
+      varcharField4 = #{record.varcharfield4,jdbcType=VARCHAR},
+      varcharField5 = #{record.varcharfield5,jdbcType=VARCHAR},
+      varcharField6 = #{record.varcharfield6,jdbcType=VARCHAR},
+      varcharField7 = #{record.varcharfield7,jdbcType=VARCHAR},
+      varcharField8 = #{record.varcharfield8,jdbcType=VARCHAR},
+      varcharField9 = #{record.varcharfield9,jdbcType=VARCHAR},
+      varcharField10 = #{record.varcharfield10,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.UserProfileWithBLOBs" >
+    update user_profile
+    <set >
+      <if test="truename != null" >
+        truename = #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="iam != null" >
+        iam = #{iam,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        classes = #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="weibo != null" >
+        weibo = #{weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null" >
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="isqqpublic != null" >
+        isQQPublic = #{isqqpublic,jdbcType=INTEGER},
+      </if>
+      <if test="isweixinpublic != null" >
+        isWeixinPublic = #{isweixinpublic,jdbcType=INTEGER},
+      </if>
+      <if test="isweibopublic != null" >
+        isWeiboPublic = #{isweibopublic,jdbcType=INTEGER},
+      </if>
+      <if test="site != null" >
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="intfield1 != null" >
+        intField1 = #{intfield1,jdbcType=INTEGER},
+      </if>
+      <if test="intfield2 != null" >
+        intField2 = #{intfield2,jdbcType=INTEGER},
+      </if>
+      <if test="intfield3 != null" >
+        intField3 = #{intfield3,jdbcType=INTEGER},
+      </if>
+      <if test="intfield4 != null" >
+        intField4 = #{intfield4,jdbcType=INTEGER},
+      </if>
+      <if test="intfield5 != null" >
+        intField5 = #{intfield5,jdbcType=INTEGER},
+      </if>
+      <if test="datefield1 != null" >
+        dateField1 = #{datefield1,jdbcType=DATE},
+      </if>
+      <if test="datefield2 != null" >
+        dateField2 = #{datefield2,jdbcType=DATE},
+      </if>
+      <if test="datefield3 != null" >
+        dateField3 = #{datefield3,jdbcType=DATE},
+      </if>
+      <if test="datefield4 != null" >
+        dateField4 = #{datefield4,jdbcType=DATE},
+      </if>
+      <if test="datefield5 != null" >
+        dateField5 = #{datefield5,jdbcType=DATE},
+      </if>
+      <if test="floatfield1 != null" >
+        floatField1 = #{floatfield1,jdbcType=REAL},
+      </if>
+      <if test="floatfield2 != null" >
+        floatField2 = #{floatfield2,jdbcType=REAL},
+      </if>
+      <if test="floatfield3 != null" >
+        floatField3 = #{floatfield3,jdbcType=REAL},
+      </if>
+      <if test="floatfield4 != null" >
+        floatField4 = #{floatfield4,jdbcType=REAL},
+      </if>
+      <if test="floatfield5 != null" >
+        floatField5 = #{floatfield5,jdbcType=REAL},
+      </if>
+      <if test="varcharfield1 != null" >
+        varcharField1 = #{varcharfield1,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield2 != null" >
+        varcharField2 = #{varcharfield2,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield3 != null" >
+        varcharField3 = #{varcharfield3,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield4 != null" >
+        varcharField4 = #{varcharfield4,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield5 != null" >
+        varcharField5 = #{varcharfield5,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield6 != null" >
+        varcharField6 = #{varcharfield6,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield7 != null" >
+        varcharField7 = #{varcharfield7,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield8 != null" >
+        varcharField8 = #{varcharfield8,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield9 != null" >
+        varcharField9 = #{varcharfield9,jdbcType=VARCHAR},
+      </if>
+      <if test="varcharfield10 != null" >
+        varcharField10 = #{varcharfield10,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        signature = #{signature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="about != null" >
+        about = #{about,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield1 != null" >
+        textField1 = #{textfield1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield2 != null" >
+        textField2 = #{textfield2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield3 != null" >
+        textField3 = #{textfield3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield4 != null" >
+        textField4 = #{textfield4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield5 != null" >
+        textField5 = #{textfield5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield6 != null" >
+        textField6 = #{textfield6,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield7 != null" >
+        textField7 = #{textfield7,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield8 != null" >
+        textField8 = #{textfield8,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield9 != null" >
+        textField9 = #{textfield9,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="textfield10 != null" >
+        textField10 = #{textfield10,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.UserProfileWithBLOBs" >
+    update user_profile
+    set truename = #{truename,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      iam = #{iam,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      city = #{city,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      classes = #{classes,jdbcType=VARCHAR},
+      weibo = #{weibo,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      isQQPublic = #{isqqpublic,jdbcType=INTEGER},
+      isWeixinPublic = #{isweixinpublic,jdbcType=INTEGER},
+      isWeiboPublic = #{isweibopublic,jdbcType=INTEGER},
+      site = #{site,jdbcType=VARCHAR},
+      intField1 = #{intfield1,jdbcType=INTEGER},
+      intField2 = #{intfield2,jdbcType=INTEGER},
+      intField3 = #{intfield3,jdbcType=INTEGER},
+      intField4 = #{intfield4,jdbcType=INTEGER},
+      intField5 = #{intfield5,jdbcType=INTEGER},
+      dateField1 = #{datefield1,jdbcType=DATE},
+      dateField2 = #{datefield2,jdbcType=DATE},
+      dateField3 = #{datefield3,jdbcType=DATE},
+      dateField4 = #{datefield4,jdbcType=DATE},
+      dateField5 = #{datefield5,jdbcType=DATE},
+      floatField1 = #{floatfield1,jdbcType=REAL},
+      floatField2 = #{floatfield2,jdbcType=REAL},
+      floatField3 = #{floatfield3,jdbcType=REAL},
+      floatField4 = #{floatfield4,jdbcType=REAL},
+      floatField5 = #{floatfield5,jdbcType=REAL},
+      varcharField1 = #{varcharfield1,jdbcType=VARCHAR},
+      varcharField2 = #{varcharfield2,jdbcType=VARCHAR},
+      varcharField3 = #{varcharfield3,jdbcType=VARCHAR},
+      varcharField4 = #{varcharfield4,jdbcType=VARCHAR},
+      varcharField5 = #{varcharfield5,jdbcType=VARCHAR},
+      varcharField6 = #{varcharfield6,jdbcType=VARCHAR},
+      varcharField7 = #{varcharfield7,jdbcType=VARCHAR},
+      varcharField8 = #{varcharfield8,jdbcType=VARCHAR},
+      varcharField9 = #{varcharfield9,jdbcType=VARCHAR},
+      varcharField10 = #{varcharfield10,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=LONGVARCHAR},
+      about = #{about,jdbcType=LONGVARCHAR},
+      textField1 = #{textfield1,jdbcType=LONGVARCHAR},
+      textField2 = #{textfield2,jdbcType=LONGVARCHAR},
+      textField3 = #{textfield3,jdbcType=LONGVARCHAR},
+      textField4 = #{textfield4,jdbcType=LONGVARCHAR},
+      textField5 = #{textfield5,jdbcType=LONGVARCHAR},
+      textField6 = #{textfield6,jdbcType=LONGVARCHAR},
+      textField7 = #{textfield7,jdbcType=LONGVARCHAR},
+      textField8 = #{textfield8,jdbcType=LONGVARCHAR},
+      textField9 = #{textfield9,jdbcType=LONGVARCHAR},
+      textField10 = #{textfield10,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.UserProfile" >
+    update user_profile
+    set truename = #{truename,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      iam = #{iam,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      city = #{city,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      classes = #{classes,jdbcType=VARCHAR},
+      weibo = #{weibo,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      isQQPublic = #{isqqpublic,jdbcType=INTEGER},
+      isWeixinPublic = #{isweixinpublic,jdbcType=INTEGER},
+      isWeiboPublic = #{isweibopublic,jdbcType=INTEGER},
+      site = #{site,jdbcType=VARCHAR},
+      intField1 = #{intfield1,jdbcType=INTEGER},
+      intField2 = #{intfield2,jdbcType=INTEGER},
+      intField3 = #{intfield3,jdbcType=INTEGER},
+      intField4 = #{intfield4,jdbcType=INTEGER},
+      intField5 = #{intfield5,jdbcType=INTEGER},
+      dateField1 = #{datefield1,jdbcType=DATE},
+      dateField2 = #{datefield2,jdbcType=DATE},
+      dateField3 = #{datefield3,jdbcType=DATE},
+      dateField4 = #{datefield4,jdbcType=DATE},
+      dateField5 = #{datefield5,jdbcType=DATE},
+      floatField1 = #{floatfield1,jdbcType=REAL},
+      floatField2 = #{floatfield2,jdbcType=REAL},
+      floatField3 = #{floatfield3,jdbcType=REAL},
+      floatField4 = #{floatfield4,jdbcType=REAL},
+      floatField5 = #{floatfield5,jdbcType=REAL},
+      varcharField1 = #{varcharfield1,jdbcType=VARCHAR},
+      varcharField2 = #{varcharfield2,jdbcType=VARCHAR},
+      varcharField3 = #{varcharfield3,jdbcType=VARCHAR},
+      varcharField4 = #{varcharfield4,jdbcType=VARCHAR},
+      varcharField5 = #{varcharfield5,jdbcType=VARCHAR},
+      varcharField6 = #{varcharfield6,jdbcType=VARCHAR},
+      varcharField7 = #{varcharfield7,jdbcType=VARCHAR},
+      varcharField8 = #{varcharfield8,jdbcType=VARCHAR},
+      varcharField9 = #{varcharfield9,jdbcType=VARCHAR},
+      varcharField10 = #{varcharfield10,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getUserDetail" resultType="com.jindumooc.vojo.user.UserDetail" parameterType="com.jindumooc.dto.user.SearchMessage" >
+    SELECT u.id,u.nickname,u.email,u.roles,u.loginIp,u.loginTime,u.loginarea,u.createdIp,u.createdTime,u.createdarea,p.truename,p.gender,p.idcard,p.mobile,p.company,p.job,p.birthday,p.weibo,p.weixin,p.site,p.signature,p.about,p.iam,p.isQQPublic,p.isWeiboPublic,p.isWeixinPublic
+    FROM `user` u,user_profile p
+    WHERE u.id = p.id and u.id = #{userId}
+  </select>
+    <update id="updateUserDetail" parameterType="com.jindumooc.dto.user.EditUser" >
+    update user_profile
+    set truename = #{truename,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      iam = #{iam,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      weibo = #{weibo,jdbcType=VARCHAR},
+      about = #{about,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getPersonalDetail" resultMap="getPersonalDetailMap">
+    SELECT p.id,truename,nickname,gender,about,title,company,job,qq,weibo,weixin,site,signature,mediumAvatar
+    FROM  user_profile p,`user` u
+    WHERE p.id = #{userId} AND p.id = u.id
+  </select>
+  <resultMap id="getPersonalDetailMap" type="com.jindumooc.vojo.user.PersonalDetail">
+    <result column="truename" property="trueName" jdbcType="VARCHAR"/>
+    <result column="nickname" property="nickName" jdbcType="VARCHAR"/>
+    <result column="gender" property="gender" jdbcType="VARCHAR"/>
+    <result column="about" property="about" jdbcType="VARCHAR"/>
+    <result column="title" property="title" jdbcType="VARCHAR"/>
+    <result column="company" property="company" jdbcType="VARCHAR"/>
+    <result column="job" property="job" jdbcType="VARCHAR"/>
+    <result column="qq" property="qq" jdbcType="VARCHAR"/>
+    <result column="weibo" property="weibo" jdbcType="VARCHAR"/>
+    <result column="weixin" property="weixin" jdbcType="VARCHAR"/>
+    <result column="site" property="site" jdbcType="VARCHAR"/>
+    <result column="mediumAvatar" property="mediumAvatar" jdbcType="VARCHAR"/>
+    <result column="id" property="id" jdbcType="INTEGER"/>
+  </resultMap>
+  <update id="updatePersonalDetail" parameterType="com.jindumooc.vojo.user.PersonalDetail">
+    update user_profile
+    set truename = #{truename,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      iam = #{iam,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      weibo = #{weibo,jdbcType=VARCHAR},
+      about = #{about,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+
+  </update>
+
+</mapper>

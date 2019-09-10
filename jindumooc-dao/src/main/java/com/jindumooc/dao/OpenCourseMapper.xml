@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.OpenCourseMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.OpenCourse" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="lessonNum" property="lessonnum" jdbcType="INTEGER" />
+    <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
+    <result column="smallPicture" property="smallpicture" jdbcType="VARCHAR" />
+    <result column="middlePicture" property="middlepicture" jdbcType="VARCHAR" />
+    <result column="largePicture" property="largepicture" jdbcType="VARCHAR" />
+    <result column="studentNum" property="studentnum" jdbcType="INTEGER" />
+    <result column="hitNum" property="hitnum" jdbcType="INTEGER" />
+    <result column="likeNum" property="likenum" jdbcType="INTEGER" />
+    <result column="postNum" property="postnum" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="locked" property="locked" jdbcType="INTEGER" />
+    <result column="recommended" property="recommended" jdbcType="TINYINT" />
+    <result column="recommendedSeq" property="recommendedseq" jdbcType="INTEGER" />
+    <result column="recommendedTime" property="recommendedtime" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="orgId" property="orgid" jdbcType="INTEGER" />
+    <result column="orgCode" property="orgcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.OpenCourseWithBLOBs" extends="BaseResultMap" >
+    <result column="tags" property="tags" jdbcType="LONGVARCHAR" />
+    <result column="about" property="about" jdbcType="LONGVARCHAR" />
+    <result column="teacherIds" property="teacherids" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, subtitle, status, type, lessonNum, categoryId, smallPicture, middlePicture, 
+    largePicture, studentNum, hitNum, likeNum, postNum, userId, parentId, locked, recommended, 
+    recommendedSeq, recommendedTime, createdTime, updatedTime, orgId, orgCode
+  </sql>
+  <sql id="Blob_Column_List" >
+    tags, about, teacherIds
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.OpenCourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from open_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.OpenCourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from open_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from open_course
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from open_course
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.OpenCourseExample" >
+    delete from open_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.OpenCourseWithBLOBs" >
+    insert into open_course (id, title, subtitle, 
+      status, type, lessonNum, 
+      categoryId, smallPicture, middlePicture, 
+      largePicture, studentNum, hitNum, 
+      likeNum, postNum, userId, 
+      parentId, locked, recommended, 
+      recommendedSeq, recommendedTime, createdTime, 
+      updatedTime, orgId, orgCode, 
+      tags, about, teacherIds
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{type,jdbcType=VARCHAR}, #{lessonnum,jdbcType=INTEGER}, 
+      #{categoryid,jdbcType=INTEGER}, #{smallpicture,jdbcType=VARCHAR}, #{middlepicture,jdbcType=VARCHAR}, 
+      #{largepicture,jdbcType=VARCHAR}, #{studentnum,jdbcType=INTEGER}, #{hitnum,jdbcType=INTEGER}, 
+      #{likenum,jdbcType=INTEGER}, #{postnum,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{parentid,jdbcType=INTEGER}, #{locked,jdbcType=INTEGER}, #{recommended,jdbcType=TINYINT}, 
+      #{recommendedseq,jdbcType=INTEGER}, #{recommendedtime,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, 
+      #{updatedtime,jdbcType=INTEGER}, #{orgid,jdbcType=INTEGER}, #{orgcode,jdbcType=VARCHAR}, 
+      #{tags,jdbcType=LONGVARCHAR}, #{about,jdbcType=LONGVARCHAR}, #{teacherids,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.OpenCourseWithBLOBs" >
+    insert into open_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="subtitle != null" >
+        subtitle,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="lessonnum != null" >
+        lessonNum,
+      </if>
+      <if test="categoryid != null" >
+        categoryId,
+      </if>
+      <if test="smallpicture != null" >
+        smallPicture,
+      </if>
+      <if test="middlepicture != null" >
+        middlePicture,
+      </if>
+      <if test="largepicture != null" >
+        largePicture,
+      </if>
+      <if test="studentnum != null" >
+        studentNum,
+      </if>
+      <if test="hitnum != null" >
+        hitNum,
+      </if>
+      <if test="likenum != null" >
+        likeNum,
+      </if>
+      <if test="postnum != null" >
+        postNum,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="locked != null" >
+        locked,
+      </if>
+      <if test="recommended != null" >
+        recommended,
+      </if>
+      <if test="recommendedseq != null" >
+        recommendedSeq,
+      </if>
+      <if test="recommendedtime != null" >
+        recommendedTime,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+      <if test="orgcode != null" >
+        orgCode,
+      </if>
+      <if test="tags != null" >
+        tags,
+      </if>
+      <if test="about != null" >
+        about,
+      </if>
+      <if test="teacherids != null" >
+        teacherIds,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="lessonnum != null" >
+        #{lessonnum,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="smallpicture != null" >
+        #{smallpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="middlepicture != null" >
+        #{middlepicture,jdbcType=VARCHAR},
+      </if>
+      <if test="largepicture != null" >
+        #{largepicture,jdbcType=VARCHAR},
+      </if>
+      <if test="studentnum != null" >
+        #{studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="hitnum != null" >
+        #{hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="postnum != null" >
+        #{postnum,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        #{locked,jdbcType=INTEGER},
+      </if>
+      <if test="recommended != null" >
+        #{recommended,jdbcType=TINYINT},
+      </if>
+      <if test="recommendedseq != null" >
+        #{recommendedseq,jdbcType=INTEGER},
+      </if>
+      <if test="recommendedtime != null" >
+        #{recommendedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="orgcode != null" >
+        #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        #{tags,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="about != null" >
+        #{about,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="teacherids != null" >
+        #{teacherids,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.OpenCourseExample" resultType="java.lang.Integer" >
+    select count(*) from open_course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update open_course
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtitle != null" >
+        subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lessonnum != null" >
+        lessonNum = #{record.lessonnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryid != null" >
+        categoryId = #{record.categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.smallpicture != null" >
+        smallPicture = #{record.smallpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.middlepicture != null" >
+        middlePicture = #{record.middlepicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.largepicture != null" >
+        largePicture = #{record.largepicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentnum != null" >
+        studentNum = #{record.studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.hitnum != null" >
+        hitNum = #{record.hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.likenum != null" >
+        likeNum = #{record.likenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.postnum != null" >
+        postNum = #{record.postnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.locked != null" >
+        locked = #{record.locked,jdbcType=INTEGER},
+      </if>
+      <if test="record.recommended != null" >
+        recommended = #{record.recommended,jdbcType=TINYINT},
+      </if>
+      <if test="record.recommendedseq != null" >
+        recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+      </if>
+      <if test="record.recommendedtime != null" >
+        recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgid != null" >
+        orgId = #{record.orgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgcode != null" >
+        orgCode = #{record.orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tags != null" >
+        tags = #{record.tags,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.about != null" >
+        about = #{record.about,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.teacherids != null" >
+        teacherIds = #{record.teacherids,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update open_course
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      lessonNum = #{record.lessonnum,jdbcType=INTEGER},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      smallPicture = #{record.smallpicture,jdbcType=VARCHAR},
+      middlePicture = #{record.middlepicture,jdbcType=VARCHAR},
+      largePicture = #{record.largepicture,jdbcType=VARCHAR},
+      studentNum = #{record.studentnum,jdbcType=INTEGER},
+      hitNum = #{record.hitnum,jdbcType=INTEGER},
+      likeNum = #{record.likenum,jdbcType=INTEGER},
+      postNum = #{record.postnum,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      locked = #{record.locked,jdbcType=INTEGER},
+      recommended = #{record.recommended,jdbcType=TINYINT},
+      recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      orgId = #{record.orgid,jdbcType=INTEGER},
+      orgCode = #{record.orgcode,jdbcType=VARCHAR},
+      tags = #{record.tags,jdbcType=LONGVARCHAR},
+      about = #{record.about,jdbcType=LONGVARCHAR},
+      teacherIds = #{record.teacherids,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update open_course
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      lessonNum = #{record.lessonnum,jdbcType=INTEGER},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      smallPicture = #{record.smallpicture,jdbcType=VARCHAR},
+      middlePicture = #{record.middlepicture,jdbcType=VARCHAR},
+      largePicture = #{record.largepicture,jdbcType=VARCHAR},
+      studentNum = #{record.studentnum,jdbcType=INTEGER},
+      hitNum = #{record.hitnum,jdbcType=INTEGER},
+      likeNum = #{record.likenum,jdbcType=INTEGER},
+      postNum = #{record.postnum,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      locked = #{record.locked,jdbcType=INTEGER},
+      recommended = #{record.recommended,jdbcType=TINYINT},
+      recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      orgId = #{record.orgid,jdbcType=INTEGER},
+      orgCode = #{record.orgcode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.OpenCourseWithBLOBs" >
+    update open_course
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="lessonnum != null" >
+        lessonNum = #{lessonnum,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null" >
+        categoryId = #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="smallpicture != null" >
+        smallPicture = #{smallpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="middlepicture != null" >
+        middlePicture = #{middlepicture,jdbcType=VARCHAR},
+      </if>
+      <if test="largepicture != null" >
+        largePicture = #{largepicture,jdbcType=VARCHAR},
+      </if>
+      <if test="studentnum != null" >
+        studentNum = #{studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="hitnum != null" >
+        hitNum = #{hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        likeNum = #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="postnum != null" >
+        postNum = #{postnum,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        locked = #{locked,jdbcType=INTEGER},
+      </if>
+      <if test="recommended != null" >
+        recommended = #{recommended,jdbcType=TINYINT},
+      </if>
+      <if test="recommendedseq != null" >
+        recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+      </if>
+      <if test="recommendedtime != null" >
+        recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="orgcode != null" >
+        orgCode = #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        tags = #{tags,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="about != null" >
+        about = #{about,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="teacherids != null" >
+        teacherIds = #{teacherids,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.OpenCourseWithBLOBs" >
+    update open_course
+    set title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      type = #{type,jdbcType=VARCHAR},
+      lessonNum = #{lessonnum,jdbcType=INTEGER},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      smallPicture = #{smallpicture,jdbcType=VARCHAR},
+      middlePicture = #{middlepicture,jdbcType=VARCHAR},
+      largePicture = #{largepicture,jdbcType=VARCHAR},
+      studentNum = #{studentnum,jdbcType=INTEGER},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      likeNum = #{likenum,jdbcType=INTEGER},
+      postNum = #{postnum,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=INTEGER},
+      recommended = #{recommended,jdbcType=TINYINT},
+      recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      orgId = #{orgid,jdbcType=INTEGER},
+      orgCode = #{orgcode,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=LONGVARCHAR},
+      about = #{about,jdbcType=LONGVARCHAR},
+      teacherIds = #{teacherids,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.OpenCourse" >
+    update open_course
+    set title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      type = #{type,jdbcType=VARCHAR},
+      lessonNum = #{lessonnum,jdbcType=INTEGER},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      smallPicture = #{smallpicture,jdbcType=VARCHAR},
+      middlePicture = #{middlepicture,jdbcType=VARCHAR},
+      largePicture = #{largepicture,jdbcType=VARCHAR},
+      studentNum = #{studentnum,jdbcType=INTEGER},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      likeNum = #{likenum,jdbcType=INTEGER},
+      postNum = #{postnum,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=INTEGER},
+      recommended = #{recommended,jdbcType=TINYINT},
+      recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      orgId = #{orgid,jdbcType=INTEGER},
+      orgCode = #{orgcode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

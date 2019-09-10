@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.RewardPointAccountFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.RewardPointAccountFlow" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="sn" property="sn" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="way" property="way" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="INTEGER" />
+    <result column="targetId" property="targetid" jdbcType="INTEGER" />
+    <result column="targetType" property="targettype" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, sn, type, way, amount, name, operator, targetId, targetType, note, createdTime, 
+    updatedTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.RewardPointAccountFlowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from reward_point_account_flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from reward_point_account_flow
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reward_point_account_flow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.RewardPointAccountFlowExample" >
+    delete from reward_point_account_flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.RewardPointAccountFlow" >
+    insert into reward_point_account_flow (id, userId, sn, 
+      type, way, amount, 
+      name, operator, targetId, 
+      targetType, note, createdTime, 
+      updatedTime)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{sn,jdbcType=BIGINT}, 
+      #{type,jdbcType=VARCHAR}, #{way,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{operator,jdbcType=INTEGER}, #{targetid,jdbcType=INTEGER}, 
+      #{targettype,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{createdtime,jdbcType=INTEGER}, 
+      #{updatedtime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.RewardPointAccountFlow" >
+    insert into reward_point_account_flow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="way != null" >
+        way,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="targetid != null" >
+        targetId,
+      </if>
+      <if test="targettype != null" >
+        targetType,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        #{way,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="targetid != null" >
+        #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.RewardPointAccountFlowExample" resultType="java.lang.Integer" >
+    select count(*) from reward_point_account_flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update reward_point_account_flow
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sn != null" >
+        sn = #{record.sn,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.way != null" >
+        way = #{record.way,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=INTEGER},
+      </if>
+      <if test="record.targetid != null" >
+        targetId = #{record.targetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.targettype != null" >
+        targetType = #{record.targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update reward_point_account_flow
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      sn = #{record.sn,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=VARCHAR},
+      way = #{record.way,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=INTEGER},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.RewardPointAccountFlow" >
+    update reward_point_account_flow
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        way = #{way,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="targetid != null" >
+        targetId = #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="targettype != null" >
+        targetType = #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.RewardPointAccountFlow" >
+    update reward_point_account_flow
+    set userId = #{userid,jdbcType=INTEGER},
+      sn = #{sn,jdbcType=BIGINT},
+      type = #{type,jdbcType=VARCHAR},
+      way = #{way,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=INTEGER},
+      targetId = #{targetid,jdbcType=INTEGER},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

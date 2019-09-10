@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseChapterMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseChapter" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="seq" property="seq" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="copyId" property="copyid" jdbcType="INTEGER" />
+    <result column="migrateLessonId" property="migratelessonid" jdbcType="INTEGER" />
+    <result column="migrateCopyCourseId" property="migratecopycourseid" jdbcType="INTEGER" />
+    <result column="migrateRefTaskId" property="migratereftaskid" jdbcType="INTEGER" />
+    <result column="mgrateCopyTaskId" property="mgratecopytaskid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, courseId, type, number, seq, title, createdTime, updatedTime, copyId, migrateLessonId, 
+    migrateCopyCourseId, migrateRefTaskId, mgrateCopyTaskId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseChapterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_chapter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_chapter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_chapter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseChapterExample" >
+    delete from course_chapter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseChapter" >
+    insert into course_chapter (id, courseId, type, 
+      number, seq, title, 
+      createdTime, updatedTime, copyId, 
+      migrateLessonId, migrateCopyCourseId, migrateRefTaskId, 
+      mgrateCopyTaskId)
+    values (#{id,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, #{copyid,jdbcType=INTEGER}, 
+      #{migratelessonid,jdbcType=INTEGER}, #{migratecopycourseid,jdbcType=INTEGER}, #{migratereftaskid,jdbcType=INTEGER}, 
+      #{mgratecopytaskid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseChapter" >
+    insert into course_chapter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="copyid != null" >
+        copyId,
+      </if>
+      <if test="migratelessonid != null" >
+        migrateLessonId,
+      </if>
+      <if test="migratecopycourseid != null" >
+        migrateCopyCourseId,
+      </if>
+      <if test="migratereftaskid != null" >
+        migrateRefTaskId,
+      </if>
+      <if test="mgratecopytaskid != null" >
+        mgrateCopyTaskId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="migratelessonid != null" >
+        #{migratelessonid,jdbcType=INTEGER},
+      </if>
+      <if test="migratecopycourseid != null" >
+        #{migratecopycourseid,jdbcType=INTEGER},
+      </if>
+      <if test="migratereftaskid != null" >
+        #{migratereftaskid,jdbcType=INTEGER},
+      </if>
+      <if test="mgratecopytaskid != null" >
+        #{mgratecopytaskid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseChapterExample" resultType="java.lang.Integer" >
+    select count(*) from course_chapter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_chapter
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.seq != null" >
+        seq = #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.copyid != null" >
+        copyId = #{record.copyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.migratelessonid != null" >
+        migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.migratecopycourseid != null" >
+        migrateCopyCourseId = #{record.migratecopycourseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.migratereftaskid != null" >
+        migrateRefTaskId = #{record.migratereftaskid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mgratecopytaskid != null" >
+        mgrateCopyTaskId = #{record.mgratecopytaskid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_chapter
+    set id = #{record.id,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      seq = #{record.seq,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      copyId = #{record.copyid,jdbcType=INTEGER},
+      migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER},
+      migrateCopyCourseId = #{record.migratecopycourseid,jdbcType=INTEGER},
+      migrateRefTaskId = #{record.migratereftaskid,jdbcType=INTEGER},
+      mgrateCopyTaskId = #{record.mgratecopytaskid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseChapter" >
+    update course_chapter
+    <set >
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        copyId = #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="migratelessonid != null" >
+        migrateLessonId = #{migratelessonid,jdbcType=INTEGER},
+      </if>
+      <if test="migratecopycourseid != null" >
+        migrateCopyCourseId = #{migratecopycourseid,jdbcType=INTEGER},
+      </if>
+      <if test="migratereftaskid != null" >
+        migrateRefTaskId = #{migratereftaskid,jdbcType=INTEGER},
+      </if>
+      <if test="mgratecopytaskid != null" >
+        mgrateCopyTaskId = #{mgratecopytaskid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseChapter" >
+    update course_chapter
+    set courseId = #{courseid,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      copyId = #{copyid,jdbcType=INTEGER},
+      migrateLessonId = #{migratelessonid,jdbcType=INTEGER},
+      migrateCopyCourseId = #{migratecopycourseid,jdbcType=INTEGER},
+      migrateRefTaskId = #{migratereftaskid,jdbcType=INTEGER},
+      mgrateCopyTaskId = #{mgratecopytaskid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

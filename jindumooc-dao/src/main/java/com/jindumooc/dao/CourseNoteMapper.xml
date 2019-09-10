@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseNoteMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseNote" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="taskId" property="taskid" jdbcType="INTEGER" />
+    <result column="length" property="length" jdbcType="INTEGER" />
+    <result column="likeNum" property="likenum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="courseSetId" property="coursesetid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.CourseNote" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, courseId, taskId, length, likeNum, status, createdTime, updatedTime, 
+    courseSetId
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.CourseNoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseNoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_note
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_note
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseNoteExample" >
+    delete from course_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseNote" >
+    insert into course_note (id, userId, courseId, 
+      taskId, length, likeNum, 
+      status, createdTime, updatedTime, 
+      courseSetId, content)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, 
+      #{taskid,jdbcType=INTEGER}, #{length,jdbcType=INTEGER}, #{likenum,jdbcType=INTEGER}, 
+      #{status,jdbcType=BIT}, #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, 
+      #{coursesetid,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseNote" >
+    insert into course_note
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="taskid != null" >
+        taskId,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="likenum != null" >
+        likeNum,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="coursesetid != null" >
+        courseSetId,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="taskid != null" >
+        #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="coursesetid != null" >
+        #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseNoteExample" resultType="java.lang.Integer" >
+    select count(*) from course_note
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_note
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskid != null" >
+        taskId = #{record.taskid,jdbcType=INTEGER},
+      </if>
+      <if test="record.length != null" >
+        length = #{record.length,jdbcType=INTEGER},
+      </if>
+      <if test="record.likenum != null" >
+        likeNum = #{record.likenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.coursesetid != null" >
+        courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update course_note
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      taskId = #{record.taskid,jdbcType=INTEGER},
+      length = #{record.length,jdbcType=INTEGER},
+      likeNum = #{record.likenum,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=BIT},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_note
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      taskId = #{record.taskid,jdbcType=INTEGER},
+      length = #{record.length,jdbcType=INTEGER},
+      likeNum = #{record.likenum,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=BIT},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseNote" >
+    update course_note
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="taskid != null" >
+        taskId = #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        likeNum = #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="coursesetid != null" >
+        courseSetId = #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.CourseNote" >
+    update course_note
+    set userId = #{userid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      taskId = #{taskid,jdbcType=INTEGER},
+      length = #{length,jdbcType=INTEGER},
+      likeNum = #{likenum,jdbcType=INTEGER},
+      status = #{status,jdbcType=BIT},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      courseSetId = #{coursesetid,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseNote" >
+    update course_note
+    set userId = #{userid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      taskId = #{taskid,jdbcType=INTEGER},
+      length = #{length,jdbcType=INTEGER},
+      likeNum = #{likenum,jdbcType=INTEGER},
+      status = #{status,jdbcType=BIT},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      courseSetId = #{coursesetid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getNoteList" resultMap="getNoteListMap">
+    SELECT c.id AS courseId,c.title AS coursrTitle,n.updatedTime,count(*) AS noteNum
+    FROM course_v8 c,course_note n
+    WHERE n.courseId = c.id AND n.userId = #{userId}
+    GROUP BY c.id
+  </select>
+  <resultMap id="getNoteListMap" type="com.jindumooc.vojo.user.Note">
+    <result column="coursrTitle" property="coursrTitle" jdbcType="VARCHAR"/>
+    <result column="courseId" property="courseId" jdbcType="INTEGER"/>
+    <result column="updatedTime" property="updatedTime" jdbcType="INTEGER"/>
+    <result column="noteNum" property="noteNum" jdbcType="INTEGER"/>
+  </resultMap>
+  <select id="getNoteDetail" resultMap="getNoteDetailMap">
+    SELECT n.id,c.id AS courseId,n.userId AS userId,t.id AS taskId,t.title AS taskTitle,n.content,n.length,c.title AS coursrTitle,n.updatedTime
+    FROM course_v8 c,course_note n,course_task t
+    WHERE n.taskId = t.id AND n.courseId = c.id AND n.userId = #{userId} AND c.id = #{courseId}
+  </select>
+  <resultMap id="getNoteDetailMap" type="com.jindumooc.vojo.user.Note">
+    <result column="id" property="id" jdbcType="INTEGER"/>
+    <result column="courseId" property="courseId" jdbcType="INTEGER"/>
+    <result column="userId" property="userId" jdbcType="INTEGER"/>
+    <result column="taskId" property="taskId" jdbcType="INTEGER"/>
+    <result column="taskTitle" property="taskTitle" jdbcType="VARCHAR"/>
+    <result column="content" property="content" jdbcType="VARCHAR"/>
+    <result column="coursrTitle" property="coursrTitle" jdbcType="VARCHAR"/>
+    <result column="updatedTime" property="updatedTime" jdbcType="INTEGER"/>
+    <result column="length" property="length" jdbcType="INTEGER"/>
+  </resultMap>
+</mapper>

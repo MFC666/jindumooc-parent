@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseTask" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="fromCourseSetId" property="fromcoursesetid" jdbcType="INTEGER" />
+    <result column="seq" property="seq" jdbcType="INTEGER" />
+    <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
+    <result column="activityId" property="activityid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="isFree" property="isfree" jdbcType="INTEGER" />
+    <result column="isOptional" property="isoptional" jdbcType="INTEGER" />
+    <result column="startTime" property="starttime" jdbcType="INTEGER" />
+    <result column="endTime" property="endtime" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="createdUserId" property="createduserid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="mode" property="mode" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="mediaSource" property="mediasource" jdbcType="VARCHAR" />
+    <result column="length" property="length" jdbcType="INTEGER" />
+    <result column="maxOnlineNum" property="maxonlinenum" jdbcType="INTEGER" />
+    <result column="copyId" property="copyid" jdbcType="INTEGER" />
+    <result column="migrateLessonId" property="migratelessonid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, courseId, fromCourseSetId, seq, categoryId, activityId, title, isFree, isOptional, 
+    startTime, endTime, status, createdUserId, createdTime, updatedTime, mode, number, 
+    type, mediaSource, length, maxOnlineNum, copyId, migrateLessonId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseTaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseTaskExample" >
+    delete from course_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseTask" >
+    insert into course_task (id, courseId, fromCourseSetId, 
+      seq, categoryId, activityId, 
+      title, isFree, isOptional, 
+      startTime, endTime, status, 
+      createdUserId, createdTime, updatedTime, 
+      mode, number, type, 
+      mediaSource, length, maxOnlineNum, 
+      copyId, migrateLessonId)
+    values (#{id,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, #{fromcoursesetid,jdbcType=INTEGER}, 
+      #{seq,jdbcType=INTEGER}, #{categoryid,jdbcType=INTEGER}, #{activityid,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{isfree,jdbcType=INTEGER}, #{isoptional,jdbcType=INTEGER}, 
+      #{starttime,jdbcType=INTEGER}, #{endtime,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{createduserid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, 
+      #{mode,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{mediasource,jdbcType=VARCHAR}, #{length,jdbcType=INTEGER}, #{maxonlinenum,jdbcType=INTEGER}, 
+      #{copyid,jdbcType=INTEGER}, #{migratelessonid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseTask" >
+    insert into course_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="fromcoursesetid != null" >
+        fromCourseSetId,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="categoryid != null" >
+        categoryId,
+      </if>
+      <if test="activityid != null" >
+        activityId,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="isfree != null" >
+        isFree,
+      </if>
+      <if test="isoptional != null" >
+        isOptional,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createduserid != null" >
+        createdUserId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="mode != null" >
+        mode,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="mediasource != null" >
+        mediaSource,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="maxonlinenum != null" >
+        maxOnlineNum,
+      </if>
+      <if test="copyid != null" >
+        copyId,
+      </if>
+      <if test="migratelessonid != null" >
+        migrateLessonId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="fromcoursesetid != null" >
+        #{fromcoursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="activityid != null" >
+        #{activityid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="isfree != null" >
+        #{isfree,jdbcType=INTEGER},
+      </if>
+      <if test="isoptional != null" >
+        #{isoptional,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createduserid != null" >
+        #{createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="mode != null" >
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="mediasource != null" >
+        #{mediasource,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="maxonlinenum != null" >
+        #{maxonlinenum,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="migratelessonid != null" >
+        #{migratelessonid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseTaskExample" resultType="java.lang.Integer" >
+    select count(*) from course_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_task
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fromcoursesetid != null" >
+        fromCourseSetId = #{record.fromcoursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.seq != null" >
+        seq = #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryid != null" >
+        categoryId = #{record.categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.activityid != null" >
+        activityId = #{record.activityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfree != null" >
+        isFree = #{record.isfree,jdbcType=INTEGER},
+      </if>
+      <if test="record.isoptional != null" >
+        isOptional = #{record.isoptional,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null" >
+        startTime = #{record.starttime,jdbcType=INTEGER},
+      </if>
+      <if test="record.endtime != null" >
+        endTime = #{record.endtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createduserid != null" >
+        createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.mode != null" >
+        mode = #{record.mode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediasource != null" >
+        mediaSource = #{record.mediasource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.length != null" >
+        length = #{record.length,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxonlinenum != null" >
+        maxOnlineNum = #{record.maxonlinenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.copyid != null" >
+        copyId = #{record.copyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.migratelessonid != null" >
+        migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_task
+    set id = #{record.id,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      fromCourseSetId = #{record.fromcoursesetid,jdbcType=INTEGER},
+      seq = #{record.seq,jdbcType=INTEGER},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      activityId = #{record.activityid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      isFree = #{record.isfree,jdbcType=INTEGER},
+      isOptional = #{record.isoptional,jdbcType=INTEGER},
+      startTime = #{record.starttime,jdbcType=INTEGER},
+      endTime = #{record.endtime,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      createdUserId = #{record.createduserid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      mode = #{record.mode,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      mediaSource = #{record.mediasource,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=INTEGER},
+      maxOnlineNum = #{record.maxonlinenum,jdbcType=INTEGER},
+      copyId = #{record.copyid,jdbcType=INTEGER},
+      migrateLessonId = #{record.migratelessonid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseTask" >
+    update course_task
+    <set >
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="fromcoursesetid != null" >
+        fromCourseSetId = #{fromcoursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null" >
+        categoryId = #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="activityid != null" >
+        activityId = #{activityid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="isfree != null" >
+        isFree = #{isfree,jdbcType=INTEGER},
+      </if>
+      <if test="isoptional != null" >
+        isOptional = #{isoptional,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createduserid != null" >
+        createdUserId = #{createduserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="mode != null" >
+        mode = #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="mediasource != null" >
+        mediaSource = #{mediasource,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="maxonlinenum != null" >
+        maxOnlineNum = #{maxonlinenum,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        copyId = #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="migratelessonid != null" >
+        migrateLessonId = #{migratelessonid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseTask" >
+    update course_task
+    set courseId = #{courseid,jdbcType=INTEGER},
+      fromCourseSetId = #{fromcoursesetid,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=INTEGER},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      activityId = #{activityid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      isFree = #{isfree,jdbcType=INTEGER},
+      isOptional = #{isoptional,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=INTEGER},
+      endTime = #{endtime,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      createdUserId = #{createduserid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      mode = #{mode,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      mediaSource = #{mediasource,jdbcType=VARCHAR},
+      length = #{length,jdbcType=INTEGER},
+      maxOnlineNum = #{maxonlinenum,jdbcType=INTEGER},
+      copyId = #{copyid,jdbcType=INTEGER},
+      migrateLessonId = #{migratelessonid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

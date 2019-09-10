@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.ActivityLearnLogMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.ActivityLearnLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="activityId" property="activityid" jdbcType="INTEGER" />
+    <result column="courseTaskId" property="coursetaskid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="mediaType" property="mediatype" jdbcType="VARCHAR" />
+    <result column="event" property="event" jdbcType="VARCHAR" />
+    <result column="watchTime" property="watchtime" jdbcType="INTEGER" />
+    <result column="learnedTime" property="learnedtime" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="migrateTaskResultId" property="migratetaskresultid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.ActivityLearnLog" extends="BaseResultMap" >
+    <result column="data" property="data" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, activityId, courseTaskId, userId, mediaType, event, watchTime, learnedTime, createdTime, 
+    migrateTaskResultId
+  </sql>
+  <sql id="Blob_Column_List" >
+    data
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.ActivityLearnLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity_learn_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ActivityLearnLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity_learn_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity_learn_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from activity_learn_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ActivityLearnLogExample" >
+    delete from activity_learn_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.ActivityLearnLog" >
+    insert into activity_learn_log (id, activityId, courseTaskId, 
+      userId, mediaType, event, 
+      watchTime, learnedTime, createdTime, 
+      migrateTaskResultId, data)
+    values (#{id,jdbcType=INTEGER}, #{activityid,jdbcType=INTEGER}, #{coursetaskid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{mediatype,jdbcType=VARCHAR}, #{event,jdbcType=VARCHAR}, 
+      #{watchtime,jdbcType=INTEGER}, #{learnedtime,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, 
+      #{migratetaskresultid,jdbcType=INTEGER}, #{data,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.ActivityLearnLog" >
+    insert into activity_learn_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityid != null" >
+        activityId,
+      </if>
+      <if test="coursetaskid != null" >
+        courseTaskId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="mediatype != null" >
+        mediaType,
+      </if>
+      <if test="event != null" >
+        event,
+      </if>
+      <if test="watchtime != null" >
+        watchTime,
+      </if>
+      <if test="learnedtime != null" >
+        learnedTime,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="migratetaskresultid != null" >
+        migrateTaskResultId,
+      </if>
+      <if test="data != null" >
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="activityid != null" >
+        #{activityid,jdbcType=INTEGER},
+      </if>
+      <if test="coursetaskid != null" >
+        #{coursetaskid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="mediatype != null" >
+        #{mediatype,jdbcType=VARCHAR},
+      </if>
+      <if test="event != null" >
+        #{event,jdbcType=VARCHAR},
+      </if>
+      <if test="watchtime != null" >
+        #{watchtime,jdbcType=INTEGER},
+      </if>
+      <if test="learnedtime != null" >
+        #{learnedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="migratetaskresultid != null" >
+        #{migratetaskresultid,jdbcType=INTEGER},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.ActivityLearnLogExample" resultType="java.lang.Integer" >
+    select count(*) from activity_learn_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update activity_learn_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.activityid != null" >
+        activityId = #{record.activityid,jdbcType=INTEGER},
+      </if>
+      <if test="record.coursetaskid != null" >
+        courseTaskId = #{record.coursetaskid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mediatype != null" >
+        mediaType = #{record.mediatype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.event != null" >
+        event = #{record.event,jdbcType=VARCHAR},
+      </if>
+      <if test="record.watchtime != null" >
+        watchTime = #{record.watchtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.learnedtime != null" >
+        learnedTime = #{record.learnedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.migratetaskresultid != null" >
+        migrateTaskResultId = #{record.migratetaskresultid,jdbcType=INTEGER},
+      </if>
+      <if test="record.data != null" >
+        data = #{record.data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update activity_learn_log
+    set id = #{record.id,jdbcType=INTEGER},
+      activityId = #{record.activityid,jdbcType=INTEGER},
+      courseTaskId = #{record.coursetaskid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      mediaType = #{record.mediatype,jdbcType=VARCHAR},
+      event = #{record.event,jdbcType=VARCHAR},
+      watchTime = #{record.watchtime,jdbcType=INTEGER},
+      learnedTime = #{record.learnedtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      migrateTaskResultId = #{record.migratetaskresultid,jdbcType=INTEGER},
+      data = #{record.data,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update activity_learn_log
+    set id = #{record.id,jdbcType=INTEGER},
+      activityId = #{record.activityid,jdbcType=INTEGER},
+      courseTaskId = #{record.coursetaskid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      mediaType = #{record.mediatype,jdbcType=VARCHAR},
+      event = #{record.event,jdbcType=VARCHAR},
+      watchTime = #{record.watchtime,jdbcType=INTEGER},
+      learnedTime = #{record.learnedtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      migrateTaskResultId = #{record.migratetaskresultid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ActivityLearnLog" >
+    update activity_learn_log
+    <set >
+      <if test="activityid != null" >
+        activityId = #{activityid,jdbcType=INTEGER},
+      </if>
+      <if test="coursetaskid != null" >
+        courseTaskId = #{coursetaskid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="mediatype != null" >
+        mediaType = #{mediatype,jdbcType=VARCHAR},
+      </if>
+      <if test="event != null" >
+        event = #{event,jdbcType=VARCHAR},
+      </if>
+      <if test="watchtime != null" >
+        watchTime = #{watchtime,jdbcType=INTEGER},
+      </if>
+      <if test="learnedtime != null" >
+        learnedTime = #{learnedtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="migratetaskresultid != null" >
+        migrateTaskResultId = #{migratetaskresultid,jdbcType=INTEGER},
+      </if>
+      <if test="data != null" >
+        data = #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.ActivityLearnLog" >
+    update activity_learn_log
+    set activityId = #{activityid,jdbcType=INTEGER},
+      courseTaskId = #{coursetaskid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      mediaType = #{mediatype,jdbcType=VARCHAR},
+      event = #{event,jdbcType=VARCHAR},
+      watchTime = #{watchtime,jdbcType=INTEGER},
+      learnedTime = #{learnedtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      migrateTaskResultId = #{migratetaskresultid,jdbcType=INTEGER},
+      data = #{data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.ActivityLearnLog" >
+    update activity_learn_log
+    set activityId = #{activityid,jdbcType=INTEGER},
+      courseTaskId = #{coursetaskid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      mediaType = #{mediatype,jdbcType=VARCHAR},
+      event = #{event,jdbcType=VARCHAR},
+      watchTime = #{watchtime,jdbcType=INTEGER},
+      learnedTime = #{learnedtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      migrateTaskResultId = #{migratetaskresultid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

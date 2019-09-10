@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseThreadMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseThread" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="taskId" property="taskid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="isStick" property="isstick" jdbcType="TINYINT" />
+    <result column="isElite" property="iselite" jdbcType="TINYINT" />
+    <result column="isClosed" property="isclosed" jdbcType="INTEGER" />
+    <result column="hide" property="hide" jdbcType="BIT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="postNum" property="postnum" jdbcType="INTEGER" />
+    <result column="hitNum" property="hitnum" jdbcType="INTEGER" />
+    <result column="followNum" property="follownum" jdbcType="INTEGER" />
+    <result column="latestPostUserId" property="latestpostuserid" jdbcType="INTEGER" />
+    <result column="latestPostTime" property="latestposttime" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="courseSetId" property="coursesetid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.CourseThread" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, courseId, taskId, userId, type, isStick, isElite, isClosed, hide, title, postNum, 
+    hitNum, followNum, latestPostUserId, latestPostTime, createdTime, updatedTime, courseSetId
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.CourseThreadExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_thread
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseThreadExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_thread
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_thread
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_thread
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseThreadExample" >
+    delete from course_thread
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseThread" >
+    insert into course_thread (id, courseId, taskId, 
+      userId, type, isStick, 
+      isElite, isClosed, hide, 
+      title, postNum, hitNum, 
+      followNum, latestPostUserId, latestPostTime, 
+      createdTime, updatedTime, courseSetId, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, #{taskid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{type,jdbcType=CHAR}, #{isstick,jdbcType=TINYINT}, 
+      #{iselite,jdbcType=TINYINT}, #{isclosed,jdbcType=INTEGER}, #{hide,jdbcType=BIT}, 
+      #{title,jdbcType=VARCHAR}, #{postnum,jdbcType=INTEGER}, #{hitnum,jdbcType=INTEGER}, 
+      #{follownum,jdbcType=INTEGER}, #{latestpostuserid,jdbcType=INTEGER}, #{latestposttime,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, #{coursesetid,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseThread" >
+    insert into course_thread
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="taskid != null" >
+        taskId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="isstick != null" >
+        isStick,
+      </if>
+      <if test="iselite != null" >
+        isElite,
+      </if>
+      <if test="isclosed != null" >
+        isClosed,
+      </if>
+      <if test="hide != null" >
+        hide,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="postnum != null" >
+        postNum,
+      </if>
+      <if test="hitnum != null" >
+        hitNum,
+      </if>
+      <if test="follownum != null" >
+        followNum,
+      </if>
+      <if test="latestpostuserid != null" >
+        latestPostUserId,
+      </if>
+      <if test="latestposttime != null" >
+        latestPostTime,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="coursesetid != null" >
+        courseSetId,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="taskid != null" >
+        #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="isstick != null" >
+        #{isstick,jdbcType=TINYINT},
+      </if>
+      <if test="iselite != null" >
+        #{iselite,jdbcType=TINYINT},
+      </if>
+      <if test="isclosed != null" >
+        #{isclosed,jdbcType=INTEGER},
+      </if>
+      <if test="hide != null" >
+        #{hide,jdbcType=BIT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="postnum != null" >
+        #{postnum,jdbcType=INTEGER},
+      </if>
+      <if test="hitnum != null" >
+        #{hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="follownum != null" >
+        #{follownum,jdbcType=INTEGER},
+      </if>
+      <if test="latestpostuserid != null" >
+        #{latestpostuserid,jdbcType=INTEGER},
+      </if>
+      <if test="latestposttime != null" >
+        #{latestposttime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="coursesetid != null" >
+        #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseThreadExample" resultType="java.lang.Integer" >
+    select count(*) from course_thread
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_thread
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskid != null" >
+        taskId = #{record.taskid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.isstick != null" >
+        isStick = #{record.isstick,jdbcType=TINYINT},
+      </if>
+      <if test="record.iselite != null" >
+        isElite = #{record.iselite,jdbcType=TINYINT},
+      </if>
+      <if test="record.isclosed != null" >
+        isClosed = #{record.isclosed,jdbcType=INTEGER},
+      </if>
+      <if test="record.hide != null" >
+        hide = #{record.hide,jdbcType=BIT},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postnum != null" >
+        postNum = #{record.postnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.hitnum != null" >
+        hitNum = #{record.hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.follownum != null" >
+        followNum = #{record.follownum,jdbcType=INTEGER},
+      </if>
+      <if test="record.latestpostuserid != null" >
+        latestPostUserId = #{record.latestpostuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.latestposttime != null" >
+        latestPostTime = #{record.latestposttime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.coursesetid != null" >
+        courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update course_thread
+    set id = #{record.id,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      taskId = #{record.taskid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=CHAR},
+      isStick = #{record.isstick,jdbcType=TINYINT},
+      isElite = #{record.iselite,jdbcType=TINYINT},
+      isClosed = #{record.isclosed,jdbcType=INTEGER},
+      hide = #{record.hide,jdbcType=BIT},
+      title = #{record.title,jdbcType=VARCHAR},
+      postNum = #{record.postnum,jdbcType=INTEGER},
+      hitNum = #{record.hitnum,jdbcType=INTEGER},
+      followNum = #{record.follownum,jdbcType=INTEGER},
+      latestPostUserId = #{record.latestpostuserid,jdbcType=INTEGER},
+      latestPostTime = #{record.latestposttime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_thread
+    set id = #{record.id,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      taskId = #{record.taskid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=CHAR},
+      isStick = #{record.isstick,jdbcType=TINYINT},
+      isElite = #{record.iselite,jdbcType=TINYINT},
+      isClosed = #{record.isclosed,jdbcType=INTEGER},
+      hide = #{record.hide,jdbcType=BIT},
+      title = #{record.title,jdbcType=VARCHAR},
+      postNum = #{record.postnum,jdbcType=INTEGER},
+      hitNum = #{record.hitnum,jdbcType=INTEGER},
+      followNum = #{record.follownum,jdbcType=INTEGER},
+      latestPostUserId = #{record.latestpostuserid,jdbcType=INTEGER},
+      latestPostTime = #{record.latestposttime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseThread" >
+    update course_thread
+    <set >
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="taskid != null" >
+        taskId = #{taskid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="isstick != null" >
+        isStick = #{isstick,jdbcType=TINYINT},
+      </if>
+      <if test="iselite != null" >
+        isElite = #{iselite,jdbcType=TINYINT},
+      </if>
+      <if test="isclosed != null" >
+        isClosed = #{isclosed,jdbcType=INTEGER},
+      </if>
+      <if test="hide != null" >
+        hide = #{hide,jdbcType=BIT},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="postnum != null" >
+        postNum = #{postnum,jdbcType=INTEGER},
+      </if>
+      <if test="hitnum != null" >
+        hitNum = #{hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="follownum != null" >
+        followNum = #{follownum,jdbcType=INTEGER},
+      </if>
+      <if test="latestpostuserid != null" >
+        latestPostUserId = #{latestpostuserid,jdbcType=INTEGER},
+      </if>
+      <if test="latestposttime != null" >
+        latestPostTime = #{latestposttime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="coursesetid != null" >
+        courseSetId = #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.CourseThread" >
+    update course_thread
+    set courseId = #{courseid,jdbcType=INTEGER},
+      taskId = #{taskid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      type = #{type,jdbcType=CHAR},
+      isStick = #{isstick,jdbcType=TINYINT},
+      isElite = #{iselite,jdbcType=TINYINT},
+      isClosed = #{isclosed,jdbcType=INTEGER},
+      hide = #{hide,jdbcType=BIT},
+      title = #{title,jdbcType=VARCHAR},
+      postNum = #{postnum,jdbcType=INTEGER},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      followNum = #{follownum,jdbcType=INTEGER},
+      latestPostUserId = #{latestpostuserid,jdbcType=INTEGER},
+      latestPostTime = #{latestposttime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      courseSetId = #{coursesetid,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseThread" >
+    update course_thread
+    set courseId = #{courseid,jdbcType=INTEGER},
+      taskId = #{taskid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      type = #{type,jdbcType=CHAR},
+      isStick = #{isstick,jdbcType=TINYINT},
+      isElite = #{iselite,jdbcType=TINYINT},
+      isClosed = #{isclosed,jdbcType=INTEGER},
+      hide = #{hide,jdbcType=BIT},
+      title = #{title,jdbcType=VARCHAR},
+      postNum = #{postnum,jdbcType=INTEGER},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      followNum = #{follownum,jdbcType=INTEGER},
+      latestPostUserId = #{latestpostuserid,jdbcType=INTEGER},
+      latestPostTime = #{latestposttime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      courseSetId = #{coursesetid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getCourseQuestion" resultType="com.jindumooc.vojo.user.CourseThread">
+    SELECT t.id,t.title,t.hitNum,t.courseId,v.title AS courseTitle,v.courseSetTitle,v.courseSetId
+    FROM course_v8 v,course_thread t
+    WHERE v.id = t.courseId AND v.teacherIds LIKE "%${teacherId}%" AND t.type='question'
+
+  </select>
+  <select id="getCourseDiscussion" resultType="com.jindumooc.vojo.user.CourseThread">
+    SELECT t.id,t.title,t.hitNum,t.courseId,v.title AS courseTitle,v.courseSetTitle,v.courseSetId
+    FROM course_v8 v,course_thread t
+    WHERE v.id = t.courseId AND v.teacherIds LIKE "%${teacherId}%" AND t.type='discussion'
+  </select>
+
+  <select id="getMyQuestion" resultType="com.jindumooc.vojo.user.CourseThread">
+    SELECT t.id,t.title,t.hitNum,t.courseId,v.title AS courseTitle,v.courseSetTitle,v.courseSetId
+    FROM course_v8 v,course_thread t
+    WHERE v.id = t.courseId AND v.userId = #{userId} AND t.type='question'
+  </select>
+  <select id="getMyDiscussion" resultType="com.jindumooc.vojo.user.CourseThread">
+    SELECT t.id,t.title,t.hitNum,t.courseId,v.title AS courseTitle,v.courseSetTitle,v.courseSetId
+    FROM course_v8 v,course_thread t,course_member m
+    WHERE m.courseId = v.id AND v.id = t.courseId AND m.userId = #{userId} AND t.type='discussion'
+  </select>
+</mapper>

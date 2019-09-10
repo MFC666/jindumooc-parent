@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Orders" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="targetType" property="targettype" jdbcType="VARCHAR" />
+    <result column="targetId" property="targetid" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="REAL" />
+    <result column="totalPrice" property="totalprice" jdbcType="REAL" />
+    <result column="isGift" property="isgift" jdbcType="TINYINT" />
+    <result column="giftTo" property="giftto" jdbcType="VARCHAR" />
+    <result column="discountId" property="discountid" jdbcType="INTEGER" />
+    <result column="discount" property="discount" jdbcType="REAL" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="refundId" property="refundid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="coupon" property="coupon" jdbcType="VARCHAR" />
+    <result column="couponDiscount" property="coupondiscount" jdbcType="REAL" />
+    <result column="payment" property="payment" jdbcType="VARCHAR" />
+    <result column="coinAmount" property="coinamount" jdbcType="REAL" />
+    <result column="coinRate" property="coinrate" jdbcType="REAL" />
+    <result column="priceType" property="pricetype" jdbcType="CHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="paidTime" property="paidtime" jdbcType="INTEGER" />
+    <result column="cashSn" property="cashsn" jdbcType="BIGINT" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="refundEndTime" property="refundendtime" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.Orders" extends="BaseResultMap" >
+    <result column="data" property="data" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sn, status, title, targetType, targetId, amount, totalPrice, isGift, giftTo, 
+    discountId, discount, token, refundId, userId, coupon, couponDiscount, payment, coinAmount, 
+    coinRate, priceType, bank, paidTime, cashSn, note, refundEndTime, createdTime, updatedTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    data
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.OrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.OrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.OrdersExample" >
+    delete from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.Orders" >
+    insert into orders (id, sn, status, 
+      title, targetType, targetId, 
+      amount, totalPrice, isGift, 
+      giftTo, discountId, discount, 
+      token, refundId, userId, 
+      coupon, couponDiscount, payment, 
+      coinAmount, coinRate, priceType, 
+      bank, paidTime, cashSn, 
+      note, refundEndTime, createdTime, 
+      updatedTime, data)
+    values (#{id,jdbcType=INTEGER}, #{sn,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{title,jdbcType=VARCHAR}, #{targettype,jdbcType=VARCHAR}, #{targetid,jdbcType=INTEGER}, 
+      #{amount,jdbcType=REAL}, #{totalprice,jdbcType=REAL}, #{isgift,jdbcType=TINYINT}, 
+      #{giftto,jdbcType=VARCHAR}, #{discountid,jdbcType=INTEGER}, #{discount,jdbcType=REAL}, 
+      #{token,jdbcType=VARCHAR}, #{refundid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{coupon,jdbcType=VARCHAR}, #{coupondiscount,jdbcType=REAL}, #{payment,jdbcType=VARCHAR}, 
+      #{coinamount,jdbcType=REAL}, #{coinrate,jdbcType=REAL}, #{pricetype,jdbcType=CHAR}, 
+      #{bank,jdbcType=VARCHAR}, #{paidtime,jdbcType=INTEGER}, #{cashsn,jdbcType=BIGINT}, 
+      #{note,jdbcType=VARCHAR}, #{refundendtime,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, 
+      #{updatedtime,jdbcType=INTEGER}, #{data,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="targettype != null" >
+        targetType,
+      </if>
+      <if test="targetid != null" >
+        targetId,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="totalprice != null" >
+        totalPrice,
+      </if>
+      <if test="isgift != null" >
+        isGift,
+      </if>
+      <if test="giftto != null" >
+        giftTo,
+      </if>
+      <if test="discountid != null" >
+        discountId,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="refundid != null" >
+        refundId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="coupon != null" >
+        coupon,
+      </if>
+      <if test="coupondiscount != null" >
+        couponDiscount,
+      </if>
+      <if test="payment != null" >
+        payment,
+      </if>
+      <if test="coinamount != null" >
+        coinAmount,
+      </if>
+      <if test="coinrate != null" >
+        coinRate,
+      </if>
+      <if test="pricetype != null" >
+        priceType,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="paidtime != null" >
+        paidTime,
+      </if>
+      <if test="cashsn != null" >
+        cashSn,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="refundendtime != null" >
+        refundEndTime,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="data != null" >
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="targettype != null" >
+        #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="targetid != null" >
+        #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=REAL},
+      </if>
+      <if test="totalprice != null" >
+        #{totalprice,jdbcType=REAL},
+      </if>
+      <if test="isgift != null" >
+        #{isgift,jdbcType=TINYINT},
+      </if>
+      <if test="giftto != null" >
+        #{giftto,jdbcType=VARCHAR},
+      </if>
+      <if test="discountid != null" >
+        #{discountid,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=REAL},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="refundid != null" >
+        #{refundid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="coupon != null" >
+        #{coupon,jdbcType=VARCHAR},
+      </if>
+      <if test="coupondiscount != null" >
+        #{coupondiscount,jdbcType=REAL},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=VARCHAR},
+      </if>
+      <if test="coinamount != null" >
+        #{coinamount,jdbcType=REAL},
+      </if>
+      <if test="coinrate != null" >
+        #{coinrate,jdbcType=REAL},
+      </if>
+      <if test="pricetype != null" >
+        #{pricetype,jdbcType=CHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="paidtime != null" >
+        #{paidtime,jdbcType=INTEGER},
+      </if>
+      <if test="cashsn != null" >
+        #{cashsn,jdbcType=BIGINT},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="refundendtime != null" >
+        #{refundendtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.OrdersExample" resultType="java.lang.Integer" >
+    select count(*) from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orders
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sn != null" >
+        sn = #{record.sn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targettype != null" >
+        targetType = #{record.targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetid != null" >
+        targetId = #{record.targetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=REAL},
+      </if>
+      <if test="record.totalprice != null" >
+        totalPrice = #{record.totalprice,jdbcType=REAL},
+      </if>
+      <if test="record.isgift != null" >
+        isGift = #{record.isgift,jdbcType=TINYINT},
+      </if>
+      <if test="record.giftto != null" >
+        giftTo = #{record.giftto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountid != null" >
+        discountId = #{record.discountid,jdbcType=INTEGER},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=REAL},
+      </if>
+      <if test="record.token != null" >
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundid != null" >
+        refundId = #{record.refundid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.coupon != null" >
+        coupon = #{record.coupon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coupondiscount != null" >
+        couponDiscount = #{record.coupondiscount,jdbcType=REAL},
+      </if>
+      <if test="record.payment != null" >
+        payment = #{record.payment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coinamount != null" >
+        coinAmount = #{record.coinamount,jdbcType=REAL},
+      </if>
+      <if test="record.coinrate != null" >
+        coinRate = #{record.coinrate,jdbcType=REAL},
+      </if>
+      <if test="record.pricetype != null" >
+        priceType = #{record.pricetype,jdbcType=CHAR},
+      </if>
+      <if test="record.bank != null" >
+        bank = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paidtime != null" >
+        paidTime = #{record.paidtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.cashsn != null" >
+        cashSn = #{record.cashsn,jdbcType=BIGINT},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundendtime != null" >
+        refundEndTime = #{record.refundendtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.data != null" >
+        data = #{record.data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update orders
+    set id = #{record.id,jdbcType=INTEGER},
+      sn = #{record.sn,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=REAL},
+      totalPrice = #{record.totalprice,jdbcType=REAL},
+      isGift = #{record.isgift,jdbcType=TINYINT},
+      giftTo = #{record.giftto,jdbcType=VARCHAR},
+      discountId = #{record.discountid,jdbcType=INTEGER},
+      discount = #{record.discount,jdbcType=REAL},
+      token = #{record.token,jdbcType=VARCHAR},
+      refundId = #{record.refundid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      coupon = #{record.coupon,jdbcType=VARCHAR},
+      couponDiscount = #{record.coupondiscount,jdbcType=REAL},
+      payment = #{record.payment,jdbcType=VARCHAR},
+      coinAmount = #{record.coinamount,jdbcType=REAL},
+      coinRate = #{record.coinrate,jdbcType=REAL},
+      priceType = #{record.pricetype,jdbcType=CHAR},
+      bank = #{record.bank,jdbcType=VARCHAR},
+      paidTime = #{record.paidtime,jdbcType=INTEGER},
+      cashSn = #{record.cashsn,jdbcType=BIGINT},
+      note = #{record.note,jdbcType=VARCHAR},
+      refundEndTime = #{record.refundendtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      data = #{record.data,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orders
+    set id = #{record.id,jdbcType=INTEGER},
+      sn = #{record.sn,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      targetType = #{record.targettype,jdbcType=VARCHAR},
+      targetId = #{record.targetid,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=REAL},
+      totalPrice = #{record.totalprice,jdbcType=REAL},
+      isGift = #{record.isgift,jdbcType=TINYINT},
+      giftTo = #{record.giftto,jdbcType=VARCHAR},
+      discountId = #{record.discountid,jdbcType=INTEGER},
+      discount = #{record.discount,jdbcType=REAL},
+      token = #{record.token,jdbcType=VARCHAR},
+      refundId = #{record.refundid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      coupon = #{record.coupon,jdbcType=VARCHAR},
+      couponDiscount = #{record.coupondiscount,jdbcType=REAL},
+      payment = #{record.payment,jdbcType=VARCHAR},
+      coinAmount = #{record.coinamount,jdbcType=REAL},
+      coinRate = #{record.coinrate,jdbcType=REAL},
+      priceType = #{record.pricetype,jdbcType=CHAR},
+      bank = #{record.bank,jdbcType=VARCHAR},
+      paidTime = #{record.paidtime,jdbcType=INTEGER},
+      cashSn = #{record.cashsn,jdbcType=BIGINT},
+      note = #{record.note,jdbcType=VARCHAR},
+      refundEndTime = #{record.refundendtime,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.Orders" >
+    update orders
+    <set >
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="targettype != null" >
+        targetType = #{targettype,jdbcType=VARCHAR},
+      </if>
+      <if test="targetid != null" >
+        targetId = #{targetid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=REAL},
+      </if>
+      <if test="totalprice != null" >
+        totalPrice = #{totalprice,jdbcType=REAL},
+      </if>
+      <if test="isgift != null" >
+        isGift = #{isgift,jdbcType=TINYINT},
+      </if>
+      <if test="giftto != null" >
+        giftTo = #{giftto,jdbcType=VARCHAR},
+      </if>
+      <if test="discountid != null" >
+        discountId = #{discountid,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=REAL},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="refundid != null" >
+        refundId = #{refundid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="coupon != null" >
+        coupon = #{coupon,jdbcType=VARCHAR},
+      </if>
+      <if test="coupondiscount != null" >
+        couponDiscount = #{coupondiscount,jdbcType=REAL},
+      </if>
+      <if test="payment != null" >
+        payment = #{payment,jdbcType=VARCHAR},
+      </if>
+      <if test="coinamount != null" >
+        coinAmount = #{coinamount,jdbcType=REAL},
+      </if>
+      <if test="coinrate != null" >
+        coinRate = #{coinrate,jdbcType=REAL},
+      </if>
+      <if test="pricetype != null" >
+        priceType = #{pricetype,jdbcType=CHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="paidtime != null" >
+        paidTime = #{paidtime,jdbcType=INTEGER},
+      </if>
+      <if test="cashsn != null" >
+        cashSn = #{cashsn,jdbcType=BIGINT},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="refundendtime != null" >
+        refundEndTime = #{refundendtime,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="data != null" >
+        data = #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.Orders" >
+    update orders
+    set sn = #{sn,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      targetId = #{targetid,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=REAL},
+      totalPrice = #{totalprice,jdbcType=REAL},
+      isGift = #{isgift,jdbcType=TINYINT},
+      giftTo = #{giftto,jdbcType=VARCHAR},
+      discountId = #{discountid,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=REAL},
+      token = #{token,jdbcType=VARCHAR},
+      refundId = #{refundid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      coupon = #{coupon,jdbcType=VARCHAR},
+      couponDiscount = #{coupondiscount,jdbcType=REAL},
+      payment = #{payment,jdbcType=VARCHAR},
+      coinAmount = #{coinamount,jdbcType=REAL},
+      coinRate = #{coinrate,jdbcType=REAL},
+      priceType = #{pricetype,jdbcType=CHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      paidTime = #{paidtime,jdbcType=INTEGER},
+      cashSn = #{cashsn,jdbcType=BIGINT},
+      note = #{note,jdbcType=VARCHAR},
+      refundEndTime = #{refundendtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      data = #{data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Orders" >
+    update orders
+    set sn = #{sn,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      targetType = #{targettype,jdbcType=VARCHAR},
+      targetId = #{targetid,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=REAL},
+      totalPrice = #{totalprice,jdbcType=REAL},
+      isGift = #{isgift,jdbcType=TINYINT},
+      giftTo = #{giftto,jdbcType=VARCHAR},
+      discountId = #{discountid,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=REAL},
+      token = #{token,jdbcType=VARCHAR},
+      refundId = #{refundid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      coupon = #{coupon,jdbcType=VARCHAR},
+      couponDiscount = #{coupondiscount,jdbcType=REAL},
+      payment = #{payment,jdbcType=VARCHAR},
+      coinAmount = #{coinamount,jdbcType=REAL},
+      coinRate = #{coinrate,jdbcType=REAL},
+      priceType = #{pricetype,jdbcType=CHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      paidTime = #{paidtime,jdbcType=INTEGER},
+      cashSn = #{cashsn,jdbcType=BIGINT},
+      note = #{note,jdbcType=VARCHAR},
+      refundEndTime = #{refundendtime,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

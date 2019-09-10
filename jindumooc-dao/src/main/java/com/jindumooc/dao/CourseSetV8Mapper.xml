@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseSetV8Mapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseSetV8" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
+    <result column="isVip" property="isvip" jdbcType="BIT" />
+    <result column="cover" property="cover" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
+    <result column="serializeMode" property="serializemode" jdbcType="VARCHAR" />
+    <result column="ratingNum" property="ratingnum" jdbcType="INTEGER" />
+    <result column="rating" property="rating" jdbcType="REAL" />
+    <result column="noteNum" property="notenum" jdbcType="INTEGER" />
+    <result column="studentNum" property="studentnum" jdbcType="INTEGER" />
+    <result column="hotSeq" property="hotseq" jdbcType="INTEGER" />
+    <result column="recommended" property="recommended" jdbcType="TINYINT" />
+    <result column="recommendedSeq" property="recommendedseq" jdbcType="INTEGER" />
+    <result column="recommendedTime" property="recommendedtime" jdbcType="INTEGER" />
+    <result column="orgId" property="orgid" jdbcType="INTEGER" />
+    <result column="orgCode" property="orgcode" jdbcType="VARCHAR" />
+    <result column="discountId" property="discountid" jdbcType="INTEGER" />
+    <result column="discount" property="discount" jdbcType="REAL" />
+    <result column="hitNum" property="hitnum" jdbcType="INTEGER" />
+    <result column="maxRate" property="maxrate" jdbcType="TINYINT" />
+    <result column="materialNum" property="materialnum" jdbcType="INTEGER" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="locked" property="locked" jdbcType="BIT" />
+    <result column="minCoursePrice" property="mincourseprice" jdbcType="REAL" />
+    <result column="maxCoursePrice" property="maxcourseprice" jdbcType="REAL" />
+    <result column="teacherIds" property="teacherids" jdbcType="VARCHAR" />
+    <result column="defaultCourseId" property="defaultcourseid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.CourseSetV8WithBLOBs" extends="BaseResultMap" >
+    <result column="tags" property="tags" jdbcType="LONGVARCHAR" />
+    <result column="summary" property="summary" jdbcType="LONGVARCHAR" />
+    <result column="goals" property="goals" jdbcType="LONGVARCHAR" />
+    <result column="audiences" property="audiences" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type, title, subtitle, categoryId, isVip, cover, status, creator, createdTime, 
+    updatedTime, serializeMode, ratingNum, rating, noteNum, studentNum, hotSeq, recommended, 
+    recommendedSeq, recommendedTime, orgId, orgCode, discountId, discount, hitNum, maxRate, 
+    materialNum, parentId, locked, minCoursePrice, maxCoursePrice, teacherIds, defaultCourseId
+  </sql>
+  <sql id="Blob_Column_List" >
+    tags, summary, goals, audiences
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.CourseSetV8Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_set_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseSetV8Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_set_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_set_v8
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_set_v8
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseSetV8Example" >
+    delete from course_set_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseSetV8WithBLOBs" >
+    insert into course_set_v8 (id, type, title, 
+      subtitle, categoryId, isVip, 
+      cover, status, creator, 
+      createdTime, updatedTime, serializeMode, 
+      ratingNum, rating, noteNum, 
+      studentNum, hotSeq, recommended, 
+      recommendedSeq, recommendedTime, orgId, 
+      orgCode, discountId, discount, 
+      hitNum, maxRate, materialNum, 
+      parentId, locked, minCoursePrice, 
+      maxCoursePrice, teacherIds, defaultCourseId, 
+      tags, summary, goals, 
+      audiences)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{categoryid,jdbcType=INTEGER}, #{isvip,jdbcType=BIT}, 
+      #{cover,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{creator,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=INTEGER}, #{updatedtime,jdbcType=INTEGER}, #{serializemode,jdbcType=VARCHAR}, 
+      #{ratingnum,jdbcType=INTEGER}, #{rating,jdbcType=REAL}, #{notenum,jdbcType=INTEGER}, 
+      #{studentnum,jdbcType=INTEGER}, #{hotseq,jdbcType=INTEGER}, #{recommended,jdbcType=TINYINT}, 
+      #{recommendedseq,jdbcType=INTEGER}, #{recommendedtime,jdbcType=INTEGER}, #{orgid,jdbcType=INTEGER}, 
+      #{orgcode,jdbcType=VARCHAR}, #{discountid,jdbcType=INTEGER}, #{discount,jdbcType=REAL}, 
+      #{hitnum,jdbcType=INTEGER}, #{maxrate,jdbcType=TINYINT}, #{materialnum,jdbcType=INTEGER}, 
+      #{parentid,jdbcType=INTEGER}, #{locked,jdbcType=BIT}, #{mincourseprice,jdbcType=REAL}, 
+      #{maxcourseprice,jdbcType=REAL}, #{teacherids,jdbcType=VARCHAR}, #{defaultcourseid,jdbcType=INTEGER}, 
+      #{tags,jdbcType=LONGVARCHAR}, #{summary,jdbcType=LONGVARCHAR}, #{goals,jdbcType=LONGVARCHAR}, 
+      #{audiences,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseSetV8WithBLOBs" >
+    insert into course_set_v8
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="subtitle != null" >
+        subtitle,
+      </if>
+      <if test="categoryid != null" >
+        categoryId,
+      </if>
+      <if test="isvip != null" >
+        isVip,
+      </if>
+      <if test="cover != null" >
+        cover,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime,
+      </if>
+      <if test="serializemode != null" >
+        serializeMode,
+      </if>
+      <if test="ratingnum != null" >
+        ratingNum,
+      </if>
+      <if test="rating != null" >
+        rating,
+      </if>
+      <if test="notenum != null" >
+        noteNum,
+      </if>
+      <if test="studentnum != null" >
+        studentNum,
+      </if>
+      <if test="hotseq != null" >
+        hotSeq,
+      </if>
+      <if test="recommended != null" >
+        recommended,
+      </if>
+      <if test="recommendedseq != null" >
+        recommendedSeq,
+      </if>
+      <if test="recommendedtime != null" >
+        recommendedTime,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+      <if test="orgcode != null" >
+        orgCode,
+      </if>
+      <if test="discountid != null" >
+        discountId,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="hitnum != null" >
+        hitNum,
+      </if>
+      <if test="maxrate != null" >
+        maxRate,
+      </if>
+      <if test="materialnum != null" >
+        materialNum,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="locked != null" >
+        locked,
+      </if>
+      <if test="mincourseprice != null" >
+        minCoursePrice,
+      </if>
+      <if test="maxcourseprice != null" >
+        maxCoursePrice,
+      </if>
+      <if test="teacherids != null" >
+        teacherIds,
+      </if>
+      <if test="defaultcourseid != null" >
+        defaultCourseId,
+      </if>
+      <if test="tags != null" >
+        tags,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="goals != null" >
+        goals,
+      </if>
+      <if test="audiences != null" >
+        audiences,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="isvip != null" >
+        #{isvip,jdbcType=BIT},
+      </if>
+      <if test="cover != null" >
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="serializemode != null" >
+        #{serializemode,jdbcType=VARCHAR},
+      </if>
+      <if test="ratingnum != null" >
+        #{ratingnum,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null" >
+        #{rating,jdbcType=REAL},
+      </if>
+      <if test="notenum != null" >
+        #{notenum,jdbcType=INTEGER},
+      </if>
+      <if test="studentnum != null" >
+        #{studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="hotseq != null" >
+        #{hotseq,jdbcType=INTEGER},
+      </if>
+      <if test="recommended != null" >
+        #{recommended,jdbcType=TINYINT},
+      </if>
+      <if test="recommendedseq != null" >
+        #{recommendedseq,jdbcType=INTEGER},
+      </if>
+      <if test="recommendedtime != null" >
+        #{recommendedtime,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="orgcode != null" >
+        #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="discountid != null" >
+        #{discountid,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=REAL},
+      </if>
+      <if test="hitnum != null" >
+        #{hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="maxrate != null" >
+        #{maxrate,jdbcType=TINYINT},
+      </if>
+      <if test="materialnum != null" >
+        #{materialnum,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        #{locked,jdbcType=BIT},
+      </if>
+      <if test="mincourseprice != null" >
+        #{mincourseprice,jdbcType=REAL},
+      </if>
+      <if test="maxcourseprice != null" >
+        #{maxcourseprice,jdbcType=REAL},
+      </if>
+      <if test="teacherids != null" >
+        #{teacherids,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultcourseid != null" >
+        #{defaultcourseid,jdbcType=INTEGER},
+      </if>
+      <if test="tags != null" >
+        #{tags,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="goals != null" >
+        #{goals,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="audiences != null" >
+        #{audiences,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseSetV8Example" resultType="java.lang.Integer" >
+    select count(*) from course_set_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_set_v8
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtitle != null" >
+        subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryid != null" >
+        categoryId = #{record.categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isvip != null" >
+        isVip = #{record.isvip,jdbcType=BIT},
+      </if>
+      <if test="record.cover != null" >
+        cover = #{record.cover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedtime != null" >
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.serializemode != null" >
+        serializeMode = #{record.serializemode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ratingnum != null" >
+        ratingNum = #{record.ratingnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.rating != null" >
+        rating = #{record.rating,jdbcType=REAL},
+      </if>
+      <if test="record.notenum != null" >
+        noteNum = #{record.notenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentnum != null" >
+        studentNum = #{record.studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.hotseq != null" >
+        hotSeq = #{record.hotseq,jdbcType=INTEGER},
+      </if>
+      <if test="record.recommended != null" >
+        recommended = #{record.recommended,jdbcType=TINYINT},
+      </if>
+      <if test="record.recommendedseq != null" >
+        recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+      </if>
+      <if test="record.recommendedtime != null" >
+        recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgid != null" >
+        orgId = #{record.orgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgcode != null" >
+        orgCode = #{record.orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountid != null" >
+        discountId = #{record.discountid,jdbcType=INTEGER},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=REAL},
+      </if>
+      <if test="record.hitnum != null" >
+        hitNum = #{record.hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxrate != null" >
+        maxRate = #{record.maxrate,jdbcType=TINYINT},
+      </if>
+      <if test="record.materialnum != null" >
+        materialNum = #{record.materialnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.locked != null" >
+        locked = #{record.locked,jdbcType=BIT},
+      </if>
+      <if test="record.mincourseprice != null" >
+        minCoursePrice = #{record.mincourseprice,jdbcType=REAL},
+      </if>
+      <if test="record.maxcourseprice != null" >
+        maxCoursePrice = #{record.maxcourseprice,jdbcType=REAL},
+      </if>
+      <if test="record.teacherids != null" >
+        teacherIds = #{record.teacherids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultcourseid != null" >
+        defaultCourseId = #{record.defaultcourseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tags != null" >
+        tags = #{record.tags,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.goals != null" >
+        goals = #{record.goals,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.audiences != null" >
+        audiences = #{record.audiences,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update course_set_v8
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      isVip = #{record.isvip,jdbcType=BIT},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      serializeMode = #{record.serializemode,jdbcType=VARCHAR},
+      ratingNum = #{record.ratingnum,jdbcType=INTEGER},
+      rating = #{record.rating,jdbcType=REAL},
+      noteNum = #{record.notenum,jdbcType=INTEGER},
+      studentNum = #{record.studentnum,jdbcType=INTEGER},
+      hotSeq = #{record.hotseq,jdbcType=INTEGER},
+      recommended = #{record.recommended,jdbcType=TINYINT},
+      recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+      orgId = #{record.orgid,jdbcType=INTEGER},
+      orgCode = #{record.orgcode,jdbcType=VARCHAR},
+      discountId = #{record.discountid,jdbcType=INTEGER},
+      discount = #{record.discount,jdbcType=REAL},
+      hitNum = #{record.hitnum,jdbcType=INTEGER},
+      maxRate = #{record.maxrate,jdbcType=TINYINT},
+      materialNum = #{record.materialnum,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      locked = #{record.locked,jdbcType=BIT},
+      minCoursePrice = #{record.mincourseprice,jdbcType=REAL},
+      maxCoursePrice = #{record.maxcourseprice,jdbcType=REAL},
+      teacherIds = #{record.teacherids,jdbcType=VARCHAR},
+      defaultCourseId = #{record.defaultcourseid,jdbcType=INTEGER},
+      tags = #{record.tags,jdbcType=LONGVARCHAR},
+      summary = #{record.summary,jdbcType=LONGVARCHAR},
+      goals = #{record.goals,jdbcType=LONGVARCHAR},
+      audiences = #{record.audiences,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_set_v8
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      categoryId = #{record.categoryid,jdbcType=INTEGER},
+      isVip = #{record.isvip,jdbcType=BIT},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+      serializeMode = #{record.serializemode,jdbcType=VARCHAR},
+      ratingNum = #{record.ratingnum,jdbcType=INTEGER},
+      rating = #{record.rating,jdbcType=REAL},
+      noteNum = #{record.notenum,jdbcType=INTEGER},
+      studentNum = #{record.studentnum,jdbcType=INTEGER},
+      hotSeq = #{record.hotseq,jdbcType=INTEGER},
+      recommended = #{record.recommended,jdbcType=TINYINT},
+      recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+      orgId = #{record.orgid,jdbcType=INTEGER},
+      orgCode = #{record.orgcode,jdbcType=VARCHAR},
+      discountId = #{record.discountid,jdbcType=INTEGER},
+      discount = #{record.discount,jdbcType=REAL},
+      hitNum = #{record.hitnum,jdbcType=INTEGER},
+      maxRate = #{record.maxrate,jdbcType=TINYINT},
+      materialNum = #{record.materialnum,jdbcType=INTEGER},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      locked = #{record.locked,jdbcType=BIT},
+      minCoursePrice = #{record.mincourseprice,jdbcType=REAL},
+      maxCoursePrice = #{record.maxcourseprice,jdbcType=REAL},
+      teacherIds = #{record.teacherids,jdbcType=VARCHAR},
+      defaultCourseId = #{record.defaultcourseid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseSetV8WithBLOBs" >
+    update course_set_v8
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryid != null" >
+        categoryId = #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="isvip != null" >
+        isVip = #{isvip,jdbcType=BIT},
+      </if>
+      <if test="cover != null" >
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="updatedtime != null" >
+        updatedTime = #{updatedtime,jdbcType=INTEGER},
+      </if>
+      <if test="serializemode != null" >
+        serializeMode = #{serializemode,jdbcType=VARCHAR},
+      </if>
+      <if test="ratingnum != null" >
+        ratingNum = #{ratingnum,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null" >
+        rating = #{rating,jdbcType=REAL},
+      </if>
+      <if test="notenum != null" >
+        noteNum = #{notenum,jdbcType=INTEGER},
+      </if>
+      <if test="studentnum != null" >
+        studentNum = #{studentnum,jdbcType=INTEGER},
+      </if>
+      <if test="hotseq != null" >
+        hotSeq = #{hotseq,jdbcType=INTEGER},
+      </if>
+      <if test="recommended != null" >
+        recommended = #{recommended,jdbcType=TINYINT},
+      </if>
+      <if test="recommendedseq != null" >
+        recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+      </if>
+      <if test="recommendedtime != null" >
+        recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="orgcode != null" >
+        orgCode = #{orgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="discountid != null" >
+        discountId = #{discountid,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=REAL},
+      </if>
+      <if test="hitnum != null" >
+        hitNum = #{hitnum,jdbcType=INTEGER},
+      </if>
+      <if test="maxrate != null" >
+        maxRate = #{maxrate,jdbcType=TINYINT},
+      </if>
+      <if test="materialnum != null" >
+        materialNum = #{materialnum,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        locked = #{locked,jdbcType=BIT},
+      </if>
+      <if test="mincourseprice != null" >
+        minCoursePrice = #{mincourseprice,jdbcType=REAL},
+      </if>
+      <if test="maxcourseprice != null" >
+        maxCoursePrice = #{maxcourseprice,jdbcType=REAL},
+      </if>
+      <if test="teacherids != null" >
+        teacherIds = #{teacherids,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultcourseid != null" >
+        defaultCourseId = #{defaultcourseid,jdbcType=INTEGER},
+      </if>
+      <if test="tags != null" >
+        tags = #{tags,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="goals != null" >
+        goals = #{goals,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="audiences != null" >
+        audiences = #{audiences,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.CourseSetV8WithBLOBs" >
+    update course_set_v8
+    set type = #{type,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      isVip = #{isvip,jdbcType=BIT},
+      cover = #{cover,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      serializeMode = #{serializemode,jdbcType=VARCHAR},
+      ratingNum = #{ratingnum,jdbcType=INTEGER},
+      rating = #{rating,jdbcType=REAL},
+      noteNum = #{notenum,jdbcType=INTEGER},
+      studentNum = #{studentnum,jdbcType=INTEGER},
+      hotSeq = #{hotseq,jdbcType=INTEGER},
+      recommended = #{recommended,jdbcType=TINYINT},
+      recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+      orgId = #{orgid,jdbcType=INTEGER},
+      orgCode = #{orgcode,jdbcType=VARCHAR},
+      discountId = #{discountid,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=REAL},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      maxRate = #{maxrate,jdbcType=TINYINT},
+      materialNum = #{materialnum,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=BIT},
+      minCoursePrice = #{mincourseprice,jdbcType=REAL},
+      maxCoursePrice = #{maxcourseprice,jdbcType=REAL},
+      teacherIds = #{teacherids,jdbcType=VARCHAR},
+      defaultCourseId = #{defaultcourseid,jdbcType=INTEGER},
+      tags = #{tags,jdbcType=LONGVARCHAR},
+      summary = #{summary,jdbcType=LONGVARCHAR},
+      goals = #{goals,jdbcType=LONGVARCHAR},
+      audiences = #{audiences,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseSetV8" >
+    update course_set_v8
+    set type = #{type,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      categoryId = #{categoryid,jdbcType=INTEGER},
+      isVip = #{isvip,jdbcType=BIT},
+      cover = #{cover,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      serializeMode = #{serializemode,jdbcType=VARCHAR},
+      ratingNum = #{ratingnum,jdbcType=INTEGER},
+      rating = #{rating,jdbcType=REAL},
+      noteNum = #{notenum,jdbcType=INTEGER},
+      studentNum = #{studentnum,jdbcType=INTEGER},
+      hotSeq = #{hotseq,jdbcType=INTEGER},
+      recommended = #{recommended,jdbcType=TINYINT},
+      recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+      recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+      orgId = #{orgid,jdbcType=INTEGER},
+      orgCode = #{orgcode,jdbcType=VARCHAR},
+      discountId = #{discountid,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=REAL},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      maxRate = #{maxrate,jdbcType=TINYINT},
+      materialNum = #{materialnum,jdbcType=INTEGER},
+      parentId = #{parentid,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=BIT},
+      minCoursePrice = #{mincourseprice,jdbcType=REAL},
+      maxCoursePrice = #{maxcourseprice,jdbcType=REAL},
+      teacherIds = #{teacherids,jdbcType=VARCHAR},
+      defaultCourseId = #{defaultcourseid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

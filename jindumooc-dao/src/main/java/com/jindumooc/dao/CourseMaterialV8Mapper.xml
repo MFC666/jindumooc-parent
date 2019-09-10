@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CourseMaterialV8Mapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.CourseMaterialV8" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="lessonId" property="lessonid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="fileId" property="fileid" jdbcType="INTEGER" />
+    <result column="fileUri" property="fileuri" jdbcType="VARCHAR" />
+    <result column="fileMime" property="filemime" jdbcType="VARCHAR" />
+    <result column="fileSize" property="filesize" jdbcType="INTEGER" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+    <result column="copyId" property="copyid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="courseSetId" property="coursesetid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.CourseMaterialV8" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, courseId, lessonId, title, link, fileId, fileUri, fileMime, fileSize, source, 
+    userId, createdTime, copyId, type, courseSetId
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.CourseMaterialV8Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_material_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CourseMaterialV8Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_material_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course_material_v8
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_material_v8
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CourseMaterialV8Example" >
+    delete from course_material_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.CourseMaterialV8" >
+    insert into course_material_v8 (id, courseId, lessonId, 
+      title, link, fileId, 
+      fileUri, fileMime, fileSize, 
+      source, userId, createdTime, 
+      copyId, type, courseSetId, 
+      description)
+    values (#{id,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, #{lessonid,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{fileid,jdbcType=INTEGER}, 
+      #{fileuri,jdbcType=VARCHAR}, #{filemime,jdbcType=VARCHAR}, #{filesize,jdbcType=INTEGER}, 
+      #{source,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, 
+      #{copyid,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{coursesetid,jdbcType=INTEGER}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.CourseMaterialV8" >
+    insert into course_material_v8
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="lessonid != null" >
+        lessonId,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="link != null" >
+        link,
+      </if>
+      <if test="fileid != null" >
+        fileId,
+      </if>
+      <if test="fileuri != null" >
+        fileUri,
+      </if>
+      <if test="filemime != null" >
+        fileMime,
+      </if>
+      <if test="filesize != null" >
+        fileSize,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="copyid != null" >
+        copyId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="coursesetid != null" >
+        courseSetId,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="fileid != null" >
+        #{fileid,jdbcType=INTEGER},
+      </if>
+      <if test="fileuri != null" >
+        #{fileuri,jdbcType=VARCHAR},
+      </if>
+      <if test="filemime != null" >
+        #{filemime,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null" >
+        #{filesize,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="coursesetid != null" >
+        #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CourseMaterialV8Example" resultType="java.lang.Integer" >
+    select count(*) from course_material_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_material_v8
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lessonid != null" >
+        lessonId = #{record.lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.link != null" >
+        link = #{record.link,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileid != null" >
+        fileId = #{record.fileid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileuri != null" >
+        fileUri = #{record.fileuri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filemime != null" >
+        fileMime = #{record.filemime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filesize != null" >
+        fileSize = #{record.filesize,jdbcType=INTEGER},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.copyid != null" >
+        copyId = #{record.copyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursesetid != null" >
+        courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update course_material_v8
+    set id = #{record.id,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      lessonId = #{record.lessonid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      link = #{record.link,jdbcType=VARCHAR},
+      fileId = #{record.fileid,jdbcType=INTEGER},
+      fileUri = #{record.fileuri,jdbcType=VARCHAR},
+      fileMime = #{record.filemime,jdbcType=VARCHAR},
+      fileSize = #{record.filesize,jdbcType=INTEGER},
+      source = #{record.source,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      copyId = #{record.copyid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_material_v8
+    set id = #{record.id,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      lessonId = #{record.lessonid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      link = #{record.link,jdbcType=VARCHAR},
+      fileId = #{record.fileid,jdbcType=INTEGER},
+      fileUri = #{record.fileuri,jdbcType=VARCHAR},
+      fileMime = #{record.filemime,jdbcType=VARCHAR},
+      fileSize = #{record.filesize,jdbcType=INTEGER},
+      source = #{record.source,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      copyId = #{record.copyid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      courseSetId = #{record.coursesetid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.CourseMaterialV8" >
+    update course_material_v8
+    <set >
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        lessonId = #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="fileid != null" >
+        fileId = #{fileid,jdbcType=INTEGER},
+      </if>
+      <if test="fileuri != null" >
+        fileUri = #{fileuri,jdbcType=VARCHAR},
+      </if>
+      <if test="filemime != null" >
+        fileMime = #{filemime,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null" >
+        fileSize = #{filesize,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="copyid != null" >
+        copyId = #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="coursesetid != null" >
+        courseSetId = #{coursesetid,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.CourseMaterialV8" >
+    update course_material_v8
+    set courseId = #{courseid,jdbcType=INTEGER},
+      lessonId = #{lessonid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      fileId = #{fileid,jdbcType=INTEGER},
+      fileUri = #{fileuri,jdbcType=VARCHAR},
+      fileMime = #{filemime,jdbcType=VARCHAR},
+      fileSize = #{filesize,jdbcType=INTEGER},
+      source = #{source,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      copyId = #{copyid,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      courseSetId = #{coursesetid,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.CourseMaterialV8" >
+    update course_material_v8
+    set courseId = #{courseid,jdbcType=INTEGER},
+      lessonId = #{lessonid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      fileId = #{fileid,jdbcType=INTEGER},
+      fileUri = #{fileuri,jdbcType=VARCHAR},
+      fileMime = #{filemime,jdbcType=VARCHAR},
+      fileSize = #{filesize,jdbcType=INTEGER},
+      source = #{source,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      copyId = #{copyid,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      courseSetId = #{coursesetid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

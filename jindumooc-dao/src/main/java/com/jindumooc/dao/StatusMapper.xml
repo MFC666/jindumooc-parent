@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.StatusMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Status" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="courseId" property="courseid" jdbcType="INTEGER" />
+    <result column="classroomId" property="classroomid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="objectType" property="objecttype" jdbcType="VARCHAR" />
+    <result column="objectId" property="objectid" jdbcType="INTEGER" />
+    <result column="commentNum" property="commentnum" jdbcType="INTEGER" />
+    <result column="likeNum" property="likenum" jdbcType="INTEGER" />
+    <result column="hide" property="hide" jdbcType="BIT" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.StatusWithBLOBs" extends="BaseResultMap" >
+    <result column="message" property="message" jdbcType="LONGVARCHAR" />
+    <result column="properties" property="properties" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, courseId, classroomId, type, objectType, objectId, commentNum, likeNum, 
+    hide, createdTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    message, properties
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.StatusExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.StatusExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from status
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from status
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.StatusExample" >
+    delete from status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.StatusWithBLOBs" >
+    insert into status (id, userId, courseId, 
+      classroomId, type, objectType, 
+      objectId, commentNum, likeNum, 
+      hide, createdTime, message, 
+      properties)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, 
+      #{classroomid,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{objecttype,jdbcType=VARCHAR}, 
+      #{objectid,jdbcType=INTEGER}, #{commentnum,jdbcType=INTEGER}, #{likenum,jdbcType=INTEGER}, 
+      #{hide,jdbcType=BIT}, #{createdtime,jdbcType=INTEGER}, #{message,jdbcType=LONGVARCHAR}, 
+      #{properties,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.StatusWithBLOBs" >
+    insert into status
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="classroomid != null" >
+        classroomId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="objecttype != null" >
+        objectType,
+      </if>
+      <if test="objectid != null" >
+        objectId,
+      </if>
+      <if test="commentnum != null" >
+        commentNum,
+      </if>
+      <if test="likenum != null" >
+        likeNum,
+      </if>
+      <if test="hide != null" >
+        hide,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="properties != null" >
+        properties,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="classroomid != null" >
+        #{classroomid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="objecttype != null" >
+        #{objecttype,jdbcType=VARCHAR},
+      </if>
+      <if test="objectid != null" >
+        #{objectid,jdbcType=INTEGER},
+      </if>
+      <if test="commentnum != null" >
+        #{commentnum,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="hide != null" >
+        #{hide,jdbcType=BIT},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="properties != null" >
+        #{properties,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.StatusExample" resultType="java.lang.Integer" >
+    select count(*) from status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update status
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseId = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classroomid != null" >
+        classroomId = #{record.classroomid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objecttype != null" >
+        objectType = #{record.objecttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objectid != null" >
+        objectId = #{record.objectid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentnum != null" >
+        commentNum = #{record.commentnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.likenum != null" >
+        likeNum = #{record.likenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.hide != null" >
+        hide = #{record.hide,jdbcType=BIT},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.properties != null" >
+        properties = #{record.properties,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update status
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      classroomId = #{record.classroomid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      objectType = #{record.objecttype,jdbcType=VARCHAR},
+      objectId = #{record.objectid,jdbcType=INTEGER},
+      commentNum = #{record.commentnum,jdbcType=INTEGER},
+      likeNum = #{record.likenum,jdbcType=INTEGER},
+      hide = #{record.hide,jdbcType=BIT},
+      createdTime = #{record.createdtime,jdbcType=INTEGER},
+      message = #{record.message,jdbcType=LONGVARCHAR},
+      properties = #{record.properties,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update status
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      courseId = #{record.courseid,jdbcType=INTEGER},
+      classroomId = #{record.classroomid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      objectType = #{record.objecttype,jdbcType=VARCHAR},
+      objectId = #{record.objectid,jdbcType=INTEGER},
+      commentNum = #{record.commentnum,jdbcType=INTEGER},
+      likeNum = #{record.likenum,jdbcType=INTEGER},
+      hide = #{record.hide,jdbcType=BIT},
+      createdTime = #{record.createdtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.StatusWithBLOBs" >
+    update status
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        courseId = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="classroomid != null" >
+        classroomId = #{classroomid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="objecttype != null" >
+        objectType = #{objecttype,jdbcType=VARCHAR},
+      </if>
+      <if test="objectid != null" >
+        objectId = #{objectid,jdbcType=INTEGER},
+      </if>
+      <if test="commentnum != null" >
+        commentNum = #{commentnum,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        likeNum = #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="hide != null" >
+        hide = #{hide,jdbcType=BIT},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="properties != null" >
+        properties = #{properties,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.StatusWithBLOBs" >
+    update status
+    set userId = #{userid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      classroomId = #{classroomid,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      objectType = #{objecttype,jdbcType=VARCHAR},
+      objectId = #{objectid,jdbcType=INTEGER},
+      commentNum = #{commentnum,jdbcType=INTEGER},
+      likeNum = #{likenum,jdbcType=INTEGER},
+      hide = #{hide,jdbcType=BIT},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      message = #{message,jdbcType=LONGVARCHAR},
+      properties = #{properties,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Status" >
+    update status
+    set userId = #{userid,jdbcType=INTEGER},
+      courseId = #{courseid,jdbcType=INTEGER},
+      classroomId = #{classroomid,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      objectType = #{objecttype,jdbcType=VARCHAR},
+      objectId = #{objectid,jdbcType=INTEGER},
+      commentNum = #{commentnum,jdbcType=INTEGER},
+      likeNum = #{likenum,jdbcType=INTEGER},
+      hide = #{hide,jdbcType=BIT},
+      createdTime = #{createdtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

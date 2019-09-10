@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.BizQueueJobMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.BizQueueJob" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="queue" property="queue" jdbcType="VARCHAR" />
+    <result column="classes" property="classes" jdbcType="VARCHAR" />
+    <result column="timeout" property="timeout" jdbcType="INTEGER" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
+    <result column="executions" property="executions" jdbcType="INTEGER" />
+    <result column="available_time" property="availableTime" jdbcType="INTEGER" />
+    <result column="reserved_time" property="reservedTime" jdbcType="INTEGER" />
+    <result column="expired_time" property="expiredTime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.BizQueueJob" extends="BaseResultMap" >
+    <result column="body" property="body" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, queue, classes, timeout, priority, executions, available_time, reserved_time, 
+    expired_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    body
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.BizQueueJobExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from biz_queue_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.BizQueueJobExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from biz_queue_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from biz_queue_job
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from biz_queue_job
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.BizQueueJobExample" >
+    delete from biz_queue_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.BizQueueJob" >
+    insert into biz_queue_job (id, queue, classes, 
+      timeout, priority, executions, 
+      available_time, reserved_time, expired_time, 
+      body)
+    values (#{id,jdbcType=BIGINT}, #{queue,jdbcType=VARCHAR}, #{classes,jdbcType=VARCHAR}, 
+      #{timeout,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER}, #{executions,jdbcType=INTEGER}, 
+      #{availableTime,jdbcType=INTEGER}, #{reservedTime,jdbcType=INTEGER}, #{expiredTime,jdbcType=INTEGER}, 
+      #{body,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.BizQueueJob" >
+    insert into biz_queue_job
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="queue != null" >
+        queue,
+      </if>
+      <if test="classes != null" >
+        classes,
+      </if>
+      <if test="timeout != null" >
+        timeout,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="executions != null" >
+        executions,
+      </if>
+      <if test="availableTime != null" >
+        available_time,
+      </if>
+      <if test="reservedTime != null" >
+        reserved_time,
+      </if>
+      <if test="expiredTime != null" >
+        expired_time,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="queue != null" >
+        #{queue,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="timeout != null" >
+        #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="executions != null" >
+        #{executions,jdbcType=INTEGER},
+      </if>
+      <if test="availableTime != null" >
+        #{availableTime,jdbcType=INTEGER},
+      </if>
+      <if test="reservedTime != null" >
+        #{reservedTime,jdbcType=INTEGER},
+      </if>
+      <if test="expiredTime != null" >
+        #{expiredTime,jdbcType=INTEGER},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.BizQueueJobExample" resultType="java.lang.Integer" >
+    select count(*) from biz_queue_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update biz_queue_job
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.queue != null" >
+        queue = #{record.queue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classes != null" >
+        classes = #{record.classes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeout != null" >
+        timeout = #{record.timeout,jdbcType=INTEGER},
+      </if>
+      <if test="record.priority != null" >
+        priority = #{record.priority,jdbcType=INTEGER},
+      </if>
+      <if test="record.executions != null" >
+        executions = #{record.executions,jdbcType=INTEGER},
+      </if>
+      <if test="record.availableTime != null" >
+        available_time = #{record.availableTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.reservedTime != null" >
+        reserved_time = #{record.reservedTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.expiredTime != null" >
+        expired_time = #{record.expiredTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.body != null" >
+        body = #{record.body,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update biz_queue_job
+    set id = #{record.id,jdbcType=BIGINT},
+      queue = #{record.queue,jdbcType=VARCHAR},
+      classes = #{record.classes,jdbcType=VARCHAR},
+      timeout = #{record.timeout,jdbcType=INTEGER},
+      priority = #{record.priority,jdbcType=INTEGER},
+      executions = #{record.executions,jdbcType=INTEGER},
+      available_time = #{record.availableTime,jdbcType=INTEGER},
+      reserved_time = #{record.reservedTime,jdbcType=INTEGER},
+      expired_time = #{record.expiredTime,jdbcType=INTEGER},
+      body = #{record.body,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update biz_queue_job
+    set id = #{record.id,jdbcType=BIGINT},
+      queue = #{record.queue,jdbcType=VARCHAR},
+      classes = #{record.classes,jdbcType=VARCHAR},
+      timeout = #{record.timeout,jdbcType=INTEGER},
+      priority = #{record.priority,jdbcType=INTEGER},
+      executions = #{record.executions,jdbcType=INTEGER},
+      available_time = #{record.availableTime,jdbcType=INTEGER},
+      reserved_time = #{record.reservedTime,jdbcType=INTEGER},
+      expired_time = #{record.expiredTime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.BizQueueJob" >
+    update biz_queue_job
+    <set >
+      <if test="queue != null" >
+        queue = #{queue,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        classes = #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="timeout != null" >
+        timeout = #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="executions != null" >
+        executions = #{executions,jdbcType=INTEGER},
+      </if>
+      <if test="availableTime != null" >
+        available_time = #{availableTime,jdbcType=INTEGER},
+      </if>
+      <if test="reservedTime != null" >
+        reserved_time = #{reservedTime,jdbcType=INTEGER},
+      </if>
+      <if test="expiredTime != null" >
+        expired_time = #{expiredTime,jdbcType=INTEGER},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.BizQueueJob" >
+    update biz_queue_job
+    set queue = #{queue,jdbcType=VARCHAR},
+      classes = #{classes,jdbcType=VARCHAR},
+      timeout = #{timeout,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      executions = #{executions,jdbcType=INTEGER},
+      available_time = #{availableTime,jdbcType=INTEGER},
+      reserved_time = #{reservedTime,jdbcType=INTEGER},
+      expired_time = #{expiredTime,jdbcType=INTEGER},
+      body = #{body,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.BizQueueJob" >
+    update biz_queue_job
+    set queue = #{queue,jdbcType=VARCHAR},
+      classes = #{classes,jdbcType=VARCHAR},
+      timeout = #{timeout,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      executions = #{executions,jdbcType=INTEGER},
+      available_time = #{availableTime,jdbcType=INTEGER},
+      reserved_time = #{reservedTime,jdbcType=INTEGER},
+      expired_time = #{expiredTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

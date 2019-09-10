@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.TestpaperItemV8Mapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.TestpaperItemV8" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="testId" property="testid" jdbcType="INTEGER" />
+    <result column="seq" property="seq" jdbcType="INTEGER" />
+    <result column="questionId" property="questionid" jdbcType="INTEGER" />
+    <result column="questionType" property="questiontype" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="REAL" />
+    <result column="missScore" property="missscore" jdbcType="REAL" />
+    <result column="copyId" property="copyid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="migrateItemId" property="migrateitemid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, testId, seq, questionId, questionType, parentId, score, missScore, copyId, type, 
+    migrateItemId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.TestpaperItemV8Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from testpaper_item_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from testpaper_item_v8
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from testpaper_item_v8
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.TestpaperItemV8Example" >
+    delete from testpaper_item_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.TestpaperItemV8" >
+    insert into testpaper_item_v8 (id, testId, seq, 
+      questionId, questionType, parentId, 
+      score, missScore, copyId, 
+      type, migrateItemId)
+    values (#{id,jdbcType=INTEGER}, #{testid,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, 
+      #{questionid,jdbcType=INTEGER}, #{questiontype,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{score,jdbcType=REAL}, #{missscore,jdbcType=REAL}, #{copyid,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{migrateitemid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.TestpaperItemV8" >
+    insert into testpaper_item_v8
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="testid != null" >
+        testId,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="questionid != null" >
+        questionId,
+      </if>
+      <if test="questiontype != null" >
+        questionType,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="missscore != null" >
+        missScore,
+      </if>
+      <if test="copyid != null" >
+        copyId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="migrateitemid != null" >
+        migrateItemId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="testid != null" >
+        #{testid,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="questionid != null" >
+        #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="questiontype != null" >
+        #{questiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=REAL},
+      </if>
+      <if test="missscore != null" >
+        #{missscore,jdbcType=REAL},
+      </if>
+      <if test="copyid != null" >
+        #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="migrateitemid != null" >
+        #{migrateitemid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.TestpaperItemV8Example" resultType="java.lang.Integer" >
+    select count(*) from testpaper_item_v8
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update testpaper_item_v8
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.testid != null" >
+        testId = #{record.testid,jdbcType=INTEGER},
+      </if>
+      <if test="record.seq != null" >
+        seq = #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionid != null" >
+        questionId = #{record.questionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.questiontype != null" >
+        questionType = #{record.questiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=REAL},
+      </if>
+      <if test="record.missscore != null" >
+        missScore = #{record.missscore,jdbcType=REAL},
+      </if>
+      <if test="record.copyid != null" >
+        copyId = #{record.copyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.migrateitemid != null" >
+        migrateItemId = #{record.migrateitemid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update testpaper_item_v8
+    set id = #{record.id,jdbcType=INTEGER},
+      testId = #{record.testid,jdbcType=INTEGER},
+      seq = #{record.seq,jdbcType=INTEGER},
+      questionId = #{record.questionid,jdbcType=INTEGER},
+      questionType = #{record.questiontype,jdbcType=VARCHAR},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=REAL},
+      missScore = #{record.missscore,jdbcType=REAL},
+      copyId = #{record.copyid,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      migrateItemId = #{record.migrateitemid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.TestpaperItemV8" >
+    update testpaper_item_v8
+    <set >
+      <if test="testid != null" >
+        testId = #{testid,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="questionid != null" >
+        questionId = #{questionid,jdbcType=INTEGER},
+      </if>
+      <if test="questiontype != null" >
+        questionType = #{questiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="missscore != null" >
+        missScore = #{missscore,jdbcType=REAL},
+      </if>
+      <if test="copyid != null" >
+        copyId = #{copyid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="migrateitemid != null" >
+        migrateItemId = #{migrateitemid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.TestpaperItemV8" >
+    update testpaper_item_v8
+    set testId = #{testid,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=INTEGER},
+      questionId = #{questionid,jdbcType=INTEGER},
+      questionType = #{questiontype,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=INTEGER},
+      score = #{score,jdbcType=REAL},
+      missScore = #{missscore,jdbcType=REAL},
+      copyId = #{copyid,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      migrateItemId = #{migrateitemid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

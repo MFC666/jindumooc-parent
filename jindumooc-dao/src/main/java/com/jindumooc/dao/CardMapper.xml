@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jindumooc.dao.CardMapper" >
+  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Card" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cardId" property="cardid" jdbcType="VARCHAR" />
+    <result column="cardType" property="cardtype" jdbcType="VARCHAR" />
+    <result column="deadline" property="deadline" jdbcType="INTEGER" />
+    <result column="useTime" property="usetime" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cardId, cardType, deadline, useTime, status, userId, createdTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.CardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from card
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from card
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.CardExample" >
+    delete from card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jindumooc.pojo.Card" >
+    insert into card (id, cardId, cardType, 
+      deadline, useTime, status, 
+      userId, createdTime)
+    values (#{id,jdbcType=INTEGER}, #{cardid,jdbcType=VARCHAR}, #{cardtype,jdbcType=VARCHAR}, 
+      #{deadline,jdbcType=INTEGER}, #{usetime,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{userid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jindumooc.pojo.Card" >
+    insert into card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cardid != null" >
+        cardId,
+      </if>
+      <if test="cardtype != null" >
+        cardType,
+      </if>
+      <if test="deadline != null" >
+        deadline,
+      </if>
+      <if test="usetime != null" >
+        useTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cardid != null" >
+        #{cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="cardtype != null" >
+        #{cardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=INTEGER},
+      </if>
+      <if test="usetime != null" >
+        #{usetime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jindumooc.pojo.CardExample" resultType="java.lang.Integer" >
+    select count(*) from card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update card
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardid != null" >
+        cardId = #{record.cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardtype != null" >
+        cardType = #{record.cardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deadline != null" >
+        deadline = #{record.deadline,jdbcType=INTEGER},
+      </if>
+      <if test="record.usetime != null" >
+        useTime = #{record.usetime,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update card
+    set id = #{record.id,jdbcType=INTEGER},
+      cardId = #{record.cardid,jdbcType=VARCHAR},
+      cardType = #{record.cardtype,jdbcType=VARCHAR},
+      deadline = #{record.deadline,jdbcType=INTEGER},
+      useTime = #{record.usetime,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      userId = #{record.userid,jdbcType=INTEGER},
+      createdTime = #{record.createdtime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.Card" >
+    update card
+    <set >
+      <if test="cardid != null" >
+        cardId = #{cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="cardtype != null" >
+        cardType = #{cardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null" >
+        deadline = #{deadline,jdbcType=INTEGER},
+      </if>
+      <if test="usetime != null" >
+        useTime = #{usetime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Card" >
+    update card
+    set cardId = #{cardid,jdbcType=VARCHAR},
+      cardType = #{cardtype,jdbcType=VARCHAR},
+      deadline = #{deadline,jdbcType=INTEGER},
+      useTime = #{usetime,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      userId = #{userid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

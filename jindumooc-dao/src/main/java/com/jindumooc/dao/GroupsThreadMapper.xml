@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jindumooc.dao.GroupsThreadMapper">
+    <resultMap id="BaseResultMap" type="com.jindumooc.pojo.GroupsThread">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="isElite" property="iselite" jdbcType="INTEGER"/>
+        <result column="isStick" property="isstick" jdbcType="INTEGER"/>
+        <result column="lastPostMemberId" property="lastpostmemberid" jdbcType="INTEGER"/>
+        <result column="lastPostTime" property="lastposttime" jdbcType="INTEGER"/>
+        <result column="groupId" property="groupid" jdbcType="INTEGER"/>
+        <result column="userId" property="userid" jdbcType="INTEGER"/>
+        <result column="createdTime" property="createdtime" jdbcType="INTEGER"/>
+        <result column="updatedTime" property="updatedtime" jdbcType="INTEGER"/>
+        <result column="postNum" property="postnum" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="hitNum" property="hitnum" jdbcType="INTEGER"/>
+        <result column="rewardCoin" property="rewardcoin" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.GroupsThread" extends="BaseResultMap">
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, title, isElite, isStick, lastPostMemberId, lastPostTime, groupId, userId, createdTime, 
+    updatedTime, postNum, status, hitNum, rewardCoin, type
+  </sql>
+    <sql id="Blob_Column_List">
+    content
+  </sql>
+    <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+            parameterType="com.jindumooc.pojo.GroupsThreadExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from groups_thread
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.GroupsThreadExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from groups_thread
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from groups_thread
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from groups_thread
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.jindumooc.pojo.GroupsThreadExample">
+        delete from groups_thread
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.jindumooc.pojo.GroupsThread">
+
+    insert into groups_thread (id, title, isElite, 
+      isStick, lastPostMemberId, lastPostTime, 
+      groupId, userId, createdTime, 
+      updatedTime, postNum, status, 
+      hitNum, rewardCoin, type, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{iselite,jdbcType=INTEGER}, 
+      #{isstick,jdbcType=INTEGER}, #{lastpostmemberid,jdbcType=INTEGER}, #{lastposttime,jdbcType=INTEGER}, 
+      #{groupid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, 
+      #{updatedtime,jdbcType=INTEGER}, #{postnum,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{hitnum,jdbcType=INTEGER}, #{rewardcoin,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.jindumooc.pojo.GroupsThread">
+        insert into groups_thread
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="iselite != null">
+                isElite,
+            </if>
+            <if test="isstick != null">
+                isStick,
+            </if>
+            <if test="lastpostmemberid != null">
+                lastPostMemberId,
+            </if>
+            <if test="lastposttime != null">
+                lastPostTime,
+            </if>
+            <if test="groupid != null">
+                groupId,
+            </if>
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="createdtime != null">
+                createdTime,
+            </if>
+            <if test="updatedtime != null">
+                updatedTime,
+            </if>
+            <if test="postnum != null">
+                postNum,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="hitnum != null">
+                hitNum,
+            </if>
+            <if test="rewardcoin != null">
+                rewardCoin,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="iselite != null">
+                #{iselite,jdbcType=INTEGER},
+            </if>
+            <if test="isstick != null">
+                #{isstick,jdbcType=INTEGER},
+            </if>
+            <if test="lastpostmemberid != null">
+                #{lastpostmemberid,jdbcType=INTEGER},
+            </if>
+            <if test="lastposttime != null">
+                #{lastposttime,jdbcType=INTEGER},
+            </if>
+            <if test="groupid != null">
+                #{groupid,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="createdtime != null">
+                #{createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="updatedtime != null">
+                #{updatedtime,jdbcType=INTEGER},
+            </if>
+            <if test="postnum != null">
+                #{postnum,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="hitnum != null">
+                #{hitnum,jdbcType=INTEGER},
+            </if>
+            <if test="rewardcoin != null">
+                #{rewardcoin,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.jindumooc.pojo.GroupsThreadExample" resultType="java.lang.Integer">
+        select count(*) from groups_thread
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update groups_thread
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.iselite != null">
+                isElite = #{record.iselite,jdbcType=INTEGER},
+            </if>
+            <if test="record.isstick != null">
+                isStick = #{record.isstick,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastpostmemberid != null">
+                lastPostMemberId = #{record.lastpostmemberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastposttime != null">
+                lastPostTime = #{record.lastposttime,jdbcType=INTEGER},
+            </if>
+            <if test="record.groupid != null">
+                groupId = #{record.groupid,jdbcType=INTEGER},
+            </if>
+            <if test="record.userid != null">
+                userId = #{record.userid,jdbcType=INTEGER},
+            </if>
+            <if test="record.createdtime != null">
+                createdTime = #{record.createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.updatedtime != null">
+                updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.postnum != null">
+                postNum = #{record.postnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=CHAR},
+            </if>
+            <if test="record.hitnum != null">
+                hitNum = #{record.hitnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.rewardcoin != null">
+                rewardCoin = #{record.rewardcoin,jdbcType=INTEGER},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=VARCHAR},
+            </if>
+            <if test="record.content != null">
+                content = #{record.content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update groups_thread
+        set id = #{record.id,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        isElite = #{record.iselite,jdbcType=INTEGER},
+        isStick = #{record.isstick,jdbcType=INTEGER},
+        lastPostMemberId = #{record.lastpostmemberid,jdbcType=INTEGER},
+        lastPostTime = #{record.lastposttime,jdbcType=INTEGER},
+        groupId = #{record.groupid,jdbcType=INTEGER},
+        userId = #{record.userid,jdbcType=INTEGER},
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+        postNum = #{record.postnum,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=CHAR},
+        hitNum = #{record.hitnum,jdbcType=INTEGER},
+        rewardCoin = #{record.rewardcoin,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=VARCHAR},
+        content = #{record.content,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update groups_thread
+        set id = #{record.id,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        isElite = #{record.iselite,jdbcType=INTEGER},
+        isStick = #{record.isstick,jdbcType=INTEGER},
+        lastPostMemberId = #{record.lastpostmemberid,jdbcType=INTEGER},
+        lastPostTime = #{record.lastposttime,jdbcType=INTEGER},
+        groupId = #{record.groupid,jdbcType=INTEGER},
+        userId = #{record.userid,jdbcType=INTEGER},
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+        postNum = #{record.postnum,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=CHAR},
+        hitNum = #{record.hitnum,jdbcType=INTEGER},
+        rewardCoin = #{record.rewardcoin,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.GroupsThread">
+        update groups_thread
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="iselite != null">
+                isElite = #{iselite,jdbcType=INTEGER},
+            </if>
+            <if test="isstick != null">
+                isStick = #{isstick,jdbcType=INTEGER},
+            </if>
+            <if test="lastpostmemberid != null">
+                lastPostMemberId = #{lastpostmemberid,jdbcType=INTEGER},
+            </if>
+            <if test="lastposttime != null">
+                lastPostTime = #{lastposttime,jdbcType=INTEGER},
+            </if>
+            <if test="groupid != null">
+                groupId = #{groupid,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                userId = #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="createdtime != null">
+                createdTime = #{createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="updatedtime != null">
+                updatedTime = #{updatedtime,jdbcType=INTEGER},
+            </if>
+            <if test="postnum != null">
+                postNum = #{postnum,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="hitnum != null">
+                hitNum = #{hitnum,jdbcType=INTEGER},
+            </if>
+            <if test="rewardcoin != null">
+                rewardCoin = #{rewardcoin,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.GroupsThread">
+
+    update groups_thread
+    set title = #{title,jdbcType=VARCHAR},
+      isElite = #{iselite,jdbcType=INTEGER},
+      isStick = #{isstick,jdbcType=INTEGER},
+      lastPostMemberId = #{lastpostmemberid,jdbcType=INTEGER},
+      lastPostTime = #{lastposttime,jdbcType=INTEGER},
+      groupId = #{groupid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      postNum = #{postnum,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      rewardCoin = #{rewardcoin,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.GroupsThread">
+
+    update groups_thread
+    set title = #{title,jdbcType=VARCHAR},
+      isElite = #{iselite,jdbcType=INTEGER},
+      isStick = #{isstick,jdbcType=INTEGER},
+      lastPostMemberId = #{lastpostmemberid,jdbcType=INTEGER},
+      lastPostTime = #{lastposttime,jdbcType=INTEGER},
+      groupId = #{groupid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=INTEGER},
+      updatedTime = #{updatedtime,jdbcType=INTEGER},
+      postNum = #{postnum,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      hitNum = #{hitnum,jdbcType=INTEGER},
+      rewardCoin = #{rewardcoin,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="setEliteGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups_thread
+        set isElite = 1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setNotEliteGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups_thread
+        set isElite = 0
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setStickGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups_thread
+        set isStick = 1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setNotStickGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups_thread
+        set isStick = 0
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="openGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups_thread
+        set status = 'open'
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="closeGroupThread" parameterType="java.lang.Integer">
+        update jindu.groups_thread
+        set status = 'close'
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="showRecentGroupThread" parameterType="java.lang.Integer" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        order by updatedTime desc
+        limit #{groupThreadNum,jdbcType=INTEGER}
+  </select>
+    <update id="updateThreadInfo" parameterType="com.jindumooc.pojo.GroupsThread">
+    update jindu.groups_thread
+    set title = #{title,jdbcType=VARCHAR},
+	    updatedTime = UNIX_TIMESTAMP(#{status,jdbcType=INTEGER}),
+		content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="searchThread" resultType="com.jindumooc.vojo.group.GroupThreadSearch">
+        select id as threadID,
+            postNum,
+            isElite,
+            userId,
+            title as threadTitle,
+            FROM_UNIXTIME(lastPostTime) as lastPostTime,
+            lastPostMemberId,
+            FROM_UNIXTIME(createdTime) as createdTime,
+            status
+        from jindu.groups_thread
+        where groupId = #{groupId,jdbcType=INTEGER} and title like CONCAT('%',#{content,jdbcType=LONGVARCHAR},'%')
+    </select>
+    <select id="allThread" parameterType="java.lang.Integer" resultType="com.jindumooc.vojo.group.GroupThreadSearch">
+        select id as threadID,
+            postNum,
+            isElite,
+            userId,
+            title as threadTitle,
+            FROM_UNIXTIME(lastPostTime) as lastPostTime,
+            lastPostMemberId,
+            FROM_UNIXTIME(createdTime) as createdTime,
+            status
+        from jindu.groups_thread
+        where groupId = #{groupId,jdbcType=INTEGER}
+    </select>
+    <select id="showAllEliteGroupThread" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        where isElite = 1
+    </select>
+    <select id="screeningByTime" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        order by createdTime desc
+    </select>
+    <select id="screeningByLastPost" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        order by lastPostTime desc
+    </select>
+    <select id="screeningByPostNum" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        order by postNum desc
+    </select>
+    <select id="screeningByTimeAndElite" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        where isElite = 1
+        order by createdTime desc
+    </select>
+    <select id="screeningByLastPostAndElite" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        where isElite = 1
+        order by lastPostTime desc
+    </select>
+    <select id="screeningByPostNumAndElite" resultType="com.jindumooc.pojo.GroupsThread">
+        select *
+        from jindu.groups_thread
+        where isElite = 1
+        order by postNum desc
+    </select>
+
+</mapper>
