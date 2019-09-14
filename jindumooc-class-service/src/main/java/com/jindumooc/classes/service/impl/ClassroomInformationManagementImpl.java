@@ -216,6 +216,54 @@ public class ClassroomInformationManagementImpl implements ClassroomInformationM
     }
 
     /**
+     * @param classroomMemberDTO 班级学员
+     * @return 添加单个学员
+     * @author 唐欣然
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean addStudent(ClassroomMemberDTO classroomMemberDTO) {
+        try {
+            ClassroomMember classroomMember = new ClassroomMember();
+            classroomMember.setClassroomid(classroomMemberDTO.getClassroomId());
+            classroomMember.setDeadline(classroomMemberDTO.getDeadline());
+            classroomMember.setUserid(classroomMemberDTO.getUserId());
+            classroomMember.setRole("|student|");
+            classroomMemberMapper.insertSelective(classroomMember);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Exception:添加单个学员");
+            return false;
+        }
+    }
+
+    /**
+     * @param classroomMemberDTO 班级教师
+     * @return 添加教师
+     * @author 唐欣然
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean addTeacher(ClassroomMemberDTO classroomMemberDTO) {
+        try {
+            if(isUserIdValid(classroomMemberDTO.getUserId())){
+                ClassroomMember classroomMember = new ClassroomMember();
+                classroomMember.setClassroomid(classroomMemberDTO.getClassroomId());
+                classroomMember.setDeadline(classroomMemberDTO.getDeadline());
+                classroomMember.setUserid(classroomMemberDTO.getUserId());
+                classroomMember.setRole("|teacher|");
+                classroomMemberMapper.insertSelective(classroomMember);
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Exception:添加班级教师");
+            return false;
+        }
+    }
+
+    /**
      * @param classroomId 班级id
      * @param studentId 学员id
      * @return 移除学员

@@ -7,6 +7,7 @@ import com.jindumooc.dto.classes.ClassroomStudentSearchDTO;
 import com.jindumooc.pojo.Classroom;
 import com.jindumooc.pojo.User;
 import com.jindumooc.vojo.classes.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,6 +41,12 @@ public interface ClassroomInformationManagement {
     // 获得学生动态
     List<ClassroomStudentActivity> getStudentActivity(Integer classroomId);
 
+
+    @Transactional(rollbackFor = Exception.class)
+    boolean addStudent(ClassroomMemberDTO classroomMemberDTO);
+
+    @Transactional(rollbackFor = Exception.class)
+    boolean addTeacher(ClassroomMemberDTO classroomMemberDTO);
 
     boolean deleteClassroomStudent(Integer classroomId, Integer studentId);
 

@@ -6,6 +6,7 @@ import com.jindumooc.Result.ResultGenerator;
 import com.jindumooc.classes.service.ClassroomBackgroundManagement;
 import com.jindumooc.dto.classes.CreateClassroomDTO;
 import com.jindumooc.pojo.Classroom;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ public class classroomBackgroundController {
     /**
      * @return 获取后台管理班级列表
      */
+    @ApiOperation("获取后台班级列表")
     @GetMapping("/getAll")
     @ResponseBody
     public Result getBackgroundClassroom(){
@@ -32,6 +34,7 @@ public class classroomBackgroundController {
      * @param newClassroom 新建班级信息
      * @return 新建班级
      */
+    @ApiOperation("新建班级")
     @PostMapping("/create")
     @ResponseBody
     public Result createClassroom(@RequestBody CreateClassroomDTO newClassroom){
@@ -47,6 +50,7 @@ public class classroomBackgroundController {
      * @param id 班级id
      * @return 推荐班级
      */
+    @ApiOperation("推荐班级")
     @PostMapping("/recommend/{id}")
     @ResponseBody
     public Result recommendClassroom(@PathVariable Integer id){
@@ -61,6 +65,7 @@ public class classroomBackgroundController {
      * @param id 班级id
      * @return 取消推荐班级
      */
+    @ApiOperation("取消推荐班级")
     @PostMapping("/cancelRecommend/{id}")
     @ResponseBody
     public Result cancelRecommendClassroom(@PathVariable Integer id){
@@ -76,6 +81,7 @@ public class classroomBackgroundController {
      * @param recommendSeq 班级推荐序列, 默认为100
      * @return 设置推荐班级序列
      */
+    @ApiOperation("设置推荐班级序列")
     @PostMapping("/setRecommend/{id}")
     @ResponseBody
     public Result setRecommendSeq(@PathVariable Integer id,@RequestParam(defaultValue = "100") int recommendSeq){
@@ -90,6 +96,7 @@ public class classroomBackgroundController {
      * @param id 班级id
      * @return 关闭班级
      */
+    @ApiOperation("关闭班级")
     @PostMapping("/close/{id}")
     @ResponseBody
     public Result closeClassroom(@PathVariable Integer id){
@@ -104,7 +111,8 @@ public class classroomBackgroundController {
      * @param id 班级id
      * @return 删除班级
      */
-    @PostMapping("/delete/{id}")
+    @ApiOperation("删除班级")
+    @DeleteMapping("/delete/{id}")
     @ResponseBody
     public Result deleteClassroom(@PathVariable Integer id){
         try{

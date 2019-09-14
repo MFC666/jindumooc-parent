@@ -7,6 +7,7 @@ import com.jindumooc.classes.service.ClassroomExploreManagement;
 import com.jindumooc.pojo.Classroom;
 import com.jindumooc.pojo.ClassroomWithBLOBs;
 import com.jindumooc.vojo.classes.ClassroomExplore;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ public class classroomController {
      * @return 班级列表
      * @author 唐欣然 2019/07/23
      */
+    @ApiOperation("获得所有班级信息")
     @GetMapping("/explore")
     @ResponseBody
     public Result getAllClassroom(@RequestParam(defaultValue = "false") boolean free, @RequestParam(defaultValue = "new") String sort, @RequestParam(defaultValue = "all") String filter) {
@@ -58,6 +60,7 @@ public class classroomController {
      * @return 具体班级信息
      * @author 唐欣然 2019/07/23
      */
+    @ApiOperation("获得某一具体班级信息")
     @GetMapping("/explore/{id}")
     @ResponseBody
     public Result getClassroom(@PathVariable Integer id) {
