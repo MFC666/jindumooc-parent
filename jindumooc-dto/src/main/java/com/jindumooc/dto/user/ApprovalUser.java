@@ -1,5 +1,6 @@
 package com.jindumooc.dto.user;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,5 +20,7 @@ public class ApprovalUser implements Serializable {
     public int getUserId() {
         return userId;
     }
+
+
 
 }

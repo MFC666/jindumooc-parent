@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="com.jindumooc.dao.GroupsThreadPostMapper">
     <resultMap id="BaseResultMap" type="com.jindumooc.pojo.GroupsThreadPost">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -136,6 +137,7 @@
       #{fromuserid,jdbcType=INTEGER}, #{postid,jdbcType=INTEGER}, #{createdtime,jdbcType=INTEGER}, 
       #{adopt,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
+
     <insert id="insertSelective" parameterType="com.jindumooc.pojo.GroupsThreadPost">
         insert into groups_thread_post
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -295,7 +297,9 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
     <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.GroupsThreadPost">
+
     update groups_thread_post
     set threadId = #{threadid,jdbcType=INTEGER},
       userId = #{userid,jdbcType=INTEGER},
@@ -305,6 +309,7 @@
       adopt = #{adopt,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
     <update id="updateThreadPost" parameterType="com.jindumooc.pojo.GroupsThreadPost">
     update groups_thread
     set lastPostMemberId = #{userid,jdbcType=INTEGER},
@@ -312,4 +317,5 @@
         postNum = postNum + 1
     where id = #{threadid,jdbcType=INTEGER}
     </update>
+
 </mapper>

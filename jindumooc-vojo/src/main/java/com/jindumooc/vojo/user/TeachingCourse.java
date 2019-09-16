@@ -16,6 +16,7 @@ public class TeachingCourse implements Serializable {
      */
     private Integer id;
 
+
     private String teacherids;
 
     private Integer studentnum;

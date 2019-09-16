@@ -39,4 +39,5 @@ public interface TestpaperResultMapper {
     List<TestPaperResult> getTestPaperResult(@Param("teacherId") int teacherId,@Param("testPaperStatus") String testPaperStatus);
 
     List<TestPaperResult> getStudentTestPaper(@Param("userId") int userId,@Param("testPaperStatus") String testPaperStatus);
+
 }

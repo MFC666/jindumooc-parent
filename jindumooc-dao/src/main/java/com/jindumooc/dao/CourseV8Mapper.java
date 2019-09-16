@@ -39,4 +39,12 @@ public interface CourseV8Mapper {
     int updateByPrimaryKey(CourseV8 record);
 
     List<TeachingCourse> getTeachingCourse(@Param("teacherId") String teacherId,@Param("courseType") String courseType);
+
+    /**
+     * @param classroomId 查询的班级Id
+     * @return 返回对应班级的课程
+     * @author 唐欣然 2019/07/23
+     */
+    List<CourseV8> selectClassroomCourses(Integer classroomId);
+
 }

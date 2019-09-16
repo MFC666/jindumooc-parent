@@ -1,154 +1,179 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jindumooc.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.User" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="verifiedMobile" property="verifiedmobile" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="salt" property="salt" jdbcType="VARCHAR" />
-    <result column="payPassword" property="paypassword" jdbcType="VARCHAR" />
-    <result column="payPasswordSalt" property="paypasswordsalt" jdbcType="VARCHAR" />
-    <result column="locale" property="locale" jdbcType="VARCHAR" />
-    <result column="uri" property="uri" jdbcType="VARCHAR" />
-    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="tags" property="tags" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="point" property="point" jdbcType="INTEGER" />
-    <result column="coin" property="coin" jdbcType="INTEGER" />
-    <result column="smallAvatar" property="smallavatar" jdbcType="VARCHAR" />
-    <result column="mediumAvatar" property="mediumavatar" jdbcType="VARCHAR" />
-    <result column="largeAvatar" property="largeavatar" jdbcType="VARCHAR" />
-    <result column="emailVerified" property="emailverified" jdbcType="BIT" />
-    <result column="setup" property="setup" jdbcType="TINYINT" />
-    <result column="roles" property="roles" jdbcType="VARCHAR" />
-    <result column="promoted" property="promoted" jdbcType="TINYINT" />
-    <result column="promotedSeq" property="promotedseq" jdbcType="INTEGER" />
-    <result column="promotedTime" property="promotedtime" jdbcType="INTEGER" />
-    <result column="locked" property="locked" jdbcType="TINYINT" />
-    <result column="lockDeadline" property="lockdeadline" jdbcType="INTEGER" />
-    <result column="consecutivePasswordErrorTimes" property="consecutivepassworderrortimes" jdbcType="INTEGER" />
-    <result column="lastPasswordFailTime" property="lastpasswordfailtime" jdbcType="INTEGER" />
-    <result column="loginTime" property="logintime" jdbcType="INTEGER" />
-    <result column="loginIp" property="loginip" jdbcType="VARCHAR" />
-    <result column="loginSessionId" property="loginsessionid" jdbcType="VARCHAR" />
-    <result column="approvalTime" property="approvaltime" jdbcType="INTEGER" />
-    <result column="approvalStatus" property="approvalstatus" jdbcType="CHAR" />
-    <result column="newMessageNum" property="newmessagenum" jdbcType="INTEGER" />
-    <result column="newNotificationNum" property="newnotificationnum" jdbcType="INTEGER" />
-    <result column="createdIp" property="createdip" jdbcType="VARCHAR" />
-    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
-    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
-    <result column="inviteCode" property="invitecode" jdbcType="VARCHAR" />
-    <result column="orgId" property="orgid" jdbcType="INTEGER" />
-    <result column="orgCode" property="orgcode" jdbcType="VARCHAR" />
-    <result column="registeredWay" property="registeredway" jdbcType="VARCHAR" />
-    <result column="distributorToken" property="distributortoken" jdbcType="VARCHAR" />
-    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
-    <result column="passwordInit" property="passwordinit" jdbcType="BIT" />
-    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
-    <result column="loginarea" property="loginarea" jdbcType="VARCHAR" />
-    <result column="createdarea" property="createdarea" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+
+<mapper namespace="com.jindumooc.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.jindumooc.pojo.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="verifiedMobile" property="verifiedmobile" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="salt" property="salt" jdbcType="VARCHAR"/>
+        <result column="payPassword" property="paypassword" jdbcType="VARCHAR"/>
+        <result column="payPasswordSalt" property="paypasswordsalt" jdbcType="VARCHAR"/>
+        <result column="locale" property="locale" jdbcType="VARCHAR"/>
+        <result column="uri" property="uri" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="tags" property="tags" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="point" property="point" jdbcType="INTEGER"/>
+        <result column="coin" property="coin" jdbcType="INTEGER"/>
+        <result column="smallAvatar" property="smallavatar" jdbcType="VARCHAR"/>
+        <result column="mediumAvatar" property="mediumavatar" jdbcType="VARCHAR"/>
+        <result column="largeAvatar" property="largeavatar" jdbcType="VARCHAR"/>
+        <result column="emailVerified" property="emailverified" jdbcType="BIT"/>
+        <result column="setup" property="setup" jdbcType="TINYINT"/>
+        <result column="roles" property="roles" jdbcType="VARCHAR"/>
+        <result column="promoted" property="promoted" jdbcType="TINYINT"/>
+        <result column="promotedSeq" property="promotedseq" jdbcType="INTEGER"/>
+        <result column="promotedTime" property="promotedtime" jdbcType="INTEGER"/>
+        <result column="locked" property="locked" jdbcType="TINYINT"/>
+        <result column="lockDeadline" property="lockdeadline" jdbcType="INTEGER"/>
+        <result column="consecutivePasswordErrorTimes" property="consecutivepassworderrortimes" jdbcType="INTEGER"/>
+        <result column="lastPasswordFailTime" property="lastpasswordfailtime" jdbcType="INTEGER"/>
+        <result column="loginTime" property="logintime" jdbcType="INTEGER"/>
+        <result column="loginIp" property="loginip" jdbcType="VARCHAR"/>
+        <result column="loginSessionId" property="loginsessionid" jdbcType="VARCHAR"/>
+        <result column="approvalTime" property="approvaltime" jdbcType="INTEGER"/>
+        <result column="approvalStatus" property="approvalstatus" jdbcType="CHAR"/>
+        <result column="newMessageNum" property="newmessagenum" jdbcType="INTEGER"/>
+        <result column="newNotificationNum" property="newnotificationnum" jdbcType="INTEGER"/>
+        <result column="createdIp" property="createdip" jdbcType="VARCHAR"/>
+        <result column="createdTime" property="createdtime" jdbcType="INTEGER"/>
+        <result column="updatedTime" property="updatedtime" jdbcType="INTEGER"/>
+        <result column="inviteCode" property="invitecode" jdbcType="VARCHAR"/>
+        <result column="orgId" property="orgid" jdbcType="INTEGER"/>
+        <result column="orgCode" property="orgcode" jdbcType="VARCHAR"/>
+        <result column="registeredWay" property="registeredway" jdbcType="VARCHAR"/>
+        <result column="distributorToken" property="distributortoken" jdbcType="VARCHAR"/>
+        <result column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="passwordInit" property="passwordinit" jdbcType="BIT"/>
+        <result column="loginarea" property="loginarea" jdbcType="VARCHAR"/>
+        <result column="createdarea" property="createdarea" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+
     id, email, verifiedMobile, password, salt, payPassword, payPasswordSalt, locale, 
     uri, nickname, title, tags, type, point, coin, smallAvatar, mediumAvatar, largeAvatar, 
     emailVerified, setup, roles, promoted, promotedSeq, promotedTime, locked, lockDeadline, 
     consecutivePasswordErrorTimes, lastPasswordFailTime, loginTime, loginIp, loginSessionId, 
     approvalTime, approvalStatus, newMessageNum, newNotificationNum, createdIp, createdTime, 
-    updatedTime, inviteCode, orgId, orgCode, registeredWay, distributorToken, uuid, passwordInit, 
-    birthday, loginarea, createdarea
+
+    updatedTime, inviteCode, orgId, orgCode, registeredWay, distributorToken, uuid, passwordInit,
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.UserExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from user
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from user
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.UserExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        *
+        from `user`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <!--选取班级老师-->
+    <select id="selectClassroomTeacher" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        *
+        from `user`
+        where id in (select userId from classroom_member where classroomId = #{id,jdbcType=INTEGER} and role = '|teacher|')
+    </select>
+    <!--选取班级学员-->
+    <select id="selectClassroomStudent" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        *
+        from `user`
+        where id in (select userId from classroom_member where classroomId = #{id,jdbcType=INTEGER} and role = '|student|')
+    </select>
+    <!--选取班主任-->
+    <select id="getClassroomHeadteacher" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        *
+        from `user`
+        where id in (select userId from classroom_member where classroomId = #{id,jdbcType=INTEGER} and role = '|headteacher|')
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.UserExample" >
-    delete from user
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.jindumooc.pojo.User" >
+    <delete id="deleteByExample" parameterType="com.jindumooc.pojo.UserExample">
+        delete from user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.jindumooc.pojo.User">
+
     insert into user (id, email, verifiedMobile, 
       password, salt, payPassword, 
       payPasswordSalt, locale, uri, 
@@ -184,661 +209,662 @@
       #{birthday,jdbcType=VARCHAR}, #{loginarea,jdbcType=VARCHAR}, #{createdarea,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.jindumooc.pojo.User" >
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="email != null" >
-        email,
-      </if>
-      <if test="verifiedmobile != null" >
-        verifiedMobile,
-      </if>
-      <if test="password != null" >
-        password,
-      </if>
-      <if test="salt != null" >
-        salt,
-      </if>
-      <if test="paypassword != null" >
-        payPassword,
-      </if>
-      <if test="paypasswordsalt != null" >
-        payPasswordSalt,
-      </if>
-      <if test="locale != null" >
-        locale,
-      </if>
-      <if test="uri != null" >
-        uri,
-      </if>
-      <if test="nickname != null" >
-        nickname,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="tags != null" >
-        tags,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="point != null" >
-        point,
-      </if>
-      <if test="coin != null" >
-        coin,
-      </if>
-      <if test="smallavatar != null" >
-        smallAvatar,
-      </if>
-      <if test="mediumavatar != null" >
-        mediumAvatar,
-      </if>
-      <if test="largeavatar != null" >
-        largeAvatar,
-      </if>
-      <if test="emailverified != null" >
-        emailVerified,
-      </if>
-      <if test="setup != null" >
-        setup,
-      </if>
-      <if test="roles != null" >
-        roles,
-      </if>
-      <if test="promoted != null" >
-        promoted,
-      </if>
-      <if test="promotedseq != null" >
-        promotedSeq,
-      </if>
-      <if test="promotedtime != null" >
-        promotedTime,
-      </if>
-      <if test="locked != null" >
-        locked,
-      </if>
-      <if test="lockdeadline != null" >
-        lockDeadline,
-      </if>
-      <if test="consecutivepassworderrortimes != null" >
-        consecutivePasswordErrorTimes,
-      </if>
-      <if test="lastpasswordfailtime != null" >
-        lastPasswordFailTime,
-      </if>
-      <if test="logintime != null" >
-        loginTime,
-      </if>
-      <if test="loginip != null" >
-        loginIp,
-      </if>
-      <if test="loginsessionid != null" >
-        loginSessionId,
-      </if>
-      <if test="approvaltime != null" >
-        approvalTime,
-      </if>
-      <if test="approvalstatus != null" >
-        approvalStatus,
-      </if>
-      <if test="newmessagenum != null" >
-        newMessageNum,
-      </if>
-      <if test="newnotificationnum != null" >
-        newNotificationNum,
-      </if>
-      <if test="createdip != null" >
-        createdIp,
-      </if>
-      <if test="createdtime != null" >
-        createdTime,
-      </if>
-      <if test="updatedtime != null" >
-        updatedTime,
-      </if>
-      <if test="invitecode != null" >
-        inviteCode,
-      </if>
-      <if test="orgid != null" >
-        orgId,
-      </if>
-      <if test="orgcode != null" >
-        orgCode,
-      </if>
-      <if test="registeredway != null" >
-        registeredWay,
-      </if>
-      <if test="distributortoken != null" >
-        distributorToken,
-      </if>
-      <if test="uuid != null" >
-        uuid,
-      </if>
-      <if test="passwordinit != null" >
-        passwordInit,
-      </if>
-      <if test="birthday != null" >
-        birthday,
-      </if>
-      <if test="loginarea != null" >
-        loginarea,
-      </if>
-      <if test="createdarea != null" >
-        createdarea,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="verifiedmobile != null" >
-        #{verifiedmobile,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null" >
-        #{salt,jdbcType=VARCHAR},
-      </if>
-      <if test="paypassword != null" >
-        #{paypassword,jdbcType=VARCHAR},
-      </if>
-      <if test="paypasswordsalt != null" >
-        #{paypasswordsalt,jdbcType=VARCHAR},
-      </if>
-      <if test="locale != null" >
-        #{locale,jdbcType=VARCHAR},
-      </if>
-      <if test="uri != null" >
-        #{uri,jdbcType=VARCHAR},
-      </if>
-      <if test="nickname != null" >
-        #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="tags != null" >
-        #{tags,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="point != null" >
-        #{point,jdbcType=INTEGER},
-      </if>
-      <if test="coin != null" >
-        #{coin,jdbcType=INTEGER},
-      </if>
-      <if test="smallavatar != null" >
-        #{smallavatar,jdbcType=VARCHAR},
-      </if>
-      <if test="mediumavatar != null" >
-        #{mediumavatar,jdbcType=VARCHAR},
-      </if>
-      <if test="largeavatar != null" >
-        #{largeavatar,jdbcType=VARCHAR},
-      </if>
-      <if test="emailverified != null" >
-        #{emailverified,jdbcType=BIT},
-      </if>
-      <if test="setup != null" >
-        #{setup,jdbcType=TINYINT},
-      </if>
-      <if test="roles != null" >
-        #{roles,jdbcType=VARCHAR},
-      </if>
-      <if test="promoted != null" >
-        #{promoted,jdbcType=TINYINT},
-      </if>
-      <if test="promotedseq != null" >
-        #{promotedseq,jdbcType=INTEGER},
-      </if>
-      <if test="promotedtime != null" >
-        #{promotedtime,jdbcType=INTEGER},
-      </if>
-      <if test="locked != null" >
-        #{locked,jdbcType=TINYINT},
-      </if>
-      <if test="lockdeadline != null" >
-        #{lockdeadline,jdbcType=INTEGER},
-      </if>
-      <if test="consecutivepassworderrortimes != null" >
-        #{consecutivepassworderrortimes,jdbcType=INTEGER},
-      </if>
-      <if test="lastpasswordfailtime != null" >
-        #{lastpasswordfailtime,jdbcType=INTEGER},
-      </if>
-      <if test="logintime != null" >
-        #{logintime,jdbcType=INTEGER},
-      </if>
-      <if test="loginip != null" >
-        #{loginip,jdbcType=VARCHAR},
-      </if>
-      <if test="loginsessionid != null" >
-        #{loginsessionid,jdbcType=VARCHAR},
-      </if>
-      <if test="approvaltime != null" >
-        #{approvaltime,jdbcType=INTEGER},
-      </if>
-      <if test="approvalstatus != null" >
-        #{approvalstatus,jdbcType=CHAR},
-      </if>
-      <if test="newmessagenum != null" >
-        #{newmessagenum,jdbcType=INTEGER},
-      </if>
-      <if test="newnotificationnum != null" >
-        #{newnotificationnum,jdbcType=INTEGER},
-      </if>
-      <if test="createdip != null" >
-        #{createdip,jdbcType=VARCHAR},
-      </if>
-      <if test="createdtime != null" >
-        #{createdtime,jdbcType=INTEGER},
-      </if>
-      <if test="updatedtime != null" >
-        #{updatedtime,jdbcType=INTEGER},
-      </if>
-      <if test="invitecode != null" >
-        #{invitecode,jdbcType=VARCHAR},
-      </if>
-      <if test="orgid != null" >
-        #{orgid,jdbcType=INTEGER},
-      </if>
-      <if test="orgcode != null" >
-        #{orgcode,jdbcType=VARCHAR},
-      </if>
-      <if test="registeredway != null" >
-        #{registeredway,jdbcType=VARCHAR},
-      </if>
-      <if test="distributortoken != null" >
-        #{distributortoken,jdbcType=VARCHAR},
-      </if>
-      <if test="uuid != null" >
-        #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="passwordinit != null" >
-        #{passwordinit,jdbcType=BIT},
-      </if>
-      <if test="birthday != null" >
-        #{birthday,jdbcType=VARCHAR},
-      </if>
-      <if test="loginarea != null" >
-        #{loginarea,jdbcType=VARCHAR},
-      </if>
-      <if test="createdarea != null" >
-        #{createdarea,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.jindumooc.pojo.UserExample" resultType="java.lang.Integer" >
-    select count(*) from user
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update user
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.email != null" >
+
+    <insert id="insertSelective" parameterType="com.jindumooc.pojo.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="verifiedmobile != null">
+                verifiedMobile,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="paypassword != null">
+                payPassword,
+            </if>
+            <if test="paypasswordsalt != null">
+                payPasswordSalt,
+            </if>
+            <if test="locale != null">
+                locale,
+            </if>
+            <if test="uri != null">
+                uri,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="tags != null">
+                tags,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="point != null">
+                point,
+            </if>
+            <if test="coin != null">
+                coin,
+            </if>
+            <if test="smallavatar != null">
+                smallAvatar,
+            </if>
+            <if test="mediumavatar != null">
+                mediumAvatar,
+            </if>
+            <if test="largeavatar != null">
+                largeAvatar,
+            </if>
+            <if test="emailverified != null">
+                emailVerified,
+            </if>
+            <if test="setup != null">
+                setup,
+            </if>
+            <if test="roles != null">
+                roles,
+            </if>
+            <if test="promoted != null">
+                promoted,
+            </if>
+            <if test="promotedseq != null">
+                promotedSeq,
+            </if>
+            <if test="promotedtime != null">
+                promotedTime,
+            </if>
+            <if test="locked != null">
+                locked,
+            </if>
+            <if test="lockdeadline != null">
+                lockDeadline,
+            </if>
+            <if test="consecutivepassworderrortimes != null">
+                consecutivePasswordErrorTimes,
+            </if>
+            <if test="lastpasswordfailtime != null">
+                lastPasswordFailTime,
+            </if>
+            <if test="logintime != null">
+                loginTime,
+            </if>
+            <if test="loginip != null">
+                loginIp,
+            </if>
+            <if test="loginsessionid != null">
+                loginSessionId,
+            </if>
+            <if test="approvaltime != null">
+                approvalTime,
+            </if>
+            <if test="approvalstatus != null">
+                approvalStatus,
+            </if>
+            <if test="newmessagenum != null">
+                newMessageNum,
+            </if>
+            <if test="newnotificationnum != null">
+                newNotificationNum,
+            </if>
+            <if test="createdip != null">
+                createdIp,
+            </if>
+            <if test="createdtime != null">
+                createdTime,
+            </if>
+            <if test="updatedtime != null">
+                updatedTime,
+            </if>
+            <if test="invitecode != null">
+                inviteCode,
+            </if>
+            <if test="orgid != null">
+                orgId,
+            </if>
+            <if test="orgcode != null">
+                orgCode,
+            </if>
+            <if test="registeredway != null">
+                registeredWay,
+            </if>
+            <if test="distributortoken != null">
+                distributorToken,
+            </if>
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="passwordinit != null">
+                passwordInit,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="loginarea != null">
+                loginarea,
+            </if>
+            <if test="createdarea != null">
+                createdarea,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="verifiedmobile != null">
+                #{verifiedmobile,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="paypassword != null">
+                #{paypassword,jdbcType=VARCHAR},
+            </if>
+            <if test="paypasswordsalt != null">
+                #{paypasswordsalt,jdbcType=VARCHAR},
+            </if>
+            <if test="locale != null">
+                #{locale,jdbcType=VARCHAR},
+            </if>
+            <if test="uri != null">
+                #{uri,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="tags != null">
+                #{tags,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="point != null">
+                #{point,jdbcType=INTEGER},
+            </if>
+            <if test="coin != null">
+                #{coin,jdbcType=INTEGER},
+            </if>
+            <if test="smallavatar != null">
+                #{smallavatar,jdbcType=VARCHAR},
+            </if>
+            <if test="mediumavatar != null">
+                #{mediumavatar,jdbcType=VARCHAR},
+            </if>
+            <if test="largeavatar != null">
+                #{largeavatar,jdbcType=VARCHAR},
+            </if>
+            <if test="emailverified != null">
+                #{emailverified,jdbcType=BIT},
+            </if>
+            <if test="setup != null">
+                #{setup,jdbcType=TINYINT},
+            </if>
+            <if test="roles != null">
+                #{roles,jdbcType=VARCHAR},
+            </if>
+            <if test="promoted != null">
+                #{promoted,jdbcType=TINYINT},
+            </if>
+            <if test="promotedseq != null">
+                #{promotedseq,jdbcType=INTEGER},
+            </if>
+            <if test="promotedtime != null">
+                #{promotedtime,jdbcType=INTEGER},
+            </if>
+            <if test="locked != null">
+                #{locked,jdbcType=TINYINT},
+            </if>
+            <if test="lockdeadline != null">
+                #{lockdeadline,jdbcType=INTEGER},
+            </if>
+            <if test="consecutivepassworderrortimes != null">
+                #{consecutivepassworderrortimes,jdbcType=INTEGER},
+            </if>
+            <if test="lastpasswordfailtime != null">
+                #{lastpasswordfailtime,jdbcType=INTEGER},
+            </if>
+            <if test="logintime != null">
+                #{logintime,jdbcType=INTEGER},
+            </if>
+            <if test="loginip != null">
+                #{loginip,jdbcType=VARCHAR},
+            </if>
+            <if test="loginsessionid != null">
+                #{loginsessionid,jdbcType=VARCHAR},
+            </if>
+            <if test="approvaltime != null">
+                #{approvaltime,jdbcType=INTEGER},
+            </if>
+            <if test="approvalstatus != null">
+                #{approvalstatus,jdbcType=CHAR},
+            </if>
+            <if test="newmessagenum != null">
+                #{newmessagenum,jdbcType=INTEGER},
+            </if>
+            <if test="newnotificationnum != null">
+                #{newnotificationnum,jdbcType=INTEGER},
+            </if>
+            <if test="createdip != null">
+                #{createdip,jdbcType=VARCHAR},
+            </if>
+            <if test="createdtime != null">
+                #{createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="updatedtime != null">
+                #{updatedtime,jdbcType=INTEGER},
+            </if>
+            <if test="invitecode != null">
+                #{invitecode,jdbcType=VARCHAR},
+            </if>
+            <if test="orgid != null">
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="orgcode != null">
+                #{orgcode,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredway != null">
+                #{registeredway,jdbcType=VARCHAR},
+            </if>
+            <if test="distributortoken != null">
+                #{distributortoken,jdbcType=VARCHAR},
+            </if>
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordinit != null">
+                #{passwordinit,jdbcType=BIT},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="loginarea != null">
+                #{loginarea,jdbcType=VARCHAR},
+            </if>
+            <if test="createdarea != null">
+                #{createdarea,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.jindumooc.pojo.UserExample" resultType="java.lang.Integer">
+        select count(*) from user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update user
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.email != null">
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.verifiedmobile != null">
+                verifiedMobile = #{record.verifiedmobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.salt != null">
+                salt = #{record.salt,jdbcType=VARCHAR},
+            </if>
+            <if test="record.paypassword != null">
+                payPassword = #{record.paypassword,jdbcType=VARCHAR},
+            </if>
+            <if test="record.paypasswordsalt != null">
+                payPasswordSalt = #{record.paypasswordsalt,jdbcType=VARCHAR},
+            </if>
+            <if test="record.locale != null">
+                locale = #{record.locale,jdbcType=VARCHAR},
+            </if>
+            <if test="record.uri != null">
+                uri = #{record.uri,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nickname != null">
+                nickname = #{record.nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tags != null">
+                tags = #{record.tags,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=VARCHAR},
+            </if>
+            <if test="record.point != null">
+                point = #{record.point,jdbcType=INTEGER},
+            </if>
+            <if test="record.coin != null">
+                coin = #{record.coin,jdbcType=INTEGER},
+            </if>
+            <if test="record.smallavatar != null">
+                smallAvatar = #{record.smallavatar,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mediumavatar != null">
+                mediumAvatar = #{record.mediumavatar,jdbcType=VARCHAR},
+            </if>
+            <if test="record.largeavatar != null">
+                largeAvatar = #{record.largeavatar,jdbcType=VARCHAR},
+            </if>
+            <if test="record.emailverified != null">
+                emailVerified = #{record.emailverified,jdbcType=BIT},
+            </if>
+            <if test="record.setup != null">
+                setup = #{record.setup,jdbcType=TINYINT},
+            </if>
+            <if test="record.roles != null">
+                roles = #{record.roles,jdbcType=VARCHAR},
+            </if>
+            <if test="record.promoted != null">
+                promoted = #{record.promoted,jdbcType=TINYINT},
+            </if>
+            <if test="record.promotedseq != null">
+                promotedSeq = #{record.promotedseq,jdbcType=INTEGER},
+            </if>
+            <if test="record.promotedtime != null">
+                promotedTime = #{record.promotedtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.locked != null">
+                locked = #{record.locked,jdbcType=TINYINT},
+            </if>
+            <if test="record.lockdeadline != null">
+                lockDeadline = #{record.lockdeadline,jdbcType=INTEGER},
+            </if>
+            <if test="record.consecutivepassworderrortimes != null">
+                consecutivePasswordErrorTimes = #{record.consecutivepassworderrortimes,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastpasswordfailtime != null">
+                lastPasswordFailTime = #{record.lastpasswordfailtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.logintime != null">
+                loginTime = #{record.logintime,jdbcType=INTEGER},
+            </if>
+            <if test="record.loginip != null">
+                loginIp = #{record.loginip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.loginsessionid != null">
+                loginSessionId = #{record.loginsessionid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.approvaltime != null">
+                approvalTime = #{record.approvaltime,jdbcType=INTEGER},
+            </if>
+            <if test="record.approvalstatus != null">
+                approvalStatus = #{record.approvalstatus,jdbcType=CHAR},
+            </if>
+            <if test="record.newmessagenum != null">
+                newMessageNum = #{record.newmessagenum,jdbcType=INTEGER},
+            </if>
+            <if test="record.newnotificationnum != null">
+                newNotificationNum = #{record.newnotificationnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.createdip != null">
+                createdIp = #{record.createdip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createdtime != null">
+                createdTime = #{record.createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.updatedtime != null">
+                updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.invitecode != null">
+                inviteCode = #{record.invitecode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orgid != null">
+                orgId = #{record.orgid,jdbcType=INTEGER},
+            </if>
+            <if test="record.orgcode != null">
+                orgCode = #{record.orgcode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.registeredway != null">
+                registeredWay = #{record.registeredway,jdbcType=VARCHAR},
+            </if>
+            <if test="record.distributortoken != null">
+                distributorToken = #{record.distributortoken,jdbcType=VARCHAR},
+            </if>
+            <if test="record.uuid != null">
+                uuid = #{record.uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.passwordinit != null">
+                passwordInit = #{record.passwordinit,jdbcType=BIT},
+            </if>
+            <if test="record.birthday != null">
+                birthday = #{record.birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="record.loginarea != null">
+                loginarea = #{record.loginarea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createdarea != null">
+                createdarea = #{record.createdarea,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update user
+        set id = #{record.id,jdbcType=INTEGER},
         email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.verifiedmobile != null" >
         verifiedMobile = #{record.verifiedmobile,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.salt != null" >
         salt = #{record.salt,jdbcType=VARCHAR},
-      </if>
-      <if test="record.paypassword != null" >
         payPassword = #{record.paypassword,jdbcType=VARCHAR},
-      </if>
-      <if test="record.paypasswordsalt != null" >
         payPasswordSalt = #{record.paypasswordsalt,jdbcType=VARCHAR},
-      </if>
-      <if test="record.locale != null" >
         locale = #{record.locale,jdbcType=VARCHAR},
-      </if>
-      <if test="record.uri != null" >
         uri = #{record.uri,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nickname != null" >
         nickname = #{record.nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.tags != null" >
         tags = #{record.tags,jdbcType=VARCHAR},
-      </if>
-      <if test="record.type != null" >
         type = #{record.type,jdbcType=VARCHAR},
-      </if>
-      <if test="record.point != null" >
         point = #{record.point,jdbcType=INTEGER},
-      </if>
-      <if test="record.coin != null" >
         coin = #{record.coin,jdbcType=INTEGER},
-      </if>
-      <if test="record.smallavatar != null" >
         smallAvatar = #{record.smallavatar,jdbcType=VARCHAR},
-      </if>
-      <if test="record.mediumavatar != null" >
         mediumAvatar = #{record.mediumavatar,jdbcType=VARCHAR},
-      </if>
-      <if test="record.largeavatar != null" >
         largeAvatar = #{record.largeavatar,jdbcType=VARCHAR},
-      </if>
-      <if test="record.emailverified != null" >
         emailVerified = #{record.emailverified,jdbcType=BIT},
-      </if>
-      <if test="record.setup != null" >
         setup = #{record.setup,jdbcType=TINYINT},
-      </if>
-      <if test="record.roles != null" >
         roles = #{record.roles,jdbcType=VARCHAR},
-      </if>
-      <if test="record.promoted != null" >
         promoted = #{record.promoted,jdbcType=TINYINT},
-      </if>
-      <if test="record.promotedseq != null" >
         promotedSeq = #{record.promotedseq,jdbcType=INTEGER},
-      </if>
-      <if test="record.promotedtime != null" >
         promotedTime = #{record.promotedtime,jdbcType=INTEGER},
-      </if>
-      <if test="record.locked != null" >
         locked = #{record.locked,jdbcType=TINYINT},
-      </if>
-      <if test="record.lockdeadline != null" >
         lockDeadline = #{record.lockdeadline,jdbcType=INTEGER},
-      </if>
-      <if test="record.consecutivepassworderrortimes != null" >
         consecutivePasswordErrorTimes = #{record.consecutivepassworderrortimes,jdbcType=INTEGER},
-      </if>
-      <if test="record.lastpasswordfailtime != null" >
         lastPasswordFailTime = #{record.lastpasswordfailtime,jdbcType=INTEGER},
-      </if>
-      <if test="record.logintime != null" >
         loginTime = #{record.logintime,jdbcType=INTEGER},
-      </if>
-      <if test="record.loginip != null" >
         loginIp = #{record.loginip,jdbcType=VARCHAR},
-      </if>
-      <if test="record.loginsessionid != null" >
         loginSessionId = #{record.loginsessionid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.approvaltime != null" >
         approvalTime = #{record.approvaltime,jdbcType=INTEGER},
-      </if>
-      <if test="record.approvalstatus != null" >
         approvalStatus = #{record.approvalstatus,jdbcType=CHAR},
-      </if>
-      <if test="record.newmessagenum != null" >
         newMessageNum = #{record.newmessagenum,jdbcType=INTEGER},
-      </if>
-      <if test="record.newnotificationnum != null" >
         newNotificationNum = #{record.newnotificationnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.createdip != null" >
         createdIp = #{record.createdip,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createdtime != null" >
         createdTime = #{record.createdtime,jdbcType=INTEGER},
-      </if>
-      <if test="record.updatedtime != null" >
         updatedTime = #{record.updatedtime,jdbcType=INTEGER},
-      </if>
-      <if test="record.invitecode != null" >
         inviteCode = #{record.invitecode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.orgid != null" >
         orgId = #{record.orgid,jdbcType=INTEGER},
-      </if>
-      <if test="record.orgcode != null" >
         orgCode = #{record.orgcode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.registeredway != null" >
         registeredWay = #{record.registeredway,jdbcType=VARCHAR},
-      </if>
-      <if test="record.distributortoken != null" >
         distributorToken = #{record.distributortoken,jdbcType=VARCHAR},
-      </if>
-      <if test="record.uuid != null" >
         uuid = #{record.uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.passwordinit != null" >
         passwordInit = #{record.passwordinit,jdbcType=BIT},
-      </if>
-      <if test="record.birthday != null" >
         birthday = #{record.birthday,jdbcType=VARCHAR},
-      </if>
-      <if test="record.loginarea != null" >
         loginarea = #{record.loginarea,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createdarea != null" >
-        createdarea = #{record.createdarea,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update user
-    set id = #{record.id,jdbcType=INTEGER},
-      email = #{record.email,jdbcType=VARCHAR},
-      verifiedMobile = #{record.verifiedmobile,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      salt = #{record.salt,jdbcType=VARCHAR},
-      payPassword = #{record.paypassword,jdbcType=VARCHAR},
-      payPasswordSalt = #{record.paypasswordsalt,jdbcType=VARCHAR},
-      locale = #{record.locale,jdbcType=VARCHAR},
-      uri = #{record.uri,jdbcType=VARCHAR},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      tags = #{record.tags,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR},
-      point = #{record.point,jdbcType=INTEGER},
-      coin = #{record.coin,jdbcType=INTEGER},
-      smallAvatar = #{record.smallavatar,jdbcType=VARCHAR},
-      mediumAvatar = #{record.mediumavatar,jdbcType=VARCHAR},
-      largeAvatar = #{record.largeavatar,jdbcType=VARCHAR},
-      emailVerified = #{record.emailverified,jdbcType=BIT},
-      setup = #{record.setup,jdbcType=TINYINT},
-      roles = #{record.roles,jdbcType=VARCHAR},
-      promoted = #{record.promoted,jdbcType=TINYINT},
-      promotedSeq = #{record.promotedseq,jdbcType=INTEGER},
-      promotedTime = #{record.promotedtime,jdbcType=INTEGER},
-      locked = #{record.locked,jdbcType=TINYINT},
-      lockDeadline = #{record.lockdeadline,jdbcType=INTEGER},
-      consecutivePasswordErrorTimes = #{record.consecutivepassworderrortimes,jdbcType=INTEGER},
-      lastPasswordFailTime = #{record.lastpasswordfailtime,jdbcType=INTEGER},
-      loginTime = #{record.logintime,jdbcType=INTEGER},
-      loginIp = #{record.loginip,jdbcType=VARCHAR},
-      loginSessionId = #{record.loginsessionid,jdbcType=VARCHAR},
-      approvalTime = #{record.approvaltime,jdbcType=INTEGER},
-      approvalStatus = #{record.approvalstatus,jdbcType=CHAR},
-      newMessageNum = #{record.newmessagenum,jdbcType=INTEGER},
-      newNotificationNum = #{record.newnotificationnum,jdbcType=INTEGER},
-      createdIp = #{record.createdip,jdbcType=VARCHAR},
-      createdTime = #{record.createdtime,jdbcType=INTEGER},
-      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
-      inviteCode = #{record.invitecode,jdbcType=VARCHAR},
-      orgId = #{record.orgid,jdbcType=INTEGER},
-      orgCode = #{record.orgcode,jdbcType=VARCHAR},
-      registeredWay = #{record.registeredway,jdbcType=VARCHAR},
-      distributorToken = #{record.distributortoken,jdbcType=VARCHAR},
-      uuid = #{record.uuid,jdbcType=VARCHAR},
-      passwordInit = #{record.passwordinit,jdbcType=BIT},
-      birthday = #{record.birthday,jdbcType=VARCHAR},
-      loginarea = #{record.loginarea,jdbcType=VARCHAR},
-      createdarea = #{record.createdarea,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.User" >
-    update user
-    <set >
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="verifiedmobile != null" >
-        verifiedMobile = #{verifiedmobile,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null" >
-        salt = #{salt,jdbcType=VARCHAR},
-      </if>
-      <if test="paypassword != null" >
-        payPassword = #{paypassword,jdbcType=VARCHAR},
-      </if>
-      <if test="paypasswordsalt != null" >
-        payPasswordSalt = #{paypasswordsalt,jdbcType=VARCHAR},
-      </if>
-      <if test="locale != null" >
-        locale = #{locale,jdbcType=VARCHAR},
-      </if>
-      <if test="uri != null" >
-        uri = #{uri,jdbcType=VARCHAR},
-      </if>
-      <if test="nickname != null" >
-        nickname = #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="tags != null" >
-        tags = #{tags,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="point != null" >
-        point = #{point,jdbcType=INTEGER},
-      </if>
-      <if test="coin != null" >
-        coin = #{coin,jdbcType=INTEGER},
-      </if>
-      <if test="smallavatar != null" >
-        smallAvatar = #{smallavatar,jdbcType=VARCHAR},
-      </if>
-      <if test="mediumavatar != null" >
-        mediumAvatar = #{mediumavatar,jdbcType=VARCHAR},
-      </if>
-      <if test="largeavatar != null" >
-        largeAvatar = #{largeavatar,jdbcType=VARCHAR},
-      </if>
-      <if test="emailverified != null" >
-        emailVerified = #{emailverified,jdbcType=BIT},
-      </if>
-      <if test="setup != null" >
-        setup = #{setup,jdbcType=TINYINT},
-      </if>
-      <if test="roles != null" >
-        roles = #{roles,jdbcType=VARCHAR},
-      </if>
-      <if test="promoted != null" >
-        promoted = #{promoted,jdbcType=TINYINT},
-      </if>
-      <if test="promotedseq != null" >
-        promotedSeq = #{promotedseq,jdbcType=INTEGER},
-      </if>
-      <if test="promotedtime != null" >
-        promotedTime = #{promotedtime,jdbcType=INTEGER},
-      </if>
-      <if test="locked != null" >
-        locked = #{locked,jdbcType=TINYINT},
-      </if>
-      <if test="lockdeadline != null" >
-        lockDeadline = #{lockdeadline,jdbcType=INTEGER},
-      </if>
-      <if test="consecutivepassworderrortimes != null" >
-        consecutivePasswordErrorTimes = #{consecutivepassworderrortimes,jdbcType=INTEGER},
-      </if>
-      <if test="lastpasswordfailtime != null" >
-        lastPasswordFailTime = #{lastpasswordfailtime,jdbcType=INTEGER},
-      </if>
-      <if test="logintime != null" >
-        loginTime = #{logintime,jdbcType=INTEGER},
-      </if>
-      <if test="loginip != null" >
-        loginIp = #{loginip,jdbcType=VARCHAR},
-      </if>
-      <if test="loginsessionid != null" >
-        loginSessionId = #{loginsessionid,jdbcType=VARCHAR},
-      </if>
-      <if test="approvaltime != null" >
-        approvalTime = #{approvaltime,jdbcType=INTEGER},
-      </if>
-      <if test="approvalstatus != null" >
-        approvalStatus = #{approvalstatus,jdbcType=CHAR},
-      </if>
-      <if test="newmessagenum != null" >
-        newMessageNum = #{newmessagenum,jdbcType=INTEGER},
-      </if>
-      <if test="newnotificationnum != null" >
-        newNotificationNum = #{newnotificationnum,jdbcType=INTEGER},
-      </if>
-      <if test="createdip != null" >
-        createdIp = #{createdip,jdbcType=VARCHAR},
-      </if>
-      <if test="createdtime != null" >
-        createdTime = #{createdtime,jdbcType=INTEGER},
-      </if>
-      <if test="updatedtime != null" >
-        updatedTime = #{updatedtime,jdbcType=INTEGER},
-      </if>
-      <if test="invitecode != null" >
-        inviteCode = #{invitecode,jdbcType=VARCHAR},
-      </if>
-      <if test="orgid != null" >
-        orgId = #{orgid,jdbcType=INTEGER},
-      </if>
-      <if test="orgcode != null" >
-        orgCode = #{orgcode,jdbcType=VARCHAR},
-      </if>
-      <if test="registeredway != null" >
-        registeredWay = #{registeredway,jdbcType=VARCHAR},
-      </if>
-      <if test="distributortoken != null" >
-        distributorToken = #{distributortoken,jdbcType=VARCHAR},
-      </if>
-      <if test="uuid != null" >
-        uuid = #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="passwordinit != null" >
-        passwordInit = #{passwordinit,jdbcType=BIT},
-      </if>
-      <if test="birthday != null" >
-        birthday = #{birthday,jdbcType=VARCHAR},
-      </if>
-      <if test="loginarea != null" >
-        loginarea = #{loginarea,jdbcType=VARCHAR},
-      </if>
-      <if test="createdarea != null" >
-        createdarea = #{createdarea,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.User" >
+        createdarea = #{record.createdarea,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.User">
+        update user
+        <set>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="verifiedmobile != null">
+                verifiedMobile = #{verifiedmobile,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="paypassword != null">
+                payPassword = #{paypassword,jdbcType=VARCHAR},
+            </if>
+            <if test="paypasswordsalt != null">
+                payPasswordSalt = #{paypasswordsalt,jdbcType=VARCHAR},
+            </if>
+            <if test="locale != null">
+                locale = #{locale,jdbcType=VARCHAR},
+            </if>
+            <if test="uri != null">
+                uri = #{uri,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="tags != null">
+                tags = #{tags,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="point != null">
+                point = #{point,jdbcType=INTEGER},
+            </if>
+            <if test="coin != null">
+                coin = #{coin,jdbcType=INTEGER},
+            </if>
+            <if test="smallavatar != null">
+                smallAvatar = #{smallavatar,jdbcType=VARCHAR},
+            </if>
+            <if test="mediumavatar != null">
+                mediumAvatar = #{mediumavatar,jdbcType=VARCHAR},
+            </if>
+            <if test="largeavatar != null">
+                largeAvatar = #{largeavatar,jdbcType=VARCHAR},
+            </if>
+            <if test="emailverified != null">
+                emailVerified = #{emailverified,jdbcType=BIT},
+            </if>
+            <if test="setup != null">
+                setup = #{setup,jdbcType=TINYINT},
+            </if>
+            <if test="roles != null">
+                roles = #{roles,jdbcType=VARCHAR},
+            </if>
+            <if test="promoted != null">
+                promoted = #{promoted,jdbcType=TINYINT},
+            </if>
+            <if test="promotedseq != null">
+                promotedSeq = #{promotedseq,jdbcType=INTEGER},
+            </if>
+            <if test="promotedtime != null">
+                promotedTime = #{promotedtime,jdbcType=INTEGER},
+            </if>
+            <if test="locked != null">
+                locked = #{locked,jdbcType=TINYINT},
+            </if>
+            <if test="lockdeadline != null">
+                lockDeadline = #{lockdeadline,jdbcType=INTEGER},
+            </if>
+            <if test="consecutivepassworderrortimes != null">
+                consecutivePasswordErrorTimes = #{consecutivepassworderrortimes,jdbcType=INTEGER},
+            </if>
+            <if test="lastpasswordfailtime != null">
+                lastPasswordFailTime = #{lastpasswordfailtime,jdbcType=INTEGER},
+            </if>
+            <if test="logintime != null">
+                loginTime = #{logintime,jdbcType=INTEGER},
+            </if>
+            <if test="loginip != null">
+                loginIp = #{loginip,jdbcType=VARCHAR},
+            </if>
+            <if test="loginsessionid != null">
+                loginSessionId = #{loginsessionid,jdbcType=VARCHAR},
+            </if>
+            <if test="approvaltime != null">
+                approvalTime = #{approvaltime,jdbcType=INTEGER},
+            </if>
+            <if test="approvalstatus != null">
+                approvalStatus = #{approvalstatus,jdbcType=CHAR},
+            </if>
+            <if test="newmessagenum != null">
+                newMessageNum = #{newmessagenum,jdbcType=INTEGER},
+            </if>
+            <if test="newnotificationnum != null">
+                newNotificationNum = #{newnotificationnum,jdbcType=INTEGER},
+            </if>
+            <if test="createdip != null">
+                createdIp = #{createdip,jdbcType=VARCHAR},
+            </if>
+            <if test="createdtime != null">
+                createdTime = #{createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="updatedtime != null">
+                updatedTime = #{updatedtime,jdbcType=INTEGER},
+            </if>
+            <if test="invitecode != null">
+                inviteCode = #{invitecode,jdbcType=VARCHAR},
+            </if>
+            <if test="orgid != null">
+                orgId = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="orgcode != null">
+                orgCode = #{orgcode,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredway != null">
+                registeredWay = #{registeredway,jdbcType=VARCHAR},
+            </if>
+            <if test="distributortoken != null">
+                distributorToken = #{distributortoken,jdbcType=VARCHAR},
+            </if>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordinit != null">
+                passwordInit = #{passwordinit,jdbcType=BIT},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="loginarea != null">
+                loginarea = #{loginarea,jdbcType=VARCHAR},
+            </if>
+            <if test="createdarea != null">
+                createdarea = #{createdarea,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.User">
     update user
     set email = #{email,jdbcType=VARCHAR},
       verifiedMobile = #{verifiedmobile,jdbcType=VARCHAR},
@@ -889,69 +915,90 @@
       createdarea = #{createdarea,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getIndexUser" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.User" >
-    SELECT *
-    FROM `user` u
-    <where>
-      <if test="true">u.roles = u.roles</if>
-      <if test="searchParameter!=null">and ${searchType} like '%${searchParameter}%'</if>
-      <if test="role!=null">and roles like '%${role}%'</if>
-      <if test="searchTimeType=='loginTime'">and u.loginTime &gt; #{starTime,jdbcType=INTEGER} and u.loginTime &lt; #{endTime,jdbcType=INTEGER}</if>
-      <if test="searchTimeType=='createdTime'">and u.createdTime &gt; #{starTime,jdbcType=INTEGER} and u.createdTime &lt; #{endTime,jdbcType=INTEGER}</if>
-    </where>
-  </select>
-  <update id="lockedUser" parameterType="com.jindumooc.dto.user.LockUser">
+    <select id="getIndexUser" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="com.jindumooc.pojo.User">
+        SELECT *
+        FROM `user` u
+        <where>
+            <if test="true">u.roles = u.roles</if>
+            <if test="searchParameter!=null">and ${searchType} like '%${searchParameter}%'</if>
+            <if test="role!=null">and roles like '%${role}%'</if>
+            <if test="searchTimeType=='loginTime'">and u.loginTime &gt; #{starTime,jdbcType=INTEGER} and u.loginTime
+                &lt; #{endTime,jdbcType=INTEGER}
+            </if>
+            <if test="searchTimeType=='createdTime'">and u.createdTime &gt; #{starTime,jdbcType=INTEGER} and
+                u.createdTime &lt; #{endTime,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+    <select id="getClassroomUser" parameterType="com.jindumooc.dto.classes.ClassroomStudentSearchDTO" resultType="com.jindumooc.pojo.User">
+        SELECT *
+        FROM `user` u
+        WHERE u.nickname = #{nickname,jdbcType=VARCHAR} OR u.email = #{email,jdbcType=VARCHAR} OR u.verifiedMobile = #{phone,jdbcType=VARCHAR}
+    </select>
+    <update id="lockedUser" parameterType="com.jindumooc.dto.user.LockUser">
     update user
     set locked = #{locked}
     where id = #{userId}
   </update>
+
   <update id="updateUserRole" parameterType="com.jindumooc.dto.user.UserRole">
     update user
     set roles = #{newRole}
     where id = #{userId}
   </update>
-  <select id="getUserNickName" parameterType="int" resultType="String">
+
+    <select id="getUserNickName" parameterType="java.lang.Integer" resultType="java.lang.String">
+
     select nickName
     from User
     where id = #{id}
   </select>
-  <select id="getUserNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
-    SELECT count(*)
-    FROM `user` u
-    <where>
-      <if test="true">u.roles = u.roles</if>
-      <if test="searchParameter!=null">and ${searchType} like '%${searchParameter}%'</if>
-      <if test="role!=null">and roles like '%${role}%'</if>
-      <if test="searchTimeType=='loginTime'">and u.loginTime &gt; #{starTime,jdbcType=INTEGER} and u.loginTime &lt; #{endTime,jdbcType=INTEGER}</if>
-      <if test="searchTimeType=='createdTime'">and u.createdTime &gt; #{starTime,jdbcType=INTEGER} and u.createdTime &lt; #{endTime,jdbcType=INTEGER}</if>
-    </where>
-  </select>
-  <select id="getAllTeachers" parameterType="com.jindumooc.dto.user.SearchMessage" resultMap="getAllTeacher" >
-    SELECT count(*) as total,u.id,u.nickname,u.loginarea,u.loginIp,u.loginTime,u.promoted
-    FROM `user` u
-    <where>roles like '%ROLE_TEACHER%'
-    <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
-    </where>
-  </select>
-  <resultMap id="getAllTeacher" type="com.jindumooc.vojo.user.Teacher">
-    <result property="id" column="id" />
-    <result property="nickName" column="nickname" />
-    <result property="promoted" column="promoted" />
-    <result property="loginTime" column="loginTime" />
-    <result property="loginIp" column="loginIp" />
-    <result property="loginarea" column="loginarea" />
-    <result property="totalNum" column="total" />
-  </resultMap>
-  <update id="updatePromoted" parameterType="com.jindumooc.dto.user.SearchMessage">
+
+    <select id="getUserNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM `user` u
+        <where>
+            <if test="true">u.roles = u.roles</if>
+            <if test="searchParameter!=null">and ${searchType} like '%${searchParameter}%'</if>
+            <if test="role!=null">and roles like '%${role}%'</if>
+            <if test="searchTimeType=='loginTime'">and u.loginTime &gt; #{starTime,jdbcType=INTEGER} and u.loginTime
+                &lt; #{endTime,jdbcType=INTEGER}
+            </if>
+            <if test="searchTimeType=='createdTime'">and u.createdTime &gt; #{starTime,jdbcType=INTEGER} and
+                u.createdTime &lt; #{endTime,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+    <select id="getAllTeachers" parameterType="com.jindumooc.dto.user.SearchMessage" resultMap="getAllTeacher">
+        SELECT count(*) as total,u.id,u.nickname,u.loginarea,u.loginIp,u.loginTime,u.promoted
+        FROM `user` u
+        <where>roles like '%ROLE_TEACHER%'
+            <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
+        </where>
+    </select>
+    <resultMap id="getAllTeacher" type="com.jindumooc.vojo.user.Teacher">
+        <result property="id" column="id"/>
+        <result property="nickName" column="nickname"/>
+        <result property="promoted" column="promoted"/>
+        <result property="loginTime" column="loginTime"/>
+        <result property="loginIp" column="loginIp"/>
+        <result property="loginarea" column="loginarea"/>
+        <result property="totalNum" column="total"/>
+    </resultMap>
+    <update id="updatePromoted" parameterType="com.jindumooc.dto.user.SearchMessage">
+
     update user
     set promoted = #{promoted}
     where id = #{userId}
   </update>
+
   <update id="updatePromotedSeq" parameterType="com.jindumooc.dto.user.SearchMessage">
+
     update user
     set promotedseq = #{promotedSeq}
     where id = #{userId}
   </update>
+
   <select id="getTeachers" resultMap="getTeachersMap">
     SELECT u.id,nickname,largeAvatar,title,about
     FROM `user` u,user_profile p

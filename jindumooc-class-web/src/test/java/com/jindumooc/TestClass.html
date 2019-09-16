@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="C:\Users\gmf\Desktop\禁毒Mooc\返回格式\jindumooc-parent-master\jindumooc-parent-master\jindumooc-class-web\src\test\java\com\jindumooc\jquery.min.js"></script>
+    <title>Test for class service</title>
+</head>
+<body>
+<div>
+    <h2>获取班级列表</h2>
+    <button id="btn1">获取</button>
+    <script>
+        $("#btn1").click(function () {
+            $.ajax({
+                url: "http://localhost:8003/classroom/explore",
+                dataType: "jsonp",
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+        });
+    </script>
+</div>
+<div>
+    <h2>选择具体班级</h2>
+</div>
+<div>
+    <h2>修改班级信息</h2>
+</div>
+<div>
+    <h2>获取班级对应课程</h2>
+</div>
+<div>
+    <h2>添加班级课程</h2>
+</div>
+</body>
+</html>

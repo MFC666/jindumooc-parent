@@ -176,6 +176,22 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="selectClassroomCourses" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    c.id, c.courseSetId, title, courseSetTitle, learnMode, expiryMode, expiryDays, expiryStartDate,
+    expiryEndDate, isDefault, maxStudentNum, status, creator, isFree, price, vipLevelId,
+    buyable, tryLookable, tryLookLength, watchLimit, taskNum, compulsoryTaskNum, studentNum,
+    teacherIds, parentId, createdTime, updatedTime, ratingNum, rating, noteNum, buyExpiryTime,
+    threadNum, type, approval, income, originPrice, coinPrice, originCoinPrice, showStudentNumType,
+    giveCredit, locationId, address, deadlineNotify, daysOfNotifyBeforeDeadline, useInClassroom,
+    singleBuy, freeStartTime, freeEndTime, locked, cover, enableFinish, materialNum,
+    maxRate, serializeMode, showServices, recommended, recommendedSeq, recommendedTime,
+    categoryId, hitNum, courseType, rewardPoint, taskRewardPoint, enableAudio
+    from course_v8 c,classroom_courses s
+    where s.classroomId = #{classroomId,jdbcType=INTEGER} AND s.courseId = c.id
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

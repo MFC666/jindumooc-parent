@@ -355,6 +355,7 @@
       courseSetId = #{coursesetid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <select id="getNoteList" resultMap="getNoteListMap">
     SELECT c.id AS courseId,c.title AS coursrTitle,n.updatedTime,count(*) AS noteNum
     FROM course_v8 c,course_note n

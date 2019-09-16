@@ -125,6 +125,16 @@
     from classroom_member
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <!--根据学员Id和班级Id搜索-->
+  <select id="selectByStudentId" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from classroom_member
+    where userId = #{param1} and classroomId = #{param2}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from classroom_member
     where id = #{id,jdbcType=INTEGER}
@@ -135,6 +145,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
+  <delete id="deleteByStudentId">
+    DELETE FROM classroom_member
+    where classroomId = #{param1} and userId = #{param2}
+  </delete>
+
   <insert id="insert" parameterType="com.jindumooc.pojo.ClassroomMember" >
     insert into classroom_member (id, classroomId, userId, 
       orderId, levelId, noteNum, 
@@ -368,6 +384,17 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <update id="updateDeadline" parameterType="com.jindumooc.dto.classes.ClassroomMemberDTO">
+    update classroom_member
+    set deadline = #{deadline,jdbcType=INTEGER}
+    where userId = #{userId,jdbcType=INTEGER} and classroomId = #{classroomId,jdbcType=INTEGER}
+  </update>
+  <update id="updateRole" parameterType="com.jindumooc.dto.classes.ClassroomMemberDTO">
+    update classroom_member
+    set role = '|headTeacher|'
+    where userId = #{userId,jdbcType=INTEGER} and classroomId = #{classroomId,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ClassroomMember" >
     update classroom_member
     <set >
@@ -461,6 +488,7 @@
       deadlineNotified = #{deadlinenotified,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <select id="getLearningClassroom" resultMap="getLearningClassroomMap">
     SELECT count(*) AS todayClassroom,c.title,c.largePicture,c.middlePicture,c.smallPicture,c.courseNum
     FROM classroom_member m,classroom c
@@ -477,4 +505,5 @@
     <result column="threadnum" property="threadnum" jdbcType="INTEGER" />
     <result column="todayClassroom" property="todayClassroom" jdbcType="INTEGER" />
   </resultMap>
+
 </mapper>

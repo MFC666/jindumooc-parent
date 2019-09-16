@@ -1,8 +1,10 @@
 package com.jindumooc.pojo;
 
+
 import java.io.Serializable;
 
 public class Tag implements Serializable {
+
     private Integer id;
 
     private String name;

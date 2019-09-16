@@ -1,5 +1,6 @@
 package com.jindumooc.dao;
 
+import com.jindumooc.dto.classes.ClassroomStudentSearchDTO;
 import com.jindumooc.dto.user.LockUser;
 import com.jindumooc.dto.user.TeacherPromoted;
 import com.jindumooc.dto.user.UserRole;
@@ -55,6 +56,18 @@ public interface UserMapper {
 
     void updatePromotedSeq(TeacherPromoted teacherPromoted);
 
+    // 选取班级老师(不包括班主任)
+    List<User> selectClassroomTeacher(Integer id);
+
+    // 选取班级学员
+    List<User> selectClassroomStudent(Integer id);
+
+    // 按手机、邮箱、用户名查找学生
+    User getClassroomUser(ClassroomStudentSearchDTO sm);
+
+    // 按班级查找班主任
+    User getClassroomHeadteacher(Integer id);
+
     List<Teacher> getTeachers();
 
     /**
@@ -64,4 +77,5 @@ public interface UserMapper {
      * @return
      */
     String getUserNameById(Integer userId);
+
 }

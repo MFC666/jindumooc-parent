@@ -1155,6 +1155,7 @@
       site = #{site,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <select id="getPersonalDetail" resultMap="getPersonalDetailMap">
     SELECT p.id,truename,nickname,gender,about,title,company,job,qq,weibo,weixin,site,signature,mediumAvatar
     FROM  user_profile p,`user` u
@@ -1193,4 +1194,5 @@
     where id = #{id,jdbcType=INTEGER}
 
   </update>
+
 </mapper>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="com.jindumooc.dao.GroupsMemberMapper">
     <resultMap id="BaseResultMap" type="com.jindumooc.pojo.GroupsMember">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -111,6 +112,7 @@
       #{role,jdbcType=VARCHAR}, #{postnum,jdbcType=INTEGER}, #{threadnum,jdbcType=INTEGER}, 
       #{createdtime,jdbcType=INTEGER})
   </insert>
+
     <insert id="insertSelective" parameterType="com.jindumooc.pojo.GroupsMember">
         insert into groups_member
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -242,6 +244,7 @@
       createdTime = #{createdtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
     <select id="getGroupMembers" parameterType="java.lang.Integer" resultType="com.jindumooc.vojo.user.UserShow">
         select userId as userId,
 		    role as role

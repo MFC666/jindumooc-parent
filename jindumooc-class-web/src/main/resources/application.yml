@@ -1,20 +1,29 @@
 server:
-  port: 9002
+  port: 8002
 
 dubbo:
   application:
-    ###########×¢²áµ½×¢²áÖĞĞÄµÄÃû³Æ############
+    ###########æ³¨å†Œåˆ°æ³¨å†Œä¸­å¿ƒçš„åç§°############
     name: member
-  ###########²ÉÓÃĞ­ÒéºÍ¶Ë¿ÚºÅ################
+  ###########é‡‡ç”¨åè®®å’Œç«¯å£å·################
   protocol:
-    ###########²ÉÓÃdubboĞ­Òé####################
+    ###########é‡‡ç”¨dubboåè®®####################
     name: dubbo
-    ###########·¢²¼dubbo¶Ë¿ÚºÅÎª20880###########
+    ###########å‘å¸ƒdubboç«¯å£å·ä¸º20880###########
     port: 20881
   registry:
 
-    ###########×¢²áÖĞĞÄµØÖ·(ĞŞ¸ÄÎª±¾»úzookeeperµØÖ·)#####################
+    ###########æ³¨å†Œä¸­å¿ƒåœ°å€(ä¿®æ”¹ä¸ºæœ¬æœºzookeeperåœ°å€)#####################
     address: zookeeper://192.168.142.128:2181
 scan:
-  ############ÊµÏÖÀàÉ¨°ü·¶Î§###################
-  base-packages: com.jindumooc.class.web
+  ############å®ç°ç±»æ‰«åŒ…èŒƒå›´###################
+  base-packages: com.jindumooc.classes.web
+swagger:
+  title: DevPlatform APIæ¥å£æ–‡æ¡£
+  description: DevPlatform Api Documentation
+  version: 1.0.0
+  termsOfServiceUrl: https://gitee.com
+  contact:
+    name: tang_xinran
+    url: https://gitee.com/
+    email: roseal@foxmail.com

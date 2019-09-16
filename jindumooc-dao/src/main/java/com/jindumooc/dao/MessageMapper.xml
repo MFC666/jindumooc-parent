@@ -296,6 +296,7 @@
     <if test="searchTimeType!=null">createdTime &gt; #{starTime} and createdTime &lt; #{endTime} </if>
     </where>
   </select>
+
   <select id="getAllMessagesNum" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
     SELECT count(*)
     FROM message

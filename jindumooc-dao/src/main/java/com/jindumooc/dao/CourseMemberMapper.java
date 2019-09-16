@@ -18,7 +18,20 @@ public interface CourseMemberMapper {
 
     List<CourseMember> selectByExample(CourseMemberExample example);
 
+
+    /**
+     * @param id 班级Id
+     * @return 对应班级的course
+     */
+    List<CourseMember> selectByClassroomId(@Param("id") Integer id);
+
     CourseMember selectByPrimaryKey(Integer id);
+
+    /**
+     * @param id 用户Id
+     * @return 用户参与课程总数
+     */
+    Integer selectCourseCount(@Param("id") Integer id);
 
     int updateByExampleSelective(@Param("record") CourseMember record, @Param("example") CourseMemberExample example);
 

@@ -114,6 +114,21 @@
     from course_member
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!--通过课程Id选取-->
+  <select id="selectByClassroomId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from course_member
+    where classroomId = #{id,jdbcType=INTEGER}
+  </select>
+  <!--计算用户参与课程总数-->
+  <select id="selectCourseCount" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select count(*)
+    from course_member
+    where userId = #{id,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from course_member
     where id = #{id,jdbcType=INTEGER}

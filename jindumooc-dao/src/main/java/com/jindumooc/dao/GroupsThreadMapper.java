@@ -5,7 +5,9 @@ import com.jindumooc.pojo.GroupsThreadExample;
 
 import java.util.List;
 
+
 import com.jindumooc.vojo.group.GroupThreadSearch;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface GroupsThreadMapper {
@@ -84,6 +86,7 @@ public interface GroupsThreadMapper {
      * @return
      */
     int closeGroupThread(Integer id);
+
 
     /**
      * 展示最后更新的小组话题
@@ -165,4 +168,5 @@ public interface GroupsThreadMapper {
      * @return
      */
     List<GroupsThread> screeningByPostNumAndElite();
+
 }

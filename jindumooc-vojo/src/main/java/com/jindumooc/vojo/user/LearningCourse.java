@@ -1,5 +1,6 @@
 package com.jindumooc.vojo.user;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class LearningCourse implements Serializable {
 
     private int learnTime;
@@ -24,6 +26,7 @@ public class LearningCourse implements Serializable {
     private int lessonId;
 
     private int lessonLearnId;
+
 
 
 }

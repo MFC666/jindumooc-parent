@@ -1,168 +1,180 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jindumooc.dao.ClassroomMapper" >
-  <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Classroom" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="CHAR" />
-    <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="REAL" />
-    <result column="vipLevelId" property="viplevelid" jdbcType="INTEGER" />
-    <result column="smallPicture" property="smallpicture" jdbcType="VARCHAR" />
-    <result column="middlePicture" property="middlepicture" jdbcType="VARCHAR" />
-    <result column="largePicture" property="largepicture" jdbcType="VARCHAR" />
-    <result column="headTeacherId" property="headteacherid" jdbcType="INTEGER" />
-    <result column="teacherIds" property="teacherids" jdbcType="VARCHAR" />
-    <result column="hitNum" property="hitnum" jdbcType="INTEGER" />
-    <result column="auditorNum" property="auditornum" jdbcType="INTEGER" />
-    <result column="studentNum" property="studentnum" jdbcType="INTEGER" />
-    <result column="courseNum" property="coursenum" jdbcType="INTEGER" />
-    <result column="lessonNum" property="lessonnum" jdbcType="INTEGER" />
-    <result column="threadNum" property="threadnum" jdbcType="INTEGER" />
-    <result column="noteNum" property="notenum" jdbcType="INTEGER" />
-    <result column="postNum" property="postnum" jdbcType="INTEGER" />
-    <result column="income" property="income" jdbcType="REAL" />
-    <result column="createdTime" property="createdtime" jdbcType="INTEGER" />
-    <result column="updatedTime" property="updatedtime" jdbcType="INTEGER" />
-    <result column="service" property="service" jdbcType="VARCHAR" />
-    <result column="hide" property="hide" jdbcType="TINYINT" />
-    <result column="recommended" property="recommended" jdbcType="BIT" />
-    <result column="recommendedSeq" property="recommendedseq" jdbcType="INTEGER" />
-    <result column="recommendedTime" property="recommendedtime" jdbcType="INTEGER" />
-    <result column="rating" property="rating" jdbcType="REAL" />
-    <result column="ratingNum" property="ratingnum" jdbcType="INTEGER" />
-    <result column="hotSeq" property="hotseq" jdbcType="INTEGER" />
-    <result column="maxRate" property="maxrate" jdbcType="TINYINT" />
-    <result column="showable" property="showable" jdbcType="BIT" />
-    <result column="buyable" property="buyable" jdbcType="BIT" />
-    <result column="orgId" property="orgid" jdbcType="INTEGER" />
-    <result column="orgCode" property="orgcode" jdbcType="VARCHAR" />
-    <result column="expiryMode" property="expirymode" jdbcType="VARCHAR" />
-    <result column="expiryValue" property="expiryvalue" jdbcType="INTEGER" />
-    <result column="creator" property="creator" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.ClassroomWithBLOBs" extends="BaseResultMap" >
-    <result column="about" property="about" jdbcType="LONGVARCHAR" />
-    <result column="description" property="description" jdbcType="LONGVARCHAR" />
-    <result column="assistantIds" property="assistantids" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+
+<mapper namespace="com.jindumooc.dao.ClassroomMapper">
+    <resultMap id="BaseResultMap" type="com.jindumooc.pojo.Classroom">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="categoryId" property="categoryid" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="REAL"/>
+        <result column="vipLevelId" property="viplevelid" jdbcType="INTEGER"/>
+        <result column="smallPicture" property="smallpicture" jdbcType="VARCHAR"/>
+        <result column="middlePicture" property="middlepicture" jdbcType="VARCHAR"/>
+        <result column="largePicture" property="largepicture" jdbcType="VARCHAR"/>
+        <result column="headTeacherId" property="headteacherid" jdbcType="INTEGER"/>
+        <result column="teacherIds" property="teacherids" jdbcType="VARCHAR"/>
+        <result column="hitNum" property="hitnum" jdbcType="INTEGER"/>
+        <result column="auditorNum" property="auditornum" jdbcType="INTEGER"/>
+        <result column="studentNum" property="studentnum" jdbcType="INTEGER"/>
+        <result column="courseNum" property="coursenum" jdbcType="INTEGER"/>
+        <result column="lessonNum" property="lessonnum" jdbcType="INTEGER"/>
+        <result column="threadNum" property="threadnum" jdbcType="INTEGER"/>
+        <result column="noteNum" property="notenum" jdbcType="INTEGER"/>
+        <result column="postNum" property="postnum" jdbcType="INTEGER"/>
+        <result column="income" property="income" jdbcType="REAL"/>
+        <result column="createdTime" property="createdtime" jdbcType="INTEGER"/>
+        <result column="updatedTime" property="updatedtime" jdbcType="INTEGER"/>
+        <result column="service" property="service" jdbcType="VARCHAR"/>
+        <result column="recommended" property="recommended" jdbcType="BIT"/>
+        <result column="recommendedSeq" property="recommendedseq" jdbcType="INTEGER"/>
+        <result column="recommendedTime" property="recommendedtime" jdbcType="INTEGER"/>
+        <result column="rating" property="rating" jdbcType="REAL"/>
+        <result column="ratingNum" property="ratingnum" jdbcType="INTEGER"/>
+        <result column="hotSeq" property="hotseq" jdbcType="INTEGER"/>
+        <result column="maxRate" property="maxrate" jdbcType="TINYINT"/>
+        <result column="showable" property="showable" jdbcType="BIT"/>
+        <result column="buyable" property="buyable" jdbcType="BIT"/>
+        <result column="orgId" property="orgid" jdbcType="INTEGER"/>
+        <result column="orgCode" property="orgcode" jdbcType="VARCHAR"/>
+        <result column="expiryMode" property="expirymode" jdbcType="VARCHAR"/>
+        <result column="expiryValue" property="expiryvalue" jdbcType="INTEGER"/>
+        <result column="creator" property="creator" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.jindumooc.pojo.ClassroomWithBLOBs" extends="BaseResultMap">
+        <result column="about" property="about" jdbcType="LONGVARCHAR"/>
+        <result column="description" property="description" jdbcType="LONGVARCHAR"/>
+        <result column="assistantIds" property="assistantids" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, title, status, categoryId, price, vipLevelId, smallPicture, middlePicture, largePicture, 
     headTeacherId, teacherIds, hitNum, auditorNum, studentNum, courseNum, lessonNum, 
     threadNum, noteNum, postNum, income, createdTime, updatedTime, service, hide, recommended, 
     recommendedSeq, recommendedTime, rating, ratingNum, hotSeq, maxRate, showable, buyable, 
     orgId, orgCode, expiryMode, expiryValue, creator
   </sql>
-  <sql id="Blob_Column_List" >
+    <sql id="Blob_Column_List">
     about, description, assistantIds
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jindumooc.pojo.ClassroomExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from classroom
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ClassroomExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from classroom
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+            parameterType="com.jindumooc.pojo.ClassroomExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from classroom
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectClassroom" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from classroom
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.ClassroomExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from classroom
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
     select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
+    *
     from classroom
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="getAllClassroom" resultMap="BaseResultMap" parameterType="com.jindumooc.pojo.Classroom">
+    select
+    *
+    from classroom
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from classroom
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ClassroomExample" >
-    delete from classroom
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.jindumooc.pojo.ClassroomWithBLOBs" >
+    <delete id="deleteByExample" parameterType="com.jindumooc.pojo.ClassroomExample">
+        delete from classroom
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.jindumooc.pojo.ClassroomWithBLOBs">
     insert into classroom (id, title, status, 
       categoryId, price, vipLevelId, 
       smallPicture, middlePicture, largePicture, 
@@ -192,614 +204,676 @@
       #{expiryvalue,jdbcType=INTEGER}, #{creator,jdbcType=INTEGER}, #{about,jdbcType=LONGVARCHAR}, 
       #{description,jdbcType=LONGVARCHAR}, #{assistantids,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jindumooc.pojo.ClassroomWithBLOBs" >
-    insert into classroom
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="categoryid != null" >
-        categoryId,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="viplevelid != null" >
-        vipLevelId,
-      </if>
-      <if test="smallpicture != null" >
-        smallPicture,
-      </if>
-      <if test="middlepicture != null" >
-        middlePicture,
-      </if>
-      <if test="largepicture != null" >
-        largePicture,
-      </if>
-      <if test="headteacherid != null" >
-        headTeacherId,
-      </if>
-      <if test="teacherids != null" >
-        teacherIds,
-      </if>
-      <if test="hitnum != null" >
-        hitNum,
-      </if>
-      <if test="auditornum != null" >
-        auditorNum,
-      </if>
-      <if test="studentnum != null" >
-        studentNum,
-      </if>
-      <if test="coursenum != null" >
-        courseNum,
-      </if>
-      <if test="lessonnum != null" >
-        lessonNum,
-      </if>
-      <if test="threadnum != null" >
-        threadNum,
-      </if>
-      <if test="notenum != null" >
-        noteNum,
-      </if>
-      <if test="postnum != null" >
-        postNum,
-      </if>
-      <if test="income != null" >
-        income,
-      </if>
-      <if test="createdtime != null" >
-        createdTime,
-      </if>
-      <if test="updatedtime != null" >
-        updatedTime,
-      </if>
-      <if test="service != null" >
-        service,
-      </if>
-      <if test="hide != null" >
-        hide,
-      </if>
-      <if test="recommended != null" >
-        recommended,
-      </if>
-      <if test="recommendedseq != null" >
-        recommendedSeq,
-      </if>
-      <if test="recommendedtime != null" >
-        recommendedTime,
-      </if>
-      <if test="rating != null" >
-        rating,
-      </if>
-      <if test="ratingnum != null" >
-        ratingNum,
-      </if>
-      <if test="hotseq != null" >
-        hotSeq,
-      </if>
-      <if test="maxrate != null" >
-        maxRate,
-      </if>
-      <if test="showable != null" >
-        showable,
-      </if>
-      <if test="buyable != null" >
-        buyable,
-      </if>
-      <if test="orgid != null" >
-        orgId,
-      </if>
-      <if test="orgcode != null" >
-        orgCode,
-      </if>
-      <if test="expirymode != null" >
-        expiryMode,
-      </if>
-      <if test="expiryvalue != null" >
-        expiryValue,
-      </if>
-      <if test="creator != null" >
-        creator,
-      </if>
-      <if test="about != null" >
-        about,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="assistantids != null" >
-        assistantIds,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="categoryid != null" >
-        #{categoryid,jdbcType=INTEGER},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=REAL},
-      </if>
-      <if test="viplevelid != null" >
-        #{viplevelid,jdbcType=INTEGER},
-      </if>
-      <if test="smallpicture != null" >
-        #{smallpicture,jdbcType=VARCHAR},
-      </if>
-      <if test="middlepicture != null" >
-        #{middlepicture,jdbcType=VARCHAR},
-      </if>
-      <if test="largepicture != null" >
-        #{largepicture,jdbcType=VARCHAR},
-      </if>
-      <if test="headteacherid != null" >
-        #{headteacherid,jdbcType=INTEGER},
-      </if>
-      <if test="teacherids != null" >
-        #{teacherids,jdbcType=VARCHAR},
-      </if>
-      <if test="hitnum != null" >
-        #{hitnum,jdbcType=INTEGER},
-      </if>
-      <if test="auditornum != null" >
-        #{auditornum,jdbcType=INTEGER},
-      </if>
-      <if test="studentnum != null" >
-        #{studentnum,jdbcType=INTEGER},
-      </if>
-      <if test="coursenum != null" >
-        #{coursenum,jdbcType=INTEGER},
-      </if>
-      <if test="lessonnum != null" >
-        #{lessonnum,jdbcType=INTEGER},
-      </if>
-      <if test="threadnum != null" >
-        #{threadnum,jdbcType=INTEGER},
-      </if>
-      <if test="notenum != null" >
-        #{notenum,jdbcType=INTEGER},
-      </if>
-      <if test="postnum != null" >
-        #{postnum,jdbcType=INTEGER},
-      </if>
-      <if test="income != null" >
-        #{income,jdbcType=REAL},
-      </if>
-      <if test="createdtime != null" >
-        #{createdtime,jdbcType=INTEGER},
-      </if>
-      <if test="updatedtime != null" >
-        #{updatedtime,jdbcType=INTEGER},
-      </if>
-      <if test="service != null" >
-        #{service,jdbcType=VARCHAR},
-      </if>
-      <if test="hide != null" >
-        #{hide,jdbcType=TINYINT},
-      </if>
-      <if test="recommended != null" >
-        #{recommended,jdbcType=BIT},
-      </if>
-      <if test="recommendedseq != null" >
-        #{recommendedseq,jdbcType=INTEGER},
-      </if>
-      <if test="recommendedtime != null" >
-        #{recommendedtime,jdbcType=INTEGER},
-      </if>
-      <if test="rating != null" >
-        #{rating,jdbcType=REAL},
-      </if>
-      <if test="ratingnum != null" >
-        #{ratingnum,jdbcType=INTEGER},
-      </if>
-      <if test="hotseq != null" >
-        #{hotseq,jdbcType=INTEGER},
-      </if>
-      <if test="maxrate != null" >
-        #{maxrate,jdbcType=TINYINT},
-      </if>
-      <if test="showable != null" >
-        #{showable,jdbcType=BIT},
-      </if>
-      <if test="buyable != null" >
-        #{buyable,jdbcType=BIT},
-      </if>
-      <if test="orgid != null" >
-        #{orgid,jdbcType=INTEGER},
-      </if>
-      <if test="orgcode != null" >
-        #{orgcode,jdbcType=VARCHAR},
-      </if>
-      <if test="expirymode != null" >
-        #{expirymode,jdbcType=VARCHAR},
-      </if>
-      <if test="expiryvalue != null" >
-        #{expiryvalue,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null" >
-        #{creator,jdbcType=INTEGER},
-      </if>
-      <if test="about != null" >
-        #{about,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="assistantids != null" >
-        #{assistantids,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.jindumooc.pojo.ClassroomExample" resultType="java.lang.Integer" >
-    select count(*) from classroom
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update classroom
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.title != null" >
+    <insert id="insertNewClassroom" parameterType="com.jindumooc.dto.classes.CreateClassroomDTO">
+        insert into classroom (title, status,
+        showable, buyable)
+        values (#{title,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{showable,jdbcType=BIT}, #{buyable,jdbcType=BIT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jindumooc.pojo.ClassroomWithBLOBs">
+        insert into classroom
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="categoryid != null">
+                categoryId,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="viplevelid != null">
+                vipLevelId,
+            </if>
+            <if test="smallpicture != null">
+                smallPicture,
+            </if>
+            <if test="middlepicture != null">
+                middlePicture,
+            </if>
+            <if test="largepicture != null">
+                largePicture,
+            </if>
+            <if test="headteacherid != null">
+                headTeacherId,
+            </if>
+            <if test="teacherids != null">
+                teacherIds,
+            </if>
+            <if test="hitnum != null">
+                hitNum,
+            </if>
+            <if test="auditornum != null">
+                auditorNum,
+            </if>
+            <if test="studentnum != null">
+                studentNum,
+            </if>
+            <if test="coursenum != null">
+                courseNum,
+            </if>
+            <if test="lessonnum != null">
+                lessonNum,
+            </if>
+            <if test="threadnum != null">
+                threadNum,
+            </if>
+            <if test="notenum != null">
+                noteNum,
+            </if>
+            <if test="postnum != null">
+                postNum,
+            </if>
+            <if test="income != null">
+                income,
+            </if>
+            <if test="createdtime != null">
+                createdTime,
+            </if>
+            <if test="updatedtime != null">
+                updatedTime,
+            </if>
+            <if test="service != null">
+                service,
+            </if>
+            <if test="hide != null">
+                hide,
+            </if>
+            <if test="recommended != null">
+                recommended,
+            </if>
+            <if test="recommendedseq != null">
+                recommendedSeq,
+            </if>
+            <if test="recommendedtime != null">
+                recommendedTime,
+            </if>
+            <if test="rating != null">
+                rating,
+            </if>
+            <if test="ratingnum != null">
+                ratingNum,
+            </if>
+            <if test="hotseq != null">
+                hotSeq,
+            </if>
+            <if test="maxrate != null">
+                maxRate,
+            </if>
+            <if test="showable != null">
+                showable,
+            </if>
+            <if test="buyable != null">
+                buyable,
+            </if>
+            <if test="orgid != null">
+                orgId,
+            </if>
+            <if test="orgcode != null">
+                orgCode,
+            </if>
+            <if test="expirymode != null">
+                expiryMode,
+            </if>
+            <if test="expiryvalue != null">
+                expiryValue,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="about != null">
+                about,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="assistantids != null">
+                assistantIds,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="categoryid != null">
+                #{categoryid,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=REAL},
+            </if>
+            <if test="viplevelid != null">
+                #{viplevelid,jdbcType=INTEGER},
+            </if>
+            <if test="smallpicture != null">
+                #{smallpicture,jdbcType=VARCHAR},
+            </if>
+            <if test="middlepicture != null">
+                #{middlepicture,jdbcType=VARCHAR},
+            </if>
+            <if test="largepicture != null">
+                #{largepicture,jdbcType=VARCHAR},
+            </if>
+            <if test="headteacherid != null">
+                #{headteacherid,jdbcType=INTEGER},
+            </if>
+            <if test="teacherids != null">
+                #{teacherids,jdbcType=VARCHAR},
+            </if>
+            <if test="hitnum != null">
+                #{hitnum,jdbcType=INTEGER},
+            </if>
+            <if test="auditornum != null">
+                #{auditornum,jdbcType=INTEGER},
+            </if>
+            <if test="studentnum != null">
+                #{studentnum,jdbcType=INTEGER},
+            </if>
+            <if test="coursenum != null">
+                #{coursenum,jdbcType=INTEGER},
+            </if>
+            <if test="lessonnum != null">
+                #{lessonnum,jdbcType=INTEGER},
+            </if>
+            <if test="threadnum != null">
+                #{threadnum,jdbcType=INTEGER},
+            </if>
+            <if test="notenum != null">
+                #{notenum,jdbcType=INTEGER},
+            </if>
+            <if test="postnum != null">
+                #{postnum,jdbcType=INTEGER},
+            </if>
+            <if test="income != null">
+                #{income,jdbcType=REAL},
+            </if>
+            <if test="createdtime != null">
+                #{createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="updatedtime != null">
+                #{updatedtime,jdbcType=INTEGER},
+            </if>
+            <if test="service != null">
+                #{service,jdbcType=VARCHAR},
+            </if>
+            <if test="hide != null">
+                #{hide,jdbcType=TINYINT},
+            </if>
+            <if test="recommended != null">
+                #{recommended,jdbcType=BIT},
+            </if>
+            <if test="recommendedseq != null">
+                #{recommendedseq,jdbcType=INTEGER},
+            </if>
+            <if test="recommendedtime != null">
+                #{recommendedtime,jdbcType=INTEGER},
+            </if>
+            <if test="rating != null">
+                #{rating,jdbcType=REAL},
+            </if>
+            <if test="ratingnum != null">
+                #{ratingnum,jdbcType=INTEGER},
+            </if>
+            <if test="hotseq != null">
+                #{hotseq,jdbcType=INTEGER},
+            </if>
+            <if test="maxrate != null">
+                #{maxrate,jdbcType=TINYINT},
+            </if>
+            <if test="showable != null">
+                #{showable,jdbcType=BIT},
+            </if>
+            <if test="buyable != null">
+                #{buyable,jdbcType=BIT},
+            </if>
+            <if test="orgid != null">
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="orgcode != null">
+                #{orgcode,jdbcType=VARCHAR},
+            </if>
+            <if test="expirymode != null">
+                #{expirymode,jdbcType=VARCHAR},
+            </if>
+            <if test="expiryvalue != null">
+                #{expiryvalue,jdbcType=INTEGER},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=INTEGER},
+            </if>
+            <if test="about != null">
+                #{about,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="assistantids != null">
+                #{assistantids,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.jindumooc.pojo.ClassroomExample" resultType="java.lang.Integer">
+        select count(*) from classroom
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="getTeachingClassroom" resultType="com.jindumooc.vojo.user.TeachingClassroom">
+        SELECT c.id,c.title,c.smallPicture,c.middlePicture,c.largePicture,c.studentNum,c.courseNum,c.threadNum,COUNT(*)
+        FROM classroom c,classroom_review r
+        WHERE c.headTeacherId = #{teacherId} and r.classroomId = c.id and r.createdTime>#{newTime}
+    </select>
+    <!--增减班级课程的操作-->
+    <update id="updateCourseNumber" parameterType="java.lang.Integer">
+        update classroom
+        set courseNum = courseNum-1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="decreaseCourseNumber" parameterType="java.lang.Integer">
+        update classroom
+        set courseNum = courseNum-1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--增减班级学员的操作-->
+    <update id="updateStudentNumber" parameterType="java.lang.Integer">
+        update classroom
+        set studentNum = studentNum+1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="decreaseStudentNumber" parameterType="java.lang.Integer">
+        update classroom
+        set studentNum = studentNum-1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--班级推荐操作-->
+    <update id="updateRecommend" parameterType="java.lang.Integer">
+        update classroom
+        set recommended = TRUE
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="cancelRecommend" parameterType="java.lang.Integer">
+        update classroom
+        set recommended = FALSE
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setRecommendSeq">
+        update classroom
+        set recommendedSeq  = #{param2}
+        where id = #{param1}
+    </update>
+    <!--关闭班级操作-->
+    <update id="closeClassroom" parameterType="java.lang.Integer">
+        update classroom
+        set status  = 'closed'
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--设置班级班主任操作-->
+    <update id="updateHeadTeacher">
+        update classroom
+        set headTeacherId  = #{param2}
+        where id = #{param1}
+    </update>
+
+    <update id="updateByExampleSelective" parameterType="map">
+        update classroom
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=CHAR},
+            </if>
+            <if test="record.categoryid != null">
+                categoryId = #{record.categoryid,jdbcType=INTEGER},
+            </if>
+            <if test="record.price != null">
+                price = #{record.price,jdbcType=REAL},
+            </if>
+            <if test="record.viplevelid != null">
+                vipLevelId = #{record.viplevelid,jdbcType=INTEGER},
+            </if>
+            <if test="record.smallpicture != null">
+                smallPicture = #{record.smallpicture,jdbcType=VARCHAR},
+            </if>
+            <if test="record.middlepicture != null">
+                middlePicture = #{record.middlepicture,jdbcType=VARCHAR},
+            </if>
+            <if test="record.largepicture != null">
+                largePicture = #{record.largepicture,jdbcType=VARCHAR},
+            </if>
+            <if test="record.headteacherid != null">
+                headTeacherId = #{record.headteacherid,jdbcType=INTEGER},
+            </if>
+            <if test="record.teacherids != null">
+                teacherIds = #{record.teacherids,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hitnum != null">
+                hitNum = #{record.hitnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditornum != null">
+                auditorNum = #{record.auditornum,jdbcType=INTEGER},
+            </if>
+            <if test="record.studentnum != null">
+                studentNum = #{record.studentnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.coursenum != null">
+                courseNum = #{record.coursenum,jdbcType=INTEGER},
+            </if>
+            <if test="record.lessonnum != null">
+                lessonNum = #{record.lessonnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.threadnum != null">
+                threadNum = #{record.threadnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.notenum != null">
+                noteNum = #{record.notenum,jdbcType=INTEGER},
+            </if>
+            <if test="record.postnum != null">
+                postNum = #{record.postnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.income != null">
+                income = #{record.income,jdbcType=REAL},
+            </if>
+            <if test="record.createdtime != null">
+                createdTime = #{record.createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.updatedtime != null">
+                updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.service != null">
+                service = #{record.service,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hide != null">
+                hide = #{record.hide,jdbcType=TINYINT},
+            </if>
+            <if test="record.recommended != null">
+                recommended = #{record.recommended,jdbcType=BIT},
+            </if>
+            <if test="record.recommendedseq != null">
+                recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+            </if>
+            <if test="record.recommendedtime != null">
+                recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+            </if>
+            <if test="record.rating != null">
+                rating = #{record.rating,jdbcType=REAL},
+            </if>
+            <if test="record.ratingnum != null">
+                ratingNum = #{record.ratingnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.hotseq != null">
+                hotSeq = #{record.hotseq,jdbcType=INTEGER},
+            </if>
+            <if test="record.maxrate != null">
+                maxRate = #{record.maxrate,jdbcType=TINYINT},
+            </if>
+            <if test="record.showable != null">
+                showable = #{record.showable,jdbcType=BIT},
+            </if>
+            <if test="record.buyable != null">
+                buyable = #{record.buyable,jdbcType=BIT},
+            </if>
+            <if test="record.orgid != null">
+                orgId = #{record.orgid,jdbcType=INTEGER},
+            </if>
+            <if test="record.orgcode != null">
+                orgCode = #{record.orgcode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.expirymode != null">
+                expiryMode = #{record.expirymode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.expiryvalue != null">
+                expiryValue = #{record.expiryvalue,jdbcType=INTEGER},
+            </if>
+            <if test="record.creator != null">
+                creator = #{record.creator,jdbcType=INTEGER},
+            </if>
+            <if test="record.about != null">
+                about = #{record.about,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.description != null">
+                description = #{record.description,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.assistantids != null">
+                assistantIds = #{record.assistantids,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update classroom
+        set id = #{record.id,jdbcType=INTEGER},
         title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null" >
         status = #{record.status,jdbcType=CHAR},
-      </if>
-      <if test="record.categoryid != null" >
         categoryId = #{record.categoryid,jdbcType=INTEGER},
-      </if>
-      <if test="record.price != null" >
         price = #{record.price,jdbcType=REAL},
-      </if>
-      <if test="record.viplevelid != null" >
         vipLevelId = #{record.viplevelid,jdbcType=INTEGER},
-      </if>
-      <if test="record.smallpicture != null" >
         smallPicture = #{record.smallpicture,jdbcType=VARCHAR},
-      </if>
-      <if test="record.middlepicture != null" >
         middlePicture = #{record.middlepicture,jdbcType=VARCHAR},
-      </if>
-      <if test="record.largepicture != null" >
         largePicture = #{record.largepicture,jdbcType=VARCHAR},
-      </if>
-      <if test="record.headteacherid != null" >
         headTeacherId = #{record.headteacherid,jdbcType=INTEGER},
-      </if>
-      <if test="record.teacherids != null" >
         teacherIds = #{record.teacherids,jdbcType=VARCHAR},
-      </if>
-      <if test="record.hitnum != null" >
         hitNum = #{record.hitnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.auditornum != null" >
         auditorNum = #{record.auditornum,jdbcType=INTEGER},
-      </if>
-      <if test="record.studentnum != null" >
         studentNum = #{record.studentnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.coursenum != null" >
         courseNum = #{record.coursenum,jdbcType=INTEGER},
-      </if>
-      <if test="record.lessonnum != null" >
         lessonNum = #{record.lessonnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.threadnum != null" >
         threadNum = #{record.threadnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.notenum != null" >
         noteNum = #{record.notenum,jdbcType=INTEGER},
-      </if>
-      <if test="record.postnum != null" >
         postNum = #{record.postnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.income != null" >
         income = #{record.income,jdbcType=REAL},
-      </if>
-      <if test="record.createdtime != null" >
         createdTime = #{record.createdtime,jdbcType=INTEGER},
-      </if>
-      <if test="record.updatedtime != null" >
         updatedTime = #{record.updatedtime,jdbcType=INTEGER},
-      </if>
-      <if test="record.service != null" >
         service = #{record.service,jdbcType=VARCHAR},
-      </if>
-      <if test="record.hide != null" >
         hide = #{record.hide,jdbcType=TINYINT},
-      </if>
-      <if test="record.recommended != null" >
         recommended = #{record.recommended,jdbcType=BIT},
-      </if>
-      <if test="record.recommendedseq != null" >
         recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
-      </if>
-      <if test="record.recommendedtime != null" >
         recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
-      </if>
-      <if test="record.rating != null" >
         rating = #{record.rating,jdbcType=REAL},
-      </if>
-      <if test="record.ratingnum != null" >
         ratingNum = #{record.ratingnum,jdbcType=INTEGER},
-      </if>
-      <if test="record.hotseq != null" >
         hotSeq = #{record.hotseq,jdbcType=INTEGER},
-      </if>
-      <if test="record.maxrate != null" >
         maxRate = #{record.maxrate,jdbcType=TINYINT},
-      </if>
-      <if test="record.showable != null" >
         showable = #{record.showable,jdbcType=BIT},
-      </if>
-      <if test="record.buyable != null" >
         buyable = #{record.buyable,jdbcType=BIT},
-      </if>
-      <if test="record.orgid != null" >
         orgId = #{record.orgid,jdbcType=INTEGER},
-      </if>
-      <if test="record.orgcode != null" >
         orgCode = #{record.orgcode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.expirymode != null" >
         expiryMode = #{record.expirymode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.expiryvalue != null" >
         expiryValue = #{record.expiryvalue,jdbcType=INTEGER},
-      </if>
-      <if test="record.creator != null" >
         creator = #{record.creator,jdbcType=INTEGER},
-      </if>
-      <if test="record.about != null" >
         about = #{record.about,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.description != null" >
         description = #{record.description,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.assistantids != null" >
-        assistantIds = #{record.assistantids,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update classroom
-    set id = #{record.id,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=CHAR},
-      categoryId = #{record.categoryid,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=REAL},
-      vipLevelId = #{record.viplevelid,jdbcType=INTEGER},
-      smallPicture = #{record.smallpicture,jdbcType=VARCHAR},
-      middlePicture = #{record.middlepicture,jdbcType=VARCHAR},
-      largePicture = #{record.largepicture,jdbcType=VARCHAR},
-      headTeacherId = #{record.headteacherid,jdbcType=INTEGER},
-      teacherIds = #{record.teacherids,jdbcType=VARCHAR},
-      hitNum = #{record.hitnum,jdbcType=INTEGER},
-      auditorNum = #{record.auditornum,jdbcType=INTEGER},
-      studentNum = #{record.studentnum,jdbcType=INTEGER},
-      courseNum = #{record.coursenum,jdbcType=INTEGER},
-      lessonNum = #{record.lessonnum,jdbcType=INTEGER},
-      threadNum = #{record.threadnum,jdbcType=INTEGER},
-      noteNum = #{record.notenum,jdbcType=INTEGER},
-      postNum = #{record.postnum,jdbcType=INTEGER},
-      income = #{record.income,jdbcType=REAL},
-      createdTime = #{record.createdtime,jdbcType=INTEGER},
-      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
-      service = #{record.service,jdbcType=VARCHAR},
-      hide = #{record.hide,jdbcType=TINYINT},
-      recommended = #{record.recommended,jdbcType=BIT},
-      recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
-      recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
-      rating = #{record.rating,jdbcType=REAL},
-      ratingNum = #{record.ratingnum,jdbcType=INTEGER},
-      hotSeq = #{record.hotseq,jdbcType=INTEGER},
-      maxRate = #{record.maxrate,jdbcType=TINYINT},
-      showable = #{record.showable,jdbcType=BIT},
-      buyable = #{record.buyable,jdbcType=BIT},
-      orgId = #{record.orgid,jdbcType=INTEGER},
-      orgCode = #{record.orgcode,jdbcType=VARCHAR},
-      expiryMode = #{record.expirymode,jdbcType=VARCHAR},
-      expiryValue = #{record.expiryvalue,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=INTEGER},
-      about = #{record.about,jdbcType=LONGVARCHAR},
-      description = #{record.description,jdbcType=LONGVARCHAR},
-      assistantIds = #{record.assistantids,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update classroom
-    set id = #{record.id,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=CHAR},
-      categoryId = #{record.categoryid,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=REAL},
-      vipLevelId = #{record.viplevelid,jdbcType=INTEGER},
-      smallPicture = #{record.smallpicture,jdbcType=VARCHAR},
-      middlePicture = #{record.middlepicture,jdbcType=VARCHAR},
-      largePicture = #{record.largepicture,jdbcType=VARCHAR},
-      headTeacherId = #{record.headteacherid,jdbcType=INTEGER},
-      teacherIds = #{record.teacherids,jdbcType=VARCHAR},
-      hitNum = #{record.hitnum,jdbcType=INTEGER},
-      auditorNum = #{record.auditornum,jdbcType=INTEGER},
-      studentNum = #{record.studentnum,jdbcType=INTEGER},
-      courseNum = #{record.coursenum,jdbcType=INTEGER},
-      lessonNum = #{record.lessonnum,jdbcType=INTEGER},
-      threadNum = #{record.threadnum,jdbcType=INTEGER},
-      noteNum = #{record.notenum,jdbcType=INTEGER},
-      postNum = #{record.postnum,jdbcType=INTEGER},
-      income = #{record.income,jdbcType=REAL},
-      createdTime = #{record.createdtime,jdbcType=INTEGER},
-      updatedTime = #{record.updatedtime,jdbcType=INTEGER},
-      service = #{record.service,jdbcType=VARCHAR},
-      hide = #{record.hide,jdbcType=TINYINT},
-      recommended = #{record.recommended,jdbcType=BIT},
-      recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
-      recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
-      rating = #{record.rating,jdbcType=REAL},
-      ratingNum = #{record.ratingnum,jdbcType=INTEGER},
-      hotSeq = #{record.hotseq,jdbcType=INTEGER},
-      maxRate = #{record.maxrate,jdbcType=TINYINT},
-      showable = #{record.showable,jdbcType=BIT},
-      buyable = #{record.buyable,jdbcType=BIT},
-      orgId = #{record.orgid,jdbcType=INTEGER},
-      orgCode = #{record.orgcode,jdbcType=VARCHAR},
-      expiryMode = #{record.expirymode,jdbcType=VARCHAR},
-      expiryValue = #{record.expiryvalue,jdbcType=INTEGER},
-      creator = #{record.creator,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ClassroomWithBLOBs" >
-    update classroom
-    <set >
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="categoryid != null" >
-        categoryId = #{categoryid,jdbcType=INTEGER},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=REAL},
-      </if>
-      <if test="viplevelid != null" >
-        vipLevelId = #{viplevelid,jdbcType=INTEGER},
-      </if>
-      <if test="smallpicture != null" >
-        smallPicture = #{smallpicture,jdbcType=VARCHAR},
-      </if>
-      <if test="middlepicture != null" >
-        middlePicture = #{middlepicture,jdbcType=VARCHAR},
-      </if>
-      <if test="largepicture != null" >
-        largePicture = #{largepicture,jdbcType=VARCHAR},
-      </if>
-      <if test="headteacherid != null" >
-        headTeacherId = #{headteacherid,jdbcType=INTEGER},
-      </if>
-      <if test="teacherids != null" >
-        teacherIds = #{teacherids,jdbcType=VARCHAR},
-      </if>
-      <if test="hitnum != null" >
-        hitNum = #{hitnum,jdbcType=INTEGER},
-      </if>
-      <if test="auditornum != null" >
-        auditorNum = #{auditornum,jdbcType=INTEGER},
-      </if>
-      <if test="studentnum != null" >
-        studentNum = #{studentnum,jdbcType=INTEGER},
-      </if>
-      <if test="coursenum != null" >
-        courseNum = #{coursenum,jdbcType=INTEGER},
-      </if>
-      <if test="lessonnum != null" >
-        lessonNum = #{lessonnum,jdbcType=INTEGER},
-      </if>
-      <if test="threadnum != null" >
-        threadNum = #{threadnum,jdbcType=INTEGER},
-      </if>
-      <if test="notenum != null" >
-        noteNum = #{notenum,jdbcType=INTEGER},
-      </if>
-      <if test="postnum != null" >
-        postNum = #{postnum,jdbcType=INTEGER},
-      </if>
-      <if test="income != null" >
-        income = #{income,jdbcType=REAL},
-      </if>
-      <if test="createdtime != null" >
-        createdTime = #{createdtime,jdbcType=INTEGER},
-      </if>
-      <if test="updatedtime != null" >
-        updatedTime = #{updatedtime,jdbcType=INTEGER},
-      </if>
-      <if test="service != null" >
-        service = #{service,jdbcType=VARCHAR},
-      </if>
-      <if test="hide != null" >
-        hide = #{hide,jdbcType=TINYINT},
-      </if>
-      <if test="recommended != null" >
-        recommended = #{recommended,jdbcType=BIT},
-      </if>
-      <if test="recommendedseq != null" >
-        recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
-      </if>
-      <if test="recommendedtime != null" >
-        recommendedTime = #{recommendedtime,jdbcType=INTEGER},
-      </if>
-      <if test="rating != null" >
-        rating = #{rating,jdbcType=REAL},
-      </if>
-      <if test="ratingnum != null" >
-        ratingNum = #{ratingnum,jdbcType=INTEGER},
-      </if>
-      <if test="hotseq != null" >
-        hotSeq = #{hotseq,jdbcType=INTEGER},
-      </if>
-      <if test="maxrate != null" >
-        maxRate = #{maxrate,jdbcType=TINYINT},
-      </if>
-      <if test="showable != null" >
-        showable = #{showable,jdbcType=BIT},
-      </if>
-      <if test="buyable != null" >
-        buyable = #{buyable,jdbcType=BIT},
-      </if>
-      <if test="orgid != null" >
-        orgId = #{orgid,jdbcType=INTEGER},
-      </if>
-      <if test="orgcode != null" >
-        orgCode = #{orgcode,jdbcType=VARCHAR},
-      </if>
-      <if test="expirymode != null" >
-        expiryMode = #{expirymode,jdbcType=VARCHAR},
-      </if>
-      <if test="expiryvalue != null" >
-        expiryValue = #{expiryvalue,jdbcType=INTEGER},
-      </if>
-      <if test="creator != null" >
-        creator = #{creator,jdbcType=INTEGER},
-      </if>
-      <if test="about != null" >
-        about = #{about,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="assistantids != null" >
-        assistantIds = #{assistantids,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.ClassroomWithBLOBs" >
+        assistantIds = #{record.assistantids,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update classroom
+        set id = #{record.id,jdbcType=INTEGER},
+        title = #{record.title,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=CHAR},
+        categoryId = #{record.categoryid,jdbcType=INTEGER},
+        price = #{record.price,jdbcType=REAL},
+        vipLevelId = #{record.viplevelid,jdbcType=INTEGER},
+        smallPicture = #{record.smallpicture,jdbcType=VARCHAR},
+        middlePicture = #{record.middlepicture,jdbcType=VARCHAR},
+        largePicture = #{record.largepicture,jdbcType=VARCHAR},
+        headTeacherId = #{record.headteacherid,jdbcType=INTEGER},
+        teacherIds = #{record.teacherids,jdbcType=VARCHAR},
+        hitNum = #{record.hitnum,jdbcType=INTEGER},
+        auditorNum = #{record.auditornum,jdbcType=INTEGER},
+        studentNum = #{record.studentnum,jdbcType=INTEGER},
+        courseNum = #{record.coursenum,jdbcType=INTEGER},
+        lessonNum = #{record.lessonnum,jdbcType=INTEGER},
+        threadNum = #{record.threadnum,jdbcType=INTEGER},
+        noteNum = #{record.notenum,jdbcType=INTEGER},
+        postNum = #{record.postnum,jdbcType=INTEGER},
+        income = #{record.income,jdbcType=REAL},
+        createdTime = #{record.createdtime,jdbcType=INTEGER},
+        updatedTime = #{record.updatedtime,jdbcType=INTEGER},
+        service = #{record.service,jdbcType=VARCHAR},
+        hide = #{record.hide,jdbcType=TINYINT},
+        recommended = #{record.recommended,jdbcType=BIT},
+        recommendedSeq = #{record.recommendedseq,jdbcType=INTEGER},
+        recommendedTime = #{record.recommendedtime,jdbcType=INTEGER},
+        rating = #{record.rating,jdbcType=REAL},
+        ratingNum = #{record.ratingnum,jdbcType=INTEGER},
+        hotSeq = #{record.hotseq,jdbcType=INTEGER},
+        maxRate = #{record.maxrate,jdbcType=TINYINT},
+        showable = #{record.showable,jdbcType=BIT},
+        buyable = #{record.buyable,jdbcType=BIT},
+        orgId = #{record.orgid,jdbcType=INTEGER},
+        orgCode = #{record.orgcode,jdbcType=VARCHAR},
+        expiryMode = #{record.expirymode,jdbcType=VARCHAR},
+        expiryValue = #{record.expiryvalue,jdbcType=INTEGER},
+        creator = #{record.creator,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jindumooc.pojo.ClassroomWithBLOBs">
+        update classroom
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="categoryid != null">
+                categoryId = #{categoryid,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=REAL},
+            </if>
+            <if test="viplevelid != null">
+                vipLevelId = #{viplevelid,jdbcType=INTEGER},
+            </if>
+            <if test="smallpicture != null">
+                smallPicture = #{smallpicture,jdbcType=VARCHAR},
+            </if>
+            <if test="middlepicture != null">
+                middlePicture = #{middlepicture,jdbcType=VARCHAR},
+            </if>
+            <if test="largepicture != null">
+                largePicture = #{largepicture,jdbcType=VARCHAR},
+            </if>
+            <if test="headteacherid != null">
+                headTeacherId = #{headteacherid,jdbcType=INTEGER},
+            </if>
+            <if test="teacherids != null">
+                teacherIds = #{teacherids,jdbcType=VARCHAR},
+            </if>
+            <if test="hitnum != null">
+                hitNum = #{hitnum,jdbcType=INTEGER},
+            </if>
+            <if test="auditornum != null">
+                auditorNum = #{auditornum,jdbcType=INTEGER},
+            </if>
+            <if test="studentnum != null">
+                studentNum = #{studentnum,jdbcType=INTEGER},
+            </if>
+            <if test="coursenum != null">
+                courseNum = #{coursenum,jdbcType=INTEGER},
+            </if>
+            <if test="lessonnum != null">
+                lessonNum = #{lessonnum,jdbcType=INTEGER},
+            </if>
+            <if test="threadnum != null">
+                threadNum = #{threadnum,jdbcType=INTEGER},
+            </if>
+            <if test="notenum != null">
+                noteNum = #{notenum,jdbcType=INTEGER},
+            </if>
+            <if test="postnum != null">
+                postNum = #{postnum,jdbcType=INTEGER},
+            </if>
+            <if test="income != null">
+                income = #{income,jdbcType=REAL},
+            </if>
+            <if test="createdtime != null">
+                createdTime = #{createdtime,jdbcType=INTEGER},
+            </if>
+            <if test="updatedtime != null">
+                updatedTime = #{updatedtime,jdbcType=INTEGER},
+            </if>
+            <if test="service != null">
+                service = #{service,jdbcType=VARCHAR},
+            </if>
+            <if test="hide != null">
+                hide = #{hide,jdbcType=TINYINT},
+            </if>
+            <if test="recommended != null">
+                recommended = #{recommended,jdbcType=BIT},
+            </if>
+            <if test="recommendedseq != null">
+                recommendedSeq = #{recommendedseq,jdbcType=INTEGER},
+            </if>
+            <if test="recommendedtime != null">
+                recommendedTime = #{recommendedtime,jdbcType=INTEGER},
+            </if>
+            <if test="rating != null">
+                rating = #{rating,jdbcType=REAL},
+            </if>
+            <if test="ratingnum != null">
+                ratingNum = #{ratingnum,jdbcType=INTEGER},
+            </if>
+            <if test="hotseq != null">
+                hotSeq = #{hotseq,jdbcType=INTEGER},
+            </if>
+            <if test="maxrate != null">
+                maxRate = #{maxrate,jdbcType=TINYINT},
+            </if>
+            <if test="showable != null">
+                showable = #{showable,jdbcType=BIT},
+            </if>
+            <if test="buyable != null">
+                buyable = #{buyable,jdbcType=BIT},
+            </if>
+            <if test="orgid != null">
+                orgId = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="orgcode != null">
+                orgCode = #{orgcode,jdbcType=VARCHAR},
+            </if>
+            <if test="expirymode != null">
+                expiryMode = #{expirymode,jdbcType=VARCHAR},
+            </if>
+            <if test="expiryvalue != null">
+                expiryValue = #{expiryvalue,jdbcType=INTEGER},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=INTEGER},
+            </if>
+            <if test="about != null">
+                about = #{about,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="assistantids != null">
+                assistantIds = #{assistantids,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.ClassroomWithBLOBs">
+
     update classroom
     set title = #{title,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
@@ -843,6 +917,7 @@
       assistantIds = #{assistantids,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.Classroom" >
     update classroom
     set title = #{title,jdbcType=VARCHAR},
@@ -884,9 +959,5 @@
       creator = #{creator,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getTeachingClassroom" resultType="com.jindumooc.vojo.user.TeachingClassroom">
-        SELECT c.id,c.title,c.smallPicture,c.middlePicture,c.largePicture,c.studentNum,c.courseNum,c.threadNum,COUNT(*)
-        FROM classroom c,classroom_review r
-        WHERE c.headTeacherId = #{teacherId} and r.classroomId = c.id and r.createdTime>#{newTime}
-  </select>
+
 </mapper>

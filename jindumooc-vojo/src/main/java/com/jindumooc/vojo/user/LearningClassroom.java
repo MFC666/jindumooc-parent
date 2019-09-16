@@ -1,5 +1,6 @@
 package com.jindumooc.vojo.user;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public class LearningClassroom implements Serializable {
 
     private Integer threadnum;
 
-    private int todayClassroom;
 
+    private int todayClassroom;
 
 }

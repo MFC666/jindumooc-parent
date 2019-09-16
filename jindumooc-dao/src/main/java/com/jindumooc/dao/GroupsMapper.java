@@ -1,5 +1,6 @@
 package com.jindumooc.dao;
 
+
 import com.jindumooc.dto.group.SearchGroupDTO;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.pojo.GroupsExample;
@@ -37,6 +38,7 @@ public interface GroupsMapper {
 
     int updateByPrimaryKey(Groups record);
 
+
     /**
      * 查找小组
      *
@@ -59,6 +61,7 @@ public interface GroupsMapper {
      * @param id
      * @return
      */
+
     int closeGroupStatusByPrimaryKey(Integer id);
 
     /**
@@ -67,6 +70,7 @@ public interface GroupsMapper {
      * @return
      */
     int avgThreadNum();
+
 
     /**
      * 展示最新的n个小组
@@ -99,4 +103,5 @@ public interface GroupsMapper {
      * @return
      */
     int setGroupBackground(Groups group);
+
 }

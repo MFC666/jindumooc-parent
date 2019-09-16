@@ -2,6 +2,7 @@ package com.jindumooc.dao;
 
 import com.jindumooc.pojo.Friend;
 import com.jindumooc.pojo.FriendExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +28,18 @@ public interface FriendMapper {
     int updateByPrimaryKeySelective(Friend record);
 
     int updateByPrimaryKey(Friend record);
+
+
+    /**
+     * @param id 用户Id
+     * @return 计算用户关注数
+     */
+    Integer countUserFollow(@Param("id") Integer id);
+
+    /**
+     * @param id 用户Id
+     * @return 计算用户粉丝数
+     */
+    Integer countUserFan(@Param("id") Integer id);
+
 }

@@ -89,6 +89,21 @@
     from friend
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!--计算用户粉丝数、关注数-->
+  <select id="countUserFollow" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select
+    count(*)
+    from friend
+    where fromId = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="countUserFan" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+     select
+    count(*)
+    from friend
+    where toId = #{id,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from friend
     where id = #{id,jdbcType=INTEGER}

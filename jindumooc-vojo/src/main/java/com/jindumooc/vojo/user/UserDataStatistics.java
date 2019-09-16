@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class UserDataStatistics implements Serializable {
     //用于储存后台用户数据统计
 
+
     private int userId;
 
     private String nickName;

@@ -106,7 +106,9 @@
             distinct
         </if>
         <include refid="Base_Column_List"/>
+
         from jindu.groups
+
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -358,6 +360,7 @@
       createdTime = #{createdtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
     <select id="getIndexGroup" parameterType="com.jindumooc.dto.group.SearchGroupDTO"
             resultType="com.jindumooc.pojo.Groups">
     SELECT *
@@ -377,6 +380,7 @@
         select avg(threadNum)
         from jindu.groups
     </select>
+
     <select id="showNewNGroups" parameterType="java.lang.Integer">
         select *
         from jindu.groups

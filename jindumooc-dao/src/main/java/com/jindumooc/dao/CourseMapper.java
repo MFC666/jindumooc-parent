@@ -3,8 +3,10 @@ package com.jindumooc.dao;
 import com.jindumooc.pojo.Course;
 import com.jindumooc.pojo.CourseExample;
 import com.jindumooc.pojo.CourseWithBLOBs;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
 
 public interface CourseMapper {
     int countByExample(CourseExample example);

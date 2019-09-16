@@ -3,6 +3,7 @@ package com.jindumooc.dao;
 import com.jindumooc.pojo.GroupsThreadPost;
 import com.jindumooc.pojo.GroupsThreadPostExample;
 
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -36,6 +37,7 @@ public interface GroupsThreadPostMapper {
 
     int updateByPrimaryKey(GroupsThreadPost record);
 
+
     /**
      * 更新回复对应话题的信息
      *
@@ -43,5 +45,6 @@ public interface GroupsThreadPostMapper {
      * @return
      */
     int updateThreadPost(GroupsThreadPost newPost);
+
 
 }

@@ -91,6 +91,7 @@ public class User {
 
     private Boolean passwordinit;
 
+
     private String birthday;
 
     private String loginarea;
@@ -457,6 +458,7 @@ public class User {
         this.passwordinit = passwordinit;
     }
 
+
     public String getBirthday() {
         return birthday;
     }
@@ -464,6 +466,7 @@ public class User {
     public void setBirthday(String birthday) {
         this.birthday = birthday == null ? null : birthday.trim();
     }
+
 
     public String getLoginarea() {
         return loginarea;

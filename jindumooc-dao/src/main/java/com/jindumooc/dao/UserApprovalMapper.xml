@@ -348,6 +348,7 @@
       </where>
     </if>
   </select>
+
   <select id="getTotalApproval" parameterType="com.jindumooc.dto.user.SearchMessage" resultType="int" >
     SELECT count (*)
     FROM user_approval

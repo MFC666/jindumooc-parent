@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -51,6 +50,7 @@ public class UserDetail implements Serializable {
     private String iam;
 
     private Integer logintime;
+
 
     private String transformedLoginTime;
 

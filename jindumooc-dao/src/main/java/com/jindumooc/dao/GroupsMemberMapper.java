@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.jindumooc.vojo.user.UserNew;
 import com.jindumooc.vojo.user.UserShow;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface GroupsMemberMapper {
@@ -63,4 +64,5 @@ public interface GroupsMemberMapper {
      * @return
      */
     UserNew showNewMember(Integer userId);
+
 }

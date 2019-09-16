@@ -123,7 +123,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, subtitle, status, type, maxStudentNum, price, originPrice, coinPrice, 
+    course.id, title, subtitle, status, type, maxStudentNum, price, originPrice, coinPrice,
     originCoinPrice, expiryMode, expiryDay, showStudentNumType, serializeMode, income, 
     lessonNum, giveCredit, rating, ratingNum, vipLevelId, categoryId, smallPicture, middlePicture, 
     largePicture, recommended, recommendedSeq, recommendedTime, locationId, address, 
@@ -184,7 +184,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jindumooc.pojo.CourseWithBLOBs" >
-    insert into course (id, title, subtitle, 
+    insert into course (id, title, subtitle,
       status, type, maxStudentNum, 
       price, originPrice, coinPrice, 
       originCoinPrice, expiryMode, expiryDay, 

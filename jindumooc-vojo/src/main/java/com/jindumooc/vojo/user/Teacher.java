@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class Teacher implements Serializable {
     //用于储存教师搜索
 
+
     private int id;
 
     private String nickName;
@@ -36,6 +37,5 @@ public class Teacher implements Serializable {
 
     //教师简介
     private String about;
-
 
 }

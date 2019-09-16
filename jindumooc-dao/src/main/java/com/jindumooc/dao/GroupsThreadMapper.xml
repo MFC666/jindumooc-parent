@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="com.jindumooc.dao.GroupsThreadMapper">
     <resultMap id="BaseResultMap" type="com.jindumooc.pojo.GroupsThread">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -138,6 +139,7 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.jindumooc.pojo.GroupsThread">
+
     insert into groups_thread (id, title, isElite, 
       isStick, lastPostMemberId, lastPostTime, 
       groupId, userId, createdTime, 
@@ -151,6 +153,7 @@
       #{hitnum,jdbcType=INTEGER}, #{rewardcoin,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
+
     <insert id="insertSelective" parameterType="com.jindumooc.pojo.GroupsThread">
         insert into groups_thread
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -411,6 +414,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jindumooc.pojo.GroupsThread">
+
     update groups_thread
     set title = #{title,jdbcType=VARCHAR},
       isElite = #{iselite,jdbcType=INTEGER},
@@ -429,7 +433,9 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
     <update id="updateByPrimaryKey" parameterType="com.jindumooc.pojo.GroupsThread">
+
     update groups_thread
     set title = #{title,jdbcType=VARCHAR},
       isElite = #{iselite,jdbcType=INTEGER},
@@ -447,6 +453,7 @@
       type = #{type,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
     <update id="setEliteGroupThread" parameterType="java.lang.Integer">
         update jindu.groups_thread
         set isElite = 1
@@ -554,6 +561,5 @@
         where isElite = 1
         order by postNum desc
     </select>
-
 
 </mapper>

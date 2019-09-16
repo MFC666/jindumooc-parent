@@ -4,6 +4,7 @@ import com.jindumooc.pojo.CourseLessonLearn;
 import com.jindumooc.pojo.CourseLessonLearnExample;
 import java.util.List;
 
+
 import com.jindumooc.vojo.user.LearningCourse;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,6 +30,7 @@ public interface CourseLessonLearnMapper {
     int updateByPrimaryKeySelective(CourseLessonLearn record);
 
     int updateByPrimaryKey(CourseLessonLearn record);
+
 
     List<LearningCourse> getLearningCourse(int userId, String learnStatus);
 }

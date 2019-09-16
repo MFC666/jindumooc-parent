@@ -39,7 +39,9 @@ public interface CourseThreadMapper {
 
     List<com.jindumooc.vojo.user.CourseThread> getCourseDiscussion(@Param("teacherId") String teacherId);
 
+
     List<com.jindumooc.vojo.user.CourseThread> getMyQuestion(@Param("userId") int userId);
 
     List<com.jindumooc.vojo.user.CourseThread> getMyDiscussion(@Param("userId") int userId);
+
 }
