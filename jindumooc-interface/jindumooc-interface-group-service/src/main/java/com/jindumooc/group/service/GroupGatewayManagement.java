@@ -35,10 +35,10 @@ public interface GroupGatewayManagement {
     /**
      * 根据小组ID返回Json格式小组组名与介绍
      *
-     * @param groupIdDTO
+     * @param groupID
      * @return
      */
-    GroupIntroduction showGroupIntroduction(GroupIdDTO groupIdDTO);
+    GroupIntroduction showGroupIntroduction(Integer groupID);
 
     /**
      * 展示所有热门小组的小组名与小组logo
@@ -102,10 +102,10 @@ public interface GroupGatewayManagement {
     /**
      * 展示小组新进成员
      *
-     * @param showNewPostDTO
+     * @param
      * @return
      */
-    List<UserNew> showNewMembers(ShowNewPostDTO showNewPostDTO);
+    List<UserNew> showNewMembers(Integer groupId, Integer memberNumber);
 
     /**
      * 编辑小组名称和介绍

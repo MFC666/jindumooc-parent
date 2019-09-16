@@ -8,10 +8,7 @@ import com.jindumooc.vojo.group.*;
 import com.jindumooc.vojo.user.UserNew;
 import com.jindumooc.vojo.user.UserShow;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class GroupGatewayManagementController {
      * @param newGroup
      * @return
      */
-    @RequestMapping(value = "/addNewGroup", method = RequestMethod.POST)
+    @PostMapping(value = "/groupGate/addNewGroup")
     @ResponseBody
     public boolean addNewGroup(@RequestBody Groups newGroup) {
         return groupGatewayManagement.addNewGroup(newGroup);
@@ -45,23 +42,22 @@ public class GroupGatewayManagementController {
      * @param groupID
      * @return
      */
-    @RequestMapping(value = "/deleteGroup", method = RequestMethod.POST)
+    @DeleteMapping(value = "/groupGate/deleteGroup")
     @ResponseBody
-    public boolean deleteGroup(Integer groupID) {
+    public boolean deleteGroup(@RequestParam(value = "groupID") Integer groupID) {
         return groupGatewayManagement.deleteGroup(groupID);
     }
 
     /**
-     * 自此方法开始，前后端一律采用Json数据格式通信
      * 根据小组ID返回Json格式小组组名与介绍
      *
-     * @param groupIdDTO
+     * @param groupID
      * @return
      */
-    @RequestMapping(value = "/showGroupIntroduction", method = RequestMethod.POST)
+    @GetMapping(value = "/groupGate/showGroupIntroduction")
     @ResponseBody
-    public GroupIntroduction showGroupIntroduction(@RequestBody GroupIdDTO groupIdDTO) {
-        return groupGatewayManagement.showGroupIntroduction(groupIdDTO);
+    public GroupIntroduction showGroupIntroduction(@RequestParam(value = "groupID") Integer groupID) {
+        return groupGatewayManagement.showGroupIntroduction(groupID);
     }
 
     /**
@@ -69,7 +65,7 @@ public class GroupGatewayManagementController {
      *
      * @return
      */
-    @RequestMapping(value = "/showAllHotGroup", method = RequestMethod.POST)
+    @GetMapping(value = "/groupGate/showAllHotGroup")
     @ResponseBody
     public List<GroupShow> showAllHotGroup() {
         return groupGatewayManagement.showAllHotGroup();
@@ -81,9 +77,9 @@ public class GroupGatewayManagementController {
      * @param groupNumber
      * @return
      */
-    @RequestMapping(value = "/showNewGroup", method = RequestMethod.POST)
+    @GetMapping(value = "/groupGate/showNewGroup")
     @ResponseBody
-    public List<GroupNew> showNewGroup(Integer groupNumber) {
+    public List<GroupNew> showNewGroup(@RequestParam(value = "groupNumber", defaultValue = "8") Integer groupNumber) {
         return groupGatewayManagement.showNewGroup(groupNumber);
     }
 
@@ -93,9 +89,9 @@ public class GroupGatewayManagementController {
      * @param groupThreadNum
      * @return
      */
-    @RequestMapping(value = "/showRecentGroupThread", method = RequestMethod.POST)
+    @GetMapping(value = "/groupGate/showRecentGroupThread")
     @ResponseBody
-    public List<GroupThreadShow> showRecentGroupThread(Integer groupThreadNum) {
+    public List<GroupThreadShow> showRecentGroupThread(@RequestParam(value = "groupThreadNum", defaultValue = "8") Integer groupThreadNum) {
         return groupGatewayManagement.showRecentGroupThread(groupThreadNum);
     }
 
@@ -105,9 +101,9 @@ public class GroupGatewayManagementController {
      * @param userID
      * @return
      */
-    @RequestMapping(value = "/showMyGroup", method = RequestMethod.POST)
+    @GetMapping(value = "/groupGate/showMyGroup")
     @ResponseBody
-    public List<GroupShow> showMyGroup(Integer userID) {
+    public List<GroupShow> showMyGroup(@RequestParam(value = "userID") Integer userID) {
         return groupGatewayManagement.showMyGroup(userID);
     }
 
@@ -117,9 +113,9 @@ public class GroupGatewayManagementController {
      * @param userID
      * @return
      */
-    @RequestMapping(value = "/showMyGroupThreadPost", method = RequestMethod.POST)
+    @GetMapping(value = "/groupGate/showMyGroupThreadPost")
     @ResponseBody
-    public List<GroupThreadShow> showMyGroupThreadPost(Integer userID) {
+    public List<GroupThreadShow> showMyGroupThreadPost(@RequestParam("userID") Integer userID) {
         return groupGatewayManagement.showMyGroupThreadPost(userID);
     }
 
@@ -129,9 +125,9 @@ public class GroupGatewayManagementController {
      * @param userID
      * @return
      */
-    @RequestMapping(value = "/showMyGroupThreadCollect", method = RequestMethod.POST)
+    @GetMapping(value = "/groupGate/showMyGroupThreadCollect")
     @ResponseBody
-    public List<GroupThreadShow> showMyGroupThreadCollect(Integer userID) {
+    public List<GroupThreadShow> showMyGroupThreadCollect(@RequestParam(value = "userID") Integer userID) {
         return groupGatewayManagement.showMyGroupThreadCollect(userID);
     }
 
@@ -141,7 +137,7 @@ public class GroupGatewayManagementController {
      * @param groupThreadDTO
      * @return
      */
-    @RequestMapping(value = "/createGroupThread", method = RequestMethod.POST)
+    @PostMapping(value = "/groupGate/createGroupThread")
     @ResponseBody
     public boolean createGroupThread(@RequestBody GroupThreadDTO groupThreadDTO) {
         return groupGatewayManagement.createGroupThread(groupThreadDTO);
@@ -150,25 +146,25 @@ public class GroupGatewayManagementController {
     /**
      * 根据小组ID展示小组成员信息
      *
-     * @param groupId
+     * @param groupID
      * @return
      */
-    @RequestMapping(value = "/showGroupMembers", method = RequestMethod.POST)
+    @GetMapping(value = "/groupGate/showGroupMembers")
     @ResponseBody
-    public List<UserShow> showGroupMembers(Integer groupId) {
-        return groupGatewayManagement.showGroupMembers(groupId);
+    public List<UserShow> showGroupMembers(@RequestParam(value = "groupID") Integer groupID) {
+        return groupGatewayManagement.showGroupMembers(groupID);
     }
 
     /**
      * 展示小组新进成员
      *
-     * @param showNewPostDTO
+     * @param
      * @return
      */
-    @RequestMapping(value = "/showNewMembers", method = RequestMethod.POST)
+    @GetMapping(value = "/groupGate/showNewMembers")
     @ResponseBody
-    public List<UserNew> showNewMembers(ShowNewPostDTO showNewPostDTO) {
-        return groupGatewayManagement.showNewMembers(showNewPostDTO);
+    public List<UserNew> showNewMembers(@RequestParam(value = "groupId") Integer groupId, @RequestParam(value = "memberNumber") Integer memberNumber) {
+        return groupGatewayManagement.showNewMembers(groupId, memberNumber);
     }
 
     /**
@@ -177,9 +173,9 @@ public class GroupGatewayManagementController {
      * @param setGroupInfoDTO
      * @return
      */
-    @RequestMapping(value = "/setGroupInfo", method = RequestMethod.POST)
+    @PutMapping(value = "/groupGate/setGroupInfo")
     @ResponseBody
-    public boolean setGroupInfo(SetGroupInfoDTO setGroupInfoDTO) {
+    public boolean setGroupInfo(@RequestBody SetGroupInfoDTO setGroupInfoDTO) {
         return groupGatewayManagement.setGroupInfo(setGroupInfoDTO);
     }
 
@@ -189,9 +185,9 @@ public class GroupGatewayManagementController {
      * @param setGroupLogoDTO
      * @return
      */
-    @RequestMapping(value = "/setGroupLogo", method = RequestMethod.POST)
+    @PutMapping(value = "/groupGate/setGroupLogo")
     @ResponseBody
-    public boolean setGroupLogo(SetGroupLogoDTO setGroupLogoDTO) {
+    public boolean setGroupLogo(@RequestBody SetGroupLogoDTO setGroupLogoDTO) {
         return groupGatewayManagement.setGroupLogo(setGroupLogoDTO);
     }
 
@@ -201,7 +197,7 @@ public class GroupGatewayManagementController {
      * @param setGroupBackgroundDTO
      * @return
      */
-    @RequestMapping(value = "/setGroupBackground", method = RequestMethod.POST)
+    @RequestMapping(value = "/groupGate/setGroupBackground", method = RequestMethod.POST)
     @ResponseBody
     public boolean setGroupBackground(SetGroupBackgroundDTO setGroupBackgroundDTO) {
         return groupGatewayManagement.setGroupBackground(setGroupBackgroundDTO);
@@ -213,7 +209,7 @@ public class GroupGatewayManagementController {
      * @param updateThreadInfoDTO
      * @return
      */
-    @RequestMapping(value = "/updateThreadInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/groupGate/updateThreadInfo", method = RequestMethod.POST)
     @ResponseBody
     public boolean updateThreadInfo(UpdateThreadInfoDTO updateThreadInfoDTO) {
         return groupGatewayManagement.updateThreadInfo(updateThreadInfoDTO);
@@ -225,9 +221,9 @@ public class GroupGatewayManagementController {
      * @param searchThreadDTO
      * @return
      */
-    @RequestMapping(value = "/searchThread ", method = RequestMethod.POST)
+    @PostMapping(value = "/groupGate/searchThread")
     @ResponseBody
-    public List<GroupThreadSearch> searchThread(SearchThreadDTO searchThreadDTO) {
+    public List<GroupThreadSearch> searchThread(@RequestBody SearchThreadDTO searchThreadDTO) {
         return groupGatewayManagement.searchThread(searchThreadDTO);
     }
 
@@ -237,9 +233,9 @@ public class GroupGatewayManagementController {
      * @param newPost
      * @return
      */
-    @RequestMapping(value = "/addNewPost ", method = RequestMethod.POST)
+    @PostMapping(value = "/groupGate/addNewPost ")
     @ResponseBody
-    public boolean addNewPost(PostNew newPost) {
+    public boolean addNewPost(@RequestBody PostNew newPost) {
         return groupGatewayManagement.newPost(newPost);
     }
 

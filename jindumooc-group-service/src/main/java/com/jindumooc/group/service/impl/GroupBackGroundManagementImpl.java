@@ -172,13 +172,13 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     /**
      * 设置话题加精
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
     @Override
-    public boolean setEliteGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+    public boolean setEliteGroupThread(Integer threadID) {
         try {
-            groupsThreadMapper.setEliteGroupThread(groupThreadIdDTO.getThreadID());
+            groupsThreadMapper.setEliteGroupThread(threadID);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -190,13 +190,13 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     /**
      * 取消话题加精
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
     @Override
-    public boolean setNotEliteGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+    public boolean setNotEliteGroupThread(Integer threadID) {
         try {
-            groupsThreadMapper.setNotEliteGroupThread(groupThreadIdDTO.getThreadID());
+            groupsThreadMapper.setNotEliteGroupThread(threadID);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -208,13 +208,13 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     /**
      * 设置话题为置顶
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
     @Override
-    public boolean setStickGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+    public boolean setStickGroupThread(Integer threadID) {
         try {
-            groupsThreadMapper.setStickGroupThread(groupThreadIdDTO.getThreadID());
+            groupsThreadMapper.setStickGroupThread(threadID);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -225,13 +225,13 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     /**
      * 取消话题置顶
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
     @Override
-    public boolean setNotStickGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+    public boolean setNotStickGroupThread(Integer threadID) {
         try {
-            groupsThreadMapper.setNotStickGroupThread(groupThreadIdDTO.getThreadID());
+            groupsThreadMapper.setNotStickGroupThread(threadID);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -242,13 +242,13 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     /**
      * 关闭小组话题
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
     @Override
-    public boolean closeGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+    public boolean closeGroupThread(Integer threadID) {
         try {
-            groupsThreadMapper.closeGroupThread(groupThreadIdDTO.getThreadID());
+            groupsThreadMapper.closeGroupThread(threadID);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -259,13 +259,13 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     /**
      * 打开小组话题
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
     @Override
-    public boolean openGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+    public boolean openGroupThread(Integer threadID) {
         try {
-            groupsThreadMapper.openGroupThread(groupThreadIdDTO.getThreadID());
+            groupsThreadMapper.openGroupThread(threadID);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -276,13 +276,13 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     /**
      * 删除小组话题
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
     @Override
-    public boolean deleteGroupThread(GroupThreadIdDTO groupThreadIdDTO) {
+    public boolean deleteGroupThread(Integer threadID) {
         try {
-            groupsThreadMapper.deleteByPrimaryKey(groupThreadIdDTO.getThreadID());
+            groupsThreadMapper.deleteByPrimaryKey(threadID);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

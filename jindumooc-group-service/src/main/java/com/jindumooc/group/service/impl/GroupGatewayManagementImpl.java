@@ -75,13 +75,13 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
     /**
      * 根据小组ID返回Json格式小组组名与介绍
      *
-     * @param groupIdDTO
+     * @param groupID
      * @return
      */
     @Override
-    public GroupIntroduction showGroupIntroduction(GroupIdDTO groupIdDTO) {
+    public GroupIntroduction showGroupIntroduction(Integer groupID) {
         try {
-            Groups groups = groupsMapper.selectByPrimaryKey(groupIdDTO.getGroupID());
+            Groups groups = groupsMapper.selectByPrimaryKey(groupID);
             GroupIntroduction groupIntroduction = new GroupIntroduction();
             groupIntroduction.setGroupTitle(groups.getTitle());
             groupIntroduction.setGroupIntroduction(groups.getAbout());
@@ -410,13 +410,13 @@ public class GroupGatewayManagementImpl implements GroupGatewayManagement {
     /**
      * 展示小组新进成员
      *
-     * @param showNewPostDTO
+     * @param
      * @return
      */
     @Override
-    public List<UserNew> showNewMembers(ShowNewPostDTO showNewPostDTO) {
+    public List<UserNew> showNewMembers(Integer groupId, Integer memberNumber) {
         try {
-            List<Integer> userIds = groupsMemberMapper.getNewMembers(showNewPostDTO.getGroupId(), showNewPostDTO.getMemberNumber());
+            List<Integer> userIds = groupsMemberMapper.getNewMembers(groupId, memberNumber);
             List<UserNew> users = new ArrayList<>();
             for (Integer userId :
                     userIds) {

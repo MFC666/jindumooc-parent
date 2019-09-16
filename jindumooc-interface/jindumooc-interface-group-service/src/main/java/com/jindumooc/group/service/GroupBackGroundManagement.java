@@ -35,59 +35,59 @@ public interface GroupBackGroundManagement {
     /**
      * 设置话题为加精
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
-    boolean setEliteGroupThread(GroupThreadIdDTO groupThreadIdDTO);
+    boolean setEliteGroupThread(Integer threadID);
 
     /**
      * 取消话题加精
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
-    boolean setNotEliteGroupThread(GroupThreadIdDTO groupThreadIdDTO);
+    boolean setNotEliteGroupThread(Integer threadID);
 
 
     /**
      * 设置话题为置顶
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
-    boolean setStickGroupThread(GroupThreadIdDTO groupThreadIdDTO);
+    boolean setStickGroupThread(Integer threadID);
 
 
     /**
      * 取消话题置顶
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
-    boolean setNotStickGroupThread(GroupThreadIdDTO groupThreadIdDTO);
+    boolean setNotStickGroupThread(Integer threadID);
 
     /**
      * 关闭小组话题
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
-    boolean closeGroupThread(GroupThreadIdDTO groupThreadIdDTO);
+    boolean closeGroupThread(Integer threadID);
 
     /**
      * 打开小组话题
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
-    boolean openGroupThread(GroupThreadIdDTO groupThreadIdDTO);
+    boolean openGroupThread(Integer threadID);
 
     /**
      * 删除小组话题
      *
-     * @param groupThreadIdDTO
+     * @param threadID
      * @return
      */
-    boolean deleteGroupThread(GroupThreadIdDTO groupThreadIdDTO);
+    boolean deleteGroupThread(Integer threadID);
 
 }
