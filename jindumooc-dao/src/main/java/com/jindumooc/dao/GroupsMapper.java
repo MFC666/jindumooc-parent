@@ -2,6 +2,7 @@ package com.jindumooc.dao;
 
 
 import com.jindumooc.dto.group.SearchGroupDTO;
+import com.jindumooc.dto.group.SearchGroupInDBDTO;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.pojo.GroupsExample;
 
@@ -45,7 +46,7 @@ public interface GroupsMapper {
      * @param sg
      * @return
      */
-    List<Groups> getIndexGroup(SearchGroupDTO sg);
+    List<Groups> getIndexGroup(SearchGroupInDBDTO sg);
 
     /**
      * 打开小组

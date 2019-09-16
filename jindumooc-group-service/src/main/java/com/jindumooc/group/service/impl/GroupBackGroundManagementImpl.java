@@ -6,7 +6,7 @@ import com.jindumooc.dao.GroupsMapper;
 import com.jindumooc.dao.GroupsThreadMapper;
 import com.jindumooc.dao.UserMapper;
 import com.jindumooc.dto.group.GroupThreadAllDTO;
-import com.jindumooc.dto.group.GroupThreadIdDTO;
+import com.jindumooc.dto.group.SearchGroupInDBDTO;
 import com.jindumooc.group.service.GroupBackGroundManagement;
 import com.jindumooc.pojo.*;
 import com.jindumooc.vojo.group.BackGroundIndexGroup;
@@ -41,9 +41,21 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
     @Override
     public List<BackGroundIndexGroup> getIndexGroup(SearchGroupDTO searchGroupDTO) {
 
+        SearchGroupInDBDTO searchGroupInDBDTO = new SearchGroupInDBDTO();
+        searchGroupInDBDTO.setGroupStatus(searchGroupDTO.getGroupStatus());
+        searchGroupInDBDTO.setGroupTitle(searchGroupDTO.getGroupTitle());
+
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andNicknameEqualTo(searchGroupDTO.getGroupOwnerName());
+
+        List<User> users = userMapper.selectByExample(userExample);
+
+        searchGroupInDBDTO.setOwnerId(users.get(0).getId());
+
         //与前端交互后修改
         PageHelper.startPage(searchGroupDTO.getPageNum(), searchGroupDTO.getPageSize());
-        List<Groups> groupsList = groupsMapper.getIndexGroup(searchGroupDTO);
+        List<Groups> groupsList = groupsMapper.getIndexGroup(searchGroupInDBDTO);
 
         //整理groupList填充BackgroundIndexGroup
         return getBackGroundIndexGroup(groupsList);
@@ -302,10 +314,12 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
         for (int i = 0; i < groupsList.size(); i++) {
             BackGroundIndexGroup bgig = new BackGroundIndexGroup();
             Groups groups = groupsList.get(i);
-            System.out.println(groups.getTitle());
+//            System.out.println(groups.getTitle());
             bgig.setGroupID(groups.getId());
             bgig.setGroupMemberNum(groups.getMembernum());
-            bgig.setGroupOwnerID(groups.getOwnerid());
+
+            User user = userMapper.selectByPrimaryKey(groups.getOwnerid());
+            bgig.setGroupOwnerName(user.getNickname());
             bgig.setGroupPostNum(groups.getPostnum());
             bgig.setGroupStatus(groups.getStatus());
             bgig.setGroupThreadNum(groups.getThreadnum());

@@ -16,7 +16,7 @@ public class BackGroundIndexGroup implements Serializable {
     // 需要展示的属性
     private int groupID;
     private String groupTitle;
-    private int groupOwnerID;
+    private String groupOwnerName;
     private int groupMemberNum;
     private int groupThreadNum;
     private int groupPostNum;

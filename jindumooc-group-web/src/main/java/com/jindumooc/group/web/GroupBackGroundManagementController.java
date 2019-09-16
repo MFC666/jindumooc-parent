@@ -142,7 +142,7 @@ public class GroupBackGroundManagementController {
      * @param threadID
      * @return
      */
-    @PutMapping(value = "/groupBack/deleteGroupThread")
+    @DeleteMapping(value = "/groupBack/deleteGroupThread")
     @ResponseBody
     public boolean deleteGroupThread(@RequestParam(value = "threadID") Integer threadID) {
         return groupBackGroundManagement.deleteGroupThread(threadID);

@@ -1,17 +1,12 @@
 package com.jindumooc.group.service;
 
-<<<<<<< HEAD
-import com.jindumooc.dto.group.GroupIdDTO;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.GroupIntroduction;
 import com.jindumooc.vojo.group.GroupShow;
-=======
 import com.jindumooc.dto.group.*;
-import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.*;
 import com.jindumooc.vojo.user.UserNew;
 import com.jindumooc.vojo.user.UserShow;
->>>>>>> a8811d28e2d840d53b0e239c6636d521f145be28
 
 import java.util.List;
 
@@ -52,9 +47,6 @@ public interface GroupGatewayManagement {
      *
      * @return
      */
-<<<<<<< HEAD
-    List<GroupShow> showAllGroup();
-=======
     List<GroupShow> showAllHotGroup();
 
     /**
@@ -165,5 +157,4 @@ public interface GroupGatewayManagement {
      * @return
      */
     boolean newPost(PostNew newPost);
->>>>>>> a8811d28e2d840d53b0e239c6636d521f145be28
 }

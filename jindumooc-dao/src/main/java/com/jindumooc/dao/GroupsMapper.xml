@@ -361,11 +361,15 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-    <select id="getIndexGroup" parameterType="com.jindumooc.dto.group.SearchGroupDTO"
+    <select id="getIndexGroup" parameterType="com.jindumooc.dto.group.SearchGroupInDBDTO"
             resultType="com.jindumooc.pojo.Groups">
-    SELECT *
-    FROM `groups` g
-  </select>
+        SELECT *
+        FROM `groups` g;
+        where
+        <if test="groupStatus!=null">status = #{groupStatus,jdbcType=VARCHAR}</if>
+        <if test="groupTitle!=null">and title = #{groupTitle,jdbcType=VARCHAR}</if>
+        <if test="ownerId!=null">and ownerId = #{ownerId,jdbcType=INTEGER}</if>
+    </select>
     <update id="openGroupStatusByPrimaryKey" parameterType="java.lang.Integer">
     update jindu.groups
     set status = 'open'
