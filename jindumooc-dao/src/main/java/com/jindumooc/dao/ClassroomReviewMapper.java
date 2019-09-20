@@ -1,9 +1,12 @@
 package com.jindumooc.dao;
 
+import com.jindumooc.dto.classes.ClassroomReviewDTO;
 import com.jindumooc.pojo.ClassroomReview;
 import com.jindumooc.pojo.ClassroomReviewExample;
 import com.jindumooc.pojo.ClassroomReviewWithBLOBs;
 import java.util.List;
+
+import com.jindumooc.vojo.classes.ClassReview;
 import org.apache.ibatis.annotations.Param;
 
 public interface ClassroomReviewMapper {
@@ -34,4 +37,8 @@ public interface ClassroomReviewMapper {
     int updateByPrimaryKeyWithBLOBs(ClassroomReviewWithBLOBs record);
 
     int updateByPrimaryKey(ClassroomReview record);
+
+    List<ClassReview> getClassroomReview(@Param("parentId") int i, @Param("classroomId") Integer classroomId);
+
+    void setClassroomReview(ClassroomReviewDTO classroomReviewDTO);
 }

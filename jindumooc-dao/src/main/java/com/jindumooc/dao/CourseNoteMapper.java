@@ -4,6 +4,7 @@ import com.jindumooc.pojo.CourseNote;
 import com.jindumooc.pojo.CourseNoteExample;
 import java.util.List;
 
+import com.jindumooc.vojo.classes.ClassroomNote;
 import com.jindumooc.vojo.user.Note;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,4 +42,5 @@ public interface CourseNoteMapper {
     List<Note> getNoteList(@Param("userId") int userId);
     List<Note> getNoteDetail(@Param("userId") int userId,@Param("courseId") int courseId);
 
+    List<ClassroomNote> getClassroomNote(@Param("classroomId") int classroomId,@Param("courseId") int courseId);
 }

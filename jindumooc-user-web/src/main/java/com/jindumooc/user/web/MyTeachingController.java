@@ -24,7 +24,7 @@ public class MyTeachingController {
     /**
      * 获得在教课程
      * @param teacherId
-     * @param courseType
+     * @param courseType：课程类型，普通课程、班级课程、公开课
      * @param pageNum
      * @param pageSize
      * @return

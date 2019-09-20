@@ -1,9 +1,12 @@
 package com.jindumooc.dao;
 
+import com.jindumooc.dto.classes.ClassroomThreadPostDTO;
 import com.jindumooc.pojo.ThreadPost;
 import com.jindumooc.pojo.ThreadPostExample;
 import com.jindumooc.pojo.ThreadPostWithBLOBs;
 import java.util.List;
+
+import com.jindumooc.vojo.classes.ClassroomThreadPost;
 import org.apache.ibatis.annotations.Param;
 
 public interface ThreadPostMapper {
@@ -34,4 +37,8 @@ public interface ThreadPostMapper {
     int updateByPrimaryKeyWithBLOBs(ThreadPostWithBLOBs record);
 
     int updateByPrimaryKey(ThreadPost record);
+
+    List<ClassroomThreadPost> getClassroomThreadPost(@Param("threadId") int threadId,@Param("posterType") String posterType,@Param("parentId")int parentIed);
+
+    void insertClassroomThreadPost(ClassroomThreadPostDTO classroomThreadPostDTO);
 }

@@ -959,5 +959,21 @@
       creator = #{creator,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+<select id="getClassroomAbout" resultType="String">
+    SELECT about
+    FROM classroom
+    WHERE id = #{classroomId}
+</select>
+    <select id="getClassCourse" resultMap="getClassCourseMap">
+       SELECT v.cover,v.courseSetTitle,t.title,t.seq,t.length
+        FROM classroom_courses c,course_V8 v,course_task t
+        WHERE c.classroomId =  #{classroomId} and c.courseId = v.id and t.fromCourseSetId = v.id
+    </select>
+    <resultMap id="getClassCourseMap" type="com.jindumooc.vojo.classes.ClassCourse">
+        <result column="cover" property="cover" jdbcType="VARCHAR"/>
+        <result column="courseSetTitle" property="courseSetTitle" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="seq" property="seq" jdbcType="INTEGER"/>
+        <result column="length" property="length" jdbcType="INTEGER"/>
+    </resultMap>
 </mapper>

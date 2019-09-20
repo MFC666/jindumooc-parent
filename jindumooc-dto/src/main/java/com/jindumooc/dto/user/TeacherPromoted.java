@@ -18,5 +18,7 @@ public class TeacherPromoted implements Serializable {
 
     private int promotedSeq;
 
+    private int promotedTime;
+
 
 }

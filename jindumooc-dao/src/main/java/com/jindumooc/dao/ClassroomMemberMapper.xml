@@ -505,5 +505,17 @@
     <result column="threadnum" property="threadnum" jdbcType="INTEGER" />
     <result column="todayClassroom" property="todayClassroom" jdbcType="INTEGER" />
   </resultMap>
+  <select id="getClassroomTeacher" resultMap="classroomTeacherMap">
+   SELECT u.id,largeAvatar,nickName,title,p.about
+    FROM `user` u,classroom_member m,user_profile p
+    WHERE u.id = m.userId AND p.id = u.id AND m.classroomId = #{classroomId} AND m.role LIKE '%eacher|%'
+  </select>
+  <resultMap id="classroomTeacherMap" type="com.jindumooc.vojo.user.Teacher">
+  <result property="id" column="id" jdbcType="INTEGER"/>
+    <result property="largeAvatar" column="largeAvatar" jdbcType="VARCHAR"/>
+    <result property="nickName" column="nickName" jdbcType="VARCHAR"/>
+    <result property="title" column="title" jdbcType="VARCHAR"/>
+    <result property="about" column="about" jdbcType="VARCHAR"/>
+  </resultMap>
 
 </mapper>

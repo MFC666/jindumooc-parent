@@ -5,6 +5,7 @@ import com.jindumooc.dto.classes.CreateClassroomDTO;
 import com.jindumooc.pojo.Classroom;
 import com.jindumooc.pojo.ClassroomExample;
 import com.jindumooc.pojo.ClassroomWithBLOBs;
+import com.jindumooc.vojo.classes.ClassCourse;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -118,4 +119,13 @@ public interface ClassroomMapper {
      * @param id 班级Id
      */
     void decreaseStudentNumber(Integer id);
+
+    /**
+     * 获取班级介绍
+     * @param classroomId
+     * @return
+     */
+    List<String> getClassroomAbout(@Param("classroomId") Integer classroomId);
+
+    List<ClassCourse> getClassCourse(@Param("classroomId") Integer id);
 }

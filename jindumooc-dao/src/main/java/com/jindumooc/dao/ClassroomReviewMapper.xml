@@ -335,4 +335,23 @@
       updatedTime = #{updatedtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getClassroomReview" resultMap="ClassroomReviewMap">
+    SELECT u.nickname,r.userId,r.id,r.content,r.createdTime,r.updatedTime,r.title,r.rating
+    FROM `user` u,classroom_review r
+    WHERE u.id = r.userId AND r.parentId = #{parentId} AND r.classroomId = #{classroomId}
+  </select>
+  <resultMap id="ClassroomReviewMap" type="com.jindumooc.vojo.classes.ClassReview">
+    <result property="nickName" column="nickname" jdbcType="VARCHAR"/>
+    <result property="id" column="id" jdbcType="INTEGER"/>
+    <result property="userId" column="userId" jdbcType="INTEGER"/>
+    <result property="title" column="title" jdbcType="VARCHAR"/>
+    <result property="content" column="content" jdbcType="VARCHAR"/>
+    <result property="rating" column="rating" jdbcType="INTEGER"/>
+    <result property="createdTime" column="createdTime" jdbcType="INTEGER"/>
+    <result property="updateTime" column="updatedTime" jdbcType="INTEGER"/>
+  </resultMap>
+  <insert id="setClassroomReview" parameterType="com.jindumooc.dto.classes.ClassroomReviewDTO">
+    INSERT INTO classroom_review(userId,classroomId,content,rating,createdTime,parentId,updatedTime)
+    VALUES(#{userId,jdbcType=INTEGER},#{classroomId,jdbcType=INTEGER},#{title,jdbcType=VARCHAR},#{rating,jdbcType=INTEGER},#{createdTime,jdbcType=INTEGER},#{parentId,jdbcType=INTEGER},#{updateTime,jdbcType=INTEGER});
+  </insert>
 </mapper>

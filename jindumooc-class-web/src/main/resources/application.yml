@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8005
 
 dubbo:
   application:
@@ -14,7 +14,7 @@ dubbo:
   registry:
 
     ###########注册中心地址(修改为本机zookeeper地址)#####################
-    address: zookeeper://192.168.142.128:2181
+    address: zookeeper://192.168.213.128:2181
 scan:
   ############实现类扫包范围###################
   base-packages: com.jindumooc.classes.web

@@ -6,7 +6,9 @@ import com.jindumooc.pojo.ClassroomMember;
 import com.jindumooc.pojo.ClassroomMemberExample;
 import java.util.List;
 import com.jindumooc.vojo.user.LearningClassroom;
+import com.jindumooc.vojo.user.Teacher;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PostMapping;
 
 public interface ClassroomMemberMapper {
     int countByExample(ClassroomMemberExample example);
@@ -48,4 +50,6 @@ public interface ClassroomMemberMapper {
     void updateRole(ClassroomMemberDTO classroomMemberDTO);
 
     List<LearningClassroom> getLearningClassroom(@Param("userId") int userId);
+
+    List<Teacher> getClassroomTeacher(@Param("classroomId") int classroomId);
 }

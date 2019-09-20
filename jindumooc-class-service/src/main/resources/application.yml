@@ -1,5 +1,5 @@
 server:
-  port: 9003
+  port: 8003
 
 dubbo:
   application:
@@ -14,7 +14,7 @@ dubbo:
     port: 20881
   registry:
   ###########注册中心地址#####################
-    address: zookeeper://39.106.90.140:2181
+    address: zookeeper://192.168.213.128:2181
   scan:
   ############实现类扫包范围###################
     base-packages: com.jindumooc.classes.service.impl

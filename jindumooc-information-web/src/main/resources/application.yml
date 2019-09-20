@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8002
 
 dubbo:
   application:
@@ -7,7 +7,7 @@ dubbo:
     name: information-web
   ##### 注册中心地址
   registry:
-    address: zookeeper://192.168.253.128:2181
+    address: zookeeper://192.168.213.128:2181
   ##### 调用服务超时时间
   consumer:
     timeout: 10000
