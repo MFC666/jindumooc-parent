@@ -1,5 +1,5 @@
 server:
-  port: 9003
+  port: 9007
 
 dubbo:
   application:
@@ -10,10 +10,10 @@ dubbo:
   ###########采用dubbo协议####################
     name: dubbo
   ###########发布dubbo端口号为20880###########
-    port: 20882
+    port: 20884
   registry:
   ###########注册中心地址#####################
-    address: zookeeper://39.106.90.140:2181
+    address: zookeeper://192.168.213.128:2181
   scan:
   ############实现类扫包范围###################
     base-packages: com.jindumooc.group.service.impl

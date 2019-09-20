@@ -384,4 +384,10 @@
     <result column="updatedTime" property="updatedTime" jdbcType="INTEGER"/>
     <result column="length" property="length" jdbcType="INTEGER"/>
   </resultMap>
+  <select id="getClassroomNote" resultMap="ClassroomNoteMap">
+    SELECT u.id AS userId,c.courseId AS courseId,c.classroomId AS classroomId,u.largeAvatar,u.nickname AS nickName,n.content,v.title,n.likeNum,n.createdTime
+    FROM `user` u,course_note n,classroom_courses c,course_v8 v
+    WHERE v.id = c.courseId AND n.userId = u.id AND c.courseId = n.courseId AND c.classroomId = #{classroomId} AND n.`status` = 1
+    <if test = "courseId!=0">AND c.courseId = #{courseId}</if>
+  </select>
 </mapper>

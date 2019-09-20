@@ -371,4 +371,22 @@
       createdTime = #{createdtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getClassroomThreadPost" resultMap="classroomThreadPostMap">
+    SELECT p.id AS threadPostId,u.id AS userId ,u.nickname AS nickName,p.parentId AS parentId,p.content,p.ups,p.createdTime
+    FROM thread_post p,`user` u
+    WHERE threadId = #{threadId} AND parentId = #{parentId} AND u.id = p.userId
+    <if test="posterType != 'All'">AND u.roles like '%|ROLE_TEACHER|%'</if>
+  </select>
+  <resultMap id="classroomThreadPostMap" type="com.jindumooc.vojo.classes.ClassroomThreadPost">
+    <result column="threadPostId" property="threadPostId" jdbcType="INTEGER"/>
+    <result column="userId" property="userId" jdbcType="INTEGER"/>
+    <result column="parentId" property="parentId" jdbcType="INTEGER"/>
+    <result column="ups" property="ups" jdbcType="INTEGER"/>
+    <result column="createdTime" property="createdTime" jdbcType="INTEGER"/>
+    <result column="nickName" property="nickName" jdbcType="VARCHAR"/>
+    <result column="content" property="content" jdbcType="VARCHAR"/>
+  </resultMap>
+  <insert id="insertClassroomThreadPost" parameterType="com.jindumooc.dto.classes.ClassroomThreadPostDTO">
+    INSERT INTO thread_post(threadId,content,adopted,userId,parentId,targetType,targetId,createdTime) VALUES(#{threadId},#{content},1,#{userId},#{parentId},'classroom',#{classroomId},#{createdTime})
+  </insert>
 </mapper>

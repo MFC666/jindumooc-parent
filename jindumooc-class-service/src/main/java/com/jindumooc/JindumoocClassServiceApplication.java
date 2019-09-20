@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableDubbo
 @MapperScan(basePackages = "com.jindumooc.dao")
 @SpringBootApplication
-@EnableTransactionManagement
 public class JindumoocClassServiceApplication {
 
     public static void main(String[] args) {

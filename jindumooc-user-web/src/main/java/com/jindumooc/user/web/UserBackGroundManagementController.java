@@ -56,9 +56,9 @@ public class UserBackGroundManagementController {
     @ApiOperation("封禁用户")
     @PutMapping("/user/lockedUser")
     @ResponseBody
-    public boolean lockedUser(@RequestBody LockUser lockMessage){
+    public Result lockedUser(@RequestBody LockUser lockMessage){
 
-        return userBackGroundManagement.lokedUser(lockMessage);
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.lokedUser(lockMessage));
     }
 
     /**
@@ -68,9 +68,9 @@ public class UserBackGroundManagementController {
     @ApiOperation("获取所有角色")
     @GetMapping("/user/getAllRoles")
     @ResponseBody
-    public List<AllRoles> getAllRoles(){
+    public Result getAllRoles(){
 
-        return userBackGroundManagement.getAllRoles();
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.getAllRoles());
     }
 
     /**
@@ -175,9 +175,9 @@ public class UserBackGroundManagementController {
     @ApiOperation("搜索教师")
     @GetMapping("/user/getAllTeachers")
     @ResponseBody
-    public List<Teacher> getAllTeachers(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "10") int pageSize,@RequestParam(defaultValue = "") String nickName){
+    public Result getAllTeachers(@RequestParam(defaultValue = "1") int pageNum,@RequestParam(defaultValue = "10") int pageSize,@RequestParam(defaultValue = "wu") String nickName){
 
-        return userBackGroundManagement.getAllTeachers(pageNum,pageSize,nickName);
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.getAllTeachers(pageNum,pageSize,nickName));
     }
 
     /**
@@ -188,17 +188,18 @@ public class UserBackGroundManagementController {
     @ApiOperation("设置推荐教师")
     @PutMapping("/user/updatePromoted")
     @ResponseBody
-    public boolean updatePromoted(@RequestBody TeacherPromoted teacherPromoted){
+    public Result updatePromoted(@RequestBody TeacherPromoted teacherPromoted){
 
-        return userBackGroundManagement.updatePromoted(teacherPromoted);
+
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.updatePromoted(teacherPromoted));
     }
 
     @ApiOperation("修改推荐序号")
     @PutMapping("/user/updatePromotedSeq")
     @ResponseBody
-    public boolean updatePromotedSeq(@RequestBody TeacherPromoted teacherPromoted){
+    public Result updatePromotedSeq(@RequestBody TeacherPromoted teacherPromoted){
 
-        return userBackGroundManagement.updatePromotedSeq(teacherPromoted);
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.updatePromotedSeq(teacherPromoted));
     }
 
     /**
@@ -224,10 +225,10 @@ public class UserBackGroundManagementController {
     @ApiOperation("修改用户实名认证状态")
     @PutMapping("/user/updateUserApproval")
     @ResponseBody
-    public boolean updateUserApproval(@RequestBody ApprovalUser userApproval){
+    public Result updateUserApproval(@RequestBody ApprovalUser userApproval){
 
 
-        return userBackGroundManagement.updateApproval(userApproval);
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.updateApproval(userApproval));
     }
 
     /**
@@ -238,9 +239,9 @@ public class UserBackGroundManagementController {
     @ApiOperation("获取私信")
     @PostMapping("/user/getAllMessages")
     @ResponseBody
-    public List<Messages> getAllMessages(@RequestBody SearchMessage sm){
+    public Result getAllMessages(@RequestBody SearchMessage sm){
 
-        return userBackGroundManagement.getAllMessages(sm);
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.getAllMessages(sm));
     }
 
     /**
@@ -251,9 +252,9 @@ public class UserBackGroundManagementController {
     @ApiOperation("删除私信")
     @DeleteMapping("/user/delMessages")
     @ResponseBody
-    public Boolean delMessages(@RequestParam List<Integer> idList){
+    public Result delMessages(@RequestParam List<Integer> idList){
 
-        return userBackGroundManagement.delMessages(idList);
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.delMessages(idList));
     }
 
     /**
@@ -264,8 +265,8 @@ public class UserBackGroundManagementController {
     @ApiOperation("查看用户详情")
     @GetMapping("/user/getUserDetail")
     @ResponseBody
-    public UserDetail getUserDetail(@RequestParam(defaultValue = "0") int userId){
-        return userBackGroundManagement.getUserDetail(userId);
+    public Result getUserDetail(@RequestParam(defaultValue = "0") int userId){
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.getUserDetail(userId));
     }
 
     /**
@@ -276,9 +277,9 @@ public class UserBackGroundManagementController {
     @ApiOperation("编辑单个用户信息")
     @PutMapping("/user/updateUserDetail")
     @ResponseBody
-    public boolean updateUserDetail(@RequestBody EditUser editUser){
+    public Result updateUserDetail(@RequestBody EditUser editUser){
 
-        return userBackGroundManagement.updateUserDetail(editUser);
+        return ResultGenerator.genSuccessResult(userBackGroundManagement.updateUserDetail(editUser));
     }
 
     /**

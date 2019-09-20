@@ -50,7 +50,7 @@ public interface UserMapper {
 
     int getUserNum(SearchMessage sm);
 
-    List<Teacher> getAllTeachers(String nickName);
+    List<Teacher> getAllTeachers(@Param("nickName") String nickName);
 
     void updatePromoted(TeacherPromoted teacherPromoted);
 
@@ -78,4 +78,5 @@ public interface UserMapper {
      */
     String getUserNameById(Integer userId);
 
+    int getTeacherNum(@Param("nickName") String nickName);
 }

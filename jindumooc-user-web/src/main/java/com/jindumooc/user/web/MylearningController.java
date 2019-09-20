@@ -29,7 +29,7 @@ public class MylearningController {
      * @param pageNum
      * @param pageSize
      * @param userId
-     * @param learnStatus：学习中、已完成。。
+     * @param learnStatus：学习中、已完成。
      * @return
      */
     @ApiOperation("获取我的课程")
@@ -100,7 +100,8 @@ public class MylearningController {
     @ResponseBody
     public Result getMyDiscussion(@RequestParam(defaultValue = "1")int pageNum,
                                   @RequestParam(defaultValue = "10")int pageSize,
-                                  @RequestParam(defaultValue = "0")int userId,@RequestParam(defaultValue = "null") String threadType){
+                                  @RequestParam(defaultValue = "0")int userId,
+                                  @RequestParam(defaultValue = "null") String threadType){
         if(userId==0||threadType==null){
             return ResultGenerator.genFailResult("参数输入错误");
         }
@@ -128,6 +129,14 @@ public class MylearningController {
 
     }
 
+    /**
+     * 获取笔记详情
+     * @param pageNum
+     * @param pageSize
+     * @param userId
+     * @param courseId：笔记对应的课程Id
+     * @return
+     */
     @ApiOperation("获取笔记详情")
     @GetMapping("/user/getNoteDetil")
     @ResponseBody

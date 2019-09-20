@@ -21,7 +21,15 @@ public class Teacher implements Serializable {
 
     private int promoted;
 
-    private String loginTime;
+    private int promotedTime;
+
+    private String promotedTimeString;
+
+    private int promotedSeq;
+
+    private int loginTime;
+
+    private String loginTimeString;
 
     private String loginArea;
 

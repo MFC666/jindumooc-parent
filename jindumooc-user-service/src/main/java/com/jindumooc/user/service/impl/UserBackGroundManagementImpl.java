@@ -7,6 +7,7 @@ import com.jindumooc.user.service.UserBackGroundManagement;
 import com.jindumooc.pojo.*;
 import com.jindumooc.pojo.UserApproval;
 import com.jindumooc.vojo.user.*;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.SimpleDateFormat;
@@ -32,8 +33,6 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     @Override
     public List<BackGroundIndexUser> getIndexUser(SearchMessage sm) {
         //与前端交互后修改
-        System.out.println(sm.getStarTime()+"kaishi");
-        System.out.println(sm.getEndTime()+"jieshu");
         PageHelper.startPage(sm.getPageNum(), sm.getPageSize());
         List<User> userList = userMapper.getIndexUser(sm);
 
@@ -119,7 +118,23 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     @Override
     public List<Teacher> getAllTeachers(int pageNum,int pageSize,String nickName) {
         List<Teacher> teacherList = new ArrayList<>();
+        PageHelper.startPage(pageNum,pageSize);
         teacherList = userMapper.getAllTeachers(nickName);
+        int teacherNum = userMapper.getTeacherNum(nickName);
+        for (int i = 0;i<teacherList.size();i++
+             ) {
+            teacherList.get(i).setTotalNum(teacherNum);
+            Date d = new Date(teacherList.get(i).getLoginTime() * 1000L);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String s = sdf.format(d);
+            teacherList.get(i).setLoginTimeString(s);
+            d = new Date(teacherList.get(i).getPromotedTime() * 1000L);
+            sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            s = sdf.format(d);
+            teacherList.get(i).setPromotedTimeString(s);
+
+        }
+
         return teacherList;
     }
 
@@ -130,6 +145,7 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
      */
     @Override
     public boolean updatePromoted(TeacherPromoted teacherPromoted) {
+        teacherPromoted.setPromotedTime((int) (System.currentTimeMillis() / 1000));
         userMapper.updatePromoted(teacherPromoted);
         return true;
     }
@@ -138,6 +154,9 @@ public class UserBackGroundManagementImpl implements UserBackGroundManagement {
     public boolean updatePromotedSeq(TeacherPromoted teacherPromoted) {
 
         userMapper.updatePromotedSeq(teacherPromoted);
+        Date date = new Date();
+        teacherPromoted.setPromotedTime((int) (System.currentTimeMillis() / 1000));
+        userMapper.updatePromoted(teacherPromoted);
         return true;
     }
 

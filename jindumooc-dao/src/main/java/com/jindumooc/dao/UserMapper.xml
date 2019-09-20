@@ -969,33 +969,41 @@
             </if>
         </where>
     </select>
-    <select id="getAllTeachers" parameterType="com.jindumooc.dto.user.SearchMessage" resultMap="getAllTeacher">
-        SELECT count(*) as total,u.id,u.nickname,u.loginarea,u.loginIp,u.loginTime,u.promoted
+    <select id="getAllTeachers" resultMap="getAllTeacher">
+        SELECT u.id,u.nickname,u.loginarea,u.loginIp,u.loginTime,u.promoted,u.promotedseq,u.promotedTime
         FROM `user` u
         <where>roles like '%ROLE_TEACHER%'
-            <if test="searchType!=null">and #{searchType} like '%#{seaechParameter}%'</if>
+            <if test="nickName!='wu'">and nickname like '%${nickName}%'</if>
         </where>
     </select>
     <resultMap id="getAllTeacher" type="com.jindumooc.vojo.user.Teacher">
         <result property="id" column="id"/>
         <result property="nickName" column="nickname"/>
         <result property="promoted" column="promoted"/>
+        <result property="promotedSeq" column="promotedseq"/>
+        <result property="promotedTime" column="promotedTime"/>
         <result property="loginTime" column="loginTime"/>
         <result property="loginIp" column="loginIp"/>
-        <result property="loginarea" column="loginarea"/>
-        <result property="totalNum" column="total"/>
+        <result property="loginArea" column="loginarea"/>
     </resultMap>
-    <update id="updatePromoted" parameterType="com.jindumooc.dto.user.SearchMessage">
+    <select id="getTeacherNum" resultType="int">
+    SELECT count(*)
+    FROM `user` u
+    <where>roles like '%ROLE_TEACHER%'
+        <if test="nickName!='wu'">and nickname like '%${nickName}%'</if>
+    </where>
+    </select>
+    <update id="updatePromoted" parameterType="com.jindumooc.dto.user.TeacherPromoted">
 
     update user
-    set promoted = #{promoted}
+    set promoted = #{promoted},promotedTime = #{promotedTime}
     where id = #{userId}
   </update>
 
-  <update id="updatePromotedSeq" parameterType="com.jindumooc.dto.user.SearchMessage">
+  <update id="updatePromotedSeq" parameterType="com.jindumooc.dto.user.TeacherPromoted">
 
     update user
-    set promotedseq = #{promotedSeq}
+    set promotedseq = #{promotedSeq},promoted=1,promotedTime = #{promotedTime}
     where id = #{userId}
   </update>
 
