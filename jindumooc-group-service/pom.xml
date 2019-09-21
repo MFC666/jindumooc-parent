@@ -7,7 +7,6 @@
         <artifactId>jindumooc-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.jinduMooc</groupId>
     <artifactId>jindumooc-group-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>jindumooc-group-service</name>
@@ -38,12 +37,6 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jinduMooc</groupId>
-            <artifactId>jindumooc-interface-group-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.jinduMooc</groupId>
@@ -85,6 +78,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.connector.vesion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jinduMooc</groupId>
+            <artifactId>jindumooc-interface-group-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
