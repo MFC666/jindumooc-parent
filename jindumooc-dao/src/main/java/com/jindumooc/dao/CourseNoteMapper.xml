@@ -112,7 +112,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -390,4 +390,15 @@
     WHERE v.id = c.courseId AND n.userId = u.id AND c.courseId = n.courseId AND c.classroomId = #{classroomId} AND n.`status` = 1
     <if test = "courseId!=0">AND c.courseId = #{courseId}</if>
   </select>
+  <resultMap id="ClassroomNoteMap" type="com.jindumooc.vojo.classes.ClassroomNote">
+    <result column="id" property="userId" jdbcType="INTEGER"/>
+    <result column="courseId" property="courseId" jdbcType="INTEGER"/>
+    <result column="classroomId" property="classroomId" jdbcType="INTEGER"/>
+    <result column="largeAvatar" property="largeAvatar" jdbcType="VARCHAR"/>
+    <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+    <result column="content" property="content" jdbcType="VARCHAR"/>
+    <result column="title" property="title" jdbcType="VARCHAR"/>
+    <result column="likeNum" property="likeNum" jdbcType="INTEGER"/>
+    <result column="createdTime" property="createdTime" jdbcType="INTEGER"/>
+  </resultMap>
 </mapper>

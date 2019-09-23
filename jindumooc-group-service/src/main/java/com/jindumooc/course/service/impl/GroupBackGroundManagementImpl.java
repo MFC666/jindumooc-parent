@@ -1,13 +1,13 @@
-package com.jindumooc.group.service.impl;
+package com.jindumooc.course.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
+import com.jindumooc.course.service.GroupBackGroundManagement;
 import com.jindumooc.dao.GroupsMapper;
 import com.jindumooc.dao.GroupsThreadMapper;
 import com.jindumooc.dao.UserMapper;
 import com.jindumooc.dto.group.GroupThreadAllDTO;
 import com.jindumooc.dto.group.SearchGroupInDBDTO;
-import com.jindumooc.group.service.GroupBackGroundManagement;
 import com.jindumooc.pojo.*;
 import com.jindumooc.vojo.group.BackGroundIndexGroup;
 import com.jindumooc.vojo.group.GroupThreadShow;
@@ -17,7 +17,6 @@ import com.jindumooc.dto.group.SearchGroupDTO;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -151,10 +150,10 @@ public class GroupBackGroundManagementImpl implements GroupBackGroundManagement 
                 int userID = thread.getUserid();
 
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                long createdTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                long createdTimeLong = new Long(thread.getCreatedtime()) * 1000;
                 String createdTimeStr = dateFormat.format(createdTimeLong);
 
-                long updatedTimeLong = new Long(thread.getCreatedtime()).longValue() * 1000;
+                long updatedTimeLong = new Long(thread.getCreatedtime()) * 1000;
                 String updatedTimeStr = dateFormat.format(updatedTimeLong);
 
 

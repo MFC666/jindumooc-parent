@@ -1,8 +1,8 @@
-package com.jindumooc.group.web;
+package com.jindumooc.course.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jindumooc.dto.group.*;
-import com.jindumooc.group.service.GroupGatewayManagement;
+import com.jindumooc.course.service.GroupGatewayManagement;
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.*;
 import com.jindumooc.vojo.user.UserNew;

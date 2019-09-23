@@ -1,4 +1,4 @@
-package com.jindumooc.group.service;
+package com.jindumooc.course.service;
 
 import com.jindumooc.pojo.Groups;
 import com.jindumooc.vojo.group.GroupIntroduction;

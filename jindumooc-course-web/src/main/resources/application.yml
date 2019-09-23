@@ -4,10 +4,10 @@ server:
 dubbo:
   application:
     ##### 注册服务的名称
-    name: group-web
+    name: course-web
   ##### 注册中心地址
   registry:
-    address: zookeeper://39.106.90.140:2181
+    address: zookeeper://192.168.213.128:2181
   ##### 调用服务超时时间
   consumer:
     timeout: 10000

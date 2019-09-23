@@ -1,9 +1,9 @@
-package com.jindumooc.group.service.impl;
+package com.jindumooc.course.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.jindumooc.course.service.GroupGatewayManagement;
 import com.jindumooc.dao.*;
 import com.jindumooc.dto.group.*;
-import com.jindumooc.group.service.GroupGatewayManagement;
 import com.jindumooc.pojo.*;
 import com.jindumooc.vojo.group.*;
 import com.jindumooc.vojo.user.UserNew;

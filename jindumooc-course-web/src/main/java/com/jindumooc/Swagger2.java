@@ -70,7 +70,7 @@ public class Swagger2 {
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.jindumooc.group.web"))
+                .apis(RequestHandlerSelectors.basePackage("com.jindumooc.course.web"))
                 .paths(PathSelectors.any())
                 .build();
     }

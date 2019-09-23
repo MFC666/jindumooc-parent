@@ -1,9 +1,9 @@
-package com.jindumooc.group.web;
+package com.jindumooc.course.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jindumooc.dto.group.GroupThreadAllDTO;
 import com.jindumooc.dto.group.SearchGroupDTO;
-import com.jindumooc.group.service.GroupBackGroundManagement;
+import com.jindumooc.course.service.GroupBackGroundManagement;
 import com.jindumooc.vojo.group.BackGroundIndexGroup;
 import com.jindumooc.vojo.group.GroupThreadShow;
 import org.springframework.stereotype.Controller;

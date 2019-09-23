@@ -1,4 +1,4 @@
-package com.jindumooc.group.service;
+package com.jindumooc.course.service;
 
 import com.jindumooc.dto.group.GroupThreadAllDTO;
 import com.jindumooc.dto.group.SearchGroupDTO;
