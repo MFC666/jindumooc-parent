@@ -1,5 +1,6 @@
 package com.jindumooc.dao;
 
+import com.jindumooc.dto.user.Fans;
 import com.jindumooc.pojo.Notification;
 import com.jindumooc.pojo.NotificationExample;
 import java.util.List;
@@ -33,4 +34,6 @@ public interface NotificationMapper {
     int updateByPrimaryKeyWithBLOBs(Notification record);
 
     int updateByPrimaryKey(Notification record);
+
+    void delFollowedUser(Fans fans);
 }

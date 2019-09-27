@@ -6,6 +6,7 @@ import com.jindumooc.pojo.Classroom;
 import com.jindumooc.pojo.ClassroomExample;
 import com.jindumooc.pojo.ClassroomWithBLOBs;
 import com.jindumooc.vojo.classes.ClassCourse;
+import com.jindumooc.vojo.user.TeachingClassroom;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -106,7 +107,7 @@ public interface ClassroomMapper {
      */
     void updateHeadTeacher(@Param("cId") Integer cId, @Param("tId") Integer tId);
 
-    void getTeachingClassroom(@Param("teacherId") int teacherId, @Param("nowTime") long nowTime);
+    List<TeachingClassroom> getTeachingClassroom(@Param("teacherId") int teacherId, @Param("newTime") long newTime);
 
     /**
      * 增加班级学员数量

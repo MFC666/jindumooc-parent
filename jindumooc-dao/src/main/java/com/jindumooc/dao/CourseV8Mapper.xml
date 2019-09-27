@@ -1399,6 +1399,6 @@
   <select id="getTeachingCourse" resultType="com.jindumooc.vojo.user.TeachingCourse">
     SELECT id,courseSetTitle,studentNum,`status`,cover
     FROM course_v8
-    WHERE teacherIds LIKE '%${teacherId}%' AND type = #{courseType}
+    WHERE teacherIds LIKE '%${teacherId}%' AND courseType = #{courseType} AND `status` != 'closed'
   </select>
 </mapper>

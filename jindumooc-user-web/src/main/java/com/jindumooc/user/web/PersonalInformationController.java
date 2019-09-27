@@ -57,4 +57,15 @@ public class PersonalInformationController {
 
         return ResultGenerator.genSuccessResult(personalInformation.followedUser(fans));
     }
+
+    @ApiOperation("取消关注")
+    @PutMapping("/user/delFollowedUser")
+    public Result delFollowedUser(@RequestBody Fans fans){
+        if(fans == null){
+
+            return ResultGenerator.genFailResult("参数错误");
+        }
+
+        return ResultGenerator.genSuccessResult(personalInformation.delFollowedUser(fans));
+    }
 }

@@ -112,7 +112,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select
+    select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -357,16 +357,14 @@
   </update>
 
   <select id="getNoteList" resultMap="getNoteListMap">
-    SELECT c.id AS courseId,c.title AS coursrTitle,n.updatedTime,count(*) AS noteNum
+    SELECT c.id AS courseId,c.title AS courseTitle,n.updatedTime
     FROM course_v8 c,course_note n
     WHERE n.courseId = c.id AND n.userId = #{userId}
-    GROUP BY c.id
   </select>
   <resultMap id="getNoteListMap" type="com.jindumooc.vojo.user.Note">
-    <result column="coursrTitle" property="coursrTitle" jdbcType="VARCHAR"/>
+    <result column="courseTitle" property="courseTitle" jdbcType="VARCHAR"/>
     <result column="courseId" property="courseId" jdbcType="INTEGER"/>
     <result column="updatedTime" property="updatedTime" jdbcType="INTEGER"/>
-    <result column="noteNum" property="noteNum" jdbcType="INTEGER"/>
   </resultMap>
   <select id="getNoteDetail" resultMap="getNoteDetailMap">
     SELECT n.id,c.id AS courseId,n.userId AS userId,t.id AS taskId,t.title AS taskTitle,n.content,n.length,c.title AS coursrTitle,n.updatedTime
@@ -380,7 +378,7 @@
     <result column="taskId" property="taskId" jdbcType="INTEGER"/>
     <result column="taskTitle" property="taskTitle" jdbcType="VARCHAR"/>
     <result column="content" property="content" jdbcType="VARCHAR"/>
-    <result column="coursrTitle" property="coursrTitle" jdbcType="VARCHAR"/>
+    <result column="courseTitle" property="courseTitle" jdbcType="VARCHAR"/>
     <result column="updatedTime" property="updatedTime" jdbcType="INTEGER"/>
     <result column="length" property="length" jdbcType="INTEGER"/>
   </resultMap>
@@ -390,15 +388,9 @@
     WHERE v.id = c.courseId AND n.userId = u.id AND c.courseId = n.courseId AND c.classroomId = #{classroomId} AND n.`status` = 1
     <if test = "courseId!=0">AND c.courseId = #{courseId}</if>
   </select>
-  <resultMap id="ClassroomNoteMap" type="com.jindumooc.vojo.classes.ClassroomNote">
-    <result column="id" property="userId" jdbcType="INTEGER"/>
-    <result column="courseId" property="courseId" jdbcType="INTEGER"/>
-    <result column="classroomId" property="classroomId" jdbcType="INTEGER"/>
-    <result column="largeAvatar" property="largeAvatar" jdbcType="VARCHAR"/>
-    <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
-    <result column="content" property="content" jdbcType="VARCHAR"/>
-    <result column="title" property="title" jdbcType="VARCHAR"/>
-    <result column="likeNum" property="likeNum" jdbcType="INTEGER"/>
-    <result column="createdTime" property="createdTime" jdbcType="INTEGER"/>
+  <resultMap id="ClassroomNoteMap" type="com.jindumooc.vojo.user.Note">
+    <result property="userId" column="userId" jdbcType="INTEGER"/>
+    <result property="courseId" column="courseId" jdbcType="INTEGER"/>
+    <result property="classroomId" column="id" jdbcType="INTEGER"/>
   </resultMap>
 </mapper>

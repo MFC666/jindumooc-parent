@@ -9,4 +9,6 @@ public interface PersonalInformation {
     String updatePersonalDetail(PersonalDetail personalDetail);
 
     String followedUser(Fans fans);
+
+    Object delFollowedUser(Fans fans);
 }

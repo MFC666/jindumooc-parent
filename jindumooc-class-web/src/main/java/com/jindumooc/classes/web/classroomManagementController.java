@@ -216,7 +216,6 @@ public class classroomManagementController {
     }
 
     /**
-     * @param id 用户Id
      * @param classroomMemberDTO 班级成员
      * @return 添加单个学员
      */

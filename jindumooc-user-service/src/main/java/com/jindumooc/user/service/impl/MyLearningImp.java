@@ -93,10 +93,10 @@ public class MyLearningImp implements MyLearning {
     @Override
     public List<CourseThread> getMyDiscussion(int pageNum, int pageSize, int userId, String threadType) {
         List<CourseThread> myDiscussionList = new ArrayList<>();
-        if(threadType=="courseMemberThread"){
+        if(threadType.equals("courseMemberThread")){
             PageHelper.startPage(pageNum,pageSize);
             myDiscussionList = courseThreadMapper.getMyDiscussion(userId);
-        }else if(threadType=="classMemberThread"){
+        }else if(threadType.equals("classMemberThread")){
             PageHelper.startPage(pageNum,pageSize);
             myDiscussionList = threadMapper.getMyDiscussion(userId);
         }else{

@@ -497,9 +497,9 @@
   <resultMap id="getLearningClassroomMap" type="com.jindumooc.vojo.user.LearningClassroom">
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="smallpicture" property="smallPicture" jdbcType="VARCHAR" />
-    <result column="middlepicture" property="middlePicture" jdbcType="VARCHAR" />
-    <result column="largepicture" property="largePicture" jdbcType="VARCHAR" />
+    <result column="smallPicture" property="smallPicture" jdbcType="VARCHAR" />
+    <result column="middlePicture" property="middlePicture" jdbcType="VARCHAR" />
+    <result column="largePicture" property="largePicture" jdbcType="VARCHAR" />
     <result column="studentnum" property="studentnum" jdbcType="INTEGER" />
     <result column="coursenum" property="coursenum" jdbcType="INTEGER" />
     <result column="threadnum" property="threadnum" jdbcType="INTEGER" />
