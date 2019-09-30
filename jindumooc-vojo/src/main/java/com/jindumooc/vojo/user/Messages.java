@@ -11,7 +11,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Messages implements Serializable {
     //用于储存私信
-    private Integer id;
+    private int MessageId;
+
+    private int messageConversation;
+
+    private int messageRelationId;
 
     private String type;
 
@@ -24,6 +28,8 @@ public class Messages implements Serializable {
     private String createdTime;
 
     private int totalMessages;
+
+    private int isRead;
 
 
 }

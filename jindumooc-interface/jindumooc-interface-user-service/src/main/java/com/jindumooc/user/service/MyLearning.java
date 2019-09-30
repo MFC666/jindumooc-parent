@@ -28,4 +28,5 @@ public interface MyLearning {
 
     QuestionMessage getQuestionDetail(int questionId);
 
+    Object getTestPaperDetail(int testPaperId, int userId);
 }

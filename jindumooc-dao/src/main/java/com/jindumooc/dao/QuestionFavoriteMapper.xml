@@ -254,7 +254,7 @@
   <select id="getQuestionDetail" resultMap="getQuestionDetailMap">
     SELECT id,stem,`type`,score,answer,metas,difficulty,analysis
     FROM question q
-    WHERE q.id = 115
+    WHERE q.id = #{questionId}
   </select>
   <resultMap id="getQuestionDetailMap" type="com.jindumooc.vojo.user.QuestionMessage">
     <result column="id" property="id" jdbcType="INTEGER"/>

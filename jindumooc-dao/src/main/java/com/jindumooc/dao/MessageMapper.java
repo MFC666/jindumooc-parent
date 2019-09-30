@@ -39,4 +39,6 @@ public interface MessageMapper {
     List<Message> getAllMessages(SearchMessage sm);
 
     int getAllMessagesNum(SearchMessage sm);
+
+    int getMaxId();
 }

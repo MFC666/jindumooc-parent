@@ -338,4 +338,9 @@
       createdTime = #{createdtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getMaxId" resultType="int">
+    SELECT MAX(id)
+    FROM message
+  </select>
 </mapper>
