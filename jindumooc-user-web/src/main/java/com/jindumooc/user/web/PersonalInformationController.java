@@ -83,6 +83,7 @@ public class PersonalInformationController {
             return ResultGenerator.genFailResult("参数错误");
         }
 
+        
         return ResultGenerator.genSuccessResult(personalInformation.sendMessage(messages));
     }
 
