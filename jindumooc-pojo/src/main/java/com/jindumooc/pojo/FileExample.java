@@ -434,52 +434,52 @@ public class FileExample {
             return (Criteria) this;
         }
 
-        public Criteria andSizeEqualTo(Integer value) {
+        public Criteria andSizeEqualTo(Long value) {
             addCriterion("size =", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeNotEqualTo(Integer value) {
+        public Criteria andSizeNotEqualTo(Long value) {
             addCriterion("size <>", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeGreaterThan(Integer value) {
+        public Criteria andSizeGreaterThan(Long value) {
             addCriterion("size >", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andSizeGreaterThanOrEqualTo(Long value) {
             addCriterion("size >=", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeLessThan(Integer value) {
+        public Criteria andSizeLessThan(Long value) {
             addCriterion("size <", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeLessThanOrEqualTo(Integer value) {
+        public Criteria andSizeLessThanOrEqualTo(Long value) {
             addCriterion("size <=", value, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeIn(List<Integer> values) {
+        public Criteria andSizeIn(List<Long> values) {
             addCriterion("size in", values, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeNotIn(List<Integer> values) {
+        public Criteria andSizeNotIn(List<Long> values) {
             addCriterion("size not in", values, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeBetween(Integer value1, Integer value2) {
+        public Criteria andSizeBetween(Long value1, Long value2) {
             addCriterion("size between", value1, value2, "size");
             return (Criteria) this;
         }
 
-        public Criteria andSizeNotBetween(Integer value1, Integer value2) {
+        public Criteria andSizeNotBetween(Long value1, Long value2) {
             addCriterion("size not between", value1, value2, "size");
             return (Criteria) this;
         }

@@ -60,9 +60,9 @@ public class MyTeachingImpl implements MyTeaching {
 
         long current=System.currentTimeMillis();
         PageHelper.startPage(pageNum,pageSize);
-        classroomMapper.getTeachingClassroom(teacherId,(current/(1000*3600*24)*(1000*3600*24)-TimeZone.getDefault().getRawOffset())/ 1000);
+        List<TeachingClassroom> teachingClassroomList = classroomMapper.getTeachingClassroom(teacherId,(current/(1000*3600*24)*(1000*3600*24)-TimeZone.getDefault().getRawOffset())/ 1000);
 
-        return null;
+        return teachingClassroomList;
     }
 
     /**
@@ -92,15 +92,15 @@ public class MyTeachingImpl implements MyTeaching {
     public List<CourseThread> getCourseDiscussion(int pageNum, int pageSize, int teacherId, String threadType) {
 
         List<CourseThread> courseThreadList = new ArrayList<>();
-        if(threadType=="courseMemberThread"){
+        if(threadType.equals("courseMemberThread")){
             PageHelper.startPage(pageNum,pageSize);
-            courseThreadList = courseThreadMapper.getCourseDiscussion("|"+teacherId+"|");
-        }else if(threadType=="classMemberThread"){
+            courseThreadList = courseThreadMapper.getCourseDiscussion(teacherId);
+        }else if(threadType.equals("classMemberThread")){
             PageHelper.startPage(pageNum,pageSize);
-            courseThreadList = threadMapper.getCourseDiscussion("|"+teacherId+"|");
+            courseThreadList = threadMapper.getCourseDiscussion(teacherId);
         }else{
 
-            return null;
+            return courseThreadList;
         }
 
 

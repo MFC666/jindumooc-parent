@@ -38,7 +38,7 @@ public class MylearningController {
     public Result getLearningCourse(@RequestParam(defaultValue = "1")int pageNum,
                                                          @RequestParam(defaultValue = "10")int pageSize,
                                                          @RequestParam(defaultValue = "0")int userId,
-                                                         @RequestParam(defaultValue = "null")String learnStatus){
+                                                         @RequestParam(defaultValue = "learning")String learnStatus){
 
         //if(userId)
         if(userId==0){
@@ -101,7 +101,7 @@ public class MylearningController {
     public Result getMyDiscussion(@RequestParam(defaultValue = "1")int pageNum,
                                   @RequestParam(defaultValue = "10")int pageSize,
                                   @RequestParam(defaultValue = "0")int userId,
-                                  @RequestParam(defaultValue = "null") String threadType){
+                                  @RequestParam(defaultValue = "courseMemberThread") String threadType){
         if(userId==0||threadType==null){
             return ResultGenerator.genFailResult("参数输入错误");
         }
@@ -165,7 +165,7 @@ public class MylearningController {
     public Result getStudentTestPaper(@RequestParam(defaultValue = "1")int pageNum,
                                       @RequestParam(defaultValue = "10")int pageSize,
                                       @RequestParam(defaultValue = "0")int userId,
-                                      @RequestParam(defaultValue = "null")String testPaperType){
+                                      @RequestParam(defaultValue = "finished")String testPaperType){
 
         if(0==userId){
 

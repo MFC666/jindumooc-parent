@@ -32,7 +32,7 @@ public class MyTeachingController {
     @ApiOperation("获取在教课程")
     @GetMapping("/user/getTeachingCourse")
     @ResponseBody
-    public Result getTeachingCourse(@RequestParam(defaultValue = "")String teacherId, @RequestParam(defaultValue = "")String courseType, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize){
+    public Result getTeachingCourse(@RequestParam(defaultValue = "")String teacherId, @RequestParam(defaultValue = "default")String courseType, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize){
         if(teacherId==null||teacherId==""){
             return ResultGenerator.genFailResult("参数错误");
         }
@@ -88,7 +88,7 @@ public class MyTeachingController {
     @ApiOperation("获取学生话题")
     @GetMapping("/user/getCourseDiscussion")
     @ResponseBody
-    public Result getCourseDiscussion(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10")int pageSize, @RequestParam(defaultValue = "0") int teacherId,@RequestParam(defaultValue = "null") String threadType){
+    public Result getCourseDiscussion(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10")int pageSize, @RequestParam(defaultValue = "0") int teacherId,@RequestParam(defaultValue = "courseMemberThread") String threadType){
 
         if(0==teacherId||threadType.equals(null)){
 
@@ -109,7 +109,7 @@ public class MyTeachingController {
     @ApiOperation("获取学生考试结果")
     @GetMapping("/user/getTestPaperResult")
     @ResponseBody
-    public Result getTestPaperResult(@RequestParam(defaultValue = "1")int pageNum,@RequestParam(defaultValue = "10")int pageSize,@RequestParam(defaultValue = "0")int teacherId,@RequestParam(defaultValue = "0")String testPaperStatus){
+    public Result getTestPaperResult(@RequestParam(defaultValue = "1")int pageNum,@RequestParam(defaultValue = "10")int pageSize,@RequestParam(defaultValue = "0")int teacherId,@RequestParam(defaultValue = "open")String testPaperStatus){
         if(testPaperStatus == "0" || teacherId == 0){
 
             return ResultGenerator.genFailResult("参数错误");

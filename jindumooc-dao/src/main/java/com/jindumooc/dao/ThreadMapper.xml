@@ -622,7 +622,7 @@
 <select id="getCourseDiscussion" resultType="com.jindumooc.vojo.user.CourseThread">
     SELECT t.id,t.title,t.hitNum,c.title AS className
     FROM classroom c,thread t,classroom_member m
-    WHERE c.id = m.classroomId AND c.teacherIds LIKE "%|teacherId|%" AND t.userId = m.userId
+    WHERE c.id = m.classroomId AND c.teacherIds LIKE '%"${teacherId}"%' AND t.userId = m.userId AND t.`status` != 'closed'
   </select>
 <select id="getMyDiscussion" resultType="com.jindumooc.vojo.user.CourseThread">
     SELECT t.id,t.title,t.hitNum,c.title AS className

@@ -320,4 +320,7 @@
       orgCode = #{orgcode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="delFollowedUser" parameterType="com.jindumooc.dto.user.Fans">
+    DELETE FROM notification WHERE userId = #{toId} AND content LIKE '%{"userId":"${fromId}",%' AND idRead = 0
+  </delete>
 </mapper>

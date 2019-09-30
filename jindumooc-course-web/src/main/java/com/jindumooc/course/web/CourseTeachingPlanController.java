@@ -68,4 +68,15 @@ public class CourseTeachingPlanController {
     public List<CourseTeachingReview> getSpecificTeachingReview(@RequestParam(value = "courseID") Integer courseID) {
         return courseTeachingPlan.getSpecificTeachingReview(courseID);
     }
+
+    /**
+     * 得到某一课程的介绍、目标、适合人群
+     *
+     * @param courseID
+     * @return
+     */
+    @GetMapping(value = "/background/course/plan/intro")
+    public CourseTeachingIntroduction getSpecificTeachingIntro(@RequestParam(value = "courseID") Integer courseID) {
+        return courseTeachingPlan.getSpecificTeachingIntro(courseID);
+    }
 }

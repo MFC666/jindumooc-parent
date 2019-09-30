@@ -44,4 +44,12 @@ public interface CourseTeachingPlan {
      * @return
      */
     List<CourseTeachingReview> getSpecificTeachingReview(Integer courseID);
+
+    /**
+     * 得到某一课程的介绍、目标、适合人群
+     *
+     * @param courseID
+     * @return
+     */
+    CourseTeachingIntroduction getSpecificTeachingIntro(Integer courseID);
 }

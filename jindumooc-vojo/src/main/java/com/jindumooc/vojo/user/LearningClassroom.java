@@ -17,11 +17,11 @@ public class LearningClassroom implements Serializable {
 
     private String title;
 
-    private String smallpicture;
+    private String smallPicture;
 
-    private String middlepicture;
+    private String middlePicture;
 
-    private String largepicture;
+    private String largePicture;
 
     private Integer studentnum;
 

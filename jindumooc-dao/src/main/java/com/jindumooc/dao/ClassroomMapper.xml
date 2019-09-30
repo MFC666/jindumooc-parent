@@ -469,9 +469,9 @@
         </if>
     </select>
     <select id="getTeachingClassroom" resultType="com.jindumooc.vojo.user.TeachingClassroom">
-        SELECT c.id,c.title,c.smallPicture,c.middlePicture,c.largePicture,c.studentNum,c.courseNum,c.threadNum,COUNT(*)
+        SELECT c.id,c.title,c.smallPicture,c.creator,c.middlePicture,c.largePicture,c.studentNum,c.courseNum,c.threadNum
         FROM classroom c,classroom_review r
-        WHERE c.headTeacherId = #{teacherId} and r.classroomId = c.id and r.createdTime>#{newTime}
+        WHERE teacherIds LIKE '%${teacherId}%' and r.classroomId = c.id AND `status` != 'closed'
     </select>
     <!--增减班级课程的操作-->
     <update id="updateCourseNumber" parameterType="java.lang.Integer">

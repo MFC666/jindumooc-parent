@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -267,4 +268,33 @@ public class CourseTeachingPlanImpl implements CourseTeachingPlan {
             return null;
         }
     }
+
+    /**
+     * 得到某一课程的介绍、目标、适合人群
+     *
+     * @param courseID
+     * @return
+     */
+    @Override
+    public CourseTeachingIntroduction getSpecificTeachingIntro(Integer courseID) {
+        try {
+            CourseSetV8WithBLOBs courseSetV8WithBLOBs = courseSetV8Mapper.selectByPrimaryKey(courseID);
+            String summary = courseSetV8WithBLOBs.getSummary();
+            String goal = courseSetV8WithBLOBs.getGoals();
+            List<String> goals = Arrays.asList(goal.split("|"));
+            String audiences = courseSetV8WithBLOBs.getAudiences();
+
+            CourseTeachingIntroduction courseTeachingIntroduction = new CourseTeachingIntroduction();
+            courseTeachingIntroduction.setIntroduction(summary);
+            courseTeachingIntroduction.setGoals(goals);
+            courseTeachingIntroduction.setAudiences(audiences);
+
+            return courseTeachingIntroduction;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }
