@@ -57,14 +57,16 @@ public class CourseSummaryInfoImpl implements CourseSummaryInfo {
 
             CourseSetV8WithBLOBs courseSetV8WithBLOBs = courseSetV8Mapper.selectByPrimaryKey(courseID);
 
-            CourseSummaryIntroduce courseSummaryIntroduce = new CourseSummaryIntroduce();
+            if(courseSetV8WithBLOBs != null){
+                CourseSummaryIntroduce courseSummaryIntroduce = new CourseSummaryIntroduce();
+                courseSummaryIntroduce.setId(courseSetV8WithBLOBs.getId());
+                courseSummaryIntroduce.setSubtitle(courseSetV8WithBLOBs.getSubtitle());
+                courseSummaryIntroduce.setSummary(courseSetV8WithBLOBs.getSummary());
+                courseSummaryIntroduce.setAudiences(courseSetV8WithBLOBs.getAudiences());
+                return courseSummaryIntroduce;
+            }
 
-            courseSummaryIntroduce.setId(courseSetV8WithBLOBs.getId());
-            courseSummaryIntroduce.setSubtitle(courseSetV8WithBLOBs.getSubtitle());
-            courseSummaryIntroduce.setSummary(courseSetV8WithBLOBs.getSummary());
-            courseSummaryIntroduce.setAudiences(courseSetV8WithBLOBs.getAudiences());
-
-            return courseSummaryIntroduce;
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -145,7 +147,6 @@ public class CourseSummaryInfoImpl implements CourseSummaryInfo {
                 courseSummaryNote.setId(c.getId());
                 courseSummaryNote.setUserId(c.getUserid());
                 courseSummaryNote.setContent(c.getContent());
-                System.out.println(c.getContent());
                 courseSummaryNote.setLikeNum(c.getLikenum());
 
                 CourseTaskExample courseTaskExample = new CourseTaskExample();
@@ -224,7 +225,7 @@ public class CourseSummaryInfoImpl implements CourseSummaryInfo {
     }
 
     /**
-     * @param courseSummaryNoticeDTO
+     * @param courseSummaryNoticeDTO 新建公告的信息
      * @return 返回新建公告的Id
      * @author 冯莫涵 2019/09/29
      */

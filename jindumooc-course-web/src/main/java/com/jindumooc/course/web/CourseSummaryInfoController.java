@@ -56,7 +56,7 @@ public class CourseSummaryInfoController {
     }
 
     /**
-     * @param courseSummaryNoticeDTO
+     * @param courseSummaryNoticeDTO 新建公告的信息
      * @return 返回新建公告的Id
      * @author 冯莫涵 2019/09/29
      */
