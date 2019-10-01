@@ -619,4 +619,24 @@
       migrateResultId = #{migrateresultid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getTestPaperResult" resultType="com.jindumooc.vojo.user.TestPaperResult">
+    SELECT c.id AS courseId,l.id AS lessonId,t.id AS testId,c.title AS courseTitle,l.title AS lessonTitle,paperName,score,objectiveScore,subjectiveScore,passedStatus
+    FROM testpaper_result_v8 t,course_v8 c,course_lesson l
+    WHERE t.lessonId = l.id AND t.courseId = c.id AND l.courseId = c.id AND c.teacherIds LIKE '%${teacherId}%' AND t.`status` = #{testPaperStatus}
+  </select>
+
+  <select id="getStudentTestPaper" resultType="com.jindumooc.vojo.user.TestPaperResult">
+   SELECT c.id AS courseId,t.id AS testId,c.title AS courseTitle,paperName,score,objectiveScore,subjectiveScore,passedStatus
+    FROM testpaper_result_v8 t,course_v8 c
+    WHERE  t.courseId = c.id AND t.userId = #{userId} AND t.`status` = #{testPaperStatus}
+  </select>
+
+  <select id="getTestPaperDetail" resultType="com.jindumooc.vojo.user.TestPaperDetail">
+
+    SELECT r.paperName,u.nickname AS nickName,q.id AS questionId,r.`status`,r.usedTime,r.endTime,r.score AS singleScore,t.score AS totalScore,t.itemCount,i.questionType,q.stem,q.answer AS rightAnswer,ir.answer AS selfAnswer,ir.score AS selfScore
+FROM testpaper_v8 t,testpaper_result_v8 r,testpaper_item_v8 i,`user` u,question q,testpaper_item_result_v8 ir
+WHERE r.userId = u.id AND r.userId = #{userId} AND t.id = #{testPaperId} AND r.testId = t.id AND i.testId = t.id AND i.questionId = q.id AND ir.testId = t.id AND ir.questionId = q.id
+
+  </select>
 </mapper>

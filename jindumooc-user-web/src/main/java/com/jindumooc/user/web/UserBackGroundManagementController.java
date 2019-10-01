@@ -232,11 +232,11 @@ public class UserBackGroundManagementController {
     }
 
     /**
-     * 获取所有私信
+     * 获取后台管理所有私信
      * @param sm
      * @return
      */
-    @ApiOperation("获取私信")
+    @ApiOperation("获取后台私信管理")
     @PostMapping("/user/getAllMessages")
     @ResponseBody
     public Result getAllMessages(@RequestBody SearchMessage sm){

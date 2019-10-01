@@ -3,6 +3,7 @@ package com.jindumooc.user.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.jindumooc.dao.*;
+import com.jindumooc.pojo.QuestionFavorite;
 import com.jindumooc.pojo.QuestionFavoriteExample;
 import com.jindumooc.user.service.MyLearning;
 import com.jindumooc.vojo.user.*;
@@ -34,6 +35,9 @@ public class MyLearningImp implements MyLearning {
 
     @Autowired
     private TestpaperResultMapper testpaperResultMapper;
+
+    @Autowired
+    private TestpaperResultV8Mapper testpaperResultV8Mapper;
 
     @Autowired
     private QuestionFavoriteMapper questionFavoriteMapper;
@@ -157,7 +161,7 @@ public class MyLearningImp implements MyLearning {
     @Override
     public List<TestPaperResult> getStudentTestPaper(int pageNum, int pageSize, int userId,String testPaperType) {
         PageHelper.startPage(pageNum,pageSize);
-        return testpaperResultMapper.getStudentTestPaper(userId,testPaperType);
+        return testpaperResultV8Mapper.getStudentTestPaper(userId,testPaperType);
     }
 
     @Override
@@ -170,7 +174,7 @@ public class MyLearningImp implements MyLearning {
         }
 
 
-        return null;
+        return questionMessageList;
     }
 
     /**
@@ -191,6 +195,42 @@ public class MyLearningImp implements MyLearning {
     public QuestionMessage getQuestionDetail(int questionId) {
 
         return questionFavoriteMapper.getQuestionDetail(questionId);
+    }
+
+    /**
+     * 获取考试详情
+     * @param testPaperId
+     * @param userId
+     * @return
+     */
+    @Override
+    public Object getTestPaperDetail(int testPaperId, int userId) {
+
+        List<TestPaperDetail> testPaperDetailList = testpaperResultV8Mapper.getTestPaperDetail(testPaperId,userId);
+
+        QuestionFavoriteExample questionFavoriteExample = new QuestionFavoriteExample();
+
+        QuestionFavoriteExample.Criteria criteria = questionFavoriteExample.createCriteria();
+
+        criteria.andUseridEqualTo(userId);
+
+        List<QuestionFavorite> questionFavoriteList = questionFavoriteMapper.selectByExample(questionFavoriteExample);
+
+
+
+        for(int i = 0;i<testPaperDetailList.size();i++) {
+
+            for (int n = 0; n < questionFavoriteList.size(); n++) {
+                if (testPaperDetailList.get(i).getQuestionId() == questionFavoriteList.get(n).getQuestionid()) {
+                    testPaperDetailList.get(i).setFavorite(1);
+                } else {
+                    testPaperDetailList.get(i).setFavorite(0);
+                }
+                testPaperDetailList.get(i).setEndTimeString(transformTime(testPaperDetailList.get(i).getEndTime()));
+            }
+
+        }
+        return testPaperDetailList;
     }
 
 

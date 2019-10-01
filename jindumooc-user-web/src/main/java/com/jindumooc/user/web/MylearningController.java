@@ -234,5 +234,22 @@ public class MylearningController {
         return ResultGenerator.genSuccessResult(myLearning.getQuestionDetail(questionId));
     }
 
+    /**
+     *
+     * @param testPaperId
+     * @param userId
+     * @return
+     */
+    @ApiOperation("查看考试详情")
+    @GetMapping("/user/getTestPaperDetail")
+    @ResponseBody
+    public Result getTestPaperDetail(@RequestParam(defaultValue = "0") int testPaperId,@RequestParam(defaultValue = "0") int userId){
+
+        if(testPaperId == 0||userId==0){
+            return ResultGenerator.genFailResult("参数错误");
+        }
+
+        return ResultGenerator.genSuccessResult(myLearning.getTestPaperDetail(testPaperId,userId));
+    }
 
 }

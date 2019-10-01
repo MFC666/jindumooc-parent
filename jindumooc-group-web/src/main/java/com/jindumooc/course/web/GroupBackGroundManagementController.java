@@ -6,6 +6,7 @@ import com.jindumooc.dto.group.SearchGroupDTO;
 import com.jindumooc.course.service.GroupBackGroundManagement;
 import com.jindumooc.vojo.group.BackGroundIndexGroup;
 import com.jindumooc.vojo.group.GroupThreadShow;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ public class GroupBackGroundManagementController {
      * @param searchGroupDTO
      * @return
      */
+    @ApiOperation("获取小组")
     @PostMapping(value = "/groupBack/getIndexGroup")
     @ResponseBody
     public List<BackGroundIndexGroup> getIndexGroup(@RequestBody SearchGroupDTO searchGroupDTO) {

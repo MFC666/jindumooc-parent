@@ -4,6 +4,9 @@ import com.jindumooc.pojo.TestpaperResultV8;
 import com.jindumooc.pojo.TestpaperResultV8Example;
 import com.jindumooc.pojo.TestpaperResultV8WithBLOBs;
 import java.util.List;
+
+import com.jindumooc.vojo.user.TestPaperDetail;
+import com.jindumooc.vojo.user.TestPaperResult;
 import org.apache.ibatis.annotations.Param;
 
 public interface TestpaperResultV8Mapper {
@@ -34,4 +37,10 @@ public interface TestpaperResultV8Mapper {
     int updateByPrimaryKeyWithBLOBs(TestpaperResultV8WithBLOBs record);
 
     int updateByPrimaryKey(TestpaperResultV8 record);
+
+    List<TestPaperResult> getTestPaperResult(@Param("teacherId") int teacherId, @Param("testPaperStatus") String testPaperStatus);
+
+    List<TestPaperResult> getStudentTestPaper(@Param("userId") int userId,@Param("testPaperStatus") String testPaperStatus);
+
+    List<TestPaperDetail> getTestPaperDetail(@Param("testPaperId")int testPaperId,@Param("userId") int userId);
 }

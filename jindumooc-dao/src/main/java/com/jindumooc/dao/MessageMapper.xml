@@ -309,4 +309,8 @@
       <if test="searchTimeType!=null">createdTime &gt; #{starTime} and createdTime &lt; #{endTime} </if>
     </where>
   </select>
+  <select id="getMaxId" resultType="int">
+    SELECT MAX(id)
+    FROM message
+  </select>
 </mapper>

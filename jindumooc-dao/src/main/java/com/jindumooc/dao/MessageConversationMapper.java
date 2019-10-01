@@ -33,4 +33,6 @@ public interface MessageConversationMapper {
     int updateByPrimaryKeyWithBLOBs(MessageConversation record);
 
     int updateByPrimaryKey(MessageConversation record);
+
+    int getMaxId();
 }

@@ -32,6 +32,9 @@ public class MyTeachingImpl implements MyTeaching {
 
     @Autowired
     private TestpaperResultMapper testpaperResultMapper;
+
+    @Autowired
+    private TestpaperResultV8Mapper testpaperResultV8Mapper;
     /**
      * 获取在教课程
      * @param teacherId
@@ -119,7 +122,7 @@ public class MyTeachingImpl implements MyTeaching {
     public List<TestPaperResult> getTestPaperResult(int pageNum, int pageSize, int teacherId, String testPaperStatus) {
 
         PageHelper.startPage(pageNum,pageSize);
-        return testpaperResultMapper.getTestPaperResult(teacherId,testPaperStatus);
+        return testpaperResultV8Mapper.getTestPaperResult(teacherId,testPaperStatus);
     }
 
     
