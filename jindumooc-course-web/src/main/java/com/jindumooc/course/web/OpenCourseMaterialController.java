@@ -6,6 +6,7 @@ import com.jindumooc.course.service.OpenCourseMaterial;
 import com.jindumooc.dto.course.CourseSummaryNoteDTO;
 import com.jindumooc.dto.course.CourseSummaryNoticeDTO;
 import com.jindumooc.dto.course.OpenCourseReviewDTO;
+import com.jindumooc.pojo.OpenCourse;
 import com.jindumooc.vojo.course.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,16 @@ public class OpenCourseMaterialController {
     @PostMapping(value = "/background/course/open/review")
     public int getSpecificSummaryNote(@RequestBody OpenCourseReviewDTO openCourseReviewDTO) {
         return openCourseMaterial.addSpecificSummaryNotice(openCourseReviewDTO);
+    }
+
+    /**
+     * @param
+     * @return 返回全部的公开课
+     * @author 冯莫涵 2019/10/07
+     */
+    @PostMapping(value = "/background/course/open/list")
+    public List<OpenCourseShow> showOpenCourseList() {
+        return openCourseMaterial.showOpenCourseList();
     }
 
 }

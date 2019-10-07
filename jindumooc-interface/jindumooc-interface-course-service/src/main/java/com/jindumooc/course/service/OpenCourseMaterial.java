@@ -4,6 +4,8 @@ import com.jindumooc.dto.course.CourseSummaryNoticeDTO;
 import com.jindumooc.dto.course.OpenCourseReviewDTO;
 import com.jindumooc.vojo.course.*;
 
+import java.util.List;
+
 public interface OpenCourseMaterial {
 
     /**
@@ -19,4 +21,11 @@ public interface OpenCourseMaterial {
      * @author 冯莫涵 2019/10/01
      */
     int addSpecificSummaryNotice(OpenCourseReviewDTO openCourseReviewDTO);
+
+    /**
+     * @param
+     * @return 返回全部的公开课
+     * @author 冯莫涵 2019/10/07
+     */
+    List<OpenCourseShow> showOpenCourseList();
 }

@@ -2,6 +2,7 @@ package com.jindumooc.course.web;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jindumooc.course.service.CourseSummaryInfo;
+import com.jindumooc.dto.course.CourseListShowDTO;
 import com.jindumooc.dto.course.CourseSummaryNoteDTO;
 import com.jindumooc.dto.course.CourseSummaryNoticeDTO;
 import com.jindumooc.vojo.course.*;
@@ -65,4 +66,13 @@ public class CourseSummaryInfoController {
         return courseSummaryInfo.addSpecificSummaryNotice(courseSummaryNoticeDTO);
     }
 
+    /**
+     * @param courseListShowDTO 展示课程列表 分类Id（=0时表示无限制），是否为免费课程（=1时表示有限制=0表示无限制），排序方式（=hit表示最热=latest表示最新=recommend表示推荐）
+     * @return 返回对应的课程
+     * @author 冯莫涵 2019/10/07
+     */
+    @PostMapping(value = "/background/course/summary/list")
+    public List<CourseListShow> showCourseList(CourseListShowDTO courseListShowDTO) {
+        return courseSummaryInfo.showCourseList(courseListShowDTO);
+    }
 }

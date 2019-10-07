@@ -46,6 +46,9 @@ public class OpenCourseMaterialImpl implements OpenCourseMaterial {
     @Autowired
     private FileMapper fileMapper;
 
+    @Autowired
+    private OpenCourseMapper openCourseMapper;
+
     /**
      * @param  materialID 查询的课程资料Id
      * @return 返回对应课程资料的Uri
@@ -110,6 +113,39 @@ public class OpenCourseMaterialImpl implements OpenCourseMaterial {
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    /**
+     * @return 返回全部的公开课
+     * @author 冯莫涵 2019/10/07
+     */
+    @Override
+    public List<OpenCourseShow> showOpenCourseList() {
+        try {
+            OpenCourseExample openCourseExample = new OpenCourseExample();
+            OpenCourseExample.Criteria criteria = openCourseExample.createCriteria();
+
+            List<OpenCourseShow> openCourseShows = new ArrayList<>();
+
+            List<OpenCourseWithBLOBs> openCourseWithBLOBs = openCourseMapper.selectByExampleWithBLOBs(openCourseExample);
+
+            for (OpenCourseWithBLOBs o : openCourseWithBLOBs) {
+                OpenCourseShow openCourseShow = new OpenCourseShow();
+
+                openCourseShow.setHitNum(o.getHitnum());
+                openCourseShow.setId(o.getId());
+                openCourseShow.setPicture(o.getMiddlepicture());
+                openCourseShow.setPostNum(o.getPostnum());
+                openCourseShow.setTitle(o.getTitle());
+
+                openCourseShows.add(openCourseShow);
+            }
+
+            return openCourseShows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

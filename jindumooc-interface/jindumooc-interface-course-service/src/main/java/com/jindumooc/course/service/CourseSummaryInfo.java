@@ -1,7 +1,6 @@
 package com.jindumooc.course.service;
 
-import com.jindumooc.dto.course.CourseSummaryNoteDTO;
-import com.jindumooc.dto.course.CourseSummaryNoticeDTO;
+import com.jindumooc.dto.course.*;
 import com.jindumooc.vojo.course.*;
 
 import java.util.List;
@@ -42,4 +41,13 @@ public interface CourseSummaryInfo {
      * @author 冯莫涵 2019/09/29
      */
     int addSpecificSummaryNotice(CourseSummaryNoticeDTO courseSummaryNoticeDTO);
+
+    /**
+     * @param  courseListShowDTO 展示课程列表 分类Id（=0时表示无限制），是否为免费课程（=1时表示有限制=0表示无限制），排序方式（=hit表示最热=latest表示最新=recommend表示推荐）
+     * @return 返回对应的课程
+     * @author 冯莫涵 2019/10/07
+     */
+    List<CourseListShow> showCourseList(CourseListShowDTO courseListShowDTO);
+
+
 }

@@ -3,8 +3,7 @@ package com.jindumooc.course.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.jindumooc.course.service.CourseSummaryInfo;
 import com.jindumooc.dao.*;
-import com.jindumooc.dto.course.CourseSummaryNoteDTO;
-import com.jindumooc.dto.course.CourseSummaryNoticeDTO;
+import com.jindumooc.dto.course.*;
 import com.jindumooc.pojo.*;
 import com.jindumooc.vojo.course.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +50,6 @@ public class CourseSummaryInfoImpl implements CourseSummaryInfo {
     @Override
     public CourseSummaryIntroduce getSpecificSummaryIntroduce(Integer courseID) {
         try {
-            CourseSetV8Example courseSetV8Example = new CourseSetV8Example();
-            CourseSetV8Example.Criteria criteria = courseSetV8Example.createCriteria();
-            criteria.andIdEqualTo(courseID);
-
             CourseSetV8WithBLOBs courseSetV8WithBLOBs = courseSetV8Mapper.selectByPrimaryKey(courseID);
 
             if(courseSetV8WithBLOBs != null){
@@ -260,6 +255,73 @@ public class CourseSummaryInfoImpl implements CourseSummaryInfo {
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    /**
+     * @param courseListShowDTO 展示课程列表 分类Id（=0时表示无限制），是否为免费课程（=1时表示有限制=0表示无限制），排序方式（=hit表示最热=latest表示最新=recommend表示推荐）
+     * @return 返回对应的课程
+     * @author 冯莫涵 2019/10/07
+     */
+    @Override
+    public List<CourseListShow> showCourseList(CourseListShowDTO courseListShowDTO) {
+        try {
+            int categoryId = courseListShowDTO.getCategoryId();
+            int isFree = courseListShowDTO.getIsFree();
+            String sort = courseListShowDTO.getSort();
+
+            List<CourseListShow> courseListShows = new ArrayList<>();
+
+            CourseSetV8Example courseSetV8Example = new CourseSetV8Example();
+            CourseSetV8Example.Criteria criteria = courseSetV8Example.createCriteria();
+
+            if(categoryId != 0){
+                criteria.andCategoryidEqualTo(categoryId);
+            }
+
+            if(isFree != 0){
+                criteria.andMaxcoursepriceEqualTo((float)0);
+            }
+
+            if(sort.equals("hit")){
+                courseSetV8Example.setOrderByClause("`hitNum` DESC");
+            }else if(sort.equals("latest")){
+                courseSetV8Example.setOrderByClause("`updatedTime` DESC");
+            }else if(sort.equals("recommend")){
+                criteria.andRecommendedEqualTo((byte)1);
+                courseSetV8Example.setOrderByClause("`recommendedSeq` ASC");
+            }
+
+            List<CourseSetV8WithBLOBs> courseSetV8WithBLOBs = courseSetV8Mapper.selectByExampleWithBLOBs(courseSetV8Example);
+
+            for (CourseSetV8WithBLOBs c : courseSetV8WithBLOBs) {
+                CourseListShow courseListShow = new CourseListShow();
+
+                courseListShow.setId(c.getId());
+                String over = c.getCover();
+                if(over.length() > 0){
+                    String[] str1 = over.split(",");
+                    String[] str2 = str1[1].split("\"");
+                    courseListShow.setPicture(str2[3]);
+                }
+                if(c.getMaxcourseprice() == (float)0){
+                    courseListShow.setIsFree(1);
+                }
+                courseListShow.setCategoryId(c.getCategoryid());
+                courseListShow.setRatingNum(c.getRatingnum());
+                courseListShow.setSerializeMode(c.getSerializemode());
+                courseListShow.setStudentNum(c.getStudentnum());
+                courseListShow.setTitle(c.getTitle());
+                courseListShow.setHitNum(c.getHitnum());
+                courseListShow.setIsRecommend(c.getRecommended());
+                courseListShow.setUpdatedTime(String.valueOf(c.getUpdatedtime()));
+
+                courseListShows.add(courseListShow);
+            }
+            return courseListShows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
