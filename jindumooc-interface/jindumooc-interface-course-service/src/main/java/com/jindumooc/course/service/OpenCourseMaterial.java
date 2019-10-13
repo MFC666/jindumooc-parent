@@ -28,4 +28,13 @@ public interface OpenCourseMaterial {
      * @author 冯莫涵 2019/10/07
      */
     List<OpenCourseShow> showOpenCourseList();
+
+    /**
+     * @param openCourseID 打开公开课Id
+     * @return 对应公开课展示信息
+     * @author 冯莫涵 2019/10/13
+     */
+    OpenCourseInfo showOpenCourseInfo(Integer openCourseID);
+
+
 }

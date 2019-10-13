@@ -6,6 +6,7 @@ import com.jindumooc.dao.*;
 import com.jindumooc.dto.course.CourseSummaryNoticeDTO;
 import com.jindumooc.dto.course.OpenCourseReviewDTO;
 import com.jindumooc.pojo.*;
+import com.jindumooc.pojo.OpenCourseRecommend;
 import com.jindumooc.vojo.course.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -48,6 +49,12 @@ public class OpenCourseMaterialImpl implements OpenCourseMaterial {
 
     @Autowired
     private OpenCourseMapper openCourseMapper;
+
+    @Autowired
+    private OpenCourseRecommendMapper openCourseRecommendMapper;
+
+    @Autowired
+    private UserProfileMapper userProfileMapper;
 
     /**
      * @param  materialID 查询的课程资料Id
@@ -125,6 +132,8 @@ public class OpenCourseMaterialImpl implements OpenCourseMaterial {
         try {
             OpenCourseExample openCourseExample = new OpenCourseExample();
             OpenCourseExample.Criteria criteria = openCourseExample.createCriteria();
+            criteria.andStatusEqualTo("published");
+            criteria.andTypeEqualTo("open");
 
             List<OpenCourseShow> openCourseShows = new ArrayList<>();
 
@@ -143,6 +152,74 @@ public class OpenCourseMaterialImpl implements OpenCourseMaterial {
             }
 
             return openCourseShows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * @param openCourseID 打开公开课Id
+     * @return 对应公开课展示信息
+     * @author 冯莫涵 2019/10/13
+     */
+    @Override
+    public OpenCourseInfo showOpenCourseInfo(Integer openCourseID) {
+        try {
+            OpenCourseInfo openCourseInfo = new OpenCourseInfo();
+
+            OpenCourseWithBLOBs openCourseWithBLOBs = openCourseMapper.selectByPrimaryKey(openCourseID);
+
+            openCourseInfo.setHitNum(openCourseWithBLOBs.getHitnum());
+            openCourseInfo.setId(openCourseID);
+            openCourseInfo.setLikeNum(openCourseWithBLOBs.getLikenum());
+            openCourseInfo.setPostNum(openCourseWithBLOBs.getPostnum());
+            openCourseInfo.setSmallPicture(openCourseWithBLOBs.getSmallpicture());
+            openCourseInfo.setSubtitle(openCourseWithBLOBs.getSubtitle());
+            openCourseInfo.setTitle(openCourseWithBLOBs.getTitle());
+
+            OpenCourseRecommendExample openCourseRecommendExample = new OpenCourseRecommendExample();
+            OpenCourseRecommendExample.Criteria criteria = openCourseRecommendExample.createCriteria();
+            criteria.andOpencourseidEqualTo(openCourseID);
+            openCourseRecommendExample.setOrderByClause("`seq` ASC");
+
+            List<OpenCourseRecommend> openCourseRecommends = openCourseRecommendMapper.selectByExample(openCourseRecommendExample);
+
+            List<OpenCourseRecom> openCourseRecoms = new ArrayList<>();
+
+            for (OpenCourseRecommend o : openCourseRecommends) {
+                OpenCourseRecom openCourseRecom = new OpenCourseRecom();
+
+                openCourseRecom.setId(o.getRecommendcourseid());
+                openCourseRecom.setSeq(o.getSeq());
+
+                OpenCourseWithBLOBs temp = openCourseMapper.selectByPrimaryKey(o.getRecommendcourseid());
+
+                openCourseRecom.setTitle(temp.getTitle());
+
+                openCourseRecoms.add(openCourseRecom);
+            }
+
+            openCourseInfo.setRecommends(openCourseRecoms);
+
+            String teacher_id_0 = openCourseWithBLOBs.getTeacherids();
+            System.out.println(teacher_id_0);
+            String[] teacher_id_1 = teacher_id_0.split("\\|");
+            int teacher_id_2 = Integer.valueOf(teacher_id_1[1]);
+            System.out.println(teacher_id_2);
+            openCourseInfo.setTeacher_id(teacher_id_2);
+
+            User user = userMapper.selectByPrimaryKey(teacher_id_2);
+
+            openCourseInfo.setTeacher_largeAvatar(user.getLargeavatar());
+            openCourseInfo.setTeacher_nickname(user.getNickname());
+            openCourseInfo.setTeacher_title(user.getTitle());
+
+            UserProfileWithBLOBs userProfileWithBLOBs = userProfileMapper.selectByPrimaryKey(teacher_id_2);
+
+            openCourseInfo.setTeacher_signature(userProfileWithBLOBs.getSignature());
+
+            return openCourseInfo;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

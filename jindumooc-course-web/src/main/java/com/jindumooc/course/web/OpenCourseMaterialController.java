@@ -48,4 +48,14 @@ public class OpenCourseMaterialController {
         return openCourseMaterial.showOpenCourseList();
     }
 
+    /**
+     * @param openCourseID 打开公开课Id
+     * @return 对应公开课展示信息
+     * @author 冯莫涵 2019/10/13
+     */
+    @PostMapping(value = "/background/course/open/Info")
+    public OpenCourseInfo showOpenCourseInfo(Integer openCourseID) {
+        return openCourseMaterial.showOpenCourseInfo(openCourseID);
+    }
+
 }
